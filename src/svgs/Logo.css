@@ -1,0 +1,56 @@
+.color .st0{
+	fill:#FFFFFF;
+	stroke:#000000;
+	stroke-miterlimit:10;
+}
+.color .st1{
+	fill:#FFFFFF;
+}
+.color .st2{
+	fill:#D500F4;
+	stroke:#000000;
+	stroke-width:3;
+	stroke-miterlimit:10;
+}
+.color .st3{
+	fill:none;
+	stroke:#000000;
+	stroke-miterlimit:10;
+}
+.color .st4{
+	fill:#FF8D27;
+	stroke:#151400;
+	stroke-width:5;
+	stroke-miterlimit:10;
+}
+.color .st4.pinkHat{
+	fill:#FF00FF;
+	stroke:#151400;
+	stroke-width:5;
+	stroke-miterlimit:10;
+}
+.bw .st0{
+	fill:#000000;
+	stroke:#000000;
+	stroke-miterlimit:10;
+}
+.bw .st1{
+	fill:#000000;
+}
+.bw .st2{
+	fill:#000000;
+	stroke:#000000;
+	stroke-width:3;
+	stroke-miterlimit:10;
+}
+.bw .st3{
+	fill:none;
+	stroke:#000000;
+	stroke-miterlimit:10;
+}
+.bw .st4{
+	fill:#000000;
+	stroke:#000000;
+	stroke-width:5;
+	stroke-miterlimit:10;
+}

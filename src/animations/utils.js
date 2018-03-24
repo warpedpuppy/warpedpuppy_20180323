@@ -1,5 +1,3 @@
-
-
 Utils = function() {
 
 
@@ -54,14 +52,16 @@ Utils = function() {
 
     function intersectRect(r1, r2) {
         return (a.left <= b.right &&
-        b.left <= a.right &&
-        a.top <= b.bottom &&
-        b.top <= a.bottom);
+            b.left <= a.right &&
+            a.top <= b.bottom &&
+            b.top <= a.bottom);
     }
 
 
-    function randomHex(){
-        return "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+    function randomHex() {
+        return "#000000".replace(/0/g, function() {
+            return (~~(Math.random() * 16)).toString(16);
+        });
     }
 
 
@@ -115,19 +115,21 @@ Utils = function() {
         $("#tugtugCanvas").css("border-bottom", "1px solid " + border);
     }
 
-    Array.prototype.sortOn = function () {
+    Array.prototype.sortOn = function() {
         var dup = this.slice();
         if (!arguments.length) return dup.sort();
         var args = Array.prototype.slice.call(arguments);
-        return dup.sort(function (a, b) {
+        return dup.sort(function(a, b) {
             var props = args.slice();
             var prop = props.shift();
             while (a[prop] == b[prop] && props.length) prop = props.shift();
             return a[prop] == b[prop] ? 0 : a[prop] > b[prop] ? 1 : -1;
         });
     };
+
     function shuffle(array) {
-        var currentIndex = array.length, temporaryValue, randomIndex;
+        var currentIndex = array.length,
+            temporaryValue, randomIndex;
 
         // While there remain elements to shuffle...
         while (0 !== currentIndex) {
@@ -144,6 +146,7 @@ Utils = function() {
 
         return array;
     }
+
     function pixiPointRectangleCollisionDetection(point, rectangle) {
 
 
@@ -153,15 +156,15 @@ Utils = function() {
 
 
 
-        if (point.x  > rectangle.x && point.x  < rightSide && point.y  > rectangle.y && point.y  < bottom) {
+        if (point.x > rectangle.x && point.x < rightSide && point.y > rectangle.y && point.y < bottom) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
 
 
     }
+
     function pointRectangleCollisionDetection(item1, rectangle) {
 
         var point = new createjs.Point(item1.x, item1.y);
@@ -174,14 +177,14 @@ Utils = function() {
 
         if (point.x + radius > rectangle.x && point.x - radius < rightSide && point.y + radius > rectangle.y && point.y - radius < bottom) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
 
 
     }
-    function triangleCircleCollision(circle, point1, point2, point3){
+
+    function triangleCircleCollision(circle, point1, point2, point3) {
 
         //first edge
         var c1x = circle.x - point1.x;
@@ -189,16 +192,14 @@ Utils = function() {
         var e1x = point2.x - point1.x;
         var e1y = point2.y - point1.y;
 
-        var k = c1x*e1x + c1y*e1y;
+        var k = c1x * e1x + c1y * e1y;
 
-        if( k > 0)
-        {
-            var len = Math.sqrt(e1x*e1x + e1y*e1y)
-            k = k/len;
+        if (k > 0) {
+            var len = Math.sqrt(e1x * e1x + e1y * e1y)
+            k = k / len;
 
-            if( k < len)
-            {
-                if(Math.sqrt(c1x*c1x + c1y*c1y - k*k) <= circle.radius)
+            if (k < len) {
+                if (Math.sqrt(c1x * c1x + c1y * c1y - k * k) <= circle.radius)
                     return true
             }
         }
@@ -207,18 +208,16 @@ Utils = function() {
         var c2x = circle.x - point2.x;
         var c2y = circle.y - point2.y;
         var e2x = point3.x - point2.x;
-        var e2y =  point3.y - point2.y;
+        var e2y = point3.y - point2.y;
 
-        k = c2x*e2x + c2y*e2y
+        k = c2x * e2x + c2y * e2y
 
-        if (k > 0)
-        {
-            len = Math.sqrt(e2x*e2x + e2y*e2y)
-            k = k/len
+        if (k > 0) {
+            len = Math.sqrt(e2x * e2x + e2y * e2y)
+            k = k / len
 
-            if(k < len)
-            {
-                if(Math.sqrt(c2x*c2x + c2y*c2y - k*k) <= circle.radius)
+            if (k < len) {
+                if (Math.sqrt(c2x * c2x + c2y * c2y - k * k) <= circle.radius)
                     return true
             }
         }
@@ -229,16 +228,14 @@ Utils = function() {
         var e3x = point1.x - point3.x;
         var e3y = point1.y - point3.y;
 
-        k = c3x*e3x + c3y*e3y
+        k = c3x * e3x + c3y * e3y
 
-        if(k > 0)
-        {
-            len = Math.sqrt(e3x*e3x + e3y*e3y)
-            k = k/len
+        if (k > 0) {
+            len = Math.sqrt(e3x * e3x + e3y * e3y)
+            k = k / len
 
-            if(k < len)
-            {
-                if(Math.sqrt(c3x*c3x + c3y*c3y - k*k) <= circle.radius)
+            if (k < len) {
+                if (Math.sqrt(c3x * c3x + c3y * c3y - k * k) <= circle.radius)
                     return true
             }
         }
@@ -290,9 +287,9 @@ Utils = function() {
 
     function rectangleRectangleCollisionDetection(rect1, rect2) {
         return (rect1.x <= (rect2.x + rect2.width) &&
-        rect2.x <= (rect1.x + rect1.width) &&
-        rect1.y <= (rect2.y + rect2.height) &&
-        rect2.y <= (rect1.y + rect1.height));
+            rect2.x <= (rect1.x + rect1.width) &&
+            rect1.y <= (rect2.y + rect2.height) &&
+            rect2.y <= (rect1.y + rect1.height));
     }
 
     function pointRectangleCollisionDetection(point, rect) {
@@ -300,8 +297,7 @@ Utils = function() {
 
         if (point.x > rect.x && point.x < rect.x + rect.width && point.y > rect.y && point.y < rect.y + rect.height) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
 
@@ -316,16 +312,15 @@ Utils = function() {
 
         if (point.x > target.body.x && point.x < item2.body.x + item2.width && point.y > item2.body.y && point.y < item2.body.y + item2.height) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
 
 
     }
 
-    String.prototype.capitalize = function () {
-        return this.replace(/(?:^|\s)\S/g, function (a) {
+    String.prototype.capitalize = function() {
+        return this.replace(/(?:^|\s)\S/g, function(a) {
             return a.toUpperCase();
         });
     };
@@ -340,7 +335,7 @@ Utils = function() {
 
 
     function proxy(method, scope) {
-        return function () {
+        return function() {
             return method.apply(scope, arguments);
         };
     }
@@ -376,10 +371,9 @@ Utils = function() {
         var radius1 = circle1.radius;
         var radius2 = circle2.radius;
 
-        if (Math.sqrt(( x2 - x1 ) * ( x2 - x1 ) + ( y2 - y1 ) * ( y2 - y1 )) < ( radius1 + radius2 )) {
+        if (Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) < (radius1 + radius2)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -404,15 +398,13 @@ Utils = function() {
         var deter = b * b - 4 * a * cc;
         if (deter <= 0) {
             this.inside = false;
-        }
-        else {
+        } else {
             var e = Math.sqrt(deter);
-            var u1 = ( -b + e ) / (2 * a );
-            var u2 = ( -b - e ) / (2 * a );
+            var u1 = (-b + e) / (2 * a);
+            var u2 = (-b - e) / (2 * a);
             if ((u1 < 0 || u1 > 1) && (u2 < 0 || u2 > 1)) {
 
-            }
-            else {
+            } else {
                 this.intersects = true;
 
             }
@@ -433,7 +425,7 @@ Utils = function() {
         //load graphic assets and show loading text
         this.gv = gv;
 
-        if(loading_text_visible === undefined)loading_text_visible = true;
+        if (loading_text_visible === undefined) loading_text_visible = true;
 
         var loaderProgressText = new createjs.Text(0 + " %", "bold 50px Arial", "#FFFF00");
         loaderProgressText.visible = loading_text_visible
@@ -452,7 +444,7 @@ Utils = function() {
     };
 
 
-    AssetLoaderClass.prototype.loadItems = function (arr, resultFunctionParam, fileLoad) {
+    AssetLoaderClass.prototype.loadItems = function(arr, resultFunctionParam, fileLoad) {
 
         //arr is an array of objects with id: and src:
         this.gv.stage.addChild(this.loaderProgressText);
@@ -463,12 +455,12 @@ Utils = function() {
         this.loader.removeAllEventListeners();
         this.loader.addEventListener("complete", proxy(this.handleComplete, this));
         this.loader.addEventListener("progress", proxy(this.loaderProgress, this));
-        if (fileLoad)this.loader.addEventListener("fileload", proxy(this.handleFileLoad, this));
+        if (fileLoad) this.loader.addEventListener("fileload", proxy(this.handleFileLoad, this));
 
     }
 
 
-    AssetLoaderClass.prototype.handleComplete = function (e) {
+    AssetLoaderClass.prototype.handleComplete = function(e) {
 
 
         this.resultFunction();
@@ -478,7 +470,7 @@ Utils = function() {
 
     }
 
-    AssetLoaderClass.prototype.loaderProgress = function (e) {
+    AssetLoaderClass.prototype.loaderProgress = function(e) {
         var perc = Math.round(e.progress * 100);
 
         this.loaderProgressText.text = perc + "%";
@@ -487,42 +479,41 @@ Utils = function() {
     }
 
 
-    AssetLoaderClass.prototype.handleFileLoad = function (b) {
+    AssetLoaderClass.prototype.handleFileLoad = function(b) {
 
 
         if (b.item.type == createjs.LoadQueue.XML) {
             bitmapFont.xml = this.loader.getResult("xml");
-        }
-        else if (b.item.type == createjs.LoadQueue.IMAGE) {
+        } else if (b.item.type == createjs.LoadQueue.IMAGE) {
             bitmapFont.bitmap = this.loader.getResult("image");
         }
 
 
     }
 
-  return{
+    return {
 
-        addTicker:addTicker,
-        randomIntBetween:randomIntBetween,
-        randomNumberBetween:randomNumberBetween,
-        AssetLoaderClass:AssetLoaderClass,
-        getParameterByName:getParameterByName,
-        randomColor:randomColor,
-        deg2rad:deg2rad,
+        addTicker: addTicker,
+        randomIntBetween: randomIntBetween,
+        randomNumberBetween: randomNumberBetween,
+        AssetLoaderClass: AssetLoaderClass,
+        getParameterByName: getParameterByName,
+        randomColor: randomColor,
+        deg2rad: deg2rad,
         randomHex: randomHex,
-        cosWave:cosWave,
-      proxy:proxy,
-      shuffle:shuffle,
-      circleToCircleCollisionDetection:circleToCircleCollisionDetection,
-      triangleCircleCollision:triangleCircleCollision,
-      circleRectangleCollision:circleRectangleCollision,
-      touchAndCursorEnable:touchAndCursorEnable,
-      pixiPointRectangleCollisionDetection:pixiPointRectangleCollisionDetection,
-      pointRectangleCollisionDetection:pointRectangleCollisionDetection,
-      lineIntersectCircle:lineIntersectCircle,
-      backgroundColor:backgroundColor,
-      trace: trace,
-      numberWithCommas:numberWithCommas
+        cosWave: cosWave,
+        proxy: proxy,
+        shuffle: shuffle,
+        circleToCircleCollisionDetection: circleToCircleCollisionDetection,
+        triangleCircleCollision: triangleCircleCollision,
+        circleRectangleCollision: circleRectangleCollision,
+        touchAndCursorEnable: touchAndCursorEnable,
+        pixiPointRectangleCollisionDetection: pixiPointRectangleCollisionDetection,
+        pointRectangleCollisionDetection: pointRectangleCollisionDetection,
+        lineIntersectCircle: lineIntersectCircle,
+        backgroundColor: backgroundColor,
+        trace: trace,
+        numberWithCommas: numberWithCommas
     }
 
 }();

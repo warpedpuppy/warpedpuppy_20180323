@@ -7,13 +7,23 @@ nav {
 	font-size: 20px;
 	height:50px;
 	z-index: 5;
+	
 }
 nav h1 {
 	display: inline-block;
-	margin:0 calc(50% - 175px);
+	margin-top: 5px;
 	width: 350px;
 	text-align: center;
-	transition: margin 0.5s;
+	transition: left 0.5s;
+	position:absolute;
+	top:0;
+	left:calc(50% - 175px);
+}
+.menuLogo {
+	transition: left 1s;
+	position:absolute;
+	top:0;
+	left:calc(50% - 35px);
 }
 .logInForm h1 {
 	font-size: 50px;
@@ -29,9 +39,10 @@ nav h1 {
 	z-index: 3;
 }
 .not-links {
-	background-color: grey;
 	position:relative;
 	z-index: 4;
+	background-color: white;
+	height:50px;
 }
 .links.open {
 	top:50px;
@@ -78,10 +89,16 @@ nav h1 {
 @media (min-width: 1024px) {
 	nav {
 		text-align: left;
+		background-color: white;
 	}
 	nav h1 {
 		text-align: left;
-		margin:0 0 0 10px;
+		left:10px;
+	}
+	.menuLogo {
+		position:relative;
+		top:0;
+		left:10px;
 	}
 	.hamburger {
 		display: none;
@@ -103,7 +120,7 @@ nav h1 {
 		display:inline-block;
 		width:auto;
 		height:100%;
-		margin:0 20px;
+		margin:10px 20px;
 		padding:10px;
 		cursor:pointer;
 		text-decoration: none;
@@ -119,6 +136,7 @@ nav h1 {
 	/*	background-color: red;*/
 	}
 	.not-links {
+		margin:0;
 		display: inline-block;
 		background-color: transparent;
 	}

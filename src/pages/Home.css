@@ -4,3 +4,14 @@ div.homePage {
 div.homePage h1 {
 	margin:0;
 }
+
+.textCont {
+	width: 700px;
+	margin:150px auto;
+	color: #FF8D27;
+	position: relative;
+}
+.textCont svg {
+	position: absolute;
+	right:0;
+}

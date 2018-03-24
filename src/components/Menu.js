@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './Menu.css';
+import Logo from '../svgs/Logo';
 
 export default class Menu extends Component {
 	  constructor(props) {
@@ -22,6 +23,7 @@ export default class Menu extends Component {
 			<div>
 				<nav>
 					<div className="not-links">
+					   <Logo customClass="menuLogo" w={70} alpha={0.5}/>
 						<h1>warped puppy</h1>
 						<div className="hamburger" onClick={() => this.showDropDown()}>
 							<span></span>
@@ -29,7 +31,7 @@ export default class Menu extends Component {
 							<span></span>
 						</div>
 					</div>
-					<div  className={`links  ${showDropDownClass}`}>
+					<div className={`links  ${showDropDownClass}`}>
 						<Link to="/">Home</Link>
 						<Link to="/Alternate">Alternate</Link>
 					</div>
