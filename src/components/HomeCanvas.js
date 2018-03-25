@@ -5,9 +5,13 @@ import Utils from '../animations/utils'
 import home_page from '../animations/home_page'
 export default class HomeCanvas extends React.Component {
 
+	componentDidMount(){
+		let homePage = home_page(Utils, PIXI, this.canvas);
+		homePage.Init();
+	}
 	render () {
 		return (
-			<canvas id='homeCanvas'>ain't got canvas ability!</canvas>
+			<div id='homeCanvas' ref={item => this.canvas = item} >ain't got canvas ability!</div>
 		)
 	}
 	

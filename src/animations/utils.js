@@ -1,4 +1,4 @@
-export default function(gv, $, createjs) {
+export default function(gv,createjs) {
 
 
 
@@ -94,13 +94,7 @@ export default function(gv, $, createjs) {
         return Math.random() * (max - min) + min;
     }
 
-    function trace(str, inPage) {
-
-        if (inPage === undefined)
-            console.log(str);
-        else
-            $("#trace").text(str);
-    }
+ 
 
     function deg2rad(degree) {
         return degree * (Math.PI / 180);
@@ -110,11 +104,6 @@ export default function(gv, $, createjs) {
         return radians * 180 / Math.PI;
     }
 
-    function backgroundColor(background, border) {
-        $("#tugtugCanvas").css("background-color", background);
-        $("#tugtugCanvas").css("border-top", "1px solid " + border);
-        $("#tugtugCanvas").css("border-bottom", "1px solid " + border);
-    }
 
     Array.prototype.sortOn = function() {
         var dup = this.slice();
@@ -123,8 +112,8 @@ export default function(gv, $, createjs) {
         return dup.sort(function(a, b) {
             var props = args.slice();
             var prop = props.shift();
-            while (a[prop] == b[prop] && props.length) prop = props.shift();
-            return a[prop] == b[prop] ? 0 : a[prop] > b[prop] ? 1 : -1;
+            while (a[prop] === b[prop] && props.length) prop = props.shift();
+            return a[prop] === b[prop] ? 0 : a[prop] > b[prop] ? 1 : -1;
         });
     };
 
@@ -257,7 +246,7 @@ export default function(gv, $, createjs) {
 
     function componentToHex(c) {
         var hex = c.toString(16);
-        return hex.length == 1 ? "0" + hex : hex;
+        return hex.length === 1 ? "0" + hex : hex;
     }
 
     function rgbToHex(r, g, b) {
@@ -414,6 +403,27 @@ export default function(gv, $, createjs) {
         return this.intersects;
     }
 
+    function returnCanvasWidth(){
+
+        return Math.max(
+            document.documentElement["clientWidth"],
+            document.body["scrollWidth"],
+            document.documentElement["scrollWidth"],
+            document.body["offsetWidth"],
+            document.documentElement["offsetWidth"]
+        );
+    }
+
+    function returnCanvasHeight(){
+
+        return Math.max(
+            document.documentElement["clientHeight"],
+            document.body["scrollHeight"],
+            document.documentElement["scrollHeight"],
+            document.body["offsetHeight"],
+            document.documentElement["offsetHeight"]
+        );
+    }
 
     function centerOnStage(mc, canvasWidth, canvasHeight) {
         mc.body.x = (canvasWidth - mc.body.getBounds().width) / 2;
@@ -493,7 +503,8 @@ export default function(gv, $, createjs) {
     }
 
     return {
-
+        returnCanvasWidth: returnCanvasWidth,
+        returnCanvasHeight: returnCanvasHeight,
         addTicker: addTicker,
         randomIntBetween: randomIntBetween,
         randomNumberBetween: randomNumberBetween,
@@ -512,8 +523,6 @@ export default function(gv, $, createjs) {
         pixiPointRectangleCollisionDetection: pixiPointRectangleCollisionDetection,
         pointRectangleCollisionDetection: pointRectangleCollisionDetection,
         lineIntersectCircle: lineIntersectCircle,
-        backgroundColor: backgroundColor,
-        trace: trace,
         numberWithCommas: numberWithCommas
     }
 
