@@ -10,6 +10,7 @@ nav {
 	
 }
 nav h1 {
+	font-size: 35px;
 	display: inline-block;
 	margin-top: 5px;
 	width: 350px;
@@ -93,7 +94,7 @@ nav h1 {
 	}
 	nav h1 {
 		text-align: left;
-		left:10px;
+		left:30px;
 	}
 	.menuLogo {
 		position:relative;
