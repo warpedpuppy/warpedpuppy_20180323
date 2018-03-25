@@ -1,13 +1,14 @@
 import React from 'react';
 import './HomeCanvas.css';
-// import * as PIXI from 'pixi.js'
-// import home_page from '~/animations/home_page'
-// import object_pools from '~/animations/object_pools'
-// import utils from '~/animations/utils'
+import * as PIXI from 'pixi.js'
+import Utils from '../animations/utils'
+import home_page from '../animations/home_page'
+export default class HomeCanvas extends React.Component {
 
-export default function HomeCanvas () {
-
-	return (
-		<canvas id='homeCanvas'>ain't got canvas ability!</canvas>
-	)
+	render () {
+		return (
+			<canvas id='homeCanvas'>ain't got canvas ability!</canvas>
+		)
+	}
+	
 }

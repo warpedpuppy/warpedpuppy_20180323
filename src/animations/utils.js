@@ -1,4 +1,4 @@
-Utils = function() {
+export default function(gv, $, createjs) {
 
 
 
@@ -51,6 +51,7 @@ Utils = function() {
     }
 
     function intersectRect(r1, r2) {
+        let a,b;
         return (a.left <= b.right &&
             b.left <= a.right &&
             a.top <= b.bottom &&
@@ -308,13 +309,13 @@ Utils = function() {
     function pointItemCollisionDetection(item1, item2) {
 
         //the item here is a class with two pubic properties:  a shape and the width
-        var point = new createjs.Point(item1.x, item1.y);
+        // var point = new createjs.Point(item1.x, item1.y);
 
-        if (point.x > target.body.x && point.x < item2.body.x + item2.width && point.y > item2.body.y && point.y < item2.body.y + item2.height) {
-            return true;
-        } else {
-            return false;
-        }
+        // if (point.x > target.body.x && point.x < item2.body.x + item2.width && point.y > item2.body.y && point.y < item2.body.y + item2.height) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
 
 
     }
@@ -357,7 +358,7 @@ Utils = function() {
         //this function returns the value of GET variables by name
         name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
         var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-            results = regex.exec(location.search);
+            results = regex.exec(document.location.search);
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
 
@@ -414,7 +415,7 @@ Utils = function() {
     }
 
 
-    function centerOnStage(mc) {
+    function centerOnStage(mc, canvasWidth, canvasHeight) {
         mc.body.x = (canvasWidth - mc.body.getBounds().width) / 2;
         mc.body.y = (canvasHeight - mc.body.getBounds().height) / 2;
     }
@@ -482,11 +483,11 @@ Utils = function() {
     AssetLoaderClass.prototype.handleFileLoad = function(b) {
 
 
-        if (b.item.type == createjs.LoadQueue.XML) {
-            bitmapFont.xml = this.loader.getResult("xml");
-        } else if (b.item.type == createjs.LoadQueue.IMAGE) {
-            bitmapFont.bitmap = this.loader.getResult("image");
-        }
+        // if (b.item.type == createjs.LoadQueue.XML) {
+        //     bitmapFont.xml = this.loader.getResult("xml");
+        // } else if (b.item.type == createjs.LoadQueue.IMAGE) {
+        //     bitmapFont.bitmap = this.loader.getResult("image");
+        // }
 
 
     }
@@ -516,4 +517,4 @@ Utils = function() {
         numberWithCommas: numberWithCommas
     }
 
-}();
+};
