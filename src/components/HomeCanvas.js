@@ -5,9 +5,16 @@ import Utils from '../animations/utils'
 import home_page from '../animations/home_page'
 export default class HomeCanvas extends React.Component {
 
+	constructor(props){
+		super(props);
+		this.home_page = {};
+	}
 	componentDidMount(){
-		let homePage = home_page(Utils, PIXI, this.canvas);
-		homePage.Init();
+		this.home_page = home_page(Utils, PIXI, this.canvas);
+		this.home_page.Init();
+	}
+	componentWillUnmount(){
+		this.home_page.Stop();
 	}
 	render () {
 		return (

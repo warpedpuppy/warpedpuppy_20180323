@@ -23,8 +23,10 @@ export default class Menu extends Component {
 			<div>
 				<nav>
 					<div className="not-links">
-					   <Logo customClass="menuLogo" w={70} alpha={0.5}/>
-						<h1>warped puppy</h1>
+						<Link className="homeLink" to="/">
+						   <Logo customClass="menuLogo" w={70} alpha={0.5}/>
+							<h1>warped puppy</h1>
+							</Link>
 						<div className="hamburger" onClick={() => this.showDropDown()}>
 							<span></span>
 							<span></span>
@@ -32,8 +34,9 @@ export default class Menu extends Component {
 						</div>
 					</div>
 					<div className={`links  ${showDropDownClass}`}>
-						<Link to="/">js experiments</Link>
-						<Link to="/Alternate">other stuff</Link>
+						<Link to="/experiments">js experiments</Link>
+						<Link to="/about">about</Link>
+						<Link to="/contact">contact</Link>
 					</div>
 					
 				</nav>

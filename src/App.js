@@ -3,7 +3,9 @@ import {BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import Menu from './components/Menu.js';
 import Home from './pages/Home.js';
-import Alternate from './pages/Alternate.js';
+import Experiments from './pages/Experiments.js';
+import About from './pages/About.js';
+import Contact from './pages/Contact.js';
 require('../node_modules/normalize.css/normalize.css');
 export default function App () {
     return (
@@ -14,7 +16,9 @@ export default function App () {
           </header>
           <main>
             <Route exact path="/" component={Home} />
-            <Route exact path="/Alternate" component={Alternate} />
+            <Route exact path="/Experiments" component={Experiments} />
+            <Route exact path="/About" component={About} />
+            <Route exact path="/Contact" component={Contact} />
           </main>
         </div>
       </Router>

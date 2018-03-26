@@ -39,6 +39,9 @@ nav h1 {
 	transition: top 0.5s;
 	z-index: 3;
 }
+.homeLink:visited {
+	color:#333;
+}
 .not-links {
 	position:relative;
 	z-index: 4;

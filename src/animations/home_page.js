@@ -4,6 +4,7 @@ export default function(Utils, PIXI, canvas) {
     left_adjustment: .15,
     utils: new Utils(),
     app: new PIXI.Application(),
+    loader:  PIXI.loader,
     Init: function() {
         window.onresize = this.resizeFunction.bind(this);
         this.gv.animate = true;
@@ -21,16 +22,23 @@ export default function(Utils, PIXI, canvas) {
         this.gv.stage.addChild(this.gv.dotCont);
         this.gv.lineCont = new PIXI.Container();
         this.gv.stage.addChild(this.gv.lineCont);
-        this.Main.bind(this);
-        PIXI.loader.add('spritesheet', '/bmps/shimmer.json').load(this.Main.bind(this));
         this.gv.webGL = (this.gv.renderer instanceof PIXI.CanvasRenderer) ? false : true;
         this.gv.dotQ = (this.gv.webGL === true) ? 1000 : 100;
         this.gv.lineQ = (this.gv.webGL === true) ? 360 : 36;
+        if(!this.loader.resources.spritesheet){
+            this.loader.add('spritesheet', '/bmps/shimmer.json').load(this.Main.bind(this));
+        } else {
+            this.Main.bind(this)
+            this.Main();
+        }
     },
     Main: function() {
         this.app.ticker.add(this.animate.bind(this));
         this.dots();
         this.lines();
+    },
+    Stop: function () {
+        this.app.ticker.remove(this.animate.bind(this));
     },
     lines: function() {
         if(this.gv.canvasWidth > 1024){
