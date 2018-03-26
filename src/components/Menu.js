@@ -34,9 +34,15 @@ export default class Menu extends Component {
 						</div>
 					</div>
 					<div className={`links  ${showDropDownClass}`}>
-						<Link to="/experiments">js experiments</Link>
-						<Link to="/about">about</Link>
-						<Link to="/contact">contact</Link>
+						<Link to="/experiments">
+						<span>js experiments</span>
+						</Link>
+						<Link to="/about">
+						<span>about</span>
+						</Link>
+						<Link to="/contact">
+						<span>contact</span>
+						</Link>
 					</div>
 					
 				</nav>

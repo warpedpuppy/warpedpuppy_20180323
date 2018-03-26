@@ -128,13 +128,15 @@ nav h1 {
 		display:inline-block;
 		width:auto;
 		height:100%;
-		margin:10px 20px;
-		padding:10px;
+		margin:0 15px;
+		padding:15px 0;
 		cursor:pointer;
 		text-decoration: none;
 		background-color:transparent;
 		border:none;
 		font-weight: 700;
+		position:relative;
+		text-align: center;
 	}
 	.links a:hover {
 		color:black;

@@ -6,6 +6,7 @@ import Home from './pages/Home.js';
 import Experiments from './pages/Experiments.js';
 import About from './pages/About.js';
 import Contact from './pages/Contact.js';
+import Footer from './components/Footer.js';
 require('../node_modules/normalize.css/normalize.css');
 export default function App () {
     return (
@@ -20,6 +21,7 @@ export default function App () {
             <Route exact path="/About" component={About} />
             <Route exact path="/Contact" component={Contact} />
           </main>
+          <Footer />
         </div>
       </Router>
     );

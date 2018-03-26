@@ -1,5 +1,5 @@
 export default function(Utils, PIXI, canvas) {
-    return {
+  return {
     gv: {},
     left_adjustment: .15,
     utils: new Utils(),
@@ -116,5 +116,5 @@ export default function(Utils, PIXI, canvas) {
             this.gv.renderer.render(this.gv.stage);
         }
     }
-}
+  }
 };
