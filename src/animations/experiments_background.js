@@ -61,7 +61,6 @@ export default function(Utils, PIXI, canvas) {
             line.width = this.canvasWidth;
             this.stage.addChild(line);
         }
-        console.log(this.canvasHeight)
     },
     animate: function() {
         for(let i = 0; i < this.lineQ; i++){

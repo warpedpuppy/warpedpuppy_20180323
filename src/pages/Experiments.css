@@ -12,23 +12,39 @@
 	left:0;
 	width:100%;
 }
-.exp_content .buttonCont{
-	text-align: center;
 
-}
-.exp_content .buttonCont button{
-	padding: 10px;
-	border-radius: 10px;
-	border:3px solid #FF00FF;
-	display: inline-block;
-	margin: 0 20px;
-	cursor: pointer;
-}
-.exp_content ul {
+.exp_content .experiments {
 	list-style-type: none;
 	background-color: rgba(255, 255, 255, 0.5);
 	border: 5px solid black;
-	display: inline-block;
 	border-radius: 20px;
 	padding:30px;
+	width:80%;
+	margin:0 auto;
+	overflow: hidden;
+}
+
+.exp_content .experiments ul {
+	width:30%;
+	list-style-type: none;
+	display: inline-block;
+	border-right:5px solid black;
+	float:left;
+
+}
+.exp_content .experiments ul li{
+	padding:5px 0;
+	cursor:pointer;
+}
+
+.exp_content .experiments .experiments-description {
+	width:60%;
+	padding: 0 10px;
+	float:left;
+	display: inline-block;
+}
+@media (min-width: 1024px) {
+	.exp_content .experiments {
+		width: 800px;
+	}
 }

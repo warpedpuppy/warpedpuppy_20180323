@@ -38,7 +38,7 @@ export default class Menu extends Component {
 						<span>js games &amp; experiments</span>
 						</Link>
 						<Link to="/about">
-						<span>about</span>
+						<span>about / cv</span>
 						</Link>
 						<Link to="/contact">
 						<span>contact</span>
