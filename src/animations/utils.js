@@ -277,24 +277,10 @@ export default function(gv,createjs) {
         return this.intersects;
     },
     returnCanvasWidth: function (){
-
-        return Math.max(
-            document.documentElement["clientWidth"],
-            document.body["scrollWidth"],
-            document.documentElement["scrollWidth"],
-            document.body["offsetWidth"],
-            document.documentElement["offsetWidth"]
-        );
+        return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     },
     returnCanvasHeight: function (){
-
-        return Math.max(
-            document.documentElement["clientHeight"],
-            document.body["scrollHeight"],
-            document.documentElement["scrollHeight"],
-            document.body["offsetHeight"],
-            document.documentElement["offsetHeight"]
-        );
+        return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     },
     centerOnStage: function (mc, canvasWidth, canvasHeight) {
         mc.body.x = (canvasWidth - mc.body.getBounds().width) / 2;

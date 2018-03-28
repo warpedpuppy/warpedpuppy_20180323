@@ -38,6 +38,7 @@ export default function(Utils, PIXI, canvas) {
         this.lines();
     },
     Stop: function () {
+         window.onresize = null;
         this.app.ticker.remove(this.animate.bind(this));
     },
     lines: function() {
