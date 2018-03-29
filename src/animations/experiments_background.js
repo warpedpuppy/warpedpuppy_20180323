@@ -27,6 +27,9 @@ export default function(Utils, PIXI, canvas) {
         for(let i = 0; i < this.lineQ; i++){
             let h = this.utils.randomNumberBetween(1, 5);
             let vy = this.utils.randomNumberBetween(1, 2);
+            if(Math.floor(Math.random()*2) > 0){
+                vy *= -1;
+            }
             line = new PIXI.Graphics();
             this.objectPool.push(line);
             line
