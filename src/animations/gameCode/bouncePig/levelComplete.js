@@ -3,6 +3,7 @@ export default function LevelComplete (gv, PIXI, TimelineLite, Back, TweenLite, 
         level: new PIXI.Sprite.fromFrame("level.png"),
         complete: new PIXI.Sprite.fromFrame("complete.png"),
         onStage: false,
+        tl: new TimelineLite(),
         init: function () {
             this.level.anchor.x = this.level.anchor.y = 0.5;
             this.level.x = gv.halfWidth;

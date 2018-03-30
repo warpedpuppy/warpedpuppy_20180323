@@ -4,21 +4,24 @@ export default function Level(PIXI, gv){
         text: "",
         width: 100,
         mineQ: 0,
-        fruitQ: 1,
+        fruitQ: 10,
         cloudQ: 3,
         maxFruit: 100,
         maxMines: 10,
         level: 1,
-        y: 10,
         init: function () {
             let cont = this.cont;
-            cont.y = 10;
-            let amount = this.returnText(this.level.toString());
-            this.text = this.returnText("level:"),
+            cont.y = 70;
+            let amount = this.amount = this.returnText(this.level.toString());
+            this.text = this.returnText("level:");
             cont.addChild(this.text);
             amount.x = this.width;
             cont.addChild(amount);
-            this.addContProps();
+            gv.stage.addChild(cont);
+            this.place();
+        },
+        resize: function () {
+            this.place();
         },
         returnText: function (str, big) {
             if(big === undefined)
@@ -29,19 +32,18 @@ export default function Level(PIXI, gv){
         increase: function () {
             let cont = this.cont;
             this.level ++;
-            if(cont.fruitQ < cont.maxFruit)cont.fruitQ += 5;
-            if(cont.mineQ < cont.maxMines)cont.mineQ += 2;
+            if(this.fruitQ < this.maxFruit)this.fruitQ += 5;
+            if(this.mineQ < this.maxMines)this.mineQ += 2;
             gv.score.fruit = 0;
             gv.score.reset();
             cont.removeChild(this.amount);
-            this.amount.setText(this.level.toString());
+            this.amount.text = this.level.toString();
             this.amount.x = this.width;
             cont.addChild(this.amount);
-            cont.place();
+            this.place();
         },
-        place: function(){
-            let cont = this.cont;
-            cont.x = gv.canvasWidth-cont.width-10;
+        place: function () {
+            this.cont.x = (gv.halfWidth-(this.cont.width/2));
         }
     }
 }

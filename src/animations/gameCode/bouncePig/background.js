@@ -21,13 +21,6 @@ export default function Background(PIXI, gv, Utils){
             this.background = background;
             this.cont.addChildAt(background, 0);
         },
-        backgroundBitmap: function() {
-            var background = new PIXI.Sprite.fromFrame("background.jpg");
-            background.width = gv.canvasWidth;
-            background.height = gv.canvasHeight;
-            this.background = background;
-            this.cont.addChildAt(background, 0);
-        },
         makeBricks: function () {
             this.bricks = [];
             this.brickQ = 0;
@@ -65,7 +58,7 @@ export default function Background(PIXI, gv, Utils){
                 ball.anchor.x = ball.anchor.y = 0.5;
                 ball.tint = colors[colorCounter];//"0x" + randomColor().substring(1);
                 colorCounter ++;
-                if(colorCounter == colors.length-1)colorCounter = 0;
+                if(colorCounter === colors.length-1)colorCounter = 0;
                 this.balls.push(ball);
                 this.cont.addChild(ball);
             }

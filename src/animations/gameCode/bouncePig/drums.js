@@ -1,31 +1,41 @@
 export default function Drums (gv, PIXI, ObjectPoolBuilder, TweenLite, Utils) {
     return {
+        cont: new PIXI.Container(),
         miniExplosion: new ObjectPoolBuilder("miniCloud.png", 2000, [10,30],[2,25], undefined, true, true, gv),
         onStage: false,
         init: function () {
             this.rightDrum = this.drum("right");
             this.leftDrum = this.drum("left");
             this.rightDrum.y = gv.halfHeight;
-            this.rightDrum.x = gv.canvasWidth*0.75;
             this.leftDrum.y = gv.halfHeight;
-            this.leftDrum.x = gv.canvasWidth*0.25;
             this.drums =[this.leftDrum, this.rightDrum];
+            gv.stage.addChild(this.cont);
         },
         addToStage: function () {
             this.onStage = true;
             this.rightDrum.visible = true;
             this.leftDrum.visible = true;
-            gv.stage.addChild(this.rightDrum);
-            gv.stage.addChild(this.leftDrum);
+            this.cont.addChild(this.rightDrum);
+            this.cont.addChild(this.leftDrum);
+            this.place();
+            
         },
         removeFromStage: function () {
             this.onStage = false;
-            gv.stage.removeChild(this.rightDrum);
-            gv.stage.removeChild(this.leftDrum);
+            this.cont.removeChildren();
         },
         hide: function () {
             this.rightDrum.visible = false;
             this.leftDrum.visible = false;
+        },
+        place: function () {
+            this.rightDrum.x = gv.canvasWidth * 0.75;
+            this.leftDrum.x = gv.canvasWidth * 0.25;
+        },
+        resize: function () {
+            this.removeFromStage();
+            this.place();
+            this.addToStage();
         },
         show: function () {
             if(this.rightDrum.visible !== true && gv.levelComplete.onStage === false){
@@ -44,7 +54,7 @@ export default function Drums (gv, PIXI, ObjectPoolBuilder, TweenLite, Utils) {
         drumRoll: function (drum) {
             gv.animate = false;
             this.drum = drum;
-            if(drum.side == "left"){
+            if(drum.side === "left"){
                 drum.x = gv.halfWidth;
                 drum.y = gv.halfHeight;
             }
@@ -58,7 +68,7 @@ export default function Drums (gv, PIXI, ObjectPoolBuilder, TweenLite, Utils) {
             this.hide();
             gv.animate = true;
             gv.utils.playSound("explosion");
-            var rot = (this.drum == this.rightDrum)?-Utils.deg2rad(3*360):Utils.deg2rad(3*360);
+            var rot = (this.drum === this.rightDrum)?-Utils.deg2rad(3*360):Utils.deg2rad(3*360);
             TweenLite.to(gv.hero,4, {rotation: rot, onComplete:this.heroZero});
             this.miniExplosion.startPool(gv.hero.x, gv.hero.y+10, gv.kingCont);
 
@@ -67,25 +77,25 @@ export default function Drums (gv, PIXI, ObjectPoolBuilder, TweenLite, Utils) {
             gv.hero.rotation = Utils.deg2rad(0);
         },
         drum: function (side) {
-            var cont = new PIXI.DisplayObjectContainer();
+            var cont = new PIXI.Container();
             cont.side = side;
             var drum = new PIXI.Sprite.fromFrame("drum.png");
             drum.side= side;
-            drum.rotation = (side == "right")?Utils.deg2rad(-30):Utils.deg2rad(30);
+            drum.rotation = (side === "right")?Utils.deg2rad(-30):Utils.deg2rad(30);
             drum.cacheAsBitmap = true;
             drum.w = cont.w = drum.width;
             drum.h = cont.h = drum.height;
             cont.addChild(drum);
             var line;
-            if(side == "right"){
-                 line = new PIXI.Graphics();
+            if(side === "right"){
+                line = new PIXI.Graphics();
                 line.lineStyle(2, 0x000000, 1).moveTo(10,10).lineTo(cont.w-12,-cont.h-12);
                 cont.line = line;
                 cont.point1 = new PIXI.Point(10,10);
                 cont.point2 = new PIXI.Point(drum.w-12,-drum.h-12);
             }
             else{
-                 line = new PIXI.Graphics();
+                line = new PIXI.Graphics();
                 line.lineStyle(2, 0x000000, 1).moveTo(-5,10).lineTo(cont.w-25,cont.h+33);
                 cont.line = line;
                 cont.point1 = new PIXI.Point(-5,10);

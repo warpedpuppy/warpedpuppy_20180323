@@ -51,10 +51,10 @@ export default function(gv, PIXI){
                 displayObject.x = (gv.canvasWidth-displayObject.width)/2;
                 displayObject.y = (gv.canvasHeight-displayObject.height)/2;
             }
-            else if (str == "x"){
+            else if (str === "x"){
                 displayObject.x = (gv.canvasWidth-displayObject.width)/2;
             }
-            else if (str == "y"){
+            else if (str === "y"){
                 displayObject.y = (gv.canvasHeight-displayObject.height)/2;
             }
         },
@@ -181,51 +181,51 @@ export default function(gv, PIXI){
     }
 }
 
-Array.prototype.sortOn = function(){
-    var dup = this.slice();
-    if(!arguments.length) return dup.sort();
-    var args = Array.prototype.slice.call(arguments);
-    return dup.sort(function(a,b){
-        var props = args.slice();
-        var prop = props.shift();
-        while(a[prop] == b[prop] && props.length) prop = props.shift();
-        return a[prop] == b[prop] ? 0 : a[prop] > b[prop] ? 1 : -1;
-    });
-};
+// Array.prototype.sortOn = function(){
+//     var dup = this.slice();
+//     if(!arguments.length) return dup.sort();
+//     var args = Array.prototype.slice.call(arguments);
+//     return dup.sort(function(a,b){
+//         var props = args.slice();
+//         var prop = props.shift();
+//         while(a[prop] === b[prop] && props.length) prop = props.shift();
+//         return a[prop] === b[prop] ? 0 : a[prop] > b[prop] ? 1 : -1;
+//     });
+// };
 
-Array.prototype.move = function (old_index, new_index) {
+// Array.prototype.move = function (old_index, new_index) {
 
-   // print("move")
-    if (new_index >= this.length) {
-        var k = new_index - this.length;
-        while ((k--) + 1) {
-            this.push(undefined);
-        }
-    }
-    this.splice(new_index, 0, this.splice(old_index, 1)[0]);
-    return this; // for testing purposes
-};
+//    // print("move")
+//     if (new_index >= this.length) {
+//         var k = new_index - this.length;
+//         while ((k--) + 1) {
+//             this.push(undefined);
+//         }
+//     }
+//     this.splice(new_index, 0, this.splice(old_index, 1)[0]);
+//     return this; // for testing purposes
+// };
 
-function formatDate(date, fmt) {
-    function pad(value) {
-        return (value.toString().length < 2) ? '0' + value : value;
-    }
-    return fmt.replace(/%([a-zA-Z])/g, function (_, fmtCode) {
-        switch (fmtCode) {
-            case 'Y':
-                return date.getUTCFullYear();
-            case 'M':
-                return pad(date.getUTCMonth() + 1);
-            case 'd':
-                return pad(date.getUTCDate());
-            case 'H':
-                return pad(date.getUTCHours());
-            case 'm':
-                return pad(date.getUTCMinutes());
-            case 's':
-                return pad(date.getUTCSeconds());
-            default:
-                throw new Error('Unsupported format code: ' + fmtCode);
-        }
-    });
-}
+// function formatDate(date, fmt) {
+//     function pad(value) {
+//         return (value.toString().length < 2) ? '0' + value : value;
+//     }
+//     return fmt.replace(/%([a-zA-Z])/g, function (_, fmtCode) {
+//         switch (fmtCode) {
+//             case 'Y':
+//                 return date.getUTCFullYear();
+//             case 'M':
+//                 return pad(date.getUTCMonth() + 1);
+//             case 'd':
+//                 return pad(date.getUTCDate());
+//             case 'H':
+//                 return pad(date.getUTCHours());
+//             case 'm':
+//                 return pad(date.getUTCMinutes());
+//             case 's':
+//                 return pad(date.getUTCSeconds());
+//             default:
+//                 throw new Error('Unsupported format code: ' + fmtCode);
+//         }
+//     });
+// }

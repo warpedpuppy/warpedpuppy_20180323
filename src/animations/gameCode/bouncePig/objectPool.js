@@ -12,25 +12,15 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
         },
         singleObject: function () {
             var so;
-            if(!this.pixi){
-                // so = new createjs.Bitmap(gv.assetLoader.loader.getResult(this.bitmapString));
-                // var bounds = so.getBounds();
-                // so.regX = bounds.width/2;
-                // so.regY = bounds.height/2;
-            }else{
-                if(this.spriteSheet === true){
-
-                    so = new PIXI.Sprite.fromFrame(this.bitmapString);
-                    so.anchor.x =so.anchor.y = 0.5;
-                    so.radius = so.width/2;
-                }
-
-            }
+            so = new PIXI.Sprite.fromFrame(bitmapString);
+            so.anchor.x =so.anchor.y = 0.5;
+            so.radius = so.width/2;
+            
             so.vx = 0;
             so.vy = 0;
             so.speed = 0;
             so.angle = 0;
-            so.rotateRange = (this.rotateRange !== undefined)?Utils.randomNumberBetween(this.rotateRange[0], this.rotateRange[1]):undefined;
+            so.rotateRange = (this.rotateRange !== undefined)?gv.utils.randomNumberBetween(this.rotateRange[0], this.rotateRange[1]):undefined;
             if(Math.floor(Math.random()*2) < 1)so.rotateRange *=-1;
             so.storeSpeed = 0;
             so.storeScale = 0;
@@ -40,10 +30,10 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
             var instance;
             this.op.length = 0;
             this.op = [];
-            for(var i =0; i < this.objQ; i ++){
+            for(var i =0; i < objQ; i ++){
                 instance =  this.singleObject();
                 instance.angle =  Math.round(Math.random() * 360);
-                instance.speed = instance.storeSpeed = Utils.randomNumberBetween(this.speeds[0], this.speeds[1]);
+                instance.speed = instance.storeSpeed = gv.utils.randomNumberBetween(speeds[0], speeds[1]);
                 instance.vx = Math.cos(instance.angle) * instance.speed;
                 instance.vy = Math.sin(instance.angle) * instance.speed;
                 instance.scale.x =  instance.scale.y =this.startScale ;
@@ -54,15 +44,17 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
         startPool: function (xPos, yPos, addTo, index) {
             var instance;
             this.addTo = addTo;
-            for(var i =0; i < this.objQ; i ++){
+
+            for(var i =0; i < objQ; i ++){
                 instance = this.op[i];
+                console.log(instance)
                 this.restore(instance);
                 instance.vx = Math.cos(instance.angle);// * instance.speed;
                 instance.vy = Math.sin(instance.angle);// * instance.speed;
                 instance.startX = instance.x = xPos;
                 instance.startY = instance.y = yPos;
                 instance.age = 0;
-                instance.lifeSpan = Utils.randomIntBetween(this.lifeSpan[0], this.lifeSpan[1]);
+                instance.lifeSpan = gv.utils.randomIntBetween(lifeSpan[0], lifeSpan[1]);
                 if(index === undefined)
                     addTo.addChild(instance);
                 else
@@ -87,7 +79,7 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
         tickIt: function () {
             if(this.go === true){
             var instance;
-            for (var i =0; i < this.objQ; i ++) {
+            for (var i =0; i < objQ; i ++) {
                 instance = this.op[i];
                 if(instance.parent !== undefined){
                     instance.x += instance.vx;

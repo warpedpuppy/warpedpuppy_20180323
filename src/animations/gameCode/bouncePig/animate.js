@@ -7,7 +7,6 @@ export default function animate (gv, PIXI) {
         if( gv.animateAllow === true 
             && gv.introScreenOnStage === false 
             && gv.score.decreaseBoolean === false) {
-                var lines = gv.background.lines;
                 var clouds = gv.clouds.clouds;
                 var drums = gv.drums.drums;
                 var fruits = gv.fruit.fruits;
@@ -20,7 +19,7 @@ export default function animate (gv, PIXI) {
                 var testing = false;
                 gv.background.tickIt();
                 gv.bouncePlatform.tickIt();
-                //gv.stars.tickIt();
+                gv.stars.tickIt();
                 gv.drums.miniExplosion.tickIt();
                 gv.mines.redBigs.tickIt();
                 gv.mines.redLittles.tickIt();
@@ -94,10 +93,10 @@ export default function animate (gv, PIXI) {
                 if (drum.x < -drum.w) drum.x = gv.canvasWidth + drum.w;
                  A = drum.toGlobal(drum.point1);
                  B =  drum.toGlobal(drum.point2);
-                if (testing === false &&  gv.vy > 0 && gv.speedLimit == gv.storeSpeedLimit && gv.utils.lineIntersectCircle(A, B, C, 20)) {
+                if (testing === false &&  gv.vy > 0 && gv.speedLimit === gv.storeSpeedLimit && gv.utils.lineIntersectCircle(A, B, C, 20)) {
                     gv.hero.bounce();
                     gv.speedLimit = 75;
-                    if (drum.side == "right") {
+                    if (drum.side === "right") {
                         gv.vx =-10;
                         gv.heroInstance.scale.x = 1;
                     } else {
@@ -122,17 +121,20 @@ export default function animate (gv, PIXI) {
 
                 var rect1 = new PIXI.Rectangle(fruit.x - (fruit.width / 2), fruit.y, fruit.width, fruit.height);
 
-                if (testing === false && gv.speedLimit === gv.storeSpeedLimit && gv.utils.rectangleRectangleCollisionDetection(rect1, gv.rect2)) {
+                if (testing === false 
+                    && gv.speedLimit === gv.storeSpeedLimit 
+                    && gv.utils.rectangleRectangleCollisionDetection(rect1, gv.rect2)) {
                     gv.fruit.eat(fruit);
                     gv.hero.chew();
                     gv.score.increase();
+
                     gv.stars.startPool(gv.hero.x, gv.hero.y, gv.kingCont);
                 }
             }
         }
 
         if (gv.vy < gv.speedLimit)gv.vy += 0.25;
-        if (gv.speedLimit != gv.storeSpeedLimit) {
+        if (gv.speedLimit !== gv.storeSpeedLimit) {
             gv.swipeText.visible = false;
             if (gv.vy > 0) {
                 if (gv.speedLimit > gv.storeSpeedLimit) {
@@ -141,7 +143,7 @@ export default function animate (gv, PIXI) {
                     gv.speedLimit = gv.storeSpeedLimit;
                 }
             }
-        } else if (gv.speedLimit == gv.storeSpeedLimit && gv.vy >0) {
+        } else if (gv.speedLimit === gv.storeSpeedLimit && gv.vy >0) {
             if(gv.vy > gv.speedLimit){
                 gv.vy -= 0.5;
             }
@@ -176,7 +178,7 @@ export default function animate (gv, PIXI) {
         gv.renderer.render(gv.stage);
     } else if( gv.animateAllow === true && gv.introScreenOnStage === true && gv.score.decreaseBoolean === false) {
         //THIS IF FOR THE NEXT LEVEL SCREENS
-        if(gv.bouncePlatform.line.alpha ==1){
+        if(gv.bouncePlatform.line.alpha === 1){
             gv.stars.tickIt();
             gv.background.tickIt();
             gv.bouncePlatform.tickIt();

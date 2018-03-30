@@ -9,7 +9,7 @@ export default function Fruit(gv, PIXI, Utils) {
         init: function () {
             gv.stage.addChild(this.fruitCont);
             this.build();
-             this.addToStage();
+            this.addToStage();
         },
         build: function () {
             var fruit;
@@ -67,7 +67,7 @@ export default function Fruit(gv, PIXI, Utils) {
                 fruit.scale.x = fruit.scale.y = 0.5;
                 fruit.rotQ = Utils.randomNumberBetween(0.001, 0.005);
                 fruit.y = Utils.randomNumberBetween(0, gv.canvasHeight);
-                fruit.x = Utils.randomNumberBetween(0, gv.canvasWidth);
+                fruit.x = Utils.randomNumberBetween(0, gv.canvasWidth);//gv.canvasWidth/2;//
 
                 this.fruitCont.addChild(fruit);
 

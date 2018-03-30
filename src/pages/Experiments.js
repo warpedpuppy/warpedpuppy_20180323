@@ -2,7 +2,7 @@ import React from 'react';
 import './Experiments.css';
 import Canvas from '../components/experiments/ExperimentsCanvas';
 import experimentData from '../json/experiments';
-
+import { Link } from 'react-router-dom';
 export default class Experiments extends React.Component {
 
 	constructor(props){
@@ -41,6 +41,7 @@ export default class Experiments extends React.Component {
 		}
 		let pagination = [];
 		let description = this.state.array[this.state.desc].description;
+		let link = this.state.array[this.state.desc].link;
 		for(let i = 0; i < this.state.pages; i++){
 
 			let page = i + 1;
@@ -70,6 +71,7 @@ export default class Experiments extends React.Component {
 				  </ul>
 				  <div className="experiments-description">
 				  	  {description}
+				  	  <Link to={link}>click here</Link>
 				  </div>
 			  </div>
 		  </section>

@@ -26,9 +26,7 @@ export default function BouncePlatform (gv, PIXI, Utils) {
             if(trueFalse === true){
                 gv.stage.interactive = true;
                 gv.stage.buttonMode = true;
-                let that = this;
-                //gv.stage.on('pointerdown', (e) => {console.log(this); this.placeFirstDot(e)})
-                 gv.stage.mousedown = gv.stage.touchstart =  this.placeFirstDot;
+                gv.stage.mousedown = gv.stage.touchstart =  this.placeFirstDot;
                 gv.stage.mousemove = gv.stage.touchmove = this.onMouseMove;
                 gv.stage.mouseup =  gv.stage.touchend = this.releaseMouse;
             } else {

@@ -22,15 +22,8 @@ import Drums from '../animations/gameCode/bouncePig/drums.js'
 
 
 export default class GamePage extends React.Component {
-	// constructor(props){
-	// 	super(props);
-	// 	this.state = {
-	// 		scriptURL: "",
-	// 		bouncePig: bouncePig
-	// 	}
-	// }
+	
 	componentDidMount(){
-		
 		let game = new bp( 
 			PIXI,
 			ObjectPoolBuilder,
@@ -52,7 +45,6 @@ export default class GamePage extends React.Component {
 			TimelineLite, 
 			Back);
 		game.start();
-	
 	}
 	
 	render () {

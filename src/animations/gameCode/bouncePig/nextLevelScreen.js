@@ -18,10 +18,10 @@ export default function NextLevelScreen (gv, StoreScore, Mines, Clouds, Drums, P
             this.startButton.y = gv.halfHeight - 30;
             this.nextLevelButton.anchor.x = this.startButton.anchor.y = 0.5;
             this.nextLevelButton.x = gv.halfWidth;
+            console.log(gv.halfWidth)
             this.nextLevelButton.y = gv.halfHeight - 50;
         },
         resize: function () {
-            let gv = this.gv;
             if(this.ON_STAGE === true){
                 gv.hero.x = gv.halfWidth;
                 this.startButton.x = gv.halfWidth;
@@ -44,15 +44,15 @@ export default function NextLevelScreen (gv, StoreScore, Mines, Clouds, Drums, P
             };
         },
         stop: function () {
-            this.gv.introScreenOnStage = true;
+            gv.introScreenOnStage = true;
             TweenLite.delayedCall(0.5, Utils.proxy(this.addToStage, this));
         },
         addToStage: function(){
-            var date = new Date().getTime();
-            var duration = date - gv.startGame;
-            let arr = [["username", "user"], ["result", "win"],["duration", duration]];
+            //var date = new Date().getTime();
+            // var duration = date - gv.startGame;
+            // let arr = [["username", "user"], ["result", "win"],["duration", duration]];
             gv.keyString = "";
-            gv.storeScore.sendScore();
+            //gv.storeScore.sendScore();
             this.ON_STAGE = true;
             gv.hero.alpha = 0;
             this.fruitCont.alpha = 0;
@@ -60,10 +60,10 @@ export default function NextLevelScreen (gv, StoreScore, Mines, Clouds, Drums, P
             this.dot1.alpha = 0;
             this.dot2.alpha = 0;
             gv.introScreenOnStage = true;
-            if(gv.fruit.fruitQ != gv.level.fruitQ){
+            if(gv.fruit.fruitQ !== gv.level.fruitQ){
                 gv.fruit.addMoreFruit();
             }
-            if(gv.mines.mineQ != gv.level.mineQ){
+            if(gv.mines.mineQ !== gv.level.mineQ){
                 gv.mines.addMoreMines();
             }
             this.line.visible = true;
@@ -87,6 +87,7 @@ export default function NextLevelScreen (gv, StoreScore, Mines, Clouds, Drums, P
             gv.bouncePlatform.on(false);
             gv.swipeText.visible = false;
             if(gv.level.level > 1){
+                console.log(this.nextLevelButton.x)
                 gv.stage.addChild(this.nextLevelButton);
                 this.nextLevelButton.scale.x = this.nextLevelButton.scale.y = 1;
                 this.nextLevelButton.interactive = true;
@@ -169,6 +170,7 @@ export default function NextLevelScreen (gv, StoreScore, Mines, Clouds, Drums, P
            // var tl = new TimelineLite();
             this.fruitCont.removeChildren();
             gv.stage.removeChild(this.fruitCont);
+            gv.drums.removeFromStage();
             //gv.stage.removeChild(this.goalText);
             gv.stage.removeChild(this.titleText);
             this.line.visible = false;
@@ -192,7 +194,7 @@ export default function NextLevelScreen (gv, StoreScore, Mines, Clouds, Drums, P
             gv.loopingQ = Math.max(gv.background.lineQ, gv.fruit.fruits.length, gv.clouds.clouds.length, gv.mines.mines.length);
         },
         nextLevel: function(){
-            if(gv.level.level == 1){
+            if(gv.level.level === 1){
                 this.startButton.interactive = false;
                 this.startButton.buttonMode = false;
                 this.startButton.mousedown = null;
@@ -209,19 +211,19 @@ export default function NextLevelScreen (gv, StoreScore, Mines, Clouds, Drums, P
             gv.fruit.addToStage();
             gv.stage.addChild(gv.swipeText);
             gv.mines.addToStage();
-            gv.stage.setChildIndex(gv.hero, gv.stage.children.length-1);
+            gv.stage.setChildIndex(gv.heroInstance, gv.stage.children.length-1);
             gv.clouds.addToStage();
             gv.stage.setChildIndex(gv.kingCont, gv.stage.children.length-1);
-            gv.stage.addChild(gv.level);
-            gv.stage.addChild(gv.score);
+            gv.stage.addChild(gv.level.cont);
+            gv.stage.addChild(gv.score.cont);
             gv.level.x = gv.score.x;
             this.clearNextLevelScreen();
         },
         tickIt: function(){
             this.fruitCont.rotation +=0.005;
-            for(var i = 0; i < gv.fruit.fruitQ; i++){
-                var fruit = gv.fruit.fruits[i];
-                if(fruit !== undefined) fruit.rotation -=0.005;
+            for(var i = 0; i < gv.level.fruitQ; i++){
+                gv.fruit.fruits[i].rotation -=0.005;
+               
             }
         }
     }

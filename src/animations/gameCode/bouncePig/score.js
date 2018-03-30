@@ -28,7 +28,11 @@ export default function Score (PIXI, Utils, gv, TweenLite) {
             cont.addChild(fruitAmount);
             this.place();
             cont.classRef = this;
+            cont.y = 60;
             gv.stage.addChild(this.cont)
+        },
+        resize: function () {
+            this.place();
         },
         reset: function () {
             let str = this.str;
@@ -62,7 +66,9 @@ export default function Score (PIXI, Utils, gv, TweenLite) {
             this.fruitAmount.x = this.width2;
             this.cont.addChild(this.fruitAmount);
             this.place();
-            if(this.cont.fruit.toString() == gv.level.fruitQ.toString()){
+            console.log('increase')
+            if(this.cont.fruit.toString() === gv.level.fruitQ.toString()){
+                console.log('function call')
                 gv.level.increase();
                 gv.levelComplete.addToStage();
             }
@@ -102,7 +108,7 @@ export default function Score (PIXI, Utils, gv, TweenLite) {
                     this.fruitAmount.setText(str);
                     this.fruitAmount.x = this.width2;
                     this.cont.addChild(this.fruitAmount);
-                    this. cont.place();
+                    this.cont.place();
                 }
                 this.slowTheDecreaseCounter ++;
             } else {

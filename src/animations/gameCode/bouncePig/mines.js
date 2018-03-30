@@ -63,7 +63,7 @@ export default function Mines (gv, PIXI, ObjectPoolBuilder, Utils, TweenLite) {
             mine.rect = new PIXI.Rectangle(-30,-30,60,60);
             mine.w = mine.h =Math.max(mine.height,mine.width);
             mine.anchor.x = mine.anchor.y = 0.5;
-            mine.rot = Utils.andomNumberBetween(-0.005,0.01);
+            mine.rot = Utils.randomNumberBetween(-0.005,0.01);
             return mine;
         }
     }
