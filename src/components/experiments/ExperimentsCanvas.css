@@ -4,21 +4,7 @@
 	top:0;
 	left:0;
 }
-.pagination {
-	font-weight: bold;
-	text-align: center;
-	padding: 10px;
-	font-size: 30px;
-}
-.pageLink {
-	cursor: pointer;
-}
-.pageLink:hover {
-	color:#FF00FF;
-}
-.pageLink:lastChild(){
-	display: none;
-}
+
 /*.pageLink::after {
 	content: '|';
 }

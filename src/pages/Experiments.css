@@ -43,6 +43,25 @@
 	float:left;
 	display: inline-block;
 }
+.pagination {
+	font-weight: bold;
+	text-align: center;
+	padding: 10px;
+	font-size: 30px;
+}
+.pageLink {
+	cursor: pointer;
+}
+.pageLink.activeLink {
+	font-size: 40px;
+	position: relative;
+	top:5px;
+	color:#FF00FF;
+}
+.pageLink:hover {
+	color:#FF00FF;
+}
+
 @media (min-width: 1024px) {
 	.exp_content .experiments {
 		width: 800px;

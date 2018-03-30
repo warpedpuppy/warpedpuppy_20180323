@@ -2,11 +2,12 @@ export default function(){
 	return [
 		{
 			title: 'solitaire',
-			description: 'desc1'
+			description: 'desc1',
+			link: 'link'
 		},
 		{
 			title: 'bounce, pig, bounce',
-			description: 'desc1'
+			description: 'desc2'
 		},
 		{
 			title: 'insect ai',
