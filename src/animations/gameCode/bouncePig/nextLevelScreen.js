@@ -1,25 +1,25 @@
-
-export default function NextLevelScreen(){
+export default function NextLevelScreen () {
     return {
-        storeScore = new StoreScore(),
-        mines = new Mines(),
-        clouds = new Clouds(),
-        drums = new Drums(),
-        core_y = gv.level.height+10,
-        ON_STAGE = false,
-        startButton = new PIXI.Sprite.fromFrame("startButton.png"),
-        tstartButton.anchor.x = this.startButton.anchor.y = 0.5,
-        startButton.x = gv.halfWidth,
-        startButton.y = gv.halfHeight - 30,
+        storeScore: new StoreScore(),
+        mines: new Mines(),
+        clouds: new Clouds(),
+        drums:  new Drums(),
+        ON_STAGE:  false,
+        startButton:  new PIXI.Sprite.fromFrame("startButton.png"),
         nextLevelButton = new PIXI.Sprite.fromFrame("nexLevelButton.png"),
-        nextLevelButton.anchor.x = this.startButton.anchor.y = 0.5,
-        nextLevelButton.x = gv.halfWidth,
-        nextLevelButton.y = gv.halfHeight - 50,
         dot1 = gv.bouncePlatform.dot1,
         dot2 = gv.bouncePlatform.dot2,
         line = gv.bouncePlatform.line,
         fruitCont = new PIXI.SpriteBatch(),
-        gv = gv,
+        init: function () {
+            core.y = gv.level.height + 10;
+            startButton.anchor.x = this.startButton.anchor.y = 0.5;
+            startButton.x = gv.halfWidth;
+            startButton.y = gv.halfHeight - 30;
+            nextLevelButton.anchor.x = this.startButton.anchor.y = 0.5;
+            nextLevelButton.x = gv.halfWidth;
+            nextLevelButton.y = gv.halfHeight - 50;
+        },
         resize: function () {
             let gv = this.gv;
             if(this.ON_STAGE === true){
@@ -225,4 +225,5 @@ export default function NextLevelScreen(){
             }
         }
     }
+}
 

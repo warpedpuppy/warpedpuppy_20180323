@@ -20,7 +20,7 @@ export default function Clouds () {
                 TweenLite.to(cloud,0.5, {alpha:1});
             }
         },
-        removeFromStage = function () {
+        removeFromStage: function () {
             this.onStage = false;
             var cloud;
             for(var i = 0; i < this.clouds.length; i ++){

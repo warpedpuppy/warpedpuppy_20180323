@@ -101,6 +101,46 @@ export default function(){
                 array[randomIndex] = temporaryValue;
             }
             return array;
+        },
+        pointRectangleCollisionDetection: function (item1, rectangle) {
+            var point = new createjs.Point(item1.x, item1.y);
+            var rightSide = rectangle.x + rectangle.width;
+            var bottom = rectangle.y +rectangle.height;
+            var radius = item1.radius !== undefined?item1.radius:0;
+            if(point.x + radius > rectangle.x && point.x - radius <rightSide && point.y +radius > rectangle.y && point.y - radius < bottom){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }, 
+        rectangleRectangleCollisionDetection: function (rect1, rect2) {
+            return (rect1.x <=(rect2.x + rect2.width) &&
+                rect2.x <= (rect1.x + rect1.width) &&
+                rect1.y <= (rect2.y + rect2.height) &&
+                rect2.y <= (rect1.y + rect1.height));
+        },
+        pointItemCollisionDetection: function (item1, item2){
+            var point = new createjs.Point(item1.x, item1.y);
+            if(point.x > target.body.x && point.x < item2.body.x+item2.width&& point.y > item2.body.y && point.y < item2.body.y +item2.height){
+                return true;
+            }
+            else{
+                return false;
+            }
+        },
+        capitalize: function () {
+            return this.charAt(0).toUpperCase()+this.substr(1);
+        },
+        addTicker: function (fps) {
+            createjs.Ticker.addEventListener("tick", tick);
+            createjs.Ticker.setFPS(fps);
+        },
+        singleton: function (ClassName, thisInstance) {
+            if (window[ClassName].prototype._singletonInstance ) {
+                return window[ClassName].prototype._singletonInstance;
+            }
+            window[ClassName].prototype._singletonInstance = thisInstance;
         }
 
 
@@ -120,101 +160,7 @@ Array.prototype.sortOn = function(){
         return a[prop] == b[prop] ? 0 : a[prop] > b[prop] ? 1 : -1;
     });
 };
-function 
-function pointRectangleCollisionDetection(item1, rectangle){
 
-    var point = new createjs.Point(item1.x, item1.y);
-    //console.log("target "+item1+" local x = "+item1.x+" global x = "+rectangle.x)
-    var rightSide = rectangle.x + rectangle.width;
-    var bottom = rectangle.y +rectangle.height;
-
-    var radius = item1.radius !== undefined?item1.radius:0;
-
-
-
-
-    if(point.x + radius > rectangle.x && point.x - radius <rightSide && point.y +radius > rectangle.y && point.y - radius < bottom){
-        return true;
-    }
-    else{
-        return false;
-    }
-
-
-}
-
-
-
-
-function rectangleRectangleCollisionDetection(rect1, rect2) {
-    return (rect1.x <=(rect2.x + rect2.width) &&
-        rect2.x <= (rect1.x + rect1.width) &&
-        rect1.y <= (rect2.y + rect2.height) &&
-        rect2.y <= (rect1.y + rect1.height));
-}
-
-function pointItemCollisionDetection(item1, item2){
-
-    //the item here is a class with two pubic properties:  a shape and the width
-    var point = new createjs.Point(item1.x, item1.y);
-
-    if(point.x > target.body.x && point.x < item2.body.x+item2.width&& point.y > item2.body.y && point.y < item2.body.y +item2.height){
-        return true;
-    }
-    else{
-        return false;
-    }
-
-
-}
-String.prototype.capitalize = function() {
-
-    return this.charAt(0).toUpperCase()+this.substr(1);
-    //return this.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
-};
-
-
-function addTicker(fps){
-
-    createjs.Ticker.addEventListener("tick", tick);
-    createjs.Ticker.setFPS(fps);
-}
-function singleton(ClassName, thisInstance){
-
-    if (window[ClassName].prototype._singletonInstance ) {
-        return window[ClassName].prototype._singletonInstance;
-    }
-    window[ClassName].prototype._singletonInstance = thisInstance;
-}
-
-function proxy(method, scope) {
-
-    return function() {
-        return method.apply(scope, arguments);
-    };
-}
-
-
-/*
-function print(str){
-    console.log(str);
-}*/
-
-function returnSprite(str){
-    return new createjs.Sprite(gv.spriteSheet, str);
-}
-function touchAndCursorEnableNew(number){
-
-
-        //this is what enables the cursor to be a pointer
-        gv.stage.enableMouseOver(number);
-        //this is what enables touch screens to work:
-        createjs.Touch.enable(gv.stage);
-
-
-
-
-}
 Array.prototype.move = function (old_index, new_index) {
 
    // print("move")
