@@ -1,8 +1,8 @@
-export default function BouncePlatform (gv, PIXI) {
+export default function BouncePlatform (gv, PIXI, Utils) {
     return {
-        line = new PIXI.Sprite.fromFrame("line.gif"),
-        dot1 = new PIXI.Sprite.fromFrame("newDot.png"),
-        dot2 = new PIXI.Sprite.fromFrame("newDot.png"),
+        line: new PIXI.Sprite.fromFrame("line.gif"),
+        dot1: new PIXI.Sprite.fromFrame("newDot.png"),
+        dot2: new PIXI.Sprite.fromFrame("newDot.png"),
         init: function () {
             this.line.height = 2;
             this.line.anchor.y = 0.5;
@@ -78,7 +78,7 @@ export default function BouncePlatform (gv, PIXI) {
                 var mouseY = mouse.y;
                 this.dot2.x = mouseX;
                 this.dot2.y = mouseY;
-                var disAngle = distanceAndAngle(new PIXI.Point(this.dot1.x, this.dot1.y), new PIXI.Point(this.dot2.x, this.dot2.y));
+                var disAngle = Utils.distanceAndAngle(new PIXI.Point(this.dot1.x, this.dot1.y), new PIXI.Point(this.dot2.x, this.dot2.y));
                 this.line.rotation = disAngle[1];
                 this.line.width = disAngle[0];
             }

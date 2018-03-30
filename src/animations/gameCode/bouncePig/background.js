@@ -1,8 +1,8 @@
 
-export default function Background(PIXI, gv){
+export default function Background(PIXI, gv, Utils){
     return {
-        cont: new PIXI.DisplayObjectContainer(),
-        container:  new PIXI.SpriteBatch(),
+        cont: new PIXI.Container(),
+        container:  new PIXI.particles.ParticleContainer(),
         ballQ:  20,
         lines: [],
         balls:  [],
@@ -57,11 +57,11 @@ export default function Background(PIXI, gv){
             for (var i = 0; i <  this.ballQ; i++) {
                 ball = new PIXI.Sprite.fromFrame("bubble.png");
 
-                ball.scale.x = ball.scale.y = randomNumberBetween(5, 15);
-                ball.y = randomNumberBetween(0, gv.canvasHeight);
-                ball.x = randomNumberBetween(0, gv.canvasWidth);
-                ball.vx = randomNumberBetween(0.05,0.5);
-                ball.vy =  randomNumberBetween(0.05,0.5);
+                ball.scale.x = ball.scale.y = Utils.randomNumberBetween(5, 15);
+                ball.y = Utils.randomNumberBetween(0, gv.canvasHeight);
+                ball.x = Utils.randomNumberBetween(0, gv.canvasWidth);
+                ball.vx = Utils.randomNumberBetween(0.05,0.5);
+                ball.vy =  Utils.randomNumberBetween(0.05,0.5);
                 ball.anchor.x = ball.anchor.y = 0.5;
                 ball.tint = colors[colorCounter];//"0x" + randomColor().substring(1);
                 colorCounter ++;

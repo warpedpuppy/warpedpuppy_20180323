@@ -1,4 +1,4 @@
-export default function Mines () {
+export default function Mines (gv, PIXI, ObjectPoolBuilder, Utils, TweenLite) {
     return {
         mineQ: gv.level.mineQ,
         mines: [],
@@ -8,7 +8,7 @@ export default function Mines () {
             this.build();
             this.redBackground.beginFill(0xFF0000).drawRect(0,0,gv.canvasWidth,gv.canvasHeight).endFill();
             this.redBackground.alpha = 0;
-            gv.stage.addChildAt(this.redBackground, 5);
+            gv.stage.addChildAt(this.redBackground, 0); // was 5
         },
         build: function () {
             for(var i = 0; i < this.mineQ; i++){
@@ -38,20 +38,20 @@ export default function Mines () {
             this.onStage = true;
             for(var i = 0; i < this.mineQ; i++){
                 var mine = this.mines[i];
-                mine.alpha = 0;
-                mine.x = randomNumberBetween(0,gv.canvasWidth);
-                mine.y = randomNumberBetween(0,gv.canvasHeight);
+                mine.alpha = 1;
+                mine.x = Utils.randomNumberBetween(0,gv.canvasWidth);
+                mine.y = Utils.randomNumberBetween(0,gv.canvasHeight);
                 gv.kingCont.addChild(mine);
                 TweenLite.to(mine,0.5, {alpha:1});
             }
 
         },
         explode: function (mine) {
-            playSound("explosion");
+            Utils.playSound("explosion");
             this.redBigs.startPool(mine.x, mine.y, gv.kingCont);
             this.redLittles.startPool(mine.x, mine.y, gv.kingCont);
-            mine.x = randomNumberBetween(0, gv.canvasWidth);
-            mine.y =  randomNumberBetween(0, 150);
+            mine.x = Utils.randomNumberBetween(0, gv.canvasWidth);
+            mine.y =  Utils.randomNumberBetween(0, 150);
             TweenLite.killTweensOf(this.redBackground);
             this.redBackground.alpha = 1;
             this.redBackground.visible = true;
@@ -63,7 +63,7 @@ export default function Mines () {
             mine.rect = new PIXI.Rectangle(-30,-30,60,60);
             mine.w = mine.h =Math.max(mine.height,mine.width);
             mine.anchor.x = mine.anchor.y = 0.5;
-            mine.rot = randomNumberBetween(-0.005,0.01);
+            mine.rot = Utils.andomNumberBetween(-0.005,0.01);
             return mine;
         }
     }

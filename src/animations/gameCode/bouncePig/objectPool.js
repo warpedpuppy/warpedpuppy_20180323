@@ -1,9 +1,10 @@
 
-export default function ObjectPoolBuilder(bitmapString, objQ, speeds, lifeSpan, rotateRange, pixi, spriteSheet, gv, loop, startScale){
+export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, lifeSpan, rotateRange, pixi, spriteSheet, gv, loop, startScale, Utils){
     return {
         op: [],
         go: false,
-        this.scaleIncrease = 0.5,
+        scaleIncrease: 0.5,
+        pixi: true,
         init: function () {
             this.buildPool()
             this.startScale = (startScale !== undefined)?startScale:0;
@@ -12,10 +13,10 @@ export default function ObjectPoolBuilder(bitmapString, objQ, speeds, lifeSpan, 
         singleObject: function () {
             var so;
             if(!this.pixi){
-                so = new createjs.Bitmap(gv.assetLoader.loader.getResult(this.bitmapString));
-                var bounds = so.getBounds();
-                so.regX = bounds.width/2;
-                so.regY = bounds.height/2;
+                // so = new createjs.Bitmap(gv.assetLoader.loader.getResult(this.bitmapString));
+                // var bounds = so.getBounds();
+                // so.regX = bounds.width/2;
+                // so.regY = bounds.height/2;
             }else{
                 if(this.spriteSheet === true){
 
@@ -29,7 +30,7 @@ export default function ObjectPoolBuilder(bitmapString, objQ, speeds, lifeSpan, 
             so.vy = 0;
             so.speed = 0;
             so.angle = 0;
-            so.rotateRange = (this.rotateRange !== undefined)?randomNumberBetween(this.rotateRange[0], this.rotateRange[1]):undefined;
+            so.rotateRange = (this.rotateRange !== undefined)?Utils.randomNumberBetween(this.rotateRange[0], this.rotateRange[1]):undefined;
             if(Math.floor(Math.random()*2) < 1)so.rotateRange *=-1;
             so.storeSpeed = 0;
             so.storeScale = 0;
@@ -42,7 +43,7 @@ export default function ObjectPoolBuilder(bitmapString, objQ, speeds, lifeSpan, 
             for(var i =0; i < this.objQ; i ++){
                 instance =  this.singleObject();
                 instance.angle =  Math.round(Math.random() * 360);
-                instance.speed = instance.storeSpeed = randomNumberBetween(this.speeds[0], this.speeds[1]);
+                instance.speed = instance.storeSpeed = Utils.randomNumberBetween(this.speeds[0], this.speeds[1]);
                 instance.vx = Math.cos(instance.angle) * instance.speed;
                 instance.vy = Math.sin(instance.angle) * instance.speed;
                 instance.scale.x =  instance.scale.y =this.startScale ;
@@ -61,7 +62,7 @@ export default function ObjectPoolBuilder(bitmapString, objQ, speeds, lifeSpan, 
                 instance.startX = instance.x = xPos;
                 instance.startY = instance.y = yPos;
                 instance.age = 0;
-                instance.lifeSpan = randomIntBetween(this.lifeSpan[0], this.lifeSpan[1]);
+                instance.lifeSpan = Utils.randomIntBetween(this.lifeSpan[0], this.lifeSpan[1]);
                 if(index === undefined)
                     addTo.addChild(instance);
                 else
@@ -107,5 +108,6 @@ export default function ObjectPoolBuilder(bitmapString, objQ, speeds, lifeSpan, 
                 }
             }
         }
+    }
     }
 }

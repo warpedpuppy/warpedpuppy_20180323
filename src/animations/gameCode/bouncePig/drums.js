@@ -1,10 +1,10 @@
-export default function Drums () {
+export default function Drums (gv, PIXI, ObjectPoolBuilder, TweenLite, Utils) {
     return {
-        rightDrum = this.drum("right"),
-        leftDrum = this.drum("left"),
-        miniExplosion =new ObjectPoolBuilder("miniCloud.png", 2000, [10,30],[2,25], undefined, true, true, gv),
+        miniExplosion: new ObjectPoolBuilder("miniCloud.png", 2000, [10,30],[2,25], undefined, true, true, gv),
         onStage: false,
-            init: function () {
+        init: function () {
+            this.rightDrum = this.drum("right");
+            this.leftDrum = this.drum("left");
             this.rightDrum.y = gv.halfHeight;
             this.rightDrum.x = gv.canvasWidth*0.75;
             this.leftDrum.y = gv.halfHeight;
@@ -52,26 +52,26 @@ export default function Drums () {
                 drum.x = gv.halfWidth;
                 drum.y = gv.halfHeight+85;
             }
-            TweenLite.delayedCall(0.5, proxy(this.blastOff, this));
+            TweenLite.delayedCall(0.5, Utils.proxy(this.blastOff, this));
         },
         blastOff: function () {
             this.hide();
             gv.animate = true;
-            playSound("explosion");
-            var rot = (this.drum == this.rightDrum)?-deg2rad(3*360):deg2rad(3*360);
+            Utils.playSound("explosion");
+            var rot = (this.drum == this.rightDrum)?-Utils.deg2rad(3*360):Utils.deg2rad(3*360);
             TweenLite.to(gv.hero,4, {rotation: rot, onComplete:this.heroZero});
             this.miniExplosion.startPool(gv.hero.x, gv.hero.y+10, gv.kingCont);
 
         },
         heroZero: function () {
-            gv.hero.rotation = deg2rad(0);
+            gv.hero.rotation = Utils.deg2rad(0);
         },
         drum: function (side) {
             var cont = new PIXI.DisplayObjectContainer();
             cont.side = side;
             var drum = new PIXI.Sprite.fromFrame("drum.png");
             drum.side= side;
-            drum.rotation = (side == "right")?deg2rad(-30):deg2rad(30);
+            drum.rotation = (side == "right")?Utils.deg2rad(-30):Utils.deg2rad(30);
             drum.cacheAsBitmap = true;
             drum.w = cont.w = drum.width;
             drum.h = cont.h = drum.height;

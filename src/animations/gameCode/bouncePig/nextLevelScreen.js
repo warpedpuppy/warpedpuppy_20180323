@@ -1,24 +1,24 @@
-export default function NextLevelScreen () {
+export default function NextLevelScreen (gv, StoreScore, Mines, Clouds, Drums, PIXI, TweenLite, TimelineLite,Utils) {
     return {
         storeScore: new StoreScore(),
-        mines: new Mines(),
-        clouds: new Clouds(),
-        drums:  new Drums(),
+        mines: Mines.init(),
+        clouds: Clouds.init(),
+        drums:  Drums.init(),
         ON_STAGE:  false,
         startButton:  new PIXI.Sprite.fromFrame("startButton.png"),
-        nextLevelButton = new PIXI.Sprite.fromFrame("nexLevelButton.png"),
-        dot1 = gv.bouncePlatform.dot1,
-        dot2 = gv.bouncePlatform.dot2,
-        line = gv.bouncePlatform.line,
-        fruitCont = new PIXI.SpriteBatch(),
+        nextLevelButton: new PIXI.Sprite.fromFrame("nexLevelButton.png"),
+        dot1: gv.bouncePlatform.dot1,
+        dot2: gv.bouncePlatform.dot2,
+        line: gv.bouncePlatform.line,
+        fruitCont: new PIXI.ParticleContainer(),
         init: function () {
-            core.y = gv.level.height + 10;
-            startButton.anchor.x = this.startButton.anchor.y = 0.5;
-            startButton.x = gv.halfWidth;
-            startButton.y = gv.halfHeight - 30;
-            nextLevelButton.anchor.x = this.startButton.anchor.y = 0.5;
-            nextLevelButton.x = gv.halfWidth;
-            nextLevelButton.y = gv.halfHeight - 50;
+            //core.y = gv.level.height + 10;
+            this.startButton.anchor.x = this.startButton.anchor.y = 0.5;
+            this.startButton.x = gv.halfWidth;
+            this.startButton.y = gv.halfHeight - 30;
+            this.nextLevelButton.anchor.x = this.startButton.anchor.y = 0.5;
+            this.nextLevelButton.x = gv.halfWidth;
+            this.nextLevelButton.y = gv.halfHeight - 50;
         },
         resize: function () {
             let gv = this.gv;
@@ -45,12 +45,12 @@ export default function NextLevelScreen () {
         },
         stop: function () {
             this.gv.introScreenOnStage = true;
-            TweenLite.delayedCall(0.5, proxy(this.addToStage, this));
+            TweenLite.delayedCall(0.5, Utils.proxy(this.addToStage, this));
         },
         addToStage: function(){
             var date = new Date().getTime();
             var duration = date - gv.startGame;
-            arr = [["username", username], ["result", "win"],["duration", duration]];
+            let arr = [["username", "user"], ["result", "win"],["duration", duration]];
             gv.keyString = "";
             gv.storeScore.sendScore();
             this.ON_STAGE = true;
@@ -67,7 +67,7 @@ export default function NextLevelScreen () {
                 gv.mines.addMoreMines();
             }
             this.line.visible = true;
-            this.line.rotation = deg2rad(0);
+            this.line.rotation = Utils.deg2rad(0);
             this.line.width = 400;
             this.line.x = gv.halfWidth-200;
             this.line.y = gv.halfHeight-100;
@@ -81,7 +81,7 @@ export default function NextLevelScreen () {
             this.fruitCont.x = gv.halfWidth;
             this.fruitCont.y = gv.hero.y;
             gv.stage.addChild(this.fruitCont);
-            TweenLite.delayedCall(0.11, proxy(this.makeRadial, this));
+            TweenLite.delayedCall(0.11, Utils.proxy(this.makeRadial, this));
             gv.stage.removeChild(gv.level);
             gv.stage.removeChild(gv.score);
             gv.bouncePlatform.on(false);
@@ -91,16 +91,16 @@ export default function NextLevelScreen () {
                 this.nextLevelButton.scale.x = this.nextLevelButton.scale.y = 1;
                 this.nextLevelButton.interactive = true;
                 this.nextLevelButton.buttonMode = true;
-                this.nextLevelButton.mousedown = this.nextLevelButton.touchstart =proxy(this.mouseDownHandler, this);
-                this.nextLevelButton.mouseup = this.startButton.mouseupoutside = this.nextLevelButton.touchend = this.startButton.touchendoutside =proxy(this.transition, this);
+                this.nextLevelButton.mousedown = this.nextLevelButton.touchstart = Utils.proxy(this.mouseDownHandler, this);
+                this.nextLevelButton.mouseup = this.startButton.mouseupoutside = this.nextLevelButton.touchend = this.startButton.touchendoutside = Utils.proxy(this.transition, this);
                 gv.stage.addChild(this.nextLevelButton);
             } else{
                 this.startButton.alpha = 0;
                 this.startButton.scale.x = this.startButton.scale.y = 1;
                 this.startButton.interactive = true;
                 this.startButton.buttonMode = true;
-                this.startButton.mousedown = this.startButton.touchstart =proxy(this.mouseDownHandler, this);
-                this.startButton.mouseup = this.startButton.mouseupoutside = this.startButton.touchend = this.startButton.touchendoutside =proxy(this.transition, this);
+                this.startButton.mousedown = this.startButton.touchstart = Utils.proxy(this.mouseDownHandler, this);
+                this.startButton.mouseup = this.startButton.mouseupoutside = this.startButton.touchend = this.startButton.touchendoutside = Utils.proxy(this.transition, this);
                 gv.stage.addChild(this.startButton);
             }
             this.titleText =  new PIXI.BitmapText("Level "+gv.level.level, {font: "64px bigText", align: "left"});
@@ -111,7 +111,7 @@ export default function NextLevelScreen () {
             else
                 str = "goal: eat the "+gv.level.fruitQ+" pieces of fruit!";
 
-            this.goalText = returnText(str);
+            this.goalText = Utils.returnText(str);
             this.goalText.pivot.x = this.goalText.textWidth/2;
             this.goalText.alpha = 0;
             this.goalText.pivot.y = this.goalText.textHeight/2;
@@ -137,8 +137,8 @@ export default function NextLevelScreen () {
             gv.levelComplete.shrink();
         },
         makeRadial: function() {
-            this.fruitCont.rotation = deg2rad(0);
-            distributeAroundRadial(gv.fruit.reset(), 250, this.fruitCont, false, this.fruitQ);
+            this.fruitCont.rotation = Utils.deg2rad(0);
+            Utils.distributeAroundRadial(gv.fruit.reset(), 250, this.fruitCont, false, this.fruitQ);
         },
         transition: function() {
            for(var i = 0; i < gv.fruit.fruitQ; i++){
@@ -148,17 +148,17 @@ export default function NextLevelScreen () {
             var tl = new TimelineLite();
             tl.to(gv.activeButton.scale, 0.15, {x:1.2, y:1.2});
             tl.to(gv.activeButton.scale, 0.25, {x:0, y:0});
-            tl.to(this.dot1, 0.15, {alpha:0, onComplete:makeInvisible, onCompleteParams:[this.dot1]});
-            tl.to(this.dot2, 0.15, {alpha:0, onComplete:makeInvisible, onCompleteParams:[this.dot2]});
-            tl.to(this.line, 0.15, {alpha:0, onComplete:makeInvisible, onCompleteParams:[this.line]});
+            tl.to(this.dot1, 0.15, {alpha:0, onComplete:Utils.makeInvisible, onCompleteParams:[this.dot1]});
+            tl.to(this.dot2, 0.15, {alpha:0, onComplete:Utils.makeInvisible, onCompleteParams:[this.dot2]});
+            tl.to(this.line, 0.15, {alpha:0, onComplete:Utils.makeInvisible, onCompleteParams:[this.line]});
             tl.to(this.titleText, 0.15, {alpha:0});
             tl.to(this.goalText.scale, 0.15, {x:1.2, y:1.2});
-            tl.to(gv.hero,0.75, {y:Math.ceil(gv.halfHeight), delay:0.5, onComplete:   proxy(this.nextLevel, this)});
+            tl.to(gv.hero,0.75, {y:Math.ceil(gv.halfHeight), delay:0.5, onComplete:   Utils.proxy(this.nextLevel, this)});
             tl.to(this.goalText.scale, 0.25, {x:1, y:1});
-            tl.to(this.goalText,0.25, {alpha:0, onComplete:removeFromStage, onCompleteParams:[this.goalText]}, "-=0.25");
+            tl.to(this.goalText,0.25, {alpha:0, onComplete:Utils.removeFromStage, onCompleteParams:[this.goalText]}, "-=0.25");
         },
         mouseDownHandler: function(e){
-            playSound("click");
+            Utils.playSound("click");
             e.target.scale.x = e.target.scale.y = 0.85;
             gv.activeButton = e.target;
         },

@@ -3,7 +3,7 @@ export default function StoreScore () {
     //if only one game per page hit, make this true
     return {
         oneGamePerPageHit: true,
-        this.startTime:  new Date().getTime(),
+        startTime:  new Date().getTime(),
         sendScore: function () {
             // if(username !== undefined && username !== 'guest') {
             //     if(this.oneGamePerPageHit === false)  this.startTime = new Date().getTime();

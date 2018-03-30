@@ -1,7 +1,7 @@
-export default function Clouds () {
+export default function Clouds (gv, PIXI, Utils, TweenLite) {
     return {
-        clouds = [],
-        onStage = false,
+        clouds: [],
+        onStage:false,
         init: function (){
             for(var i = 0; i < gv.level.cloudQ; i ++){
                 this.clouds.push(this.cloud("right"));
@@ -10,12 +10,12 @@ export default function Clouds () {
         },
         addToStage: function () {
             this.onStage = true;
-            var cloud;
+            let cloud;
             for(var i = 0; i < this.clouds.length; i ++){
                 cloud =  this.clouds[i];
-                cloud.alpha = 0;
+                cloud.alpha = 1;
                 cloud.y = Math.ceil(Math.random()*gv.canvasHeight);
-                cloud.x = (cloud.side == "right")?randomIntBetween(gv.halfWidth+(cloud.w/2), gv.canvasWidth-cloud.w):randomIntBetween(0, gv.halfWidth-cloud.w-30);
+                cloud.x = (cloud.side == "right")?Utils.randomIntBetween(gv.halfWidth+(cloud.w/2), gv.canvasWidth-cloud.w):Utils.randomIntBetween(0, gv.halfWidth-cloud.w-30);
                 gv.stage.addChild(cloud);
                 TweenLite.to(cloud,0.5, {alpha:1});
             }

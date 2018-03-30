@@ -1,9 +1,7 @@
-export default function LevelComplete () {
+export default function LevelComplete (gv, PIXI, TimelineLite, Back, TweenLite, Utils) {
     return {
         level: new PIXI.Sprite.fromFrame("level.png"),
         complete: new PIXI.Sprite.fromFrame("complete.png"),
-        tl: new TimelineLite(),
-        tl2: new TimelineLite(),
         onStage: false,
         init: function () {
             this.level.anchor.x = this.level.anchor.y = 0.5;
@@ -18,9 +16,9 @@ export default function LevelComplete () {
             this.level.scale.x = this.level.scale.y = this.complete.scale.x = this.complete.scale.y = 0;
             gv.stage.addChild(this.level);
             gv.stage.addChild(this.complete);
-
+            this.done = this.done.bind(this);
             this.tl.to(this.level.scale, 0.5, {x:1, y:1, ease:Back.easeOut});
-            this.tl.to(this.complete.scale, 0.5, {x:1, y:1, ease:Back.easeOut, onComplete:proxy(this.done, this)});
+            this.tl.to(this.complete.scale, 0.5, {x:1, y:1, ease:Back.easeOut, onComplete:this.done});
 
 
             gv.nextLevelScreen.line.alpha = 0;
@@ -41,11 +39,11 @@ export default function LevelComplete () {
             gv.stage.removeChild(gv.swipeText);
         },
         done: function () {
-            TweenLite.delayedCall(2,proxy(gv.nextLevelScreen.stop,gv.nextLevelScreen));
+            TweenLite.delayedCall(2,Utils.proxy(gv.nextLevelScreen.stop,gv.nextLevelScreen));
         },
         shrink: function () {
             this.tl.to(this.level.scale, 1, {x:0, y:0, ease:Back.easeOut});
-            this.tl.to(this.complete.scale, 1, {x:0, y:0, ease:Back.easeOut, onComplete:proxy(this.cleanUp, this)});
+            this.tl.to(this.complete.scale, 1, {x:0, y:0, ease:Back.easeOut, onComplete:Utils.proxy(this.cleanUp, this)});
         },
         cleanUp: function () {
             gv.stage.removeChild(this.level);

@@ -1,91 +1,94 @@
-export default function Hero () {
+export default function Hero (gv, PIXI) {
     return {
-        cont: new PIXI.DisplayObjectContainer(),
+        cont: new PIXI.Container(),
         fallingTextures: [PIXI.Texture.fromFrame("heroFalling0001.png"), PIXI.Texture.fromFrame("heroFalling0002.png")],
         chewingTextures: [PIXI.Texture.fromFrame("heroChewing0001.png"), PIXI.Texture.fromFrame("heroChewing0002.png")],
         flyingTextures: [PIXI.Texture.fromFrame("heroFlying0001.png"), PIXI.Texture.fromFrame("heroFlying0002.png")],
         standingTextures: [PIXI.Texture.fromFrame("heroStanding0001.png"), PIXI.Texture.fromFrame("heroStanding0002.png")],
         glidingTextures: [PIXI.Texture.fromFrame("heroGliding.png"), PIXI.Texture.fromFrame("heroGliding0001.png"), PIXI.Texture.fromFrame("heroGliding0002.png")],
-        hero: new PIXI.MovieClip(fallingTextures),
-        glideHero: new PIXI.MovieClip(glidingTextures),
-        chewingHero: new PIXI.MovieClip(chewingTextures),
-        flyingHero: new PIXI.MovieClip(flyingTextures),
-        standingHero:  new PIXI.MovieClip(standingTextures),
-        activeMC,
+        activeMC: "",
         init: function () {
-            cont.introVY = 2;
-            hero.anchor.x = hero.anchor.y = 0.5;
-            hero.animationSpeed = 0.05;
-            hero.play();
-            cont.addChild(hero);
-            activeMC = hero;
-            glideHero.anchor.x = glideHero.anchor.y = 0.5;
-            glideHero.animationSpeed = 0.05;
-            chewingHero.onComplete = returnToHero;
-            chewingHero.anchor.x = chewingHero.anchor.y = 0.5;
-            chewingHero.animationSpeed = 0.05;
-            flyingHero.anchor.x = flyingHero.anchor.y = 0.5;
-            flyingHero.animationSpeed = 0.5;
-            standingHero.anchor.x = standingHero.anchor.y = 0.5;
-            standingHero.animationSpeed = 0.0175;
+            this.hero = new PIXI.MovieClip(this.fallingTextures);
+            this.glideHero = new PIXI.MovieClip(this.glidingTextures);
+            this.chewingHero = new PIXI.MovieClip(this.chewingTextures);
+            this.flyingHero = new PIXI.MovieClip(this.flyingTextures);
+            this.standingHero = new PIXI.MovieClip(this.standingTextures);
+            this.cont.introVY = 2;
+            this.hero.anchor.x = this.hero.anchor.y = 0.5;
+            this.hero.animationSpeed = 0.05;
+            this.hero.play();
+            this.cont.addChild(this.hero);
+            this.activeMC = this.hero;
+            this.glideHero.anchor.x = this.glideHero.anchor.y = 0.5;
+            this.glideHero.animationSpeed = 0.05;
+            this.chewingHero.onComplete = this.returnToHero;
+            this.chewingHero.anchor.x = this.chewingHero.anchor.y = 0.5;
+            this.chewingHero.animationSpeed = 0.05;
+            this.flyingHero.anchor.x = this.flyingHero.anchor.y = 0.5;
+            this.flyingHero.animationSpeed = 0.5;
+            this.standingHero.anchor.x = this.standingHero.anchor.y = 0.5;
+            this.standingHero.animationSpeed = 0.0175;
             this.addContProps();
         },
         bounce: function () {
-            if(activeMC != glideHero){
-                activeMC.stop();
-                cont.removeChild(activeMC);
-                cont.addChild(glideHero);
-                glideHero.play();
-                activeMC = glideHero;
+            if(this.activeMC != this.glideHero){
+                this.activeMC.stop();
+                this.cont.removeChild(this.activeMC);
+                this.cont.addChild(this.glideHero);
+                this.glideHero.play();
+                this.activeMC = this.glideHero;
             }
 
+        },
+        getHero: function () {
+            return this.hero;
         },
         returnToHero: function () {
             gv.hero.hero();
         },
         addContProps: function () {
-            cont.chewCounter = 0;
-            cont.chew = function () {
+            this.cont.chewCounter = 0;
+            this.cont.chew = function () {
 
-                activeMC.stop();
-                cont.removeChild(activeMC);
-                cont.addChild(chewingHero);
-                chewingHero.play();
+                this.activeMC.stop();
+                this.cont.removeChild(this.activeMC);
+                this.cont.addChild(this.chewingHero);
+                this.chewingHero.play();
 
-                activeMC = chewingHero;
+                this.activeMC = this.chewingHero;
             };
-            cont.fly = function () {
+            this.cont.fly = function () {
 
-                activeMC.stop();
-                cont.removeChild(activeMC);
-                cont.addChild(flyingHero);
-                flyingHero.play();
+                this.activeMC.stop();
+                this.cont.removeChild(this.activeMC);
+                this.cont.addChild(this.flyingHero);
+                this.flyingHero.play();
 
-                activeMC = flyingHero;
+                this.activeMC = this.flyingHero;
             };
-            cont.stand = function () {
+            this.cont.stand = function () {
 
-                activeMC.stop();
-                cont.removeChild(activeMC);
-                cont.addChild(standingHero);
-                standingHero.play();
+                this.activeMC.stop();
+                this.cont.removeChild(this.activeMC);
+                this.cont.addChild(this.standingHero);
+                this.standingHero.play();
 
-                activeMC = standingHero;
+                this.activeMC = this.standingHero;
             };
-            cont.hero = function () {
+            this.cont.hero = function () {
 
-                cont.chewCounter ++;
+                this.cont.chewCounter ++;
 
-                if(cont.chewCounter >5){
-                    cont.chewCounter = 0;
-                    activeMC.stop();
-                    cont.removeChild(activeMC);
-                    cont.addChild(hero);
-                    hero.play();
-                    activeMC = hero;
+                if(this.cont.chewCounter >5){
+                    this.cont.chewCounter = 0;
+                    this.activeMC.stop();
+                    this.cont.removeChild(this.activeMC);
+                    this.cont.addChild(this.hero);
+                    this.hero.play();
+                    this.activeMC = this.hero;
                 }
                 else{
-                    cont.chew();
+                    this.cont.chew();
                 }
 
             }

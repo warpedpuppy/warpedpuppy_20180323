@@ -141,6 +141,32 @@ export default function(){
                 return window[ClassName].prototype._singletonInstance;
             }
             window[ClassName].prototype._singletonInstance = thisInstance;
+        },
+        returnCanvasWidth: function () {
+            return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        },
+        returnCanvasHeight: function () {
+            return window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        },
+        lineIntersectCircle: function (A ,B, C, r) {
+            this.intersects = false;
+            var a  = (B.x - A.x) * (B.x - A.x) + (B.y - A.y) * (B.y - A.y);
+            var b  = 2 * ((B.x - A.x) * (A.x - C.x) +(B.y - A.y) * (A.y - C.y));
+            var cc  = C.x * C.x + C.y * C.y + A.x * A.x + A.y * A.y - 2 * (C.x * A.x + C.y * A.y) - r * r;
+            var deter  = b * b - 4 * a * cc;
+            if (deter <= 0 ){
+                this.inside = false;
+            } else {
+                var e  = Math.sqrt (deter);
+                var u1  = ( - b + e ) / (2 * a );
+                var u2  = ( - b - e ) / (2 * a );
+                if ((u1 < 0 || u1 > 1) && (u2 < 0 || u2 > 1))
+                {
+                }else{
+                    this.intersects = true;
+                }
+            }
+            return this.intersects;
         }
 
 
@@ -199,36 +225,7 @@ function formatDate(date, fmt) {
 }
 
 
-function lineIntersectCircle(A ,B, C, r)
-{
-    this.intersects = false;
-
-    var a  = (B.x - A.x) * (B.x - A.x) + (B.y - A.y) * (B.y - A.y);
-    var b  = 2 * ((B.x - A.x) * (A.x - C.x) +(B.y - A.y) * (A.y - C.y));
-    var cc  = C.x * C.x + C.y * C.y + A.x * A.x + A.y * A.y - 2 * (C.x * A.x + C.y * A.y) - r * r;
-    var deter  = b * b - 4 * a * cc;
-    if (deter <= 0 )
-    {
-        this.inside = false;
-    }
-    else
-    {
-        var e  = Math.sqrt (deter);
-        var u1  = ( - b + e ) / (2 * a );
-        var u2  = ( - b - e ) / (2 * a );
-        if ((u1 < 0 || u1 > 1) && (u2 < 0 || u2 > 1))
-        {
-
-        }
-        else
-        {
-            this.intersects = true;
-
-        }
-    }
-
-    return this.intersects;
-}
+function 
 
 function distanceAndAngle(point1, point2){
     var xs = 0;
