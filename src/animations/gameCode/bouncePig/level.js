@@ -4,7 +4,7 @@ export default function Level(PIXI, gv){
         text: "",
         width: 100,
         mineQ: 0,
-        fruitQ: 5,
+        fruitQ: 1,
         cloudQ: 3,
         maxFruit: 100,
         maxMines: 10,
@@ -26,24 +26,22 @@ export default function Level(PIXI, gv){
             else
                 return new PIXI.BitmapText(str, {font: "64px bigText", align: "left"});
         },
-        addContProps: function () {
+        increase: function () {
             let cont = this.cont;
-            cont.increase = function () {
-                cont.level ++;
-                if(cont.fruitQ < cont.maxFruit)cont.fruitQ += 5;
-                if(cont.mineQ < cont.maxMines)cont.mineQ += 2;
-                gv.score.fruit = 0;
-                gv.score.reset();
-                cont.removeChild(this.amount);
-                this.amount.setText(cont.level.toString());
-                this.amount.x = this.width;
-                cont.addChild(this.amount);
-                cont.place();
-            };
-            cont.place = function(){
-                cont.x = gv.canvasWidth-cont.width-10;
-            };
+            this.level ++;
+            if(cont.fruitQ < cont.maxFruit)cont.fruitQ += 5;
+            if(cont.mineQ < cont.maxMines)cont.mineQ += 2;
+            gv.score.fruit = 0;
+            gv.score.reset();
+            cont.removeChild(this.amount);
+            this.amount.setText(this.level.toString());
+            this.amount.x = this.width;
+            cont.addChild(this.amount);
             cont.place();
+        },
+        place: function(){
+            let cont = this.cont;
+            cont.x = gv.canvasWidth-cont.width-10;
         }
     }
 }

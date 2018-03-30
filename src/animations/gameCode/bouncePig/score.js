@@ -26,8 +26,9 @@ export default function Score (PIXI, Utils, gv, TweenLite) {
             fruitAmount.y = fruitText.y;
             fruitAmount.x = width2;
             cont.addChild(fruitAmount);
-            cont.place();
+            this.place();
             cont.classRef = this;
+            gv.stage.addChild(this.cont)
         },
         reset: function () {
             let str = this.str;
@@ -44,7 +45,7 @@ export default function Score (PIXI, Utils, gv, TweenLite) {
             this.fruitAmount.setText(str);
             this.fruitAmount.x = this.width2;
             cont.addChild(this.fruitAmount);
-            cont.place();
+            this.place();
         },
         increase: function () {
             let str = this.str;
@@ -54,13 +55,13 @@ export default function Score (PIXI, Utils, gv, TweenLite) {
             str = Utils.numberWithCommas(this.cont.score).toString();
             this.scoreAmount.setText(str);
             this.scoreAmount.x = this.width1;
-            this.cont.addChild(this.width1scoreAmount);
+            this.cont.addChild(this.scoreAmount);
             this.cont.removeChild(this.fruitAmount);
             str = this.cont.fruit.toString()+"/"+gv.fruit.fruitQ.toString();
             this.fruitAmount.setText(str);
             this.fruitAmount.x = this.width2;
             this.cont.addChild(this.fruitAmount);
-            this.cont.place();
+            this.place();
             if(this.cont.fruit.toString() == gv.level.fruitQ.toString()){
                 gv.level.increase();
                 gv.levelComplete.addToStage();

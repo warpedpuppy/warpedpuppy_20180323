@@ -7,6 +7,7 @@ export default function Hero (gv, PIXI) {
         standingTextures: [PIXI.Texture.fromFrame("heroStanding0001.png"), PIXI.Texture.fromFrame("heroStanding0002.png")],
         glidingTextures: [PIXI.Texture.fromFrame("heroGliding.png"), PIXI.Texture.fromFrame("heroGliding0001.png"), PIXI.Texture.fromFrame("heroGliding0002.png")],
         activeMC: "",
+        chewCounter: 0,
         init: function () {
             this.hero = new PIXI.MovieClip(this.fallingTextures);
             this.glideHero = new PIXI.MovieClip(this.glidingTextures);
@@ -28,10 +29,9 @@ export default function Hero (gv, PIXI) {
             this.flyingHero.animationSpeed = 0.5;
             this.standingHero.anchor.x = this.standingHero.anchor.y = 0.5;
             this.standingHero.animationSpeed = 0.0175;
-            this.addContProps();
         },
         bounce: function () {
-            if(this.activeMC != this.glideHero){
+            if(this.activeMC !== this.glideHero){
                 this.activeMC.stop();
                 this.cont.removeChild(this.activeMC);
                 this.cont.addChild(this.glideHero);
@@ -41,23 +41,21 @@ export default function Hero (gv, PIXI) {
 
         },
         getHero: function () {
-            return this.hero;
+            return this.cont;
         },
         returnToHero: function () {
             gv.hero.hero();
         },
-        addContProps: function () {
-            this.cont.chewCounter = 0;
-            this.cont.chew = function () {
+        chew: function () {
+            console.log('chew')
+            this.activeMC.stop();
+            this.cont.removeChild(this.activeMC);
+            this.cont.addChild(this.chewingHero);
+            this.chewingHero.play();
 
-                this.activeMC.stop();
-                this.cont.removeChild(this.activeMC);
-                this.cont.addChild(this.chewingHero);
-                this.chewingHero.play();
-
-                this.activeMC = this.chewingHero;
-            };
-            this.cont.fly = function () {
+            this.activeMC = this.chewingHero;
+        },
+        fly: function () {
 
                 this.activeMC.stop();
                 this.cont.removeChild(this.activeMC);
@@ -65,8 +63,8 @@ export default function Hero (gv, PIXI) {
                 this.flyingHero.play();
 
                 this.activeMC = this.flyingHero;
-            };
-            this.cont.stand = function () {
+        },
+        stand: function () {
 
                 this.activeMC.stop();
                 this.cont.removeChild(this.activeMC);
@@ -74,24 +72,24 @@ export default function Hero (gv, PIXI) {
                 this.standingHero.play();
 
                 this.activeMC = this.standingHero;
-            };
-            this.cont.hero = function () {
+        },
+        hero: function () {
 
-                this.cont.chewCounter ++;
+            this.cont.chewCounter ++;
 
-                if(this.cont.chewCounter >5){
-                    this.cont.chewCounter = 0;
-                    this.activeMC.stop();
-                    this.cont.removeChild(this.activeMC);
-                    this.cont.addChild(this.hero);
-                    this.hero.play();
-                    this.activeMC = this.hero;
-                }
-                else{
-                    this.cont.chew();
-                }
-
+            if(this.cont.chewCounter >5){
+                this.cont.chewCounter = 0;
+                this.activeMC.stop();
+                this.cont.removeChild(this.activeMC);
+                this.cont.addChild(this.hero);
+                this.hero.play();
+                this.activeMC = this.hero;
             }
+            else{
+                this.cont.chew();
+            }
+
         }
+        
     }
 }

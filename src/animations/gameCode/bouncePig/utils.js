@@ -1,4 +1,4 @@
-export default function(){
+export default function(gv, PIXI){
     return {
         distributeAroundRadial: function (array, radius, addTo, spiral, itemQ){
             var arrayQ = (itemQ === undefined)?array.length:itemQ;
@@ -14,8 +14,8 @@ export default function(){
                 if(spiral === true)radius +=3;
             }
         },
-        playSound: function (str){
-            createjs.Sound.play(str);
+        playSound: function (str) {
+            // createjs.Sound.play(str);
         },
         returnText: function (str, big) {
             if(big === undefined)
@@ -29,12 +29,12 @@ export default function(){
         numberWithCommas: function (x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         },
-        intersectRect: function(r1, r2) {
-            return (a.left <= b.right &&
-                b.left <= a.right &&
-                a.top <= b.bottom &&
-                b.top <= a.bottom);
-        },
+        // intersectRect: function(r1, r2) {
+        //     return (a.left <= b.right &&
+        //         b.left <= a.right &&
+        //         a.top <= b.bottom &&
+        //         b.top <= a.bottom);
+        // },
         randomColor: function (){
             var x=Math.round(0xffffff * Math.random()).toString(16);
             var y=(6-x.length);
@@ -72,24 +72,11 @@ export default function(){
         randomNumberBetween: function (min, max) {
             return Math.random() * (max - min) + min;
         },
-        trace: function (str, inPage){
-            if(inPage === undefined){
-                console.log(str);
-            }
-            else{
-                $("#test").text(str);
-            }
-        },
         deg2rad: function (degree) {
             return degree * (Math.PI / 180);
         },
         rad2deg: function (radians){
             return radians * 180 / Math.PI;
-        },
-        backgroundColor: function (background, border){
-            $("#tugtugCanvas").css("background-color", background);
-            $("#tugtugCanvas").css("border-top", "1px solid "+border);
-            $("#tugtugCanvas").css("border-bottom", "1px solid "+border);
         },
         shuffle: function (array) {
             var currentIndex = array.length, temporaryValue, randomIndex ;
@@ -103,7 +90,7 @@ export default function(){
             return array;
         },
         pointRectangleCollisionDetection: function (item1, rectangle) {
-            var point = new createjs.Point(item1.x, item1.y);
+            var point = new PIXI.Point(item1.x, item1.y);
             var rightSide = rectangle.x + rectangle.width;
             var bottom = rectangle.y +rectangle.height;
             var radius = item1.radius !== undefined?item1.radius:0;
@@ -121,20 +108,16 @@ export default function(){
                 rect2.y <= (rect1.y + rect1.height));
         },
         pointItemCollisionDetection: function (item1, item2){
-            var point = new createjs.Point(item1.x, item1.y);
-            if(point.x > target.body.x && point.x < item2.body.x+item2.width&& point.y > item2.body.y && point.y < item2.body.y +item2.height){
-                return true;
-            }
-            else{
-                return false;
-            }
+            // var point = new PIXI.Point(item1.x, item1.y);
+            // if(point.x > target.body.x && point.x < item2.body.x+item2.width&& point.y > item2.body.y && point.y < item2.body.y +item2.height){
+            //     return true;
+            // }
+            // else{
+            //     return false;
+            // }
         },
         capitalize: function () {
             return this.charAt(0).toUpperCase()+this.substr(1);
-        },
-        addTicker: function (fps) {
-            createjs.Ticker.addEventListener("tick", tick);
-            createjs.Ticker.setFPS(fps);
         },
         singleton: function (ClassName, thisInstance) {
             if (window[ClassName].prototype._singletonInstance ) {
@@ -167,11 +150,34 @@ export default function(){
                 }
             }
             return this.intersects;
-        }
+        },
+        distanceAndAngle: function (point1, point2){
+            var xs = 0;
+            var ys = 0;
 
+            xs = point2.x - point1.x;
+            ys = point2.y - point1.y;
+            var angle = Math.atan2(ys, xs);
 
+            ys = ys * ys;
+            xs = xs * xs;
+            var distance = Math.sqrt( xs + ys );
 
+            return [distance, angle];
 
+        },
+        randomHex: function () {
+            return "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
+        },
+        centerOnStage: function (mc){
+            // mc.body.x = (canvasWidth - mc.body.getBounds().width)/2;
+            // mc.body.y = (canvasHeight - mc.body.getBounds().height)/2;
+        },
+        proxy: function (method, scope) {
+            return function() {
+                return method.apply(scope, arguments);
+            };
+        },
     }
 }
 
@@ -222,30 +228,4 @@ function formatDate(date, fmt) {
                 throw new Error('Unsupported format code: ' + fmtCode);
         }
     });
-}
-
-
-function 
-
-function distanceAndAngle(point1, point2){
-    var xs = 0;
-    var ys = 0;
-
-    xs = point2.x - point1.x;
-    ys = point2.y - point1.y;
-    var angle = Math.atan2(ys, xs);
-
-    ys = ys * ys;
-    xs = xs * xs;
-    var distance = Math.sqrt( xs + ys );
-
-    return [distance, angle];
-
-}
-function randomHex(){
-    return "#000000".replace(/0/g,function(){return (~~(Math.random()*16)).toString(16);});
-}
-function centerOnStage(mc){
-    mc.body.x = (canvasWidth - mc.body.getBounds().width)/2;
-    mc.body.y = (canvasHeight - mc.body.getBounds().height)/2;
 }

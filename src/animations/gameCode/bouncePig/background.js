@@ -87,6 +87,10 @@ export default function Background(PIXI, gv, Utils){
                 this.container.addChild(line);
             }
         },
+        resize: function () {
+            this.background.width = gv.canvasWidth;
+            this.background.height = gv.canvasHeight;
+        },
         tickIt: function(){
             var ball;
             for (var i = 0; i <  this.ballQ; i++) {

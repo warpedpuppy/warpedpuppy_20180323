@@ -57,7 +57,7 @@ export default function Drums (gv, PIXI, ObjectPoolBuilder, TweenLite, Utils) {
         blastOff: function () {
             this.hide();
             gv.animate = true;
-            Utils.playSound("explosion");
+            gv.utils.playSound("explosion");
             var rot = (this.drum == this.rightDrum)?-Utils.deg2rad(3*360):Utils.deg2rad(3*360);
             TweenLite.to(gv.hero,4, {rotation: rot, onComplete:this.heroZero});
             this.miniExplosion.startPool(gv.hero.x, gv.hero.y+10, gv.kingCont);

@@ -24,10 +24,9 @@ export default function(
         bouncePlatform: "",
         app: new PIXI.Application(),
         loader:  PIXI.loader,
-        utils: new Utils(),
         start: function () {
             this.totalSoundsAndLoader = 7;
-
+            this.utils = new Utils(this, PIXI);
             
 
             this.speedLimit = this.storeSpeedLimit = 10;
@@ -69,10 +68,8 @@ export default function(
             // createjs.Sound.registerSound("/sounds/bouncePig/pop.mp3", "pop");
         },
         Main: function () {
-            console.log("main");
-            animate = animate.bind(this);
-
-            this.app.ticker.add(animate(this, PIXI, Utils));
+            console.log("main", this.utils);
+           
 
             this.halfHeight = this.canvasHeight / 2;
             this.halfWidth = this.canvasWidth / 2;
@@ -84,6 +81,7 @@ export default function(
             this.clouds = Clouds(this, PIXI, this.utils, TweenLite);
             this.clouds.init();
             this.clouds.addToStage();
+            this.cloudsOnStage = true;
 
              this.drums = Drums(this, PIXI, ObjectPoolBuilder, TweenLite, this.utils);
              this.drums.init();
@@ -115,6 +113,31 @@ export default function(
             this.animateAllow = true;
             this.introScreenOnStage = false;
 
+            this.loopingQ = 10;
+            var hitAreaWidth = this.heroInstance.width*0.5;
+            var hitAreaHeight = this.heroInstance.height*0.5;
+            var hitAreaX =this.heroInstance.x - (hitAreaWidth / 2);
+            var hitAreaY =  this.heroInstance.y - (hitAreaHeight / 2);
+
+            this.rect2 = new PIXI.Rectangle(hitAreaX,hitAreaY,hitAreaWidth, hitAreaHeight);//general hit area
+            this.rect3 = new PIXI.Rectangle(
+            this.heroInstance.x - (this.heroInstance.width / 4), 
+            this.heroInstance.y + (this.heroInstance.height/2)-20,this.hero.width/2, 5);
+
+            this.swipeText = new PIXI.Sprite.fromFrame("swipeScreen.png");
+
+            this.levelComplete = LevelComplete(this, PIXI, TimelineLite, Back, TweenLite, this.utils);
+            this.levelComplete.init();
+
+            this.score = Score (PIXI, this.utils, this, TweenLite);
+            this.score.init();
+
+            this.stars = new ObjectPoolBuilder("star.png", 20, [3,8],[2,25], undefined, true, true, this, false, 1);
+
+             animate = animate.bind(this);
+
+            this.app.ticker.add(animate(this, PIXI, Utils));
+
             // this.nextLevelScreen = NextLevelScreen(this, StoreScore, this.mines, this.clouds, this.drums, PIXI, TweenLite, TimelineLite,this.utils);
             // this.levelComplete = LevelComplete(this, PIXI, TimelineLite, Back, TweenLite, this.utils);
             // this.levelComplete.init();
@@ -141,7 +164,7 @@ export default function(
             // this.rect3 = new PIXI.Rectangle(this.hero.x - (this.hero.width / 4), this.hero.y + (this.hero.height/2)-20, this.hero.width/2, 5);//for the cloud walking
            
             // this.bouncePlatform = new BouncePlatform();
-             this.swipeText = new PIXI.Sprite.fromFrame("swipeScreen.png");
+             //this.swipeText = new PIXI.Sprite.fromFrame("swipeScreen.png");
             // this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;
             // this.swipeText.y = (this.canvasHeight - this.swipeText.height);
             // this.level = new Level();
@@ -161,6 +184,7 @@ export default function(
             this.halfHeight = this.canvasHeight/2;
             this.renderer.resize(this.canvasWidth, this.canvasHeight);
             var browserHeight = this.canvasHeight;
+            this.background.resize();
             // this.mines.redBackground.clear();
             // this.mines.redBackground.beginFill(0xFF0000).drawRect(0,0,this.canvasWidth,this.canvasHeight).endFill();
             // this.hero.x = Math.ceil(this.halfWidth);
