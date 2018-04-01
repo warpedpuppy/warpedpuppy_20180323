@@ -32,17 +32,60 @@
 	float:left;
 
 }
+.exp_content .experiments ul li div {
+	display:inline-block;
+
+}
 .exp_content .experiments ul li{
 	padding:5px 0;
 	cursor:pointer;
 }
-
+.exp_content .experiments ul li hr {
+	width:0;
+	visibility: hidden;
+	transition: width 0.25s;
+}
+.exp_content .experiments ul li:hover hr {
+	width:100%;
+	visibility: visible;
+}
 .exp_content .experiments .experiments-description {
 	width:60%;
 	padding: 0 10px;
 	float:left;
 	display: inline-block;
 }
+.experiments-description div {
+	margin: 20px 0;
+}	
+.experiments-description a {
+	display: inline-block;
+	border:1px solid black;
+	border-radius: 10px;
+	padding:5px 10px;
+	font-size: 20px;
+	text-decoration: none;
+	text-align: center;
+}	
+.pagination {
+	font-weight: bold;
+	text-align: center;
+	padding: 10px;
+	font-size: 30px;
+}
+.pageLink {
+	cursor: pointer;
+}
+.pageLink.activeLink {
+	font-size: 40px;
+	position: relative;
+	top:5px;
+	color:#FF00FF;
+}
+.pageLink:hover {
+	color:#FF00FF;
+}
+
 @media (min-width: 1024px) {
 	.exp_content .experiments {
 		width: 800px;
