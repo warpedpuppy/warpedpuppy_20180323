@@ -12,10 +12,17 @@ export default class Experiments extends React.Component {
 			page: 0,
 			desc: 0,
 			array: array,
-			itemsPerPage: 4, 
-			pages: Math.ceil(array.length/4)
+			itemsPerPage: 6, 
+			pages: 0
 
 		}
+		
+
+	}
+	componentDidMount(){
+		this.setState({
+			pages: Math.ceil(this.state.array.length/this.state.itemsPerPage)
+		})
 	}
 	changePage(e){
 		e.preventDefault();
@@ -25,7 +32,6 @@ export default class Experiments extends React.Component {
 	}
 	changeDescription(e) {
 		e.preventDefault();
-		console.log(e.target.getAttribute('data-ref'))
 		this.setState({desc: Number(e.target.getAttribute('data-ref'))})
 	}
 	
@@ -35,18 +41,24 @@ export default class Experiments extends React.Component {
 		let end = this.state.page + this.state.itemsPerPage;
 		for(let i = this.state.page; i < end; i++){
 			if(this.state.array[i]) {
-				data.push(<li key={i} data-ref={i} ref={item => this[`item${i}`] = item} onClick={(e) => this.changeDescription(e)} >{this.state.array[i].title}</li>)
+				data.push(
+					<li key={i} data-ref={i} ref={item => this[`item${i}`] = item} onClick={(e) => this.changeDescription(e)} >
+					<div>
+					{this.state.array[i].title}
+					<hr />
+					</div>
+					</li>)
 			}
 			
 		}
 		let pagination = [];
 		let description = this.state.array[this.state.desc].description;
 		let link = this.state.array[this.state.desc].link;
+		let temp = this.state.page/this.state.itemsPerPage;
 		for(let i = 0; i < this.state.pages; i++){
-
 			let page = i + 1;
 			let key2 = i + this.state.array.length;
-			let classes = ((this.state.page/4) === i)?`pageLink activeLink`:`pageLink`;
+			let classes = (temp === i)?`pageLink activeLink`:`pageLink`;
 			pagination.push(
 			<span 
 			key={i}
@@ -70,8 +82,8 @@ export default class Experiments extends React.Component {
 				  {data}
 				  </ul>
 				  <div className="experiments-description">
-				  	  {description}
-				  	  <Link to={link}>click here</Link>
+				  	  <div>{description}</div>
+				  	  <Link to={link}>visit experiment</Link>
 				  </div>
 			  </div>
 		  </section>

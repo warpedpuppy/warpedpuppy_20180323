@@ -24,11 +24,17 @@ export default function(
         bouncePlatform: "",
         app: new PIXI.Application(),
         loader:  PIXI.loader,
+        PIXI: PIXI,
         start: function () {
             this.totalSoundsAndLoader = 7;
             this.utils = new Utils(this, PIXI);
-            
-
+            this.PIXI = PIXI;
+            this.TweenLite = TweenLite;
+            this.TimelineLite = TimelineLite;
+            this.Back = Back;
+            this.ObjectPoolBuilder = ObjectPoolBuilder;
+            this.StoreScore = StoreScore;
+            this.Mines = Mines;
             this.speedLimit = this.storeSpeedLimit = 10;
             this.canvasWidth = this.utils.returnCanvasWidth();
             this.canvasHeight = this.utils.returnCanvasHeight();
@@ -39,12 +45,17 @@ export default function(
             this.renderer = PIXI.autoDetectRenderer(this.canvasWidth, this.canvasHeight);
             this.renderer.backgroundColor = 0x1a69ff;
             document.getElementById("warpedPuppyCanvas").appendChild(this.renderer.view);
-
-            this.loader
-                .add('gamesheet', "/images/bouncePig/bpb.json")
-                .add('levelText', "/fonts/games/bouncePig/levelText.xml")
-                .add('text', "/fonts/games/bouncePig/text.xml")
-                .load(this.Main.bind(this));
+            if(!this.loader.resources.gamesheet){
+                 this.loader
+                    .add('gamesheet', "/images/bouncePig/bpb.json")
+                    .add('levelText', "/fonts/games/bouncePig/levelText.xml")
+                    .add('text', "/fonts/games/bouncePig/text.xml")
+                    .load(this.Main.bind(this));
+            } else {
+                this.Main.bind(this)
+                this.Main();
+            }
+           
 
             this.webGL = (this.renderer instanceof PIXI.CanvasRenderer) ? false : true;
             this.resizeHandler = this.resizeHandler.bind(this);
@@ -68,48 +79,44 @@ export default function(
             // createjs.Sound.registerSound("/sounds/bouncePig/pop.mp3", "pop");
         },
         Main: function () {
-            console.log("main", this.utils);
-           
-
             this.halfHeight = this.canvasHeight / 2;
             this.halfWidth = this.canvasWidth / 2;
-            this.level = Level(PIXI, this);
+            this.level = Level(this);
             this.level.init();
             
-            this.kingCont = new PIXI.ParticleContainer();
+            this.kingCont = new PIXI.particles.ParticleContainer();
             this.stage.addChild(this.kingCont);
 
-            this.clouds = Clouds(this, PIXI, this.utils, TweenLite);
+            this.clouds = Clouds(this);
             this.clouds.init();
             this.clouds.addToStage();
             this.cloudsOnStage = true;
 
-             this.drums = Drums(this, PIXI, ObjectPoolBuilder, TweenLite, this.utils);
+             this.drums = Drums(this);
              this.drums.init();
              this.drums.addToStage();
 
-             this.mines = Mines(this, PIXI, ObjectPoolBuilder, this.utils, TweenLite);
+             this.mines = Mines(this);
              this.mines.init();
              this.mines.addToStage();
 
-            
-             this.fruit = Fruit(this, PIXI, this.utils);
+             this.fruit = Fruit(this);
              this.fruit.init();
 
-            this.hero = new Hero(this, PIXI);
+            this.hero = new Hero(this);
             this.hero.init();
             this.heroInstance = this.hero.getHero()
             this.heroInstance.x = this.halfWidth;
-            this.heroInstance.y = this.halfHeight-160;
+            this.heroInstance.y = this.halfHeight*.65;
             this.stage.addChild(this.heroInstance);
 
-            this.bouncePlatform = BouncePlatform(this, PIXI, Utils);
+            this.bouncePlatform = BouncePlatform(this);
             this.bouncePlatform.init();
 
-            this.background = Background(PIXI, this, this.utils);
+            this.background = Background(this);
             this.background.init();
 
-            this.score = Score(PIXI, this.utils, this, TweenLite);
+            this.score = Score(this);
 
             this.animateAllow = true;
             this.introScreenOnStage = false;
@@ -127,10 +134,10 @@ export default function(
 
             this.swipeText = new PIXI.Sprite.fromFrame("swipeScreen.png");
 
-            this.levelComplete = LevelComplete(this, PIXI, TimelineLite, Back, TweenLite, this.utils);
+            this.levelComplete = LevelComplete(this);
             this.levelComplete.init();
 
-            this.score = Score (PIXI, this.utils, this, TweenLite);
+            this.score = Score (this);
             this.score.init();
 
             this.stars = new ObjectPoolBuilder(PIXI, "star.png", 80, [3,8],[2,25], undefined, true, true, this, false, 1);
@@ -138,9 +145,9 @@ export default function(
 
              animate = animate.bind(this);
 
-            this.app.ticker.add(animate(this, PIXI, Utils));
+            this.app.ticker.add(animate(this));
 
-            this.nextLevelScreen = NextLevelScreen(this, StoreScore, this.mines, this.clouds, this.drums, PIXI, TweenLite, TimelineLite,this.utils);
+            this.nextLevelScreen = NextLevelScreen(this);
             this.nextLevelScreen.init();
             this.nextLevelScreen.addToStage();
 
@@ -153,10 +160,9 @@ export default function(
             // this.keyString = "";
             // this.mouseDown = false;
            
-            
-            this.swipeText = new PIXI.Sprite.fromFrame("swipeScreen.png");
+        
             this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;
-            this.swipeText.y = (this.canvasHeight - this.swipeText.height)-300;
+            this.swipeText.y = (this.canvasHeight - this.swipeText.height)-200;
 
 
             // this.introScreenOnStage = true;
@@ -177,6 +183,8 @@ export default function(
             this.score.resize();
             this.level.resize();
             this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;
+             this.heroInstance.y = this.halfHeight*.65;
+             this.mines.resize();
             // this.mines.redBackground.clear();
             // this.mines.redBackground.beginFill(0xFF0000).drawRect(0,0,this.canvasWidth,this.canvasHeight).endFill();
             // this.hero.x = Math.ceil(this.halfWidth);

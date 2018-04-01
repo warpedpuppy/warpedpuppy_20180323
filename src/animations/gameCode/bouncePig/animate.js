@@ -1,4 +1,4 @@
-export default function animate (gv, PIXI) {
+export default function animate (gv) {
 
     
     return function () {
@@ -14,7 +14,7 @@ export default function animate (gv, PIXI) {
                 var dot2 = gv.bouncePlatform.dot2;
                 var line =  gv.bouncePlatform.line;
                 var mines = gv.mines.mines;
-                var C = new PIXI.Point(gv.heroInstance.x, gv.heroInstance.y);
+                var C = new gv.PIXI.Point(gv.heroInstance.x, gv.heroInstance.y);
                 var bounce = -0.7;
                 var testing = false;
                 gv.background.tickIt();
@@ -47,7 +47,7 @@ export default function animate (gv, PIXI) {
 
                     if (mine.x > gv.canvasWidth + mine.w) mine.x = -mine.w;
                     if (mine.x < -mine.w) mine.x = gv.canvasWidth + mine.w;
-                    var mineRect = new PIXI.Rectangle(mine.x + mine.rect.x, mine.y + mine.rect.y, mine.rect.width, mine.rect.height);
+                    var mineRect = new gv.PIXI.Rectangle(mine.x + mine.rect.x, mine.y + mine.rect.y, mine.rect.width, mine.rect.height);
                     if (gv.vy > 0 && gv.utils.rectangleRectangleCollisionDetection(mineRect, gv.rect2) ) {
                             gv.fruit.reset();
                             gv.fruit.addToStage();
@@ -72,8 +72,8 @@ export default function animate (gv, PIXI) {
 
 
                     //CLOUD COLLISION DETECTION
-                    var boxPoint = cloud.toGlobal(new PIXI.Point(cloud.box.x, cloud.box.y));
-                    var cloudRect = new PIXI.Rectangle(boxPoint.x, boxPoint.y, cloud.w, 20);
+                    var boxPoint = cloud.toGlobal(new gv.PIXI.Point(cloud.box.x, cloud.box.y));
+                    var cloudRect = new gv.PIXI.Rectangle(boxPoint.x, boxPoint.y, cloud.w, 20);
                     if (testing === false && gv.vy >0  && gv.utils.rectangleRectangleCollisionDetection(cloudRect, gv.rect3 ) ) {
                         gv.vy *= bounce;
                         cloud.y += gv.rect3.height;
@@ -119,7 +119,7 @@ export default function animate (gv, PIXI) {
                 if (fruit.x > gv.canvasWidth + fruit.width) fruit.x = -fruit.width;
                 if (fruit.x < -fruit.width) fruit.x = gv.canvasWidth + fruit.width;
 
-                var rect1 = new PIXI.Rectangle(fruit.x - (fruit.width / 2), fruit.y, fruit.width, fruit.height);
+                var rect1 = new gv.PIXI.Rectangle(fruit.x - (fruit.width / 2), fruit.y, fruit.width, fruit.height);
 
                 if (testing === false 
                     && gv.speedLimit === gv.storeSpeedLimit 
@@ -159,8 +159,8 @@ export default function animate (gv, PIXI) {
         }
 
         //BOUNCING PLATFORM COLLISION DETECTION
-        A = new PIXI.Point(dot1.x, dot1.y);
-        B = new PIXI.Point(dot2.x, dot2.y);
+        A = new gv.PIXI.Point(dot1.x, dot1.y);
+        B = new gv.PIXI.Point(dot2.x, dot2.y);
         if (gv.mouseDown !== true && gv.utils.lineIntersectCircle(A, B, C, 20)) {
             if ((dot1.x > dot2.x && dot1.y < dot2.y) || (dot1.y > dot2.y && dot1.x < dot2.x)) {
                 gv.vx = -2;

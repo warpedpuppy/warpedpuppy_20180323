@@ -1,7 +1,7 @@
-export default function Drums (gv, PIXI, ObjectPoolBuilder, TweenLite, Utils) {
+export default function Drums (gv) {
     return {
-        cont: new PIXI.Container(),
-        miniExplosion: new ObjectPoolBuilder("miniCloud.png", 2000, [10,30],[2,25], undefined, true, true, gv),
+        cont: new gv.PIXI.Container(),
+        miniExplosion: new gv.ObjectPoolBuilder("miniCloud.png", 2000, [10,30],[2,25], undefined, true, true, gv),
         onStage: false,
         init: function () {
             this.rightDrum = this.drum("right");
@@ -18,7 +18,6 @@ export default function Drums (gv, PIXI, ObjectPoolBuilder, TweenLite, Utils) {
             this.cont.addChild(this.rightDrum);
             this.cont.addChild(this.leftDrum);
             this.place();
-            
         },
         removeFromStage: function () {
             this.onStage = false;
@@ -45,8 +44,8 @@ export default function Drums (gv, PIXI, ObjectPoolBuilder, TweenLite, Utils) {
                 this.leftDrum.y = gv.halfHeight;
                 this.leftDrum.x = gv.canvasWidth*0.25;
 
-                TweenLite.from(this.rightDrum,0.5, {alpha:0});
-                TweenLite.from(this.leftDrum,0.5, {alpha:0});
+                gv.TweenLite.from(this.rightDrum,0.5, {alpha:0});
+                gv.TweenLite.from(this.leftDrum,0.5, {alpha:0});
                 this.rightDrum.visible = true;
                 this.leftDrum.visible = true;
             }
@@ -62,44 +61,44 @@ export default function Drums (gv, PIXI, ObjectPoolBuilder, TweenLite, Utils) {
                 drum.x = gv.halfWidth;
                 drum.y = gv.halfHeight+85;
             }
-            TweenLite.delayedCall(0.5, Utils.proxy(this.blastOff, this));
+            gv.TweenLite.delayedCall(0.5, gv.utils.proxy(this.blastOff, this));
         },
         blastOff: function () {
             this.hide();
             gv.animate = true;
             gv.utils.playSound("explosion");
-            var rot = (this.drum === this.rightDrum)?-Utils.deg2rad(3*360):Utils.deg2rad(3*360);
-            TweenLite.to(gv.hero,4, {rotation: rot, onComplete:this.heroZero});
+            var rot = (this.drum === this.rightDrum)?-gv.utils.deg2rad(3*360):gv.utils.deg2rad(3*360);
+            gv.TweenLite.to(gv.hero,4, {rotation: rot, onComplete:this.heroZero});
             this.miniExplosion.startPool(gv.hero.x, gv.hero.y+10, gv.kingCont);
 
         },
         heroZero: function () {
-            gv.hero.rotation = Utils.deg2rad(0);
+            gv.hero.rotation = gv.utils.deg2rad(0);
         },
         drum: function (side) {
-            var cont = new PIXI.Container();
+            var cont = new gv.PIXI.Container();
             cont.side = side;
-            var drum = new PIXI.Sprite.fromFrame("drum.png");
+            var drum = new gv.PIXI.Sprite.fromFrame("drum.png");
             drum.side= side;
-            drum.rotation = (side === "right")?Utils.deg2rad(-30):Utils.deg2rad(30);
+            drum.rotation = (side === "right")?gv.utils.deg2rad(-30):gv.utils.deg2rad(30);
             drum.cacheAsBitmap = true;
             drum.w = cont.w = drum.width;
             drum.h = cont.h = drum.height;
             cont.addChild(drum);
             var line;
             if(side === "right"){
-                line = new PIXI.Graphics();
+                line = new gv.PIXI.Graphics();
                 line.lineStyle(2, 0x000000, 1).moveTo(10,10).lineTo(cont.w-12,-cont.h-12);
                 cont.line = line;
-                cont.point1 = new PIXI.Point(10,10);
-                cont.point2 = new PIXI.Point(drum.w-12,-drum.h-12);
+                cont.point1 = new gv.PIXI.Point(10,10);
+                cont.point2 = new gv.PIXI.Point(drum.w-12,-drum.h-12);
             }
             else{
-                line = new PIXI.Graphics();
+                line = new gv.PIXI.Graphics();
                 line.lineStyle(2, 0x000000, 1).moveTo(-5,10).lineTo(cont.w-25,cont.h+33);
                 cont.line = line;
-                cont.point1 = new PIXI.Point(-5,10);
-                cont.point2 = new PIXI.Point(drum.w-25,drum.h+33);
+                cont.point1 = new gv.PIXI.Point(-5,10);
+                cont.point2 = new gv.PIXI.Point(drum.w-25,drum.h+33);
             }
             cont.pivot.x = drum.width/2;
             cont.pivot.y = drum.height/2;

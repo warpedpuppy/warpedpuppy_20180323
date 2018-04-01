@@ -1,14 +1,14 @@
 export default function(){
 	return [
 		{
-			title: 'solitaire',
-			description: 'desc1',
+			title: 'Solitaire',
+			description: 'Rite of passage for a developer.  Solitaire with hints and suggestions.',
 			link: '/'
 		},
 		{
-			title: 'bounce, pig, bounce',
-			description: 'a most bouncy pig game',
-			link: '/GamePage/?asdf=bouncePig'
+			title: 'Bounce, Pig! Bounce!',
+			description: 'A video game in which you bounce a pig on a swipe-created platform and eat fruit!',
+			link: '/BouncePig'
 		},
 		{
 			title: 'insect ai',
@@ -72,34 +72,42 @@ export default function(){
 		},
 		{
 			title: 'four card solitaire',
-			description: 'desc1'
+			description: 'desc1',
+			link: '/'
 		},
 		{
 			title: 'web gl experiment',
-			description: 'desc1'
+			description: 'desc1',
+			link: '/'
 		},
 		{
 			title: 'test gear page',
-			description: 'desc1'
+			description: 'desc1',
+			link: '/'
 		},
 		{
 			title: 'chess layout',
-			description: 'desc1'
+			description: 'desc1',
+			link: '/'
 		},
 		{
 			title: 'brick break',
-			description: 'desc1'
+			description: 'desc1',
+			link: '/'
 		},
 		{
 			title: 'bitmap font and sound sync',
-			description: 'desc1'
+			description: 'desc1',
+			link: '/'
 		},
 		{
 			title: 'tic tac toe',
-			description: 'desc1'
+			description: 'desc1',
+			link: '/'
 		},
 		{
 			title: 'geodesic lines',
-			description: 'desc1'
+			description: 'desc1',
+			link: '/'
 		}]
 }

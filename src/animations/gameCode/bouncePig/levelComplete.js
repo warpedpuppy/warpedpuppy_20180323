@@ -1,9 +1,9 @@
-export default function LevelComplete (gv, PIXI, TimelineLite, Back, TweenLite, Utils) {
+export default function LevelComplete (gv) {
     return {
-        level: new PIXI.Sprite.fromFrame("level.png"),
-        complete: new PIXI.Sprite.fromFrame("complete.png"),
+        level: new gv.PIXI.Sprite.fromFrame("level.png"),
+        complete: new gv.PIXI.Sprite.fromFrame("complete.png"),
         onStage: false,
-        tl: new TimelineLite(),
+        tl: new gv.TimelineLite(),
         init: function () {
             this.level.anchor.x = this.level.anchor.y = 0.5;
             this.level.x = gv.halfWidth;
@@ -18,8 +18,8 @@ export default function LevelComplete (gv, PIXI, TimelineLite, Back, TweenLite, 
             gv.stage.addChild(this.level);
             gv.stage.addChild(this.complete);
             this.done = this.done.bind(this);
-            this.tl.to(this.level.scale, 0.5, {x:1, y:1, ease:Back.easeOut});
-            this.tl.to(this.complete.scale, 0.5, {x:1, y:1, ease:Back.easeOut, onComplete:this.done});
+            this.tl.to(this.level.scale, 0.5, {x:1, y:1, ease:gv.Back.easeOut});
+            this.tl.to(this.complete.scale, 0.5, {x:1, y:1, ease:gv.Back.easeOut, onComplete:this.done});
 
 
             gv.nextLevelScreen.line.alpha = 0;
@@ -40,11 +40,11 @@ export default function LevelComplete (gv, PIXI, TimelineLite, Back, TweenLite, 
             gv.stage.removeChild(gv.swipeText);
         },
         done: function () {
-            TweenLite.delayedCall(2,Utils.proxy(gv.nextLevelScreen.stop,gv.nextLevelScreen));
+            gv.TweenLite.delayedCall(2,gv.utils.proxy(gv.nextLevelScreen.stop,gv.nextLevelScreen));
         },
         shrink: function () {
-            this.tl.to(this.level.scale, 1, {x:0, y:0, ease:Back.easeOut});
-            this.tl.to(this.complete.scale, 1, {x:0, y:0, ease:Back.easeOut, onComplete:Utils.proxy(this.cleanUp, this)});
+            this.tl.to(this.level.scale, 1, {x:0, y:0, ease:gv.Back.easeOut});
+            this.tl.to(this.complete.scale, 1, {x:0, y:0, ease:gv.Back.easeOut, onComplete:gv.utils.proxy(this.cleanUp, this)});
         },
         cleanUp: function () {
             gv.stage.removeChild(this.level);

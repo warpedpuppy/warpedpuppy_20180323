@@ -1,4 +1,4 @@
-export default function(gv, PIXI){
+export default function(gv){
     return {
         distributeAroundRadial: function (array, radius, addTo, spiral, itemQ){
             var arrayQ = (itemQ === undefined)?array.length:itemQ;
@@ -19,9 +19,9 @@ export default function(gv, PIXI){
         },
         returnText: function (str, big) {
             if(big === undefined)
-                return new PIXI.BitmapText(str, {font: "30px SpeedballNo2SW", align: "left"});
+                return new gv.PIXI.extras.BitmapText(str, {font: "30px SpeedballNo2SW", align: "left"});
             else
-                return new PIXI.BitmapText(str, {font: "64px bigText", align: "left"});
+                return new gv.PIXI.extras.BitmapText(str, {font: "64px bigText", align: "left"});
         },
         removeFromStage: function(item){
             item.parent.removeChild(item);
@@ -90,7 +90,7 @@ export default function(gv, PIXI){
             return array;
         },
         pointRectangleCollisionDetection: function (item1, rectangle) {
-            var point = new PIXI.Point(item1.x, item1.y);
+            var point = new gv.PIXI.Point(item1.x, item1.y);
             var rightSide = rectangle.x + rectangle.width;
             var bottom = rectangle.y +rectangle.height;
             var radius = item1.radius !== undefined?item1.radius:0;
@@ -108,7 +108,7 @@ export default function(gv, PIXI){
                 rect2.y <= (rect1.y + rect1.height));
         },
         pointItemCollisionDetection: function (item1, item2){
-            // var point = new PIXI.Point(item1.x, item1.y);
+            // var point = new gv.PIXI.Point(item1.x, item1.y);
             // if(point.x > target.body.x && point.x < item2.body.x+item2.width&& point.y > item2.body.y && point.y < item2.body.y +item2.height){
             //     return true;
             // }

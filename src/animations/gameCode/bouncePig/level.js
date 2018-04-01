@@ -1,9 +1,9 @@
-export default function Level(PIXI, gv){
+export default function Level(gv){
     return {
-        cont: new PIXI.Container(),
+        cont: new gv.PIXI.Container(),
         text: "",
         width: 100,
-        mineQ: 0,
+        mineQ: 3,
         fruitQ: 10,
         cloudQ: 3,
         maxFruit: 100,
@@ -25,9 +25,9 @@ export default function Level(PIXI, gv){
         },
         returnText: function (str, big) {
             if(big === undefined)
-                return new PIXI.BitmapText(str, {font: "30px SpeedballNo2SW", align: "left"});
+                return new gv.PIXI.extras.BitmapText(str, {font: "30px SpeedballNo2SW", align: "left"});
             else
-                return new PIXI.BitmapText(str, {font: "64px bigText", align: "left"});
+                return new gv.PIXI.extras.BitmapText(str, {font: "64px bigText", align: "left"});
         },
         increase: function () {
             let cont = this.cont;

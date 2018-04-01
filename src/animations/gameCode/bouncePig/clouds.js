@@ -1,7 +1,7 @@
-export default function Clouds (gv, PIXI, Utils, TweenLite) {
+export default function Clouds (gv) {
     return {
         clouds: [],
-        cont: new PIXI.Container(),
+        cont: new gv.PIXI.Container(),
         onStage:false,
         init: function (){
             for(var i = 0; i < gv.level.cloudQ; i ++){
@@ -17,9 +17,9 @@ export default function Clouds (gv, PIXI, Utils, TweenLite) {
                 cloud =  this.clouds[i];
                 cloud.alpha = 1;
                 cloud.y = Math.ceil(Math.random()*gv.canvasHeight);
-                cloud.x = (cloud.side === "right")?Utils.randomIntBetween(gv.halfWidth+(cloud.w/2), gv.canvasWidth-cloud.w):Utils.randomIntBetween(0, gv.halfWidth-cloud.w-30);
+                cloud.x = (cloud.side === "right")?gv.utils.randomIntBetween(gv.halfWidth+(cloud.w/2), gv.canvasWidth-cloud.w):gv.utils.randomIntBetween(0, gv.halfWidth-cloud.w-30);
                 this.cont.addChild(cloud);
-                TweenLite.to(cloud,0.5, {alpha:1});
+                gv.TweenLite.to(cloud,0.5, {alpha:1});
             }
         },
         removeFromStage: function () {
@@ -31,12 +31,12 @@ export default function Clouds (gv, PIXI, Utils, TweenLite) {
             this.addToStage();
         },
         cloud: function (side) {
-            var cloud = (side === "right")?new PIXI.Sprite.fromFrame("cloudRight.png"):new PIXI.Sprite.fromFrame("cloudLeft.png");
+            var cloud = (side === "right")?new gv.PIXI.Sprite.fromFrame("cloudRight.png"):new gv.PIXI.Sprite.fromFrame("cloudLeft.png");
             cloud.side= side;
             cloud.cacheAsBitmap = true;
             cloud.w = cloud.width;
             cloud.h = cloud.height;
-            var box = new PIXI.Rectangle(0,60,cloud.w, 10);
+            var box = new gv.PIXI.Rectangle(0,60,cloud.w, 10);
             cloud.box = box;
             return cloud;
         }

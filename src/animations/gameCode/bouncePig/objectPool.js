@@ -47,7 +47,6 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
 
             for(var i =0; i < objQ; i ++){
                 instance = this.op[i];
-                console.log(instance)
                 this.restore(instance);
                 instance.vx = Math.cos(instance.angle);// * instance.speed;
                 instance.vy = Math.sin(instance.angle);// * instance.speed;

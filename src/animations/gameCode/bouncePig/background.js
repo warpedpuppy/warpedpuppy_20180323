@@ -1,8 +1,8 @@
 
-export default function Background(PIXI, gv, Utils){
+export default function Background(gv){
     return {
-        cont: new PIXI.Container(),
-        container:  new PIXI.particles.ParticleContainer(),
+        cont: new gv.PIXI.Container(),
+        container:  new gv.PIXI.particles.ParticleContainer(),
         ballQ:  20,
         lines: [],
         balls:  [],
@@ -15,7 +15,7 @@ export default function Background(PIXI, gv, Utils){
             gv.stage.addChildAt(this.cont, 0);
         },
         backgroundBitmap: function() {
-            var background = new PIXI.Sprite.fromFrame("background.jpg");
+            var background = new gv.PIXI.Sprite.fromFrame("background.jpg");
             background.width = gv.canvasWidth;
             background.height = gv.canvasHeight;
             this.background = background;
@@ -31,7 +31,7 @@ export default function Background(PIXI, gv, Utils){
             var brick;
             for(var i = 0; i < brickVQ; i ++){
                 for(var j = 0; j < brickHQ;j ++){
-                    brick = new PIXI.Graphics();
+                    brick = new gv.PIXI.Graphics();
                     brick.lineStyle(2, 0x000000,0.25).moveTo(0,0).lineTo(brickWidth, 0).lineTo(brickWidth, brickHeight).lineTo(0, brickHeight).lineTo(0,0);
                     brick.x = (j* brickWidth) +brickWidth/2;
                     brick.y = (i*brickHeight)+brickHeight/2;
@@ -48,13 +48,13 @@ export default function Background(PIXI, gv, Utils){
             var colors = [0x31ff5b, 0x5F27E8, 0xB252ff, 0x16e4e8, 0x7d11ff];
             var colorCounter = 0;
             for (var i = 0; i <  this.ballQ; i++) {
-                ball = new PIXI.Sprite.fromFrame("bubble.png");
+                ball = new gv.PIXI.Sprite.fromFrame("bubble.png");
 
-                ball.scale.x = ball.scale.y = Utils.randomNumberBetween(5, 15);
-                ball.y = Utils.randomNumberBetween(0, gv.canvasHeight);
-                ball.x = Utils.randomNumberBetween(0, gv.canvasWidth);
-                ball.vx = Utils.randomNumberBetween(0.05,0.5);
-                ball.vy =  Utils.randomNumberBetween(0.05,0.5);
+                ball.scale.x = ball.scale.y = gv.utils.randomNumberBetween(5, 15);
+                ball.y = gv.utils.randomNumberBetween(0, gv.canvasHeight);
+                ball.x = gv.utils.randomNumberBetween(0, gv.canvasWidth);
+                ball.vx = gv.utils.randomNumberBetween(0.05,0.5);
+                ball.vy =  gv.utils.randomNumberBetween(0.05,0.5);
                 ball.anchor.x = ball.anchor.y = 0.5;
                 ball.tint = colors[colorCounter];//"0x" + randomColor().substring(1);
                 colorCounter ++;
@@ -70,7 +70,7 @@ export default function Background(PIXI, gv, Utils){
             var line;
             this.lines.length = 0;
             for (var i = 0; i < gv.lineQ; i++) {
-                line = new PIXI.Sprite.fromFrame("line.gif");
+                line = new gv.PIXI.Sprite.fromFrame("line.gif");
                 line.y = spacer * i;
                 line.height = 2;
                 line.alpha = 0.25;

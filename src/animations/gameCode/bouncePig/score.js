@@ -1,28 +1,28 @@
-export default function Score (PIXI, Utils, gv, TweenLite) {
+export default function Score (gv) {
     return {
-        cont: new PIXI.Container(),
+        cont: new gv.PIXI.Container(),
         str: "",
         decreaseBoolean: false,
         init: function () {
-            this.scoreText = Utils.returnText("score:");
+            this.scoreText = gv.utils.returnText("score:");
             let str = this.str;
             let cont = this.cont;
             cont.score = 0;
-            str = Utils.numberWithCommas(cont.score).toString();
+            str = gv.utils.numberWithCommas(cont.score).toString();
             this.decreaseBoolean = false;
             this.slowTheDecreaseCounter = 0;
             var width1 = this.width1 = this.scoreText.width;
             cont.addChild(this.scoreText);
-            var scoreAmount = this.scoreAmount = Utils.returnText(str);
+            var scoreAmount = this.scoreAmount = gv.utils.returnText(str);
             scoreAmount.x = width1;
             cont.addChild(scoreAmount);
             cont.fruit = 0;
-            var fruitText = this.fruitText = Utils.returnText("fruit:");
+            var fruitText = this.fruitText = gv.utils.returnText("fruit:");
             fruitText.y = this.scoreText.y + this.scoreText.height + 10;
             var width2 = this.width2 = fruitText.width;
             cont.addChild(fruitText);
             var str2 = "0/"+gv.fruit.fruitQ.toString();
-            var fruitAmount = this.fruitAmount = Utils.returnText(str2);
+            var fruitAmount = this.fruitAmount = gv.utils.returnText(str2);
             fruitAmount.y = fruitText.y;
             fruitAmount.x = width2;
             cont.addChild(fruitAmount);
@@ -39,14 +39,14 @@ export default function Score (PIXI, Utils, gv, TweenLite) {
             let cont = this.cont;
             cont.fruit = 0;
             cont.removeChild(this.scoreAmount);
-            str = Utils.numberWithCommas(cont.score).toString();
-            this.scoreAmount.setText(str);
+            str = gv.utils.numberWithCommas(cont.score).toString();
+            this.scoreAmount.text = str;
             this.scoreAmount.x = this.width1;
             cont.addChild(this.scoreAmount);
 
             cont.removeChild(this.fruitAmount);
             str = cont.fruit.toString()+"/"+gv.fruit.fruitQ.toString();
-            this.fruitAmount.setText(str);
+            this.fruitAmount.text = str;
             this.fruitAmount.x = this.width2;
             cont.addChild(this.fruitAmount);
             this.place();
@@ -56,19 +56,17 @@ export default function Score (PIXI, Utils, gv, TweenLite) {
             this.cont.score +=1;
             this.cont.fruit ++;
             this.cont.removeChild(this.scoreAmount);
-            str = Utils.numberWithCommas(this.cont.score).toString();
-            this.scoreAmount.setText(str);
+            str = gv.utils.numberWithCommas(this.cont.score).toString();
+            this.scoreAmount.text = str;
             this.scoreAmount.x = this.width1;
             this.cont.addChild(this.scoreAmount);
             this.cont.removeChild(this.fruitAmount);
             str = this.cont.fruit.toString()+"/"+gv.fruit.fruitQ.toString();
-            this.fruitAmount.setText(str);
+            this.fruitAmount.text = str;
             this.fruitAmount.x = this.width2;
             this.cont.addChild(this.fruitAmount);
             this.place();
-            console.log('increase')
             if(this.cont.fruit.toString() === gv.level.fruitQ.toString()){
-                console.log('function call')
                 gv.level.increase();
                 gv.levelComplete.addToStage();
             }
@@ -99,20 +97,20 @@ export default function Score (PIXI, Utils, gv, TweenLite) {
                     str = "";
                     this.cont.removeChild(this.scoreAmount);
                     str = this.cont.score.toString();
-                    this.scoreAmount.setText(str);
+                    this.scoreAmount.text = str;
                     this.scoreAmount.x = this.width1;
                     this.cont.addChild(this.scoreAmount);
 
                     this.cont.removeChild(this.fruitAmount);
                     str = this.cont.fruit.toString()+"/"+gv.fruit.fruitQ.toString();
-                    this.fruitAmount.setText(str);
+                    this.fruitAmount.text = str;
                     this.fruitAmount.x = this.width2;
                     this.cont.addChild(this.fruitAmount);
                     this.cont.place();
                 }
                 this.slowTheDecreaseCounter ++;
             } else {
-                TweenLite.to(gv.mines.redBackground,0.5, {alpha:0, onComplete:Utils.makeInvisible, onCompleteParams:[gv.mines.redBackground]});
+                gv.TweenLite.to(gv.mines.redBackground,0.5, {alpha:0, onComplete:gv.utils.makeInvisible, onCompleteParams:[gv.mines.redBackground]});
                 this.slowTheDecreaseCounter = 0;
                 this.cont.decreaseBoolean = false;
             }
