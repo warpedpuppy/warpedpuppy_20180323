@@ -28,6 +28,8 @@ export default class Experiments extends React.Component {
 		e.preventDefault();
 		let nextPage = (Number(e.target.innerHTML) * this.state.itemsPerPage) - this.state.itemsPerPage;
 		this.setState({page:nextPage})
+		let descNum = (Number(e.target.innerHTML)-1)*this.state.itemsPerPage;
+		this.setState({desc: descNum})
 
 	}
 	changeDescription(e) {
@@ -42,8 +44,8 @@ export default class Experiments extends React.Component {
 		for(let i = this.state.page; i < end; i++){
 			if(this.state.array[i]) {
 				data.push(
-					<li key={i} data-ref={i} ref={item => this[`item${i}`] = item} onClick={(e) => this.changeDescription(e)} >
-					<div>
+					<li key={i} ref={item => this[`item${i}`] = item} onClick={(e) => this.changeDescription(e)} >
+					<div data-ref={i} >
 					{this.state.array[i].title}
 					<hr />
 					</div>

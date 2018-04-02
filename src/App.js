@@ -6,6 +6,7 @@ import Home from './pages/Home.js';
 import Experiments from './pages/Experiments.js';
 import About from './pages/About.js';
 import BouncePig from './pages/Games/BouncePig.js';
+import WhirlyGigs from './pages/Games/WhirlyGigs.js';
 import Contact from './pages/Contact.js';
 import GamePage from './pages/GamePage.js';
 import Footer from './components/Footer.js';
@@ -26,6 +27,7 @@ export default function App () {
             <Route exact path="/Contact" component={Contact} />
             <Route exact path="/GamePage" component={GamePage} />
             <Route exact path="/BouncePig" component={BouncePig} />
+            <Route exact path="/WhirlyGigs" component={WhirlyGigs} />
           </main>
           <Footer />
         </div>

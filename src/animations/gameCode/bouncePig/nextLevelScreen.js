@@ -66,7 +66,7 @@ export default function NextLevelScreen (gv) {
                 gv.fruit.addMoreFruit();
             }
             if(gv.mines.mineQ !== gv.level.mineQ){
-                gv.mines.addMore;
+                gv.mines.addMore();
             }
             this.line.visible = true;
             this.line.rotation = gv.utils.deg2rad(0);

@@ -12,17 +12,17 @@ export default function(){
 		},
 		{
 			title: 'insect ai',
-			description: 'desc1',
+			description: 'Drop the insect on either of the maze entrances and it will think its way out',
 			link: '/'
 		},
 		{
-			title: 'whirley gigs',
-			description: 'desc1',
-			link: '/'
+			title: 'Whirly Gigs',
+			description: 'Add ornamental whirley gigs and test the impact of frames per second.',
+			link: '/WhirlyGigs'
 		},
 		{
-			title: 'glitter -- object pool',
-			description: 'desc1',
+			title: 'Glitter -- object pool',
+			description: 'Same code from the home page, just purple.',
 			link: '/'
 		},
 		{
@@ -32,17 +32,17 @@ export default function(){
 		},
 		{
 			title: 'falling green numbers',
-			description: 'desc1',
+			description: 'Pretty falling green numbers with trails.',
 			link: '/'
 		},
 		{
 			title: '4 card oop solitaire',
-			description: 'desc1',
+			description: 'Four card oop solitaire',
 			link: '/'
 		},
 		{
 			title: 'fireworks',
-			description: 'desc1',
+			description: 'fireworks',
 			link: '/'
 		},
 		{
@@ -62,7 +62,7 @@ export default function(){
 		},
 		{
 			title: 'webgl sun animation',
-			description: 'desc1',
+			description: 'loads huge sun bitmap',
 			link: '/'
 		},
 		{

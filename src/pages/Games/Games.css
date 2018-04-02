@@ -1,0 +1,32 @@
+#tugtugCanvas {
+	position: relative;
+	
+	height:400px;
+}
+.uiElementCont {
+	position: absolute;
+	top:0;
+	z-index: 1;
+	padding:10px;
+}
+.uiElementCont button {
+	font-size:15px;
+	padding: 10px 20px;
+	border-radius: 10px;
+	background-color: rgba(164, 255, 169, 0.5);
+	margin:10px 0;
+}
+#my-stats-container {
+	
+}
+canvas {
+	position: absolute;
+	top:0;
+	z-index: -1;
+	border-top:5px solid black;
+	border-bottom:5px solid black;
+}
+@media (min-width: 1024px) {
+
+
+}

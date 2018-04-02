@@ -1,5 +1,5 @@
 import React from 'react';
-import './BouncePig.css';
+import './Games.css';
 import * as PIXI from 'pixi.js';
 import Utils from '../../animations/gameCode/bouncePig/utils.js';
 import { TweenLite, TimelineLite, Back } from 'gsap';
