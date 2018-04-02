@@ -22,7 +22,7 @@ export default function NextLevelScreen (gv) {
         },
         resize: function () {
             if(this.ON_STAGE === true){
-                gv.hero.x = gv.halfWidth;
+                gv.heroInstance.x = gv.halfWidth;
                 this.startButton.x = gv.halfWidth;
                 this.nextLevelButton.x = gv.halfWidth;
                 this.startButton.y = gv.halfHeight;
@@ -33,13 +33,13 @@ export default function NextLevelScreen (gv) {
                 this.line.y = gv.halfHeight-100;
                 this.dot1.y = gv.halfHeight-100;
                 this.dot2.y = gv.halfHeight-100;
-                gv.hero.y = this.line.y -30;
+                gv.heroInstance.y = this.line.y -30;
                 this.titleText.x = Math.ceil((gv.canvasWidth - this.titleText.textWidth)/2);
                 this.goalText.x = Math.ceil( gv.halfWidth);
-                this.titleText.y = Math.ceil(gv.hero.y -200);
-                this.goalText.y =  Math.ceil(gv.hero.y -100);
+                this.titleText.y = Math.ceil(gv.heroInstance.y -200);
+                this.goalText.y =  Math.ceil(gv.heroInstance.y -100);
                 this.fruitCont.x = gv.halfWidth;
-                this.fruitCont.y = gv.hero.y;
+                this.fruitCont.y = gv.heroInstance.y;
             };
         },
         stop: function () {
@@ -55,7 +55,7 @@ export default function NextLevelScreen (gv) {
               gv.heroInstance.y = gv.halfHeight*.65;
             gv.score.cont.visible = false;
             this.ON_STAGE = true;
-            gv.hero.alpha = 0;
+            gv.heroInstance.alpha = 0;
             this.fruitCont.alpha = 0;
             gv.level.cont.visible = false;
             this.line.alpha = 0;
@@ -79,9 +79,9 @@ export default function NextLevelScreen (gv) {
             this.dot2.visible = true;
             this.dot2.x = gv.halfWidth+200;
             this.dot2.y = gv.halfHeight-100;
-            gv.hero.y = Math.ceil(this.line.y - 30);
+            gv.heroInstance.y = Math.ceil(this.line.y - 30);
             this.fruitCont.x = gv.halfWidth;
-            this.fruitCont.y = gv.hero.y;
+            this.fruitCont.y = gv.heroInstance.y;
             gv.stage.addChild(this.fruitCont);
             gv.TweenLite.delayedCall(0.11, gv.utils.proxy(this.makeRadial, this));
             gv.stage.removeChild(gv.level);
@@ -119,8 +119,8 @@ export default function NextLevelScreen (gv) {
             this.goalText.alpha = 0;
             this.goalText.pivot.y = this.goalText.textHeight/2;
             this.goalText.x =Math.ceil( gv.halfWidth);
-            this.titleText.y = Math.ceil(gv.hero.y -200);
-            this.goalText.y =  Math.ceil(gv.hero.y -100);
+            this.titleText.y = Math.ceil(gv.heroInstance.y -200);
+            this.goalText.y =  Math.ceil(gv.heroInstance.y -100);
             gv.stage.addChild(this.goalText);
             this.titleText.alpha = 0;
             gv.stage.addChild(this.titleText);
@@ -131,7 +131,7 @@ export default function NextLevelScreen (gv) {
             gv.TweenLite.to(this.dot2,fadeIn, {alpha:1, delay:delayFadeIn});
             gv.TweenLite.to(this.goalText,fadeIn, {alpha:1, delay:delayFadeIn});
             gv.TweenLite.to(this.titleText,fadeIn, {alpha:1, delay:delayFadeIn});
-            gv.TweenLite.to(gv.hero,fadeIn, {alpha:1, delay:delayFadeIn});
+            gv.TweenLite.to(gv.heroInstance,fadeIn, {alpha:1, delay:delayFadeIn});
             if(gv.level.level > 1)
                 gv.TweenLite.to(this.nextLevelButton,fadeIn, {alpha:1, delay:delayFadeIn});
             else
@@ -190,8 +190,8 @@ export default function NextLevelScreen (gv) {
             this.dot2.y = 0;
             gv.bouncePlatform.on(true);
             gv.swipeText.visible = true;
-            gv.hero.x = gv.halfWidth;
-            gv.hero.y = gv.halfHeight;
+            gv.heroInstance.x = gv.halfWidth;
+            gv.heroInstance.y = gv.halfHeight;
             gv.introScreenOnStage = false;
             gv.loopingQ = Math.max(gv.background.lineQ, gv.fruit.fruits.length, gv.clouds.clouds.length, gv.mines.mines.length);
         },

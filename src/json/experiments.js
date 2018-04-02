@@ -1,49 +1,49 @@
 export default function(){
 	return [
-		{
-			title: 'Solitaire',
-			description: 'Rite of passage for a developer.  Solitaire with hints and suggestions.',
-			link: '/'
-		},
+		// {
+		// 	title: 'Solitaire',
+		// 	description: 'Rite of passage for a developer.  Solitaire with hints and suggestions.',
+		// 	link: '/'
+		// },
 		{
 			title: 'Bounce, Pig! Bounce!',
 			description: 'A video game in which you bounce a pig on a swipe-created platform and eat fruit!',
 			link: '/BouncePig'
 		},
-		{
-			title: 'insect ai',
-			description: 'Drop the insect on either of the maze entrances and it will think its way out',
-			link: '/'
-		},
+		// {
+		// 	title: 'insect ai',
+		// 	description: 'Drop the insect on either of the maze entrances and it will think its way out',
+		// 	link: '/'
+		// },
 		{
 			title: 'Whirly Gigs',
 			description: 'Add ornamental whirley gigs and test the impact of frames per second.',
 			link: '/WhirlyGigs'
 		},
-		{
-			title: 'Glitter -- object pool',
-			description: 'Same code from the home page, just purple.',
-			link: '/'
-		},
-		{
-			title: 'slide puzzle',
-			description: 'desc1',
-			link: '/'
-		},
+		// {
+		// 	title: 'Glitter -- object pool',
+		// 	description: 'Same code from the home page, just purple.',
+		// 	link: '/'
+		// },
+		// {
+		// 	title: 'slide puzzle',
+		// 	description: 'desc1',
+		// 	link: '/'
+		// },
 		{
 			title: 'falling green numbers',
 			description: 'Pretty falling green numbers with trails.',
-			link: '/'
+			link: '/FallingNumbers'
 		},
-		{
-			title: '4 card oop solitaire',
-			description: 'Four card oop solitaire',
-			link: '/'
-		},
+		// {
+		// 	title: '4 card oop solitaire',
+		// 	description: 'Four card oop solitaire',
+		// 	link: '/'
+		// },
 		{
 			title: 'fireworks',
 			description: 'fireworks',
-			link: '/'
+			link: '/Fireworks'
 		},
 		{
 			title: 'pretty dots',

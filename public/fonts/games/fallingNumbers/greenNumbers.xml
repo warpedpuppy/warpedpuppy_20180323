@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--Created using Glyph Designer - http://www.71squared.com/glyphdesigner-->
+<font>
+    <info face="Typewriter" size="12" bold="0" italic="0" chasrset="" unicode="0" stretchH="100" smooth="1" aa="1" padding="0,0,0,0" spacing="2,2"/>
+    <common lineHeight="14" base="11" scaleW="32" scaleH="16" pages="1" packed="0"/>
+    <pages>
+        <page id="0" file="greenNumbers.png"/>
+    </pages>
+    <chars count="3">
+        <char id="32" x="22" y="2" width="0" height="0" xoffset="0" yoffset="11" xadvance="3" page="0" chnl="0" letter="space"/>
+        <char id="48" x="2" y="2" width="9" height="11" xoffset="1" yoffset="0" xadvance="8" page="0" chnl="0" letter="0"/>
+        <char id="49" x="13" y="2" width="7" height="11" xoffset="1" yoffset="0" xadvance="8" page="0" chnl="0" letter="1"/>
+    </chars>
+    <kernings count="0"/>
+</font>

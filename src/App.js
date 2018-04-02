@@ -7,6 +7,8 @@ import Experiments from './pages/Experiments.js';
 import About from './pages/About.js';
 import BouncePig from './pages/Games/BouncePig.js';
 import WhirlyGigs from './pages/Games/WhirlyGigs.js';
+import FallingNumbers from './pages/Games/FallingNumbers.js';
+import Fireworks from './pages/Games/Fireworks.js';
 import Contact from './pages/Contact.js';
 import GamePage from './pages/GamePage.js';
 import Footer from './components/Footer.js';
@@ -28,6 +30,8 @@ export default function App () {
             <Route exact path="/GamePage" component={GamePage} />
             <Route exact path="/BouncePig" component={BouncePig} />
             <Route exact path="/WhirlyGigs" component={WhirlyGigs} />
+            <Route exact path="/FallingNumbers" component={FallingNumbers} />
+            <Route exact path="/Fireworks" component={Fireworks} />
           </main>
           <Footer />
         </div>

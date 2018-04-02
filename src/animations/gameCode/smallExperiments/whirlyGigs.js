@@ -53,6 +53,9 @@ export default function WhirleyGigs(PIXI, Utils, Stats) {
             this.stats.setMode(0);
             this.app.ticker.add(this.animate.bind(this));
         },
+        stop: function () {
+            this.app.ticker.destroy();
+        },
         resize: function () {
             this.canvasWidth = this.utils.returnCanvasWidth();
             this.halfHeight = this.canvasHeight / 2;

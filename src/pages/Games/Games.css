@@ -19,7 +19,7 @@
 #my-stats-container {
 	
 }
-canvas {
+div.games canvas {
 	position: absolute;
 	top:0;
 	z-index: -1;

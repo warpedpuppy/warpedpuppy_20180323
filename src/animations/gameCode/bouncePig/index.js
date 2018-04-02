@@ -107,7 +107,7 @@ export default function(
             this.hero.init();
             this.heroInstance = this.hero.getHero()
             this.heroInstance.x = this.halfWidth;
-            this.heroInstance.y = this.halfHeight*.65;
+            //this.heroInstance.y = this.halfHeight*.65;
             this.stage.addChild(this.heroInstance);
 
             this.bouncePlatform = BouncePlatform(this);
@@ -129,7 +129,7 @@ export default function(
 
             this.rect2 = new PIXI.Rectangle(hitAreaX,hitAreaY,hitAreaWidth, hitAreaHeight);//general hit area
             this.rect3 = new PIXI.Rectangle(
-            this.heroInstance.x - (this.heroInstance.width / 4), 
+            this.heroInstance.x - (this.heroInstance.width / 4),
             this.heroInstance.y + (this.heroInstance.height/2)-20,this.hero.width/2, 5);
 
             this.swipeText = new PIXI.Sprite.fromFrame("swipeScreen.png");
@@ -183,7 +183,7 @@ export default function(
             this.score.resize();
             this.level.resize();
             this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;
-             this.heroInstance.y = this.halfHeight*.65;
+             //this.heroInstance.y = this.halfHeight*.65;
              this.mines.resize();
             // this.mines.redBackground.clear();
             // this.mines.redBackground.beginFill(0xFF0000).drawRect(0,0,this.canvasWidth,this.canvasHeight).endFill();
