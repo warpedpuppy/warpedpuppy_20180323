@@ -26,7 +26,7 @@ export default class FallingNumbers extends React.Component {
 	}
 	render () {
 		return (
-			 <div id="tugtugCanvas"  className="games">
+			 <div id="tugtugCanvas" className="games">
 		        <div className="uiElementCont">
 		        	<div id='my-stats-container'></div>
 		        </div>
