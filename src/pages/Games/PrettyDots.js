@@ -1,13 +1,13 @@
 import React from 'react';
 import * as PIXI from 'pixi.js';
 import Utils from '../../animations/utils.js';
-import whirlyGigs from '../../animations/gameCode/smallExperiments/whirlyGigs.js';
+import whirlyGigs from '../../animations/gameCode/smallExperiments/prettyDots.js';
 import Stats from '../../animations/Stats.js';
 import './WhirlyGigs.css';
 import './Games.css';
 import GamePagination from '../../components/experiments/GamePagination.js';
 
-export default class WhirlyGigs extends React.Component {
+export default class PrettyDots extends React.Component {
 
 	componentDidMount () {
 		this.code = new whirlyGigs(PIXI, Utils, Stats);
@@ -37,9 +37,8 @@ export default class WhirlyGigs extends React.Component {
 		                <button onClick={(e) => this.reset(e) }>reset</button>
 		            </div>
 		        </div>
-		       
 		    </div>
-		    <GamePagination />
+		     <GamePagination />
 		    </div>
 		)
 	}

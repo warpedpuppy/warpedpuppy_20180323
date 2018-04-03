@@ -1,17 +1,15 @@
 import React from 'react';
 import * as PIXI from 'pixi.js';
 import Utils from '../../animations/utils.js';
-import whirlyGigs from '../../animations/gameCode/smallExperiments/whirlyGigs.js';
-import Stats from '../../animations/Stats.js';
-import './WhirlyGigs.css';
 import './Games.css';
+import GlitterCode from '../../animations/gameCode/smallExperiments/glitter.js';
 import GamePagination from '../../components/experiments/GamePagination.js';
 
-export default class WhirlyGigs extends React.Component {
+export default class Glitter extends React.Component {
 
 	componentDidMount () {
-		this.code = new whirlyGigs(PIXI, Utils, Stats);
-		this.code.init();
+		this.code = new GlitterCode(Utils, PIXI);
+		this.code.Init();
 	}
 	addMore (e) {
 		e.preventDefault();
@@ -22,7 +20,7 @@ export default class WhirlyGigs extends React.Component {
 		this.code.reset();
 	}
 	componentWillUnmount () {
-		this.code.stop();
+		//this.code.Stop();
 	}
 	render () {
 		return (
@@ -30,14 +28,7 @@ export default class WhirlyGigs extends React.Component {
 			 <div id="tugtugCanvas" className="games">
 		        <div className="uiElementCont">
 		        	<div id='my-stats-container'></div>
-		            <div className="uiElement">
-		                <button onClick={(e) => this.addMore(e) }>add more</button>
-		            </div>
-		            <div className="uiElement">
-		                <button onClick={(e) => this.reset(e) }>reset</button>
-		            </div>
 		        </div>
-		       
 		    </div>
 		    <GamePagination />
 		    </div>

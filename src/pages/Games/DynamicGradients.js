@@ -4,9 +4,9 @@ import Utils from '../../animations/utils.js';
 import './WhirlyGigs.css';
 import './Games.css';
 import { TimelineLite} from 'gsap';
-import fireworks from '../../animations/gameCode/smallExperiments/fireworks.js';
-import GamePagination from '../../components/experiments/GamePagination.js';
-export default class FallingNumbers extends React.Component {
+import fireworks from '../../animations/gameCode/smallExperiments/dynamicGradients.js';
+
+export default class DynamicGradients extends React.Component {
 
 	componentDidMount () {
 		 
@@ -26,13 +26,11 @@ export default class FallingNumbers extends React.Component {
 	}
 	render () {
 		return (
-			<div>
-				<div id="tugtugCanvas" className="games">
-				<div className="uiElementCont">
-				<div id='my-stats-container'></div>
-				</div>
-				</div>
-				<GamePagination />
+			 <div id="tugtugCanvas" className="games">
+		        <div className="uiElementCont">
+		        	<div id='my-stats-container'></div>
+		        </div>
+		       
 		    </div>
 		)
 	}

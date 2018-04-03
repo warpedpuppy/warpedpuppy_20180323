@@ -12,7 +12,7 @@ export default class Experiments extends React.Component {
 			page: 0,
 			desc: 0,
 			array: array,
-			itemsPerPage: 6, 
+			itemsPerPage:3, 
 			pages: 0
 
 		}

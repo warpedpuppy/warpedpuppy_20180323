@@ -17,7 +17,7 @@ export default function Level(gv){
             cont.addChild(this.text);
             amount.x = this.width;
             cont.addChild(amount);
-            gv.stage.addChild(cont);
+            //gv.stage.addChild(cont);
             this.place();
         },
         resize: function () {

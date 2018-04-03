@@ -1,0 +1,31 @@
+.gamePagination {
+	margin:60px;
+	text-align: center;
+}
+.gamePagination div.pagination {
+	display: inline-block;
+}
+
+.gamePagination div.pagination span {
+	display: inline-block;
+	border: 1px solid black;
+	padding:10px;
+	cursor: pointer;
+	width: 50px;
+	font-size: 15px;
+}
+.gamePagination div.pagination span.activeSpan {
+	background-color: #333;
+	color:white;
+}	
+.gamePagination div.pagination span:first-child {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.gamePagination div.pagination span:last-child {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+.paginationText {
+	min-height: 20px;
+}

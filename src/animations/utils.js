@@ -1,4 +1,4 @@
-export default function(gv,createjs) {
+export default function Utils (gv,createjs) {
   return {
     lineDistance: function (point1, point2) {
         var xs = 0;

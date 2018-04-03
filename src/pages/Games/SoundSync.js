@@ -1,16 +1,16 @@
 import React from 'react';
 import * as PIXI from 'pixi.js';
+import * as pixisound from 'pixi-sound';
 import Utils from '../../animations/utils.js';
-import './WhirlyGigs.css';
 import './Games.css';
-import { TimelineLite} from 'gsap';
-import fireworks from '../../animations/gameCode/smallExperiments/fireworks.js';
+import soundSync from '../../animations/gameCode/smallExperiments/soundSync.js';
 import GamePagination from '../../components/experiments/GamePagination.js';
-export default class FallingNumbers extends React.Component {
+
+export default class SoundSync extends React.Component {
 
 	componentDidMount () {
 		 
-		this.code = new fireworks(PIXI, Utils, TimelineLite);
+		this.code = new soundSync(PIXI, Utils, pixisound);
 		this.code.init();
 	}
 	addMore (e) {
@@ -27,13 +27,9 @@ export default class FallingNumbers extends React.Component {
 	render () {
 		return (
 			<div>
-				<div id="tugtugCanvas" className="games">
-				<div className="uiElementCont">
-				<div id='my-stats-container'></div>
-				</div>
-				</div>
-				<GamePagination />
-		    </div>
+			 <div id="tugtugCanvas" className="games"></div>
+			 <GamePagination />
+			 </div>
 		)
 	}
 }

@@ -29,8 +29,11 @@ export default function PrettyDots (PIXI, Utils, Stats) {
                 this.Main();
             }
         },
+        stop: function () {
+            this.app.ticker.destroy();
+        },
         Main: function () {
-            this.flower = new Flower(0);
+            this.flower = this.Flower(0);
             this.flower.x = this.halfWidth;
             this.flower.y = this.halfHeight;
             this.stage.addChild(this.flower);
@@ -42,8 +45,10 @@ export default function PrettyDots (PIXI, Utils, Stats) {
         },
         Flower: function (zero) {
             let cont = new PIXI.Container();
-            let spinners = new Spinners(zero);
+            let spinners = this.Spinners(zero);
+            cont.spinners = cont;
             cont.addChild(spinners);
+            let that = this;
             cont.project = function () {
                 for (let j = 0; j < spinners.spinners.length; j ++) {
                     spinners.spinners[j].project();
@@ -51,8 +56,8 @@ export default function PrettyDots (PIXI, Utils, Stats) {
             }
             cont.add = function () {
                 for (let j = 0; j < spinners.spinners.length; j ++) {
-                    let f = new Flower(spinners.spinners[j].x+Math.random()*100);
-                    this.flowers.push(f)
+                    let f = that.Flower(spinners.spinners[j].x + Math.random()*100);
+                    that.flowers.push(f)
                     spinners.spinners[j].addChild(f);
                 }
             }
@@ -60,12 +65,12 @@ export default function PrettyDots (PIXI, Utils, Stats) {
         },
         Spinners: function (zero) {
             let cont = new PIXI.Container();
-            let q = randomIntBetween(4, 10);
+            let q = this.utils.randomIntBetween(10, 30);
             let spinners = [];
             let s;
             for (let i = 0; i < q; i ++) {
-                s = new Spinner(zero,randomIntBetween(3, 10));
-                s.rotation = deg2rad(360/q)*i;
+                s = this.Spinner(zero,this.utils.randomIntBetween(3, 10));
+                s.rotation = this.utils.deg2rad(360/q)*i;
                 spinners.push(s);
                 cont.addChild(s)
             }
@@ -73,23 +78,34 @@ export default function PrettyDots (PIXI, Utils, Stats) {
             return cont;
         },
         Spinner: function (zero, size) {
-            let cont = new PIXI.DisplayObjectContainer();
+            let cont = new PIXI.Container();
             let dot = new PIXI.Sprite.fromFrame("dot.png");
             dot.width = dot.height =size
-            dot.tint = "0x"+randomColor().substr(1);
+            dot.tint = "0x" + this.utils.randomColor().substr(1);
+            dot.var = (Math.random()*150) + 20;
             cont.addChild(dot);
-            cont.project = function(){
-                cont.rotation += deg2rad(1);
-                dot.x = cosWave(zero, 50,.001);
+            let that = this;
+            cont.project = function () {
+                cont.rotation += that.utils.deg2rad(1);
+                dot.x = that.utils.cosWave(zero, dot.var,.001);
             }
             return cont;
         },
         addMore: function () {
             this.flower.add();
         },
+        resize: function () {
+            this.canvasWidth = this.utils.returnCanvasWidth();
+            this.canvasHeight = 400;
+            this.halfHeight = this.canvasHeight / 2;
+            this.halfWidth = this.canvasWidth / 2;
+            this.renderer.resize(this.canvasWidth, this.canvasHeight);
+            this.reset();
+
+        },
         reset: function () {
             this.stage.removeChildren();
-            this.flower = new Flower(0);
+            this.flower = this.Flower(0);
             this.flower.x = this.halfWidth;
             this.flower.y = this.halfHeight;
             this.stage.addChild(this.flower);
@@ -100,6 +116,7 @@ export default function PrettyDots (PIXI, Utils, Stats) {
             for (let i = 0; i < this.flowers.length; i ++) {
                 this.flowers[i].project();
             }
+            this.stats.update();
             this.renderer.render(this.stage);
         }
     }

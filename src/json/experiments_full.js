@@ -23,7 +23,7 @@ export default function(){
 		{
 			title: 'Glitter -- object pool',
 			description: 'Same code from the home page, just purple.',
-			link: '/Glitter'
+			link: '/'
 		},
 		// {
 		// 	title: 'slide puzzle',
@@ -50,11 +50,11 @@ export default function(){
 			description: 'desc1',
 			link: '/PrettyDots'
 		},
-		// {
-		// 	title: 'dynamic gradients',
-		// 	description: 'desc1',
-		// 	link: '/'
-		// },
+		{
+			title: 'dynamic gradients',
+			description: 'desc1',
+			link: '/'
+		},
 		// {
 		// 	title: 'paralax layers',
 		// 	description: 'desc1',
@@ -80,36 +80,34 @@ export default function(){
 		// 	description: 'desc1',
 		// 	link: '/'
 		// },
-		// {
-		// 	title: 'test gear page',
-		// 	description: 'desc1',
-		// 	link: '/'
-		// },
+		{
+			title: 'test gear page',
+			description: 'desc1',
+			link: '/'
+		},
 		// {
 		// 	title: 'chess layout',
 		// 	description: 'desc1',
 		// 	link: '/'
 		// },
-		// {
-		// 	title: 'brick break',
-		// 	description: 'desc1',
-		// 	link: '/'
-		// },
+		{
+			title: 'brick break',
+			description: 'desc1',
+			link: '/'
+		},
 		{
 			title: 'bitmap font and sound sync',
 			description: 'desc1',
-			link: '/SoundSync'
-		}
-		//,
+			link: '/'
+		},
 		// {
 		// 	title: 'tic tac toe',
 		// 	description: 'desc1',
 		// 	link: '/'
 		// },
-		// {
-		// 	title: 'geodesic lines',
-		// 	description: 'desc1',
-		// 	link: '/'
-		// 
-		]
+		{
+			title: 'geodesic lines',
+			description: 'desc1',
+			link: '/'
+		}]
 }

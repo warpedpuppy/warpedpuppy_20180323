@@ -37,7 +37,7 @@ export default function Drums (gv) {
             this.addToStage();
         },
         show: function () {
-            if(this.rightDrum.visible !== true && gv.levelComplete.onStage === false){
+            if(this.rightDrum.visible !== true ){
                 this.rightDrum.y = gv.halfHeight;
                 this.rightDrum.x = gv.canvasWidth*0.75;
 

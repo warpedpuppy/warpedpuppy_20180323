@@ -29,7 +29,7 @@ export default function Score (gv) {
             this.place();
             cont.classRef = this;
             cont.y = 60;
-            gv.stage.addChild(this.cont)
+            //gv.stage.addChild(this.cont)
         },
         resize: function () {
             this.place();
@@ -66,10 +66,10 @@ export default function Score (gv) {
             this.fruitAmount.x = this.width2;
             this.cont.addChild(this.fruitAmount);
             this.place();
-            if(this.cont.fruit.toString() === gv.level.fruitQ.toString()){
-                gv.level.increase();
-                gv.levelComplete.addToStage();
-            }
+            // if(this.cont.fruit.toString() === gv.level.fruitQ.toString()){
+            //     gv.level.increase();
+            //     gv.levelComplete.addToStage();
+            // }
         },
         decrease: function () {
             this.cont.decreaseBoolean = true;

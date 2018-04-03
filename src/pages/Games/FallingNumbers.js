@@ -6,6 +6,7 @@ import './WhirlyGigs.css';
 import './Games.css';
 
 import fallingGreenNumbers from '../../animations/gameCode/smallExperiments/fallingNumbers.js';
+import GamePagination from '../../components/experiments/GamePagination.js';
 
 export default class FallingNumbers extends React.Component {
 
@@ -27,11 +28,13 @@ export default class FallingNumbers extends React.Component {
 	}
 	render () {
 		return (
-			 <div id="tugtugCanvas" className="games">
+			<div>
+				<div id="tugtugCanvas" className="games">
 		        <div className="uiElementCont">
 		        	<div id='my-stats-container'></div>
 		        </div>
-		       
+			    </div>
+			    <GamePagination />
 		    </div>
 		)
 	}

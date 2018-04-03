@@ -1,6 +1,6 @@
 #tugtugCanvas {
 	position: relative;
-	
+	z-index: 1000;
 	height:400px;
 }
 .uiElementCont {

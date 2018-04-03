@@ -11,6 +11,9 @@ export default class About extends React.Component {
     componentDidMount () {
     	this.registerActive()
     }
+    componentWillUnmount () {
+     TweenMax.killAll()
+    }
     loginActive(){
       TweenMax.to(this.path2,2,{morphSVG: this.path2, ease: Elastic.easeOut, css:{fill:"#FF0000"}, onComplete: this.registerActive.bind(this)})
     }

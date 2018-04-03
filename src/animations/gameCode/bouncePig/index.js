@@ -37,7 +37,7 @@ export default function(
             this.Mines = Mines;
             this.speedLimit = this.storeSpeedLimit = 10;
             this.canvasWidth = this.utils.returnCanvasWidth();
-            this.canvasHeight = this.utils.returnCanvasHeight();
+            this.canvasHeight = 400;
             this.vy = 2;
             this.vx = 0;
             this.bounce = -0.7;
@@ -61,6 +61,10 @@ export default function(
             this.resizeHandler = this.resizeHandler.bind(this);
             window.onresize = this.resizeHandler;
             this.counter = 0;
+        },
+        stop: function () {
+            this.loader.destroy();
+            this.app.ticker.destroy();
         },
         count: function(){
             this.counter ++;
@@ -107,7 +111,7 @@ export default function(
             this.hero.init();
             this.heroInstance = this.hero.getHero()
             this.heroInstance.x = this.halfWidth;
-            //this.heroInstance.y = this.halfHeight*.65;
+            this.heroInstance.y = this.halfHeight;
             this.stage.addChild(this.heroInstance);
 
             this.bouncePlatform = BouncePlatform(this);
@@ -134,8 +138,8 @@ export default function(
 
             this.swipeText = new PIXI.Sprite.fromFrame("swipeScreen.png");
 
-            this.levelComplete = LevelComplete(this);
-            this.levelComplete.init();
+            // this.levelComplete = LevelComplete(this);
+            // this.levelComplete.init();
 
             this.score = Score (this);
             this.score.init();
@@ -147,9 +151,9 @@ export default function(
 
             this.app.ticker.add(animate(this));
 
-            this.nextLevelScreen = NextLevelScreen(this);
-            this.nextLevelScreen.init();
-            this.nextLevelScreen.addToStage();
+            // this.nextLevelScreen = NextLevelScreen(this);
+            // this.nextLevelScreen.init();
+            // this.nextLevelScreen.addToStage();
 
 
 
@@ -160,9 +164,9 @@ export default function(
             // this.keyString = "";
             // this.mouseDown = false;
            
-        
+            this.stage.addChild(this.swipeText);
             this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;
-            this.swipeText.y = (this.canvasHeight - this.swipeText.height)-200;
+            this.swipeText.y = (this.canvasHeight - this.swipeText.height)-10;
 
 
             // this.introScreenOnStage = true;
@@ -171,19 +175,19 @@ export default function(
         },
         resizeHandler: function () {
             this.canvasWidth = this.utils.returnCanvasWidth();
-            this.canvasHeight =  this.utils.returnCanvasHeight();
+            this.canvasHeight =  400;
             this.halfWidth = this.canvasWidth/2;
             this.halfHeight = this.canvasHeight/2;
             this.renderer.resize(this.canvasWidth, this.canvasHeight);
             this.background.resize();
             this.heroInstance.x = this.halfWidth;
-            this.nextLevelScreen.resize();
+           // this.nextLevelScreen.resize();
             this.drums.resize();
             this.clouds.resize();
-            this.score.resize();
+            //this.score.resize();
             this.level.resize();
             this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;
-             //this.heroInstance.y = this.halfHeight*.65;
+             this.heroInstance.y = this.halfHeight;
              this.mines.resize();
             // this.mines.redBackground.clear();
             // this.mines.redBackground.beginFill(0xFF0000).drawRect(0,0,this.canvasWidth,this.canvasHeight).endFill();
