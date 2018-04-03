@@ -1,6 +1,5 @@
 export default function Firework (PIXI, Utils, TimelineLite){
     return {
-        canvasID : "tugtugCanvas",
         utils: new Utils(),
         canvasHeight: 400,
         fs: [],
