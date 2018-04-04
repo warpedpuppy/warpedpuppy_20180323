@@ -13,13 +13,22 @@ export default class GamePagination extends React.Component {
 			startingNumber: 1,
 			array: experimentData()
 		}
-		console.log(experimentData().length)
+	}
+	componentDidMount () {
+		function findPageIndex(element){
+			return element.link === this.state.currentPage;
+		}
+		findPageIndex = findPageIndex.bind(this);
+		let activeIndex = this.state.array.findIndex(findPageIndex);
+		this.setState({activePage: activeIndex})
 	}
 
 	changeText (e) {
 		let str = e.target.innerHTML;
 		let response = "";
-		if (str === "&lt;&lt;") {
+		if (str  == this.state.activePage) {
+			return;
+		} else if (str === "&lt;&lt;") {
 			response = 'go five back'
 		} else if (str === "&lt;") {
 			response = 'go one back'
@@ -122,9 +131,11 @@ export default class GamePagination extends React.Component {
 		
 		return (
 			<div className="gamePagination">
+				<h2>{this.state.array[this.state.activePage].title}</h2>
 				<div className="paginationText">{this.state.paginationText}</div>
 				<div className="pagination">
 					<span 
+						className="fiveBack"
 						onMouseEnter={(e) => this.changeText(e)}
 						onMouseLeave={(e) => this.emptyText(e)}
 						onClick={(e) => this.changeNumbers(e)}
@@ -140,7 +151,8 @@ export default class GamePagination extends React.Component {
 						onMouseLeave={(e) => this.emptyText(e)}
 						onClick={(e) => this.changeNumbers(e)}
 					>&gt;</span>
-					<span 
+					<span
+						className="fiveForward"
 						onMouseEnter={(e) => this.changeText(e)}
 						onMouseLeave={(e) => this.emptyText(e)}
 						onClick={(e) => this.changeNumbers(e)}

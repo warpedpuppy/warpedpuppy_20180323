@@ -17,18 +17,23 @@
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* IE10+/Edge */
 	user-select: none; /* Standard */
+	color:black;
 }
 .gamePagination div.pagination span.activeSpan {
 	background-color: #333;
 	color:white;
 }	
-.gamePagination div.pagination span:first-child {
+.gamePagination div.pagination span.fiveBack {
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
-.gamePagination div.pagination span:last-child {
+.gamePagination div.pagination span.fiveForward {
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
+}
+.gamePagination div.pagination span:hover:not(.activeSpan) {
+	background-color: #CCCCCC;
+	color:white;
 }
 .paginationText {
 	min-height: 20px;
