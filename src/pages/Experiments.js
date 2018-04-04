@@ -1,96 +1,71 @@
 import React from 'react';
 import './Experiments.css';
-import Canvas from '../components/experiments/ExperimentsCanvas';
-import experimentData from '../json/experiments';
-import { Link } from 'react-router-dom';
+import * as PIXI from 'pixi.js';
+import Utils from '../animations/utils.js';
+import GamePagination from '../components/experiments/GamePagination.js';
+import BouncePig from './Games/BouncePig.js';
+import WhirlyGigs from './Games/WhirlyGigs.js';
+import Glitter from './Games/Glitter.js';
+import FallingNumbers from './Games/FallingNumbers.js';
+import Fireworks from './Games/Fireworks.js';
+import PrettyDots from './Games/PrettyDots.js';
+import SoundSync from './Games/SoundSync.js';
+import NodeGarden from './Games/NodeGarden.js';
+import LegsWalking from './Games/LegsWalking.js';
 export default class Experiments extends React.Component {
-
-	constructor(props){
-		super(props)
-		let array = experimentData();
+	
+	constructor (props) {
+		super(props);
+		this.changePage = this.changePage.bind(this)
 		this.state = {
-			page: 0,
-			desc: 0,
-			array: array,
-			itemsPerPage:3, 
-			pages: 0
-
+			activeGame: '0'
 		}
-		
 
 	}
 	componentDidMount(){
-		this.setState({
-			pages: Math.ceil(this.state.array.length/this.state.itemsPerPage)
-		})
-	}
-	changePage(e){
-		e.preventDefault();
-		let nextPage = (Number(e.target.innerHTML) * this.state.itemsPerPage) - this.state.itemsPerPage;
-		this.setState({page:nextPage})
-		let descNum = (Number(e.target.innerHTML)-1)*this.state.itemsPerPage;
-		this.setState({desc: descNum})
-
-	}
-	changeDescription(e) {
-		e.preventDefault();
-		this.setState({desc: Number(e.target.getAttribute('data-ref'))})
-	}
-	
-	
-	render() {
-		let data =  [];
-		let end = this.state.page + this.state.itemsPerPage;
-		for(let i = this.state.page; i < end; i++){
-			if(this.state.array[i]) {
-				data.push(
-					<li key={i} ref={item => this[`item${i}`] = item} onClick={(e) => this.changeDescription(e)} >
-					<div data-ref={i} >
-					{this.state.array[i].title}
-					<hr />
-					</div>
-					</li>)
-			}
-			
+		this.utils = Utils();
+		let queryObj = this.utils.createParamObject();
+		if(queryObj.game){
+			this.setState({activeGame:queryObj.game})
 		}
-		let pagination = [];
-		let description = this.state.array[this.state.desc].description;
-		let link = this.state.array[this.state.desc].link;
-		let temp = this.state.page/this.state.itemsPerPage;
-		for(let i = 0; i < this.state.pages; i++){
-			let page = i + 1;
-			let key2 = i + this.state.array.length;
-			let classes = (temp === i)?`pageLink activeLink`:`pageLink`;
-			pagination.push(
-			<span 
-			key={i}
-			onClick={(e) => this.changePage(e)} 
-			className={classes}> {page} </span>)
-
-			if(i !== this.state.pages-1) {
-				pagination.push(<span key={key2}>|</span>)
-			}
+		//this.game.init();
+	}
+	componentWillUnmount () {
+		//this.game.stop();
+	}
+	changePage (index) {
+		let minusOne = Number(index) - 1;
+		console.log("new activeGame", minusOne)
+		this.setState({activeGame: minusOne.toString()})
+	}
+	render () {
+		let game = [];
+		if(this.state.activeGame === '0') {
+			game.push(<BouncePig  key={this.state.activeGame} />)
+		} else if(this.state.activeGame === '1') {
+			game.push(<WhirlyGigs key={this.state.activeGame} />)
+		} else if(this.state.activeGame === '2') {
+			game.push(<Glitter  key={this.state.activeGame} />)
+		} else if(this.state.activeGame === '3') {
+			game.push(<FallingNumbers  key={this.state.activeGame} />)
+		} else if(this.state.activeGame === '4') {
+			game.push(<Fireworks  key={this.state.activeGame} />)
+		} else if(this.state.activeGame === '5') {
+			game.push(<PrettyDots  key={this.state.activeGame} />)
+		} else if(this.state.activeGame === '6') {
+			game.push(<SoundSync  key={this.state.activeGame} />)
+		} else if(this.state.activeGame === '7') {
+			game.push(<NodeGarden  key={this.state.activeGame} />)
+		} else if(this.state.activeGame === '8') {
+			game.push(<LegsWalking  key={this.state.activeGame} />)
 		}
-
 		
 		return (
-		<div className="experiments-page">
-		  <Canvas />
-		  <section className="exp_content">
-			  <h2>Games &amp; Experiments</h2>
-			  <div className="experiments">
-			  	  <div className="pagination">{pagination}</div>
-				  <ul>
-				  {data}
-				  </ul>
-				  <div className="experiments-description">
-				  	  <div>{description}</div>
-				  	  <Link to={link}>visit experiment</Link>
-				  </div>
-			  </div>
-		  </section>
-		</div>
-    );
+			<div> 
+				{game}
+				<GamePagination activeGame={this.state.activeGame} onChangePage={this.changePage} />
+			</div>
+	    );
 	}
     
 }

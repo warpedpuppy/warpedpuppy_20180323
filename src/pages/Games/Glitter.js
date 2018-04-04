@@ -3,7 +3,6 @@ import * as PIXI from 'pixi.js';
 import Utils from '../../animations/utils.js';
 import './Games.css';
 import GlitterCode from '../../animations/gameCode/smallExperiments/glitter.js';
-import GamePagination from '../../components/experiments/GamePagination.js';
 
 export default class Glitter extends React.Component {
 
@@ -20,7 +19,7 @@ export default class Glitter extends React.Component {
 		this.code.reset();
 	}
 	componentWillUnmount () {
-		//this.code.Stop();
+		this.code.Stop();
 	}
 	render () {
 		return (
@@ -30,7 +29,6 @@ export default class Glitter extends React.Component {
 		        	<div id='my-stats-container'></div>
 		        </div>
 		    </div>
-		    <GamePagination />
 		    </div>
 		)
 	}

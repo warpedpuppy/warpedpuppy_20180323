@@ -8,25 +8,16 @@ export default class GamePagination extends React.Component {
 		super(props);
 		this.state = {
 			paginationText: '',
-			currentPage: window.location.pathname,
-			activePage: 1,
+			activePage: this.props.activeGame,
 			startingNumber: 1,
-			array: experimentData()
+			array: experimentData(),
+			blankText: '-'
 		}
 	}
-	componentDidMount () {
-		function findPageIndex(element){
-			return element.link === this.state.currentPage;
-		}
-		findPageIndex = findPageIndex.bind(this);
-		let activeIndex = this.state.array.findIndex(findPageIndex);
-		this.setState({activePage: activeIndex})
-	}
-
 	changeText (e) {
 		let str = e.target.innerHTML;
 		let response = "";
-		if (str  == this.state.activePage) {
+		if (str  == this.state.activePage || str === this.state.blankText) {
 			return;
 		} else if (str === "&lt;&lt;") {
 			response = 'go five back'
@@ -37,125 +28,126 @@ export default class GamePagination extends React.Component {
 		} else if (str === "&gt;&gt;") {
 			response = 'go five forward'
 		} else {
-			response = this.state.array[str].title;
+			let index = Number(str) - 1;
+			response = this.state.array[index].title;
 		}	
 		this.setState({
 			paginationText: response
 		})
 	}
-	changeNumbers (e) {
-		let str = e.target.innerHTML,
-		    response = "",
-		    newNumber = this.state.startingNumber,
-		    num = this.state.startingNumber,
-		    max = this.state.array.length,
-		    newActivePage = this.state.activePage;
-		if (str === "&lt;&lt;") {
-			response = 'go five back'
-			if (num > 5) {
-				newNumber = num - 5; 
-			} else {
-				newNumber = 1;
-			}
-		} else if (str === "&lt;") {
-			response = 'go one back'
-			if(num > 1 && newActivePage <= newNumber){
-				newNumber = num - 1;
-			}
-			if(newActivePage >1){
-				newActivePage --;
-			}
-		} else if (str === "&gt;") {
-			response = 'go one forward'
-			if (num + 4 < max && newActivePage >= num + 4) {
-				newNumber = num + 1;
-			}
-			if(newActivePage < 8){
-				newActivePage ++;
-			}
-		} else if (str === "&gt;&gt;") {
-			response = 'go five forward'
-			if (num + 9 < max) {
-				newNumber = num + 5;
-				newActivePage += 5;
-			} else {
-				newNumber = max - 4;
-				newActivePage = newNumber;
-			}
-		} else {
-			//BrowserRouter.push("/");
-		}
-		this.setState({
-			paginationText: response,
-			startingNumber: newNumber,
-			activePage: newActivePage
-		})
-	}
+
 	emptyText (e) {
-		// let str = e.target.innerHTML;
-		// let response = "";
-		// if (str === "&lt;&lt;") {
-		// 	response = 'go five back'
-		// } else if (str === "&lt;") {
-		// 	response = 'go one back'
-		// } else if (str === "&gt;") {
-		// 	response = 'go one forward'
-		// } else if (str === "&gt;&gt;") {
-		// 	response = 'go five forward'
-		// }		
 		this.setState({
 			paginationText: ''
 		})
 	}
-	changeAnim (e) {
-		this.setState({activePage:Number(e.target.innerHTML)})
+	handleChange (num) {
+		let max = this.state.array.length;
+		if(num === this.state.blankText){
+			return;
+		} else if (num === "one_forward") {
+			let nextGame = Number(this.props.activeGame) + 2;
+			let topNumber = this.state.startingNumber + 5;
+			if(nextGame > max){
+				return
+			} else if(nextGame === topNumber) {
+		 		let newStart = this.state.startingNumber + 1;
+		 		this.setState({startingNumber: newStart})
+		 	}
+		 	this.props.onChangePage(nextGame);
+		} else if (num === "one_back") {
+			let prevGame = Number(this.props.activeGame);
+			let bottomNumber = this.state.startingNumber;
+			
+			if(prevGame > 0) {
+				this.props.onChangePage(prevGame)
+				if(prevGame < bottomNumber) {
+					let newStart = this.state.startingNumber - 1;
+			 		this.setState({startingNumber: newStart})
+				}
+			} 
+		} else if(num === "fiveForward"){
+			let plusFive = this.state.startingNumber + 5;
+			console.log(plusFive+" versus "+ max)
+			if(plusFive < max) {
+				this.props.onChangePage(plusFive)
+				this.setState({startingNumber: plusFive});
+			}
+
+		} else if(num === "fiveBack"){
+			let minusFive = this.state.startingNumber - 1;
+			console.log(minusFive)
+			if(this.state.startingNumber > 1) {
+				this.props.onChangePage(minusFive)
+				this.setState({startingNumber: minusFive});
+			}
+
+		} else {
+			this.props.onChangePage(num)
+		}
+		
 	}
 
 	render () {
-		let buttons = [];
-		for(let i = 0; i < 5; i++){
+		let buttons = [],
+		    i,
+		    nextNum;
+
+
+		buttons.push(
+			<span
+				key="-1"
+				onClick = {() => this.handleChange("one_back")}   
+				onMouseEnter={(e) => this.changeText(e)}
+				onMouseLeave={(e) => this.emptyText(e)}
+			>&lt;</span>
+			)
+
+		for(i = 0; i < 5; i++){
 			let num = this.state.startingNumber + i;
-			let classes = (num === this.state.activePage)?`activeSpan`:``;
-			let link = this.state.array[num].link;
+			let pageNum = (num <= this.state.array.length)?num:this.state.blankText;
+			let indexNumber = num - 1;
+			let classes = (this.props.activeGame.toString() === indexNumber.toString())?`activeSpan`:``;
 			buttons.push(
-			<Link key={i} to={link}>
-				<span 
-					className={classes} 
-					onClick={(e) => this.changeAnim(e)}
+				<span
+					key={i}
+					className={classes}
+					onClick = {() => this.handleChange(pageNum)} 
 					onMouseEnter={(e) => this.changeText(e)}
 					onMouseLeave={(e) => this.emptyText(e)}
-				>{num}</span>
-			</Link>
+				>{pageNum}</span>
 			)
+			nextNum = num;
 		}
+
 		
+		buttons.push(
+			<span
+				key="100"
+				onClick = {() => this.handleChange("one_forward")}  
+				onMouseEnter={(e) => this.changeText(e)}
+				onMouseLeave={(e) => this.emptyText(e)}
+			>&gt;</span>
+			)
+
+
 		return (
 			<div className="gamePagination">
-				<h2>{this.state.array[this.state.activePage].title}</h2>
+				<h2>{this.state.array[this.props.activeGame].title}</h2>
 				<div className="paginationText">{this.state.paginationText}</div>
 				<div className="pagination">
 					<span 
 						className="fiveBack"
+						onClick = {() => this.handleChange("fiveBack")}  
 						onMouseEnter={(e) => this.changeText(e)}
 						onMouseLeave={(e) => this.emptyText(e)}
-						onClick={(e) => this.changeNumbers(e)}
 					>&lt;&lt;</span>
-					<span 
-						onMouseEnter={(e) => this.changeText(e)}
-						onMouseLeave={(e) => this.emptyText(e)}
-						onClick={(e) => this.changeNumbers(e)}
-					>&lt;</span>
 					{buttons}
-					<span 
-						onMouseEnter={(e) => this.changeText(e)}
-						onMouseLeave={(e) => this.emptyText(e)}
-						onClick={(e) => this.changeNumbers(e)}
-					>&gt;</span>
 					<span
 						className="fiveForward"
+						onClick = {() => this.handleChange("fiveForward")}  
 						onMouseEnter={(e) => this.changeText(e)}
 						onMouseLeave={(e) => this.emptyText(e)}
-						onClick={(e) => this.changeNumbers(e)}
 					>&gt;&gt;</span>
 				</div>
 			</div>

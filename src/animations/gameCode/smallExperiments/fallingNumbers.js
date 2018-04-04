@@ -71,7 +71,9 @@ export default function Numbers (PIXI, Utils, Stats) {
             }
         },
         stop: function () {
+            this.loader.destroy();
             this.app.ticker.destroy();
+            this.renderer.destroy();
         },
         resize: function () {
             this.canvasWidth = this.utils.returnCanvasWidth();

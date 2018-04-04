@@ -1,15 +1,13 @@
 import React from 'react';
 import * as PIXI from 'pixi.js';
-import * as pixisound from 'pixi-sound';
 import Utils from '../../animations/utils.js';
 import './Games.css';
-import soundSync from '../../animations/gameCode/smallExperiments/soundSync.js';
+import LegsWalkingCode from '../../animations/gameCode/smallExperiments/legsWalking.js';
 
-export default class SoundSync extends React.Component {
+export default class LegsWalking extends React.Component {
 
 	componentDidMount () {
-		 
-		this.code = new soundSync(PIXI, Utils, pixisound);
+		this.code = new LegsWalkingCode(PIXI,Utils);
 		this.code.init();
 	}
 	addMore (e) {
@@ -25,9 +23,7 @@ export default class SoundSync extends React.Component {
 	}
 	render () {
 		return (
-			<div>
 			 <div id="tugtugCanvas" className="games"></div>
-			 </div>
 		)
 	}
 }

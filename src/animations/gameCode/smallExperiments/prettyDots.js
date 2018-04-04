@@ -30,7 +30,9 @@ export default function PrettyDots (PIXI, Utils, Stats) {
             }
         },
         stop: function () {
+            this.loader.destroy();
             this.app.ticker.destroy();
+            this.renderer.destroy();
         },
         Main: function () {
             this.flower = this.Flower(0);

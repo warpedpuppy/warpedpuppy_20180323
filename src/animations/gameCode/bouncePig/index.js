@@ -65,6 +65,7 @@ export default function(
         stop: function () {
             this.loader.destroy();
             this.app.ticker.destroy();
+            this.renderer.destroy();
         },
         count: function(){
             this.counter ++;
