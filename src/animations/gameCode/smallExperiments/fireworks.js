@@ -54,6 +54,7 @@ export default function Firework (PIXI, Utils, TimelineLite){
         },
         stop: function () {
             this.app.ticker.destroy();
+            this.renderer.destroy();
         },
         resize: function () {
             this.canvasWidth = this.utils.returnCanvasWidth();

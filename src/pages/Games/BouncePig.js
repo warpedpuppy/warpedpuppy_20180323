@@ -19,7 +19,6 @@ import StoreScore from '../../animations/gameCode/bouncePig/storeScore.js'
 import Mines from '../../animations/gameCode/bouncePig/mines.js'
 import Clouds from '../../animations/gameCode/bouncePig/clouds.js'
 import Drums from '../../animations/gameCode/bouncePig/drums.js'
-import GamePagination from '../../components/experiments/GamePagination.js';
 
 
 export default class BouncePig extends React.Component {
@@ -52,10 +51,7 @@ export default class BouncePig extends React.Component {
 	}
 	render () {
 		return (
-			<div> 
-				<div id="warpedPuppyCanvas"></div>
-				<GamePagination />
-			</div>
+			<div id="warpedPuppyCanvas"></div>
 	    );
 	}
     

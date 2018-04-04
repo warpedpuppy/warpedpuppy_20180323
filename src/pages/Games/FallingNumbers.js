@@ -6,7 +6,6 @@ import './WhirlyGigs.css';
 import './Games.css';
 
 import fallingGreenNumbers from '../../animations/gameCode/smallExperiments/fallingNumbers.js';
-import GamePagination from '../../components/experiments/GamePagination.js';
 
 export default class FallingNumbers extends React.Component {
 
@@ -34,7 +33,6 @@ export default class FallingNumbers extends React.Component {
 		        	<div id='my-stats-container'></div>
 		        </div>
 			    </div>
-			    <GamePagination />
 		    </div>
 		)
 	}

@@ -32,7 +32,6 @@ export default class FallingNumbers extends React.Component {
 				<div id='my-stats-container'></div>
 				</div>
 				</div>
-				<GamePagination />
 		    </div>
 		)
 	}

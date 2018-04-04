@@ -5,7 +5,6 @@ import whirlyGigs from '../../animations/gameCode/smallExperiments/prettyDots.js
 import Stats from '../../animations/Stats.js';
 import './WhirlyGigs.css';
 import './Games.css';
-import GamePagination from '../../components/experiments/GamePagination.js';
 
 export default class PrettyDots extends React.Component {
 
@@ -38,7 +37,6 @@ export default class PrettyDots extends React.Component {
 		            </div>
 		        </div>
 		    </div>
-		     <GamePagination />
 		    </div>
 		)
 	}

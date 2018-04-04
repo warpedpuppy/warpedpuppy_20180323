@@ -60,11 +60,11 @@ export default function () {
 		// 	description: 'desc1',
 		// 	link: '/'
 		// },
-		{
-			title: 'webgl sun animation',
-			description: 'loads huge sun bitmap',
-			link: '/'
-		},
+		// {
+		// 	title: 'webgl sun animation',
+		// 	description: 'loads huge sun bitmap',
+		// 	link: '/'
+		// },
 		// {
 		// 	title: 'pixi displacement filter',
 		// 	description: 'desc1',
@@ -97,6 +97,16 @@ export default function () {
 		// },
 		{
 			title: 'bitmap font and sound sync',
+			description: 'desc1',
+			link: '/SoundSync'
+		},
+		{
+			title: 'node garden',
+			description: 'desc1',
+			link: '/SoundSync'
+		},
+		{
+			title: 'legs walking',
 			description: 'desc1',
 			link: '/SoundSync'
 		}

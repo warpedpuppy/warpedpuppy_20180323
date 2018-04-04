@@ -45,7 +45,8 @@ export default function SoundSync (PIXI, Utils) {
         stop: function () {
         	clearTimeout(this.to);
         	this.loader.destroy();
-        	this.app.ticker.destroy();
+            this.app.ticker.destroy();
+            this.renderer.destroy();
         },
 		Main: function () {
 

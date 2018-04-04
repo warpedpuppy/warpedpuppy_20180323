@@ -4,7 +4,6 @@ import * as pixisound from 'pixi-sound';
 import Utils from '../../animations/utils.js';
 import './Games.css';
 import soundSync from '../../animations/gameCode/smallExperiments/soundSync.js';
-import GamePagination from '../../components/experiments/GamePagination.js';
 
 export default class SoundSync extends React.Component {
 
@@ -28,7 +27,6 @@ export default class SoundSync extends React.Component {
 		return (
 			<div>
 			 <div id="tugtugCanvas" className="games"></div>
-			 <GamePagination />
 			 </div>
 		)
 	}

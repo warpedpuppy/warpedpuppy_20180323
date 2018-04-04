@@ -39,7 +39,9 @@ export default function GlitterCode (Utils, PIXI) {
     },
     Stop: function () {
          window.onresize = null;
-        this.app.ticker.remove(this.animate.bind(this));
+        this.loader.destroy();
+        this.app.ticker.destroy();
+        this.renderer.destroy();
     },
     lines: function() {
        
