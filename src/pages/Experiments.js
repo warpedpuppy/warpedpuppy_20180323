@@ -1,6 +1,7 @@
 import React from 'react';
 import './Experiments.css';
 import * as PIXI from 'pixi.js';
+import Utils from '../animations/utils.js';
 import GamePagination from '../components/experiments/GamePagination.js';
 import BouncePig from './Games/BouncePig.js';
 import WhirlyGigs from './Games/WhirlyGigs.js';
@@ -9,7 +10,8 @@ import FallingNumbers from './Games/FallingNumbers.js';
 import Fireworks from './Games/Fireworks.js';
 import PrettyDots from './Games/PrettyDots.js';
 import SoundSync from './Games/SoundSync.js';
-
+import NodeGarden from './Games/NodeGarden.js';
+import LegsWalking from './Games/LegsWalking.js';
 export default class Experiments extends React.Component {
 	
 	constructor (props) {
@@ -21,6 +23,11 @@ export default class Experiments extends React.Component {
 
 	}
 	componentDidMount(){
+		this.utils = Utils();
+		let queryObj = this.utils.createParamObject();
+		if(queryObj.game){
+			this.setState({activeGame:queryObj.game})
+		}
 		//this.game.init();
 	}
 	componentWillUnmount () {
@@ -34,7 +41,7 @@ export default class Experiments extends React.Component {
 	render () {
 		let game = [];
 		if(this.state.activeGame === '0') {
-			game.push(<BouncePig key={this.state.activeGame} />)
+			game.push(<BouncePig  key={this.state.activeGame} />)
 		} else if(this.state.activeGame === '1') {
 			game.push(<WhirlyGigs key={this.state.activeGame} />)
 		} else if(this.state.activeGame === '2') {
@@ -47,6 +54,10 @@ export default class Experiments extends React.Component {
 			game.push(<PrettyDots  key={this.state.activeGame} />)
 		} else if(this.state.activeGame === '6') {
 			game.push(<SoundSync  key={this.state.activeGame} />)
+		} else if(this.state.activeGame === '7') {
+			game.push(<NodeGarden  key={this.state.activeGame} />)
+		} else if(this.state.activeGame === '8') {
+			game.push(<LegsWalking  key={this.state.activeGame} />)
 		}
 		
 		return (

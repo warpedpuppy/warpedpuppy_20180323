@@ -39,7 +39,9 @@ export default function(Utils, PIXI, canvas) {
     },
     Stop: function () {
          window.onresize = null;
-        this.app.ticker.remove(this.animate.bind(this));
+        this.gv.renderer.destroy();
+        this.app.ticker.destroy();
+        this.loader.destroy();
     },
     lines: function() {
         if(this.gv.canvasWidth > 1024){

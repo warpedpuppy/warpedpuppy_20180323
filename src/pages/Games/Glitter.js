@@ -19,7 +19,7 @@ export default class Glitter extends React.Component {
 		this.code.reset();
 	}
 	componentWillUnmount () {
-		//this.code.Stop();
+		this.code.Stop();
 	}
 	render () {
 		return (
