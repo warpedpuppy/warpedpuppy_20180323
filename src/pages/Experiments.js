@@ -12,6 +12,8 @@ import PrettyDots from './Games/PrettyDots.js';
 import SoundSync from './Games/SoundSync.js';
 import NodeGarden from './Games/NodeGarden.js';
 import LegsWalking from './Games/LegsWalking.js';
+import PlayBall from './Games/PlayBall.js';
+import Ladybug from './Games/Ladybug.js';
 export default class Experiments extends React.Component {
 	
 	constructor (props) {
@@ -41,7 +43,7 @@ export default class Experiments extends React.Component {
 	render () {
 		let game = [];
 		if(this.state.activeGame === '0') {
-			game.push(<BouncePig  key={this.state.activeGame} />)
+			game.push(<Ladybug key={this.state.activeGame} />)
 		} else if(this.state.activeGame === '1') {
 			game.push(<WhirlyGigs key={this.state.activeGame} />)
 		} else if(this.state.activeGame === '2') {
@@ -57,7 +59,9 @@ export default class Experiments extends React.Component {
 		} else if(this.state.activeGame === '7') {
 			game.push(<NodeGarden  key={this.state.activeGame} />)
 		} else if(this.state.activeGame === '8') {
-			game.push(<LegsWalking  key={this.state.activeGame} />)
+			game.push(<BouncePig  key={this.state.activeGame} />)
+		} else if(this.state.activeGame === '9') {
+			game.push(<PlayBall key={this.state.activeGame} />)
 		}
 		
 		return (

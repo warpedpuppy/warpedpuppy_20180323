@@ -5,7 +5,6 @@ import './WhirlyGigs.css';
 import './Games.css';
 import { TimelineLite} from 'gsap';
 import fireworks from '../../animations/gameCode/smallExperiments/fireworks.js';
-import GamePagination from '../../components/experiments/GamePagination.js';
 export default class FallingNumbers extends React.Component {
 
 	componentDidMount () {

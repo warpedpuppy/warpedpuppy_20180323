@@ -1,0 +1,23 @@
+{
+"images": ["/images/lady_bug/ladyBug.png"],
+"frames": [
+
+    [2, 2, 51, 52], 
+    [55, 2, 51, 52], 
+    [108, 2, 51, 52], 
+    [161, 2, 51, 52], 
+    [214, 2, 51, 52]
+],
+"animations": {
+    
+        "l1":[0], 
+        "l2":[1], 
+        "l3":[2], 
+        "l4":[3], 
+        "l5":[4]
+},
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:2904152fa881a72207b17a2699df8a50:b95c9ba25d1b46f2172b0bfadd96948f:7c895c5b1673d6c2a98b5ec7fb44bcad$",
+        "Created with TexturePacker (http://www.texturepacker.com) for EaselJS"
+]
+}
