@@ -38,8 +38,8 @@ export default function Numbers (PIXI, Utils, Stats) {
             let text0 = new PIXI.extras.BitmapText("0", {font: "12px Typewriter", align: "left"});
             let width = text0.textWidth;
             let height = text0.textHeight;
-            this.colQ = Math.floor(this.canvasWidth/width);
-            this.rowQ = Math.floor(this.canvasHeight/height);
+            this.colQ = Math.ceil(this.canvasWidth/width);
+            this.rowQ = Math.ceil(this.canvasHeight/height);
             let row, col;
             this.noDups = [];
             this.streamers = [];
@@ -100,7 +100,7 @@ export default function Numbers (PIXI, Utils, Stats) {
                 this.counter ++;
                 if (this.counter % 5 === 0) {
                         this.row ++;
-                        if(this.row >= (this.rowQ-1)){
+                        if(this.row >= (this.rowQ)){
                             this.row = 0;
                         }
                         this.newNumber = this.texts[this.row][this.col];
