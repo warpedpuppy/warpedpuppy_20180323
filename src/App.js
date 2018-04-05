@@ -8,20 +8,9 @@ import About from './pages/About.js';
 
 import Contact from './pages/Contact.js';
 import Footer from './components/Footer.js';
-import Utils from './animations/utils.js';
-
-
 require('../node_modules/normalize.css/normalize.css');
-export default class App extends React.Component {
 
-    componentDidMount () {
-      // let utils = new Utils();
-      // let url_vars = utils.createParamObject();
-      // if(!url_vars.cc) {
-      //   window.location = '/?cc=1234';
-      // }
-    }
-    render () {
+export default function App () {
       return (
         <Router>
           <div className="App">
@@ -38,7 +27,5 @@ export default class App extends React.Component {
             <Footer />
           </div>
         </Router>
-      );
-    }
-    
+      )
 }

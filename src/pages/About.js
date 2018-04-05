@@ -1,6 +1,6 @@
 import React from 'react';
 import './About.css'
-import { TweenMax, Elastic, CSSPlugin } from 'gsap';
+import { TweenMax, Elastic } from 'gsap';
 export default class About extends React.Component {
 	constructor(props){
        super(props);

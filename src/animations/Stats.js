@@ -76,6 +76,8 @@ export default function Stats() {
 				fpsDiv.style.display = 'none';
 				msDiv.style.display = 'block';
 				break;
+			default:
+				console.log('hola!')
 		}
 
 	};

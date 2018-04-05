@@ -52,16 +52,16 @@ export default function SoundSync (PIXI, Utils) {
 
 			
 			this.button = this.StartButton();
-			this.button.x = this.halfWidth-100;
-            this.button.y = 170;
+			this.button.x = Math.floor(this.halfWidth-100);
+            this.button.y = Math.floor(170);
             this.button.buttonMode = true;
             this.button.interactive = true;
             this.button.mousedown = this.onButtonDown;
 
 
             this.button2 = this.ReStartButton();
-			this.button2.x = this.halfWidth-150;
-            this.button2.y = this.canvasHeight-70;
+			this.button2.x = Math.floor(this.halfWidth-150);
+            this.button2.y = Math.floor(this.canvasHeight-70);
             this.button2.buttonMode = true;
             this.button2.interactive = true;
             this.button2.mousedown = this.onButtonDown;
@@ -74,12 +74,12 @@ export default function SoundSync (PIXI, Utils) {
 
 		},
 		StartButton: function () {
-			let button = new PIXI.Sprite;
+			let button = new PIXI.Sprite();
             let buttonGraphic = new PIXI.Graphics();
             buttonGraphic.buttonMode = true;
             buttonGraphic.interactive = true;
             buttonGraphic.beginFill(0xFFFF00).drawRoundedRect(0,0,200,50,10).endFill();
-            button.addChild(buttonGraphic);
+            //button.addChild(buttonGraphic);
             let buttonText = new PIXI.extras.BitmapText("click to start", {font: "24px AntsyPants", align: "left"})
             buttonText.y = -7;
             buttonText.x = 5;
@@ -88,12 +88,12 @@ export default function SoundSync (PIXI, Utils) {
 
 		},
 		ReStartButton: function () {
-			let button = new PIXI.Sprite;
+			let button = new PIXI.Sprite();
             let buttonGraphic = new PIXI.Graphics();
             buttonGraphic.buttonMode = true;
             buttonGraphic.interactive = true;
             buttonGraphic.beginFill(0xFFFF00).drawRoundedRect(0,0,300,50,10).endFill();
-            button.addChild(buttonGraphic);
+            //button.addChild(buttonGraphic);
             let buttonText2 = new PIXI.extras.BitmapText("click to re-start", {font: "24px AntsyPants", align: "left"})
             buttonText2.y = -7;
             buttonText2.x = 35;
@@ -133,7 +133,7 @@ export default function SoundSync (PIXI, Utils) {
 		        var str2 = this.textArray[this.textArrayCounter];
 		        var speed = this.typeSpeed;
 
-		        if (this.textArray[this.textArrayCounter] == "|") {
+		        if (this.textArray[this.textArrayCounter] === "|") {
 		            str = "carriageReturn";
 		            str2 = "\n";
 		            speed = this.typeSpeed * 10;
@@ -145,7 +145,7 @@ export default function SoundSync (PIXI, Utils) {
 		        this.kingCont.addChild(this.b);
 		 
 		        this.to = setTimeout(this.newLetter, speed)
-		        if(this.textArray[this.textArrayCounter] != " "){
+		        if(this.textArray[this.textArrayCounter] !== " "){
 		        	if(str === 'click') {
 						this.click.play();
 		        	} else {

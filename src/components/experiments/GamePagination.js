@@ -1,7 +1,6 @@
 import React from 'react';
 import './GamePagination.css';
 import experimentData from '../../json/experiments';
-import { Link } from 'react-router-dom';
 export default class GamePagination extends React.Component {
 
 	constructor (props, context) {
@@ -16,8 +15,10 @@ export default class GamePagination extends React.Component {
 	}
 	changeText (e) {
 		let str = e.target.innerHTML;
+		let game = Number(this.props.activeGame) + 1;
+
 		let response = "";
-		if (str  == this.state.activePage || str === this.state.blankText) {
+		if (str  === game.toString() || str === this.state.blankText) {
 			return;
 		} else if (str === "&lt;&lt;") {
 			response = 'go five back'
@@ -68,7 +69,6 @@ export default class GamePagination extends React.Component {
 			} 
 		} else if(num === "fiveForward"){
 			let plusFive = this.state.startingNumber + 5;
-			console.log(plusFive+" versus "+ max)
 			if(plusFive < max) {
 				this.props.onChangePage(plusFive)
 				this.setState({startingNumber: plusFive});
@@ -76,7 +76,6 @@ export default class GamePagination extends React.Component {
 
 		} else if(num === "fiveBack"){
 			let minusFive = this.state.startingNumber - 1;
-			console.log(minusFive)
 			if(this.state.startingNumber > 1) {
 				this.props.onChangePage(minusFive)
 				this.setState({startingNumber: minusFive});
@@ -90,8 +89,7 @@ export default class GamePagination extends React.Component {
 
 	render () {
 		let buttons = [],
-		    i,
-		    nextNum;
+		    i;
 
 
 		buttons.push(
@@ -117,7 +115,6 @@ export default class GamePagination extends React.Component {
 					onMouseLeave={(e) => this.emptyText(e)}
 				>{pageNum}</span>
 			)
-			nextNum = num;
 		}
 
 		

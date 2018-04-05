@@ -195,7 +195,7 @@ return {
 					boardShell.addChild(tile);
 					tile.red_mc.alpha = 0;
 					for (let k = 0; k < this.blueArray.length; k++) {
-						if (idNo == this.blueArray[k]) {
+						if (idNo === this.blueArray[k]) {
 							tile.cover_mc.alpha = 1;
 							break;
 						} else {
@@ -237,7 +237,7 @@ return {
 			var returnString;
 			if (!mc) {
 				returnString = "nothing";
-			} else if (mc.cover_mc.alpha ==1 || mc.red_mc.alpha == 1) {
+			} else if (mc.cover_mc.alpha === 1 || mc.red_mc.alpha === 1) {
 				returnString = "wall";
 			} else {
 				returnString = "path";
@@ -256,15 +256,13 @@ return {
 		determinePath: function (mc, endTile) {
 				var timerPause = this.forwardMotion * 1000;
 				setTimeout(nextTile.bind(this),timerPause)
-				nextTile = nextTile.bind(this);
 				function nextTile()
 				{
 					new TweenMax(this.avatar, 
 						this.forwardMotion, 
 						{y:this.tileArray[mc].y+(this.avatar.height/2),
 							x:this.tileArray[mc].x+(this.avatar.width/2)});
-					var checkStatus;
-					var shellObject = new Object();
+					var shellObject = {};
 				
 					var upTile = mc - this.boardWidthHeight;
 					var downTile = mc + this.boardWidthHeight;
@@ -277,14 +275,14 @@ return {
 					
 					var threePaths = false;
 					var pathCounter = 0;
-					if(upString == 'path'){pathCounter ++;}
-					if(downString == 'path'){pathCounter ++;}
-					if(rightString == 'path'){pathCounter ++;}
-					if(leftString == 'path'){pathCounter ++;}
-					if(pathCounter == 3){threePaths = true;};
+					if(upString === 'path'){pathCounter ++;}
+					if(downString === 'path'){pathCounter ++;}
+					if(rightString === 'path'){pathCounter ++;}
+					if(leftString === 'path'){pathCounter ++;}
+					if(pathCounter === 3){threePaths = true;};
 					shellObject = ({id:mc, up:upString, down:downString, right:rightString, left:leftString, threePaths:threePaths});
 					this.pathArray.push(shellObject);
-					if (this.resume == true) {
+					if (this.resume === true) {
 						this.pathArrayCounter = this.pathArray.length -1;
 						this.resume = false;
 					}
@@ -294,53 +292,53 @@ return {
 					*/
 					
 					
-					if (this.pathArrayCounter == 0) {
-						if (this.pathArray[this.pathArrayCounter]['up'] == 'path') {
+					if (this.pathArrayCounter === 0) {
+						if (this.pathArray[this.pathArrayCounter]['up'] === 'path') {
 								TweenMax.to(this.avatar, .2, {shortRotation:{rotation:0}});
 								this.pathArray[this.pathArrayCounter]['route'] = 'up';
 								this.pathArrayCounter ++;
 								this.determinePath(upTile, endTile);
-							} else if (this.pathArray[this.pathArrayCounter]['down'] == 'path') {
+							} else if (this.pathArray[this.pathArrayCounter]['down'] === 'path') {
 								this.avatar.rotation = this.utils.deg2rad(180);
 								TweenMax.to(this.avatar, .2, {rotation:this.utils.deg2rad(180)});
 								this.pathArray[this.pathArrayCounter]['route'] = 'down';
 								this.pathArrayCounter ++;
 								this.determinePath(downTile, endTile);
-							} else if (this.pathArray[this.pathArrayCounter]['right'] == 'path') {
+							} else if (this.pathArray[this.pathArrayCounter]['right'] === 'path') {
 								TweenMax.to(this.avatar, .2, {shortRotation:{rotation:this.utils.deg2rad(90)}});
 									this.pathArray[this.pathArrayCounter]['route'] = 'right';
 									this.pathArrayCounter ++;
 									this.determinePath(rightTile, endTile);
-							} else if(this.pathArray[this.pathArrayCounter]['left'] == 'path') {
+							} else if(this.pathArray[this.pathArrayCounter]['left'] === 'path') {
 								TweenMax.to(this.avatar, .2, {shortRotation:{rotation:this.utils.deg2rad(270)}});
 									this.pathArray[this.pathArrayCounter]['route'] = 'left';
 									this.pathArrayCounter ++;
 									this.determinePath(leftTile, endTile);
 							}
 					} else {
-						if (this.pathArray[this.pathArrayCounter]['up'] == 'path' && this.pathArray[this.pathArrayCounter-1]['id'] != upTile ) {
+						if (this.pathArray[this.pathArrayCounter]['up'] === 'path' && this.pathArray[this.pathArrayCounter-1]['id'] !== upTile ) {
 							TweenMax.to(this.avatar, .3, {rotation:0});
 								this.pathArray[this.pathArrayCounter]['route'] = 'up';
 								this.pathArrayCounter ++;
 								this.determinePath(upTile, endTile);
-						} else if(this.pathArray[this.pathArrayCounter]['down'] == 'path' && this.pathArray[this.pathArrayCounter-1]['id'] != downTile) {
+						} else if(this.pathArray[this.pathArrayCounter]['down'] === 'path' && this.pathArray[this.pathArrayCounter-1]['id'] !== downTile) {
 							TweenMax.to(this.avatar, .3, {rotation:this.utils.deg2rad(180)});
 							this.pathArray[this.pathArrayCounter]['route'] = 'down';
 							this.pathArrayCounter ++;
 							this.determinePath(downTile, endTile);
-						} else if(this.pathArray[this.pathArrayCounter]['right'] == 'path' && this.pathArray[this.pathArrayCounter-1]['id'] != rightTile ) {
+						} else if(this.pathArray[this.pathArrayCounter]['right'] === 'path' && this.pathArray[this.pathArrayCounter-1]['id'] !== rightTile ) {
 							TweenMax.to(this.avatar, .3, {rotation:this.utils.deg2rad(90)});
 							this.pathArray[this.pathArrayCounter]['route'] = 'right';
 							this.pathArrayCounter ++;
 							this.determinePath(rightTile, endTile);
-						} else if(this.pathArray[this.pathArrayCounter]['left'] == 'path' && this.pathArray[this.pathArrayCounter-1]['id'] != leftTile) {
+						} else if(this.pathArray[this.pathArrayCounter]['left'] === 'path' && this.pathArray[this.pathArrayCounter-1]['id'] !== leftTile) {
 							TweenMax.to(this.avatar, .3, {rotation:this.utils.deg2rad(270)});
 							this.pathArray[this.pathArrayCounter]['route'] = 'left';
 							this.pathArrayCounter ++;
 							this.determinePath(leftTile, endTile);
 						} else {
 							//console.log("done.");
-							if (mc == endTile) {
+							if (mc === endTile) {
 								//console.log("congrats");
 								this.avatar.stop();
 								this.stageShell.setChildIndex(this.startOver_btn, this.stageShell.children.length -1)

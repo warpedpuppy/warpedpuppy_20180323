@@ -36,7 +36,6 @@ export default function NodeGarden (PIXI, Utils){
             let particle, line;
             for (var i = 0; i < this.numParticles; i++) {
                 particle = this.Ball(3, this.colors[this.colorCounter]);
-                console.log(this.colorCounter)
                 particle.body.x = Math.random() *  this.canvasWidth;
                 particle.body.y = Math.random() *  this.canvasHeight;
                 particle.vx = Math.random() * 6 - 3;
