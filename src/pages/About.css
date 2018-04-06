@@ -1,2 +1,18 @@
-.st0_about{fill:#FF00FF;stroke:#000000;stroke-width:5;stroke-miterlimit:10;display:none;}
-.st1_about{fill:#FF0000;stroke:#000000;stroke-width:5;stroke-miterlimit:10;}
+.aboutPage {
+	background-color: #333;
+	min-height: 100vw;
+	padding:50px;
+}
+
+.aboutPage div {
+
+	margin: 50px auto;
+	width: 80%;
+}
+.aboutPage div h1 {
+	color: white;
+}
+.aboutPage div p {
+	color: white;
+	margin:20px 0;
+}

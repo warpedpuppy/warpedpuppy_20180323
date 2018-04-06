@@ -10,7 +10,9 @@ export default class ContactForm extends React.Component {
 				<input type="email" placeholder="email address " />
 				<input type="text" placeholder="name" />
 				<textarea></textarea>
-				<input type="submit" value="send message" />
+				<div className="buttonDiv">
+					<input type="submit" value="send message" />
+				</div>
 			</form>
 			</fieldset>
 		)
