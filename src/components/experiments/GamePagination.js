@@ -126,11 +126,11 @@ export default class GamePagination extends React.Component {
 				onMouseLeave={(e) => this.emptyText(e)}
 			>&gt;</span>
 			)
-
+		let title = (this.state.array[this.props.activeGame])?this.state.array[this.props.activeGame].title :'';
 
 		return (
 			<div className="gamePagination">
-				<h2>{this.state.array[this.props.activeGame].title}</h2>
+				<h2>{title}</h2>
 				<div className="paginationText">{this.state.paginationText}</div>
 				<div className="pagination">
 					<span 

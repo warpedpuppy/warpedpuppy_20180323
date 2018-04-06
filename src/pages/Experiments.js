@@ -14,13 +14,14 @@ import Ladybug from './Games/Ladybug.js';
 import ElasticTwo from './Games/ElasticTwo.js';
 import ElasticThree from './Games/ElasticThree.js';
 import LongChain from './Games/LongChain.js';
+import BrickBreak from './Games/BrickBreak.js';
 export default class Experiments extends React.Component {
 	
 	constructor (props) {
 		super(props);
 		this.changePage = this.changePage.bind(this)
 		this.state = {
-			activeGame: '0',
+			activeGame: '',
 			getVar: ''
 		}
 
@@ -29,7 +30,9 @@ export default class Experiments extends React.Component {
 		this.utils = Utils();
 		let queryObj = this.utils.createParamObject();
 		if(queryObj.game){
-			this.setState({getVar:queryObj.game})
+			this.setState({activeGame:queryObj.game})
+		} else {
+			this.setState({activeGame:'0'})
 		}
 
 	}
@@ -39,8 +42,10 @@ export default class Experiments extends React.Component {
 	}
 	render () {
 		let game = [];
-		if(this.state.activeGame === '0') {
-			game.push(<BouncePig  key={this.state.activeGame} />)
+		if(this.state.activeGame === '') {
+
+		} else if(this.state.activeGame === '0') {
+			game.push(<BouncePig key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '1') {
 			game.push(<Ladybug key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '2') {
@@ -63,6 +68,9 @@ export default class Experiments extends React.Component {
 			game.push(<WhirlyGigs key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '11') {
 			game.push(<ElasticTwo key={this.state.activeGame} />)
+		} else if (this.state.activeGame === '12') {
+			game.push(<BrickBreak  key={this.state.activeGame} />)
+			
 		} 
 		
 		return (

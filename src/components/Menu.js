@@ -15,15 +15,16 @@ export default class Menu extends Component {
 	  		showDropDown: !this.state.showDropDown
 	  	})
 	  }
-	  render() {
 
-	  	// let loginClass = (this.state.loginShow)?'':'hide';
+
+	  render() {
 	  	let showDropDownClass = (this.state.showDropDown)?'open':'';
+	  	
 	    return (
 			<div>
 				<nav>
 					<div className="not-links">
-						<Link className="homeLink" to="/">
+						<Link className="homeLink" to="/" onClick={() => this.showDropDown()} >
 						   <Logo customClass="menuLogo" w={70} alpha={0.5}/>
 							<h1>warped puppy</h1>
 							</Link>
@@ -34,13 +35,13 @@ export default class Menu extends Component {
 						</div>
 					</div>
 					<div className={`links  ${showDropDownClass}`}>
-						<Link to="/experiments">
+						<Link to="/experiments"  onClick={() => this.showDropDown()} >
 						<span>js / canvas experiments</span>
 						</Link>
-						<Link to="/about">
+						<Link to="/about"  onClick={() => this.showDropDown()} >
 						<span>about / cv</span>
 						</Link>
-						<Link to="/contact">
+						<Link to="/contact"  onClick={() => this.showDropDown()} >
 						<span>contact</span>
 						</Link>
 					</div>

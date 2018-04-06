@@ -44,7 +44,7 @@ export default function(
             this.stage = new PIXI.Container();
             this.renderer = PIXI.autoDetectRenderer(this.canvasWidth, this.canvasHeight);
             this.renderer.backgroundColor = 0x1a69ff;
-            document.getElementById("warpedPuppyCanvas").appendChild(this.renderer.view);
+            document.getElementById("tugtugCanvas").appendChild(this.renderer.view);
             if(!this.loader.resources.gamesheet){
                  this.loader
                     .add('gamesheet', "/images/bouncePig/bpb.json")
