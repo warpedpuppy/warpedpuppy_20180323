@@ -29,12 +29,6 @@ export default function(gv){
         numberWithCommas: function (x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         },
-        // intersectRect: function(r1, r2) {
-        //     return (a.left <= b.right &&
-        //         b.left <= a.right &&
-        //         a.top <= b.bottom &&
-        //         b.top <= a.bottom);
-        // },
         randomColor: function (){
             var x=Math.round(0xffffff * Math.random()).toString(16);
             var y=(6-x.length);
@@ -180,52 +174,3 @@ export default function(gv){
         },
     }
 }
-
-// Array.prototype.sortOn = function(){
-//     var dup = this.slice();
-//     if(!arguments.length) return dup.sort();
-//     var args = Array.prototype.slice.call(arguments);
-//     return dup.sort(function(a,b){
-//         var props = args.slice();
-//         var prop = props.shift();
-//         while(a[prop] === b[prop] && props.length) prop = props.shift();
-//         return a[prop] === b[prop] ? 0 : a[prop] > b[prop] ? 1 : -1;
-//     });
-// };
-
-// Array.prototype.move = function (old_index, new_index) {
-
-//    // print("move")
-//     if (new_index >= this.length) {
-//         var k = new_index - this.length;
-//         while ((k--) + 1) {
-//             this.push(undefined);
-//         }
-//     }
-//     this.splice(new_index, 0, this.splice(old_index, 1)[0]);
-//     return this; // for testing purposes
-// };
-
-// function formatDate(date, fmt) {
-//     function pad(value) {
-//         return (value.toString().length < 2) ? '0' + value : value;
-//     }
-//     return fmt.replace(/%([a-zA-Z])/g, function (_, fmtCode) {
-//         switch (fmtCode) {
-//             case 'Y':
-//                 return date.getUTCFullYear();
-//             case 'M':
-//                 return pad(date.getUTCMonth() + 1);
-//             case 'd':
-//                 return pad(date.getUTCDate());
-//             case 'H':
-//                 return pad(date.getUTCHours());
-//             case 'm':
-//                 return pad(date.getUTCMinutes());
-//             case 's':
-//                 return pad(date.getUTCSeconds());
-//             default:
-//                 throw new Error('Unsupported format code: ' + fmtCode);
-//         }
-//     });
-// }

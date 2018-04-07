@@ -96,12 +96,12 @@ export default function GlitterCode (Utils, PIXI) {
         if(Math.floor(Math.random()*2) > 0){ 
            dot.startY = Math.random() * this.utils.returnCanvasWidth();
         } else {
-            dot.startY = -Math.random() * this.utils.returnCanvasWidth();
+        dot.startY = -Math.random() * this.utils.returnCanvasWidth();
         }
         if(Math.floor(Math.random()*2) > 1){ dot.startY *=-1};
-        dot.xDiff = Math.abs(dot.startX);
-        dot.yDiff = Math.abs(dot.startY);
-        dot.alpha = .05;
+        dot.xDiff = Math.abs(dot.startX * 0.75);
+        dot.yDiff = Math.abs(dot.startY * 0.75);
+        dot.alpha = Math.random()*0.25+0.1;
         dot.speed = this.utils.randomNumberBetween(0.0005, 0.001);
         dot.tint = 0xFFFF00;
         return dot;

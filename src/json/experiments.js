@@ -62,5 +62,10 @@ export default function () {
 			title: 'two balls',
 			description: 'desc1',
 			link: '/SoundSync'
+		},
+		{
+			title: 'pong -- work in progress',
+			description: 'desc1',
+			link: '/SoundSync'
 		}]
 }

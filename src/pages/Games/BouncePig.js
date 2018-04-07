@@ -12,10 +12,7 @@ import Hero from '../../animations/gameCode/bouncePig/hero.js'
 import BouncePlatform from '../../animations/gameCode/bouncePig/bouncePlatform.js'
 import Level from '../../animations/gameCode/bouncePig/level.js'
 import Fruit from '../../animations/gameCode/bouncePig/fruit.js'
-import Score from '../../animations/gameCode/bouncePig/score.js'
-import NextLevelScreen from '../../animations/gameCode/bouncePig/nextLevelScreen.js'
 import animate from '../../animations/gameCode/bouncePig/animate.js'
-import StoreScore from '../../animations/gameCode/bouncePig/storeScore.js'
 import Mines from '../../animations/gameCode/bouncePig/mines.js'
 import Clouds from '../../animations/gameCode/bouncePig/clouds.js'
 import Drums from '../../animations/gameCode/bouncePig/drums.js'
@@ -33,11 +30,8 @@ export default class BouncePig extends React.Component {
 			BouncePlatform,
 			Level,
 			Fruit,
-			Score,
-			NextLevelScreen, 
 			animate, 
 			Utils,
-			StoreScore,
 			Mines,
 			Clouds,
 			Drums,
