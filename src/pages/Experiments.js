@@ -45,7 +45,7 @@ export default class Experiments extends React.Component {
 		if(this.state.activeGame === '') {
 
 		} else if(this.state.activeGame === '0') {
-			game.push(<BouncePig key={this.state.activeGame} />)
+			game.push(<BrickBreak key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '1') {
 			game.push(<Ladybug key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '2') {
@@ -69,7 +69,7 @@ export default class Experiments extends React.Component {
 		} else if (this.state.activeGame === '11') {
 			game.push(<ElasticTwo key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '12') {
-			game.push(<BrickBreak  key={this.state.activeGame} />)
+			game.push(<BouncePig key={this.state.activeGame} />)
 			
 		} 
 		

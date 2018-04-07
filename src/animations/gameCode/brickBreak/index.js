@@ -7,6 +7,9 @@ export default function BrickBreak (PIXI, Utils, Setting, TweenLite, Bricks, Pad
         loader: PIXI.loader,
         PIXI: PIXI,
         TweenLite: TweenLite,
+        brickHeight: 10,
+        brickWidth: 250,
+        rows: 10,
         init: function () {
             this.resize = this.resize.bind(this);
             window.onresize = this.resize;
@@ -27,42 +30,54 @@ export default function BrickBreak (PIXI, Utils, Setting, TweenLite, Bricks, Pad
         },
         build: function () {
 
-            this.kingCont = new PIXI.Container();
-            this.stage.addChild(this.kingCont);
+           
+            const bricks = this.Bricks();
+            this.stage.addChild(bricks);
 
-            const setting = this.setting = new Setting(PIXI, this);
-            const settingContainer = this.settingContainer = setting.init();
-            settingContainer.x = (this.canvasWidth - settingContainer.width)/2;
-            settingContainer.y = (this.canvasHeight - settingContainer.height)/2;
-            this.settingContainer = settingContainer;
-            this.kingCont.addChild(settingContainer);
+            // const paddle = Paddle(this);
+            // const paddleCont = paddle.init();
+            // paddleCont.x = (this.canvasWidth - paddleCont.width)/2;
+            // paddleCont.y = this.canvaseHeight - paddleCont.height - 25;
+            // this.stage.addChild(paddleCont);
+            // this.paddle = paddle;
 
-            const bricks = Bricks(this);
-            const bricksCont = bricks.init();
-            bricksCont.mask = setting.background;
-            settingContainer.addChildAt(bricksCont, 1);
-            this.bricks = bricks;
+            this.ball = this.Ball();
+            this.ball.x = this.halfWidth;
+            this.ball.y = this.halfHeight;
+            this.stage.addChild(this.ball);
 
-            const paddle = Paddle(this);
-            const paddleCont = paddle.init();
-            paddleCont.x = (settingContainer.width - paddleCont.width)/2;
-            paddleCont.y = settingContainer.height - paddleCont.height - 25;
-            paddleCont.mask = setting.background;
-            settingContainer.addChild(paddleCont);
-            this.paddle = paddleCont;
-
-            const ball = Ball(this, 3, 0xFF0000);
-            const ballCont = ball.init();
-            ballCont.vx = ballCont.speed;
-            ballCont.vy = ballCont.speed;
-            this.ball = ballCont;
-            ballCont.x= settingContainer.width/2;
-            ballCont.y = settingContainer.height/2;
-            settingContainer.addChild(ballCont);
             this.gamePlay = true;
             this.handleKeyDown = this.handleKeyDown.bind(this);
             document.addEventListener('keydown', this.handleKeyDown);
             this.app.ticker.add(this.animate.bind(this));
+        },
+        Bricks: function () {
+            const cont = new PIXI.Container();
+            let cols = this.canvasWidth / this.brickWidth;
+            for(let i = 0; i < this.rows; i++){
+                for(let j = 0; j < cols; j++){
+                    let brick = new PIXI.Graphics();
+                    brick
+                    .beginFill(0xFF00FF)
+                    .drawRect(0,0,this.brickWidth, this.brickHeight)
+                    .endFill()
+                    brick.x = j * this.brickWidth;
+                    brick.y = i * this.brickHeight;
+                    brick.alpha = (Math.random()*1)+0.2;
+                    cont.addChild(brick)
+                }
+            }
+            return cont;
+        },
+        Ball: function () {
+            const ball = new PIXI.Graphics();
+            ball
+            .beginFill(0x000000)
+            .drawCircle(0,0,20)
+            .endFill();
+            ball.radius = 20;
+            ball.vx = ball.vy = 5;
+            return ball;
         },
         resize: function () {
             this.canvasWidth = this.utils.returnCanvasWidth();
@@ -70,7 +85,7 @@ export default function BrickBreak (PIXI, Utils, Setting, TweenLite, Bricks, Pad
             this.halfHeight = this.canvasHeight / 2;
             this.halfWidth = this.canvasWidth / 2;
             this.renderer.resize(this.canvasWidth,this.canvasHeight);
-            this.settingContainer.x = (this.canvasWidth - this.settingContainer.width)/2;
+           
         },
         handleKeyDown: function (event) {
             event.preventDefault();
@@ -121,60 +136,53 @@ export default function BrickBreak (PIXI, Utils, Setting, TweenLite, Bricks, Pad
             }
         },
         animate: function () {
-            this.setting.spinWheels();
-            let rightBoundary = this.settingContainer.width - this.paddle.width;
-            let leftBoundary  = -this.ball.radius;
             if (this.gamePlay) {
 
                 this.ball.x += this.ball.vx;
                 this.ball.y += this.ball.vy;
 
-                if(this.ball.y < leftBoundary) {
+                if(this.ball.y < 0) {
                     this.ball.vy *= -1;
-                } else if(this.ball.x + this.ball.radius > 500) {
-                    //this.ball.vx  = 0;
+                } else if(this.ball.x  > this.canvasWidth) {
                     this.ball.vx *= -1;
-                    //this.ball.x = this.ball.y = 10;
-                } else if (this.ball.x < leftBoundary) {
+                } else if (this.ball.x < 0) {
                     this.ball.vx *= -1;
-                } else if(this.ball.y + this.ball.radius > 300){
-
-                    this.ball.classRef.reset();
-                    this.ball.x = this.ball.y = 10;
+                } else if(this.ball.y  > this.canvasHeight){
+                     this.ball.vy *= -1;
                 }
-                var rect = new PIXI.Rectangle(this.paddle.x, this.paddle.y, this.paddle.width, this.paddle.height)
+            //     var rect = new PIXI.Rectangle(this.paddle.x, this.paddle.y, this.paddle.width, this.paddle.height)
 
-                if (this.utils.pointRectangleCollisionDetection(this.ball, rect)) {
-                    this.paddle.classRef.hit(this.ball.x,this.paddle.x)
-                    //this.setting.classRef.spinWheels();
-                }
+            //     if (this.utils.pointRectangleCollisionDetection(this.ball, rect)) {
+            //         this.paddle.classRef.hit(this.ball.x,this.paddle.x)
+            //         //this.setting.classRef.spinWheels();
+            //     }
 
-            }
-            if(this.paddle.moveRight){
-                this.paddle.vx = -Math.abs(this.paddle.vx);
-            }
-            else if(this.paddle.moveLeft){
-                this.paddle.vx = Math.abs(this.paddle.vx);
-            }
+            // }
+            // if(this.paddle.moveRight){
+            //     this.paddle.vx = -Math.abs(this.paddle.vx);
+            // }
+            // else if(this.paddle.moveLeft){
+            //     this.paddle.vx = Math.abs(this.paddle.vx);
+            // }
 
-            if(!this.paddle.moveLeft && !this.paddle.moveRight) {
-              if (this.paddle.peterOut && Math.abs(this.paddle.vx) > 1) {
-                    this.paddle.vx *= .9;
-                } else if (this.paddle.peterOut && Math.abs(this.paddle.vx) < 1) {
-                    this.paddle.peterOut = false;
-                    this.paddle.vx = 0;
-                }
-            }
+            // if(!this.paddle.moveLeft && !this.paddle.moveRight) {
+            //   if (this.paddle.peterOut && Math.abs(this.paddle.vx) > 1) {
+            //         this.paddle.vx *= .9;
+            //     } else if (this.paddle.peterOut && Math.abs(this.paddle.vx) < 1) {
+            //         this.paddle.peterOut = false;
+            //         this.paddle.vx = 0;
+            //     }
+            // }
             
-            if(this.paddle.x > rightBoundary){
-                this.paddle.x = rightBoundary;
-            } else if(this.paddle.x < 0 ) {
-                this.paddle.x =0;
-            }
+            // if(this.paddle.x > rightBoundary){
+            //     this.paddle.x = rightBoundary;
+            // } else if(this.paddle.x < 0 ) {
+            //     this.paddle.x =0;
+            // }
 
-            this.paddle.x -= this.paddle.vx;
+            //this.paddle.x -= this.paddle.vx;
             // let counter = this.counter = 0;
-           
+           }
             this.renderer.render(this.stage);
         }
     }

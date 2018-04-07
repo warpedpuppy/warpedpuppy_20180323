@@ -46,15 +46,19 @@ export default function Bricks(parent) {
             return cont;
         },
         Block: function (height, width, color, outline, outlineWidth) {
-            this.blockHeight = height;
-            this.blockWidth = width;
-            var b = new parent.PIXI.Graphics();
-            b.beginFill(color).drawRect(0,0,this.blockWidth, this.blockHeight);
-            //stage.addChild(b);
-            this.body = b;
-            this.getBlock = function(){return b}
-            this.getBounds = function(){this.setBounds(b.x, b.y, width, height)};
-            return b;
+            let cont = new parent.PIXI.Container();
+
+            let border = new parent.PIXI.Graphics();
+            border.lineStyle(10, 0xFF00FF, 1)
+            .moveTo(0,0).lineTo(width, 0).lineTo(width, height).lineTo(0, height).lineTo(0,0);
+            cont.addChild(border);
+
+            let fill = new parent.PIXI.Graphics();
+            fill.beginFill(color).drawRect(0,0,width, height);
+            cont.addChild(fill);
+
+            this.body = cont;
+            return cont;
         },
         reset:  function () {
             for (let i = 0; i < 5; i ++) {
