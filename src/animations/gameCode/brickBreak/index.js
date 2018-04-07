@@ -8,8 +8,10 @@ export default function BrickBreak (PIXI, Utils, Setting, TweenLite, Bricks, Pad
         PIXI: PIXI,
         TweenLite: TweenLite,
         brickHeight: 10,
-        brickWidth: 250,
+        brickColQ:4,
         rows: 10,
+        bricks: [],
+        bricksQ:0,
         init: function () {
             this.resize = this.resize.bind(this);
             window.onresize = this.resize;
@@ -34,12 +36,11 @@ export default function BrickBreak (PIXI, Utils, Setting, TweenLite, Bricks, Pad
             const bricks = this.Bricks();
             this.stage.addChild(bricks);
 
-            // const paddle = Paddle(this);
-            // const paddleCont = paddle.init();
-            // paddleCont.x = (this.canvasWidth - paddleCont.width)/2;
-            // paddleCont.y = this.canvaseHeight - paddleCont.height - 25;
-            // this.stage.addChild(paddleCont);
-            // this.paddle = paddle;
+            const paddle = this.Paddle();
+            paddle.x = (this.canvasWidth - paddle.width)/2;
+            paddle.y = this.canvasHeight  - paddle.height;
+            this.stage.addChild(paddle);
+            this.paddle = paddle;
 
             this.ball = this.Ball();
             this.ball.x = this.halfWidth;
@@ -53,21 +54,35 @@ export default function BrickBreak (PIXI, Utils, Setting, TweenLite, Bricks, Pad
         },
         Bricks: function () {
             const cont = new PIXI.Container();
-            let cols = this.canvasWidth / this.brickWidth;
+            let brickWidth = Math.ceil(this.canvasWidth /this.brickColQ);
+            console.log(brickWidth)
             for(let i = 0; i < this.rows; i++){
-                for(let j = 0; j < cols; j++){
+                for(let j = 0; j < this.brickColQ; j++){
                     let brick = new PIXI.Graphics();
                     brick
                     .beginFill(0xFF00FF)
-                    .drawRect(0,0,this.brickWidth, this.brickHeight)
+                    .drawRect(0,0,brickWidth, this.brickHeight)
                     .endFill()
-                    brick.x = j * this.brickWidth;
+                    brick.x = j * brickWidth;
                     brick.y = i * this.brickHeight;
                     brick.alpha = (Math.random()*1)+0.2;
-                    cont.addChild(brick)
+                    this.bricks.push(brick)
+                    cont.addChild(brick);
+                    this.bricksQ ++;
                 }
             }
             return cont;
+        },
+        Paddle: function () {
+            const paddle = new PIXI.Graphics();
+            paddle
+            .beginFill(0x000000)
+            .drawRect(0,0,200, 10)
+            .endFill();
+            paddle.vx = 10;
+            paddle.moveRight = false;
+            paddle.moveLeft = false;
+            return paddle;
         },
         Ball: function () {
             const ball = new PIXI.Graphics();
@@ -150,6 +165,19 @@ export default function BrickBreak (PIXI, Utils, Setting, TweenLite, Bricks, Pad
                 } else if(this.ball.y  > this.canvasHeight){
                      this.ball.vy *= -1;
                 }
+
+                for(let i = 0; i < this.bricksQ; i++) {
+                    let brick = this.bricks[i];
+                    if(brick.alpha !== 0){
+                        let rect = new PIXI.Rectangle(brick.x, brick.y, brick.width, brick.height);
+                        if (this.utils.circleRectangleCollision(this.ball, rect)){
+                            brick.alpha = 0;
+                            this.ball.vy *= -1;
+                        }
+                    }
+                    
+
+                }
             //     var rect = new PIXI.Rectangle(this.paddle.x, this.paddle.y, this.paddle.width, this.paddle.height)
 
             //     if (this.utils.pointRectangleCollisionDetection(this.ball, rect)) {
@@ -158,12 +186,12 @@ export default function BrickBreak (PIXI, Utils, Setting, TweenLite, Bricks, Pad
             //     }
 
             // }
-            // if(this.paddle.moveRight){
-            //     this.paddle.vx = -Math.abs(this.paddle.vx);
-            // }
-            // else if(this.paddle.moveLeft){
-            //     this.paddle.vx = Math.abs(this.paddle.vx);
-            // }
+            if(this.paddle.moveRight){
+                this.paddle.vx = -Math.abs(this.paddle.vx);
+            }
+            else if(this.paddle.moveLeft){
+                this.paddle.vx = Math.abs(this.paddle.vx);
+            }
 
             // if(!this.paddle.moveLeft && !this.paddle.moveRight) {
             //   if (this.paddle.peterOut && Math.abs(this.paddle.vx) > 1) {
@@ -174,11 +202,11 @@ export default function BrickBreak (PIXI, Utils, Setting, TweenLite, Bricks, Pad
             //     }
             // }
             
-            // if(this.paddle.x > rightBoundary){
-            //     this.paddle.x = rightBoundary;
-            // } else if(this.paddle.x < 0 ) {
-            //     this.paddle.x =0;
-            // }
+            if(this.paddle.x > this.canvasWidth){
+                this.paddle.x = this.canvasWidth;
+            } else if(this.paddle.x < 0 ) {
+                this.paddle.x = 0;
+            }
 
             //this.paddle.x -= this.paddle.vx;
             // let counter = this.counter = 0;
