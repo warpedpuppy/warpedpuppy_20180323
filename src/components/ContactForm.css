@@ -1,24 +1,20 @@
 
 
-.contactPage fieldset {
-	display: inline-block;
+
+.contactPage form {
+
+	display: block;
+	padding: 30px;
 	border:3px solid white;
 	margin: 50px auto;
 	border-radius: 10px;
 	text-align: center;
 	width:90%;
-}
-.contactPage fieldset legend {
-	text-align: left;
-	color:white;
-	letter-spacing: 5px;
-	padding:0 5px;
+	position: relative;
+	z-index: 3;
+	background-color: rgba(0,0,0,0.5);
 }
 
-.contactPage form {
-	display: inline-block;
-	width:100%;
-}
 .contactPage form input {
 	display:block;
 	width: 100%;
@@ -28,7 +24,7 @@
 	border-radius: 3px;
 	border:1px solid white;
 }
-.contactPage form textarea {
+textarea {
 	display:block;
 	width: 100%;
 	font-size: 15px;
@@ -44,18 +40,13 @@
 }
 .contactPage form input[type="submit"] {
 	cursor:pointer;
-	float: right;
 	width:50%;
+	display: inline-block;
 }
 
 
 @media (min-width: 1024px) {
-.contactPage fieldset {
-	
-	width:500px;
-}
-
-
-
-
+	.contactPage form {
+		width:800px;
+	}
 }

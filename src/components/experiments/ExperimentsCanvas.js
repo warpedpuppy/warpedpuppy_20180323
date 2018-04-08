@@ -18,7 +18,7 @@ export default class ExperimentsCanvas extends React.Component {
 	}
 	render () {
 		return (
-			<div id='experimentsCavas' ref={item => this.canvas = item} ></div>
+			<div id='horizLinesCanvas' ref={item => this.canvas = item} ></div>
 		)
 	}
 	

@@ -1,6 +1,6 @@
 import React from 'react';
-import './About.css'
 import { TweenMax, Elastic } from 'gsap';
+import './MorphingDivs.css'
 export default class MorphingDivs extends React.Component {
 	constructor(props){
        super(props);
@@ -25,7 +25,7 @@ export default class MorphingDivs extends React.Component {
     }
 	render(){
     return (
-    	<div className="aboutPage">
+    	<div className="morphingDivs">
 	     <svg x="0px" y="0px" viewBox="0 0 559 368">
             <g id="end">
               <path  ref={item => this.path1 = item} className="st0_about" d="M67.7,133.1c-11.7,11.9-60.7,64-48,117c16.1,67.4,119.9,85.4,169,94c42.9,7.5,98.2,17.1,157-13
