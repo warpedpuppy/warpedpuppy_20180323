@@ -20,6 +20,10 @@ nav h1 {
 	top:0;
 	left:calc(50% - 175px);
 }
+a h1,
+a h1:visited {
+	color:#333;
+}
 .menuLogo {
 	transition: left 1s;
 	position:absolute;

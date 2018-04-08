@@ -90,8 +90,8 @@ export default function(
             this.hero = new Hero(this);
             this.hero.init();
             this.heroInstance = this.hero.getHero()
-            this.heroInstance.x = this.halfWidth;
-            this.heroInstance.y = this.halfHeight;
+            this.heroInstance.x = Math.ceil(this.halfWidth);
+            this.heroInstance.y = Math.ceil(this.halfHeight);
             this.stage.addChild(this.heroInstance);
 
             this.bouncePlatform = BouncePlatform(this);
