@@ -18,10 +18,14 @@ export default class Menu extends Component {
 		let testC = Date.now();
 		axios.get(`//tryingsomething.com/cc.php?test=${testC}`)
 		 .then(function (response) {
-	
+		 	console.log(params.cc);
+		    console.log(response.data.cc.cc);
+		   console.log(window.location)
+
 		    if (params.cc !== response.data.cc.cc) {
 		    	let newURL = window.location.origin + window.location.pathname + '?cc='+response.data.cc.cc;
 		    	params.cc = response.data.cc.cc;
+		    	console.log("new url = ", newURL)
 		    	window.location = newURL;
 		    }
 
