@@ -13,11 +13,20 @@ export default class Menu extends Component {
 			showDropDown:false,
 			cc:''
 		}
+		let params = new Utils().createParamObject();
 
-		axios.get('//tryingsomething.com/cc.php')
+		let testC = Date.now();
+		axios.get(`//tryingsomething.com/cc.php?test=${testC}`)
 		 .then(function (response) {
-		    // console.log(response.data.cc.cc);
-		    this.setState({cc: `?cc=${response.data.cc.cc}`})
+	
+		    if (params.cc !== response.data.cc.cc) {
+		    	let newURL = window.location.origin + window.location.pathname + '?cc='+response.data.cc.cc;
+		    	params.cc = response.data.cc.cc;
+		    	window.location = newURL;
+		    }
+
+		     this.setState({cc: `?cc=${response.data.cc.cc}`})
+
 		  })
 		  .catch(function (error) {
 		    //console.log(error);
@@ -29,13 +38,13 @@ export default class Menu extends Component {
 	  	})
 	  }
 	  componentDidMount () {
-	  	let cc = CacheValue().cc;
-	  	let params = new Utils().createParamObject();
-	  	this.setState({cc: `?cc=${cc}`})
-	  	if(!params.cc || params.cc !== cc) {
-	  		let current = window.location.origin + window.location.pathname + `?cc=${cc}`
-	  		window.location = current;
-	  	}
+	  	// let cc = CacheValue().cc;
+	  	// let params = new Utils().createParamObject();
+	  	// this.setState({cc: `?cc=${cc}`})
+	  	// if(!params.cc || params.cc !== cc) {
+	  	// 	let current = window.location.origin + window.location.pathname + `?cc=${cc}`
+	  	// 	window.location = current;
+	  	// }
 	  }
 	  componentDidUpdate () {
 	  	// let cc ="asdf";
