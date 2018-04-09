@@ -38,3 +38,15 @@
 .paginationText {
 	min-height: 20px;
 }
+
+@media (min-width: 1024px) {
+.gamePagination div.pagination span {
+	padding:10px;
+	cursor: pointer;
+	width: 50px;
+	font-size: 15px;
+}
+
+
+
+}

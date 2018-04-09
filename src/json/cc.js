@@ -1,5 +1,5 @@
 export default function CC () {
 	return {
-			cc: '1'
+			cc: 'ts_1'
 		}
 }

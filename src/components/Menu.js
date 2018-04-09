@@ -4,6 +4,7 @@ import './Menu.css';
 import Logo from '../svgs/Logo';
 import Utils from '../animations/utils.js';
 import CacheValue from '../json/cc.js';
+import axios from 'axios';
 
 export default class Menu extends Component {
 	  constructor(props) {
@@ -12,6 +13,15 @@ export default class Menu extends Component {
 			showDropDown:false,
 			cc:''
 		}
+
+		axios.get('//tryingsomething.com/cc.php')
+		 .then(function (response) {
+		    // console.log(response.data.cc.cc);
+		    this.setState({cc: `?cc=${response.data.cc.cc}`})
+		  })
+		  .catch(function (error) {
+		    //console.log(error);
+		  });
 	  }
 	  showDropDown(e){
 	  	this.setState({

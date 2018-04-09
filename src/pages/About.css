@@ -1,12 +1,13 @@
 .aboutPage {
-	background-color: #333;
 	min-height: 100vw;
-	padding:50px;
+	padding:20px;
 }
-
-.aboutPage div {
-
-	margin: 50px auto;
+.aboutPage div.text {
+	background-color: rgba(0,0,0,0.75);
+	border:3px solid black;
+	padding:10px;
+	border-radius: 20px;
+	margin: 5px auto;
 	width: 80%;
 }
 .aboutPage div h1 {

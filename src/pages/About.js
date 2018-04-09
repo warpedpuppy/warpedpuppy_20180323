@@ -1,6 +1,7 @@
 import React from 'react';
 import './About.css'
 import { TweenMax } from 'gsap';
+import AboutCanvas from '../components/AboutCanvas';
 export default class About extends React.Component {
 	constructor(props){
        super(props);
@@ -18,7 +19,8 @@ export default class About extends React.Component {
 	render(){
     return (
     	<div className="aboutPage">
-      <div>
+      <AboutCanvas />
+      <div className="text">
 	      <h1>About</h1>
         <p>Graduated from U.C. Berkeley with Honors.</p>
         <p>Graduated from U.C. Hastings Law School.  Won grant to work with International Gay and Lesbian Human Rights Commission. Passed the California and Connecticut bar examinations.</p>

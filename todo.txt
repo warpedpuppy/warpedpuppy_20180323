@@ -1,0 +1,2 @@
+1) add loader to the renderers
+2) add loaders to the sound handlers
