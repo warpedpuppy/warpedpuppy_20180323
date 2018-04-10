@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './Menu.css';
 import Logo from '../svgs/Logo';
 import Utils from '../animations/utils.js';
-import CacheValue from '../json/cc.js';
 import axios from 'axios';
 
 export default class Menu extends Component {
@@ -11,30 +10,40 @@ export default class Menu extends Component {
 		super(props);
 		this.state = {
 			showDropDown:false,
-			cc:''
+			cc:'?cc=testing'
 		}
-		
-		let params = new Utils().createParamObject();
-		let testC = Date.now();
-		axios.get(`//tryingsomething.com/cc.php?test=${testC}`)
-		 .then(function (response) {
-		 	console.log(params.cc);
-		    console.log(response.data.cc.cc);
-		   console.log(window.location)
+	  }
+	  checkRemoteCCValue () {
+	  		let params = new Utils().createParamObject();
+			let testC = Date.now();
+			axios.get(`//tryingsomething.com/cc.php?test=${testC}`)
+			 .then(function (response) {
+			 	//console.log(params.cc);
+			   //console.log(response.data.cc.cc);
+			   //console.log(window.location)
 
-		    if (params.cc !== response.data.cc.cc) {
-		    	let newURL = window.location.origin + window.location.pathname + '?cc='+response.data.cc.cc;
-		    	params.cc = response.data.cc.cc;
-		    	console.log("new url = ", newURL)
-		    	window.location = newURL;
-		    }
+			    if (!params.cc || params.cc !== response.data.cc.cc) {
+			    	console.log('they are not equal')
+			    	let newCC = '?cc='+response.data.cc.cc;
+			    	let newURL = window.location.origin + window.location.pathname + newCC;
+			  
+			    	params.cc = response.data.cc.cc;
+			    	//console.log("new url = ", newURL)
+			    	window.location = newURL;
+			    	this.setState({cc: newCC})
+			    } else {
+			    	console.log('3 params.cc', params.cc)
+			    	this.setState({cc: params.cc})
+			    	console.log('4', this.state.cc)
+			    }
 
-		     this.setState({cc: `?cc=${response.data.cc.cc}`})
+			    // this.setState({cc: `?cc=${response.data.cc.cc}`})
 
-		  })
-		  .catch(function (error) {
-		    //console.log(error);
-		  });
+			  })
+			  .catch(function (error) {
+			    //console.log(error);
+			  });
+			  console.log('1')
 	  }
 	  showDropDown(e){
 	  	this.setState({
@@ -42,26 +51,12 @@ export default class Menu extends Component {
 	  	})
 	  }
 	  componentDidMount () {
-	  	// let cc = CacheValue().cc;
-	  	// let params = new Utils().createParamObject();
-	  	// this.setState({cc: `?cc=${cc}`})
-	  	// if(!params.cc || params.cc !== cc) {
-	  	// 	let current = window.location.origin + window.location.pathname + `?cc=${cc}`
-	  	// 	window.location = current;
-	  	// }
+	  	let params = new Utils().createParamObject();
+	  	this.setState({cc: `?cc=${params.cc}`})
+	  	this.checkRemoteCCValue();
 	  }
 	  componentDidUpdate () {
-	  	// let cc ="asdf";
-	  	// let params = new Utils().createParamObject();
-	  	// if(!params.cc || params.cc !== cc) {
-	  	// 	// let current = window.location.href + `?cc=${cc}`
-	  	// 	// window.location = current
-	  	// }
-	  	// this.setState({cc: `?cc=${cc}`})
-	  	// console.log(window.location.href)
-	  	// console.log('params = ', params);
-	  	// let CC = new CC();
-	  	// console.log(cc)
+	  	console.log('update', this.state)
 	  }
 
 	  render() {
@@ -70,13 +65,15 @@ export default class Menu extends Component {
 	  	let experimentsLink = `/experiments${this.state.cc}`;
 	  	let aboutLink = `/about${this.state.cc}`;
 	  	let contactLink = `/contact${this.state.cc}`
+	  	console.log('cc = ', this.state.cc)
 	    return (
 			<div>
 				<nav>
+					
 					<div className="not-links">
 						<Link className="homeLink" to={homeLink} onClick={() => this.showDropDown()} >
 						   <Logo customClass="menuLogo" w={70} alpha={0.5}/>
-							<h1>warped puppy</h1>
+							<h1>here: {this.state.cc}</h1>
 							</Link>
 						<div className="hamburger" onClick={() => this.showDropDown()}>
 							<span></span>
