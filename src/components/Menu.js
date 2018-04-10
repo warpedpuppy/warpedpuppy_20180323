@@ -16,7 +16,7 @@ export default class Menu extends Component {
 		
 		let params = new Utils().createParamObject();
 		let testC = Date.now();
-		axios.get(`http://tryingsomething.com/cc.php?test=${testC}`)
+		axios.get(`//tryingsomething.com/cc.php?test=${testC}`)
 		 .then(function (response) {
 		 	console.log(params.cc);
 		    console.log(response.data.cc.cc);
