@@ -73,7 +73,7 @@ export default class Menu extends Component {
 					<div className="not-links">
 						<Link className="homeLink" to={homeLink} onClick={() => this.showDropDown()} >
 						   <Logo customClass="menuLogo" w={70} alpha={0.5}/>
-							<h1>warped puppy x</h1>
+							<h1>warped puppy</h1>
 							</Link>
 						<div className="hamburger" onClick={() => this.showDropDown()}>
 							<span></span>
