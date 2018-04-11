@@ -40,6 +40,8 @@ export default function(
             this.stage = new PIXI.Container();
             this.renderer = PIXI.autoDetectRenderer(this.canvasWidth, this.canvasHeight);
             this.renderer.backgroundColor = 0x1a69ff;
+            this.animate = animate.bind(this);
+            this.app.ticker.add(animate(this));
             document.getElementById("tugtugCanvas").appendChild(this.renderer.view);
             if(!this.loader.resources.gamesheet){
                  this.loader
@@ -120,12 +122,11 @@ export default function(
             this.stars = new ObjectPoolBuilder(PIXI, "star.png", 80, [3,8],[2,25], undefined, true, true, this, false, 1);
             this.stars.init();
 
-            animate = animate.bind(this);
-
+           
             this.stage.addChild(this.swipeText);
             this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;
             this.swipeText.y = (this.canvasHeight - this.swipeText.height)-10;
-            this.app.ticker.add(animate(this));
+            
           
         },
         resizeHandler: function () {

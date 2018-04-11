@@ -18,9 +18,6 @@ export default class Menu extends Component {
 			let testC = Date.now();
 			axios.get(`//tryingsomething.com/cc.php?test=${testC}`)
 			 .then(function (response) {
-			 	//console.log(params.cc);
-			   //console.log(response.data.cc.cc);
-			   //console.log(window.location)
 
 			    if (!params.cc || params.cc !== response.data.cc.cc) {
 			    	console.log('they are not equal')
@@ -28,13 +25,10 @@ export default class Menu extends Component {
 			    	let newURL = window.location.origin + window.location.pathname + newCC;
 			  
 			    	params.cc = response.data.cc.cc;
-			    	//console.log("new url = ", newURL)
 			    	window.location = newURL;
 			    	this.setState({cc: newCC})
 			    } else {
-			    	console.log('3 params.cc', params.cc)
 			    	this.setState({cc: params.cc})
-			    	console.log('4', this.state.cc)
 			    }
 
 			    // this.setState({cc: `?cc=${response.data.cc.cc}`})
@@ -43,7 +37,6 @@ export default class Menu extends Component {
 			  .catch(function (error) {
 			    //console.log(error);
 			  });
-			  console.log('1')
 	  }
 	  showDropDown(e){
 	  	this.setState({
@@ -56,7 +49,7 @@ export default class Menu extends Component {
 	  	this.checkRemoteCCValue();
 	  }
 	  componentDidUpdate () {
-	  	console.log('update', this.state)
+	  	// console.log('update', this.state)
 	  }
 
 	  render() {
@@ -65,7 +58,6 @@ export default class Menu extends Component {
 	  	let experimentsLink = `/experiments${this.state.cc}`;
 	  	let aboutLink = `/about${this.state.cc}`;
 	  	let contactLink = `/contact${this.state.cc}`
-	  	console.log('cc = ', this.state.cc)
 	    return (
 			<div>
 				<nav>

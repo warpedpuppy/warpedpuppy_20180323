@@ -68,15 +68,16 @@ export default class GamePagination extends React.Component {
 				}
 			} 
 		} else if(num === "fiveForward"){
-			let plusFive = this.state.startingNumber + 5;
+			let plusFive = Number(this.props.activeGame) + 6;
 			if(plusFive < max) {
 				this.props.onChangePage(plusFive)
 				this.setState({startingNumber: plusFive});
 			}
 
 		} else if(num === "fiveBack"){
-			let minusFive = this.state.startingNumber - 1;
-			if(this.state.startingNumber > 1) {
+			let minusFive = Number(this.props.activeGame)  - 4;
+
+			if(minusFive > 0) {
 				this.props.onChangePage(minusFive)
 				this.setState({startingNumber: minusFive});
 			}

@@ -32,10 +32,12 @@ export default function SoundSync (PIXI, Utils) {
             document.getElementById("tugtugCanvas").appendChild(this.renderer.view);
 
         	 if(!this.loader.resources.soundSyncTest){
-        	 	this.click = PIXI.sound.Sound.from('/sounds/click.mp3');
-        	 	this.carriageReturn = PIXI.sound.Sound.from('/sounds/carriageReturn.mp3');
+        	 	// this.click = PIXI.sound.Sound.from('/sounds/click.mp3');
+        	 	// this.carriageReturn = PIXI.sound.Sound.from('/sounds/carriageReturn.mp3');
                 this.loader
                     .add('soundSyncTest', "/fonts/games/soundSync/testing.xml")
+                    .add('click', "/sounds/click.mp3")
+                    .add('return', "/sounds/carriageReturn.mp3")
                     .load(this.Main.bind(this));
             } else {
                 this.Main.bind(this)
@@ -50,7 +52,7 @@ export default function SoundSync (PIXI, Utils) {
         },
 		Main: function () {
 
-			
+
 			this.button = this.StartButton();
 			this.button.x = Math.floor(this.halfWidth-100);
             this.button.y = Math.floor(170);
@@ -79,7 +81,6 @@ export default function SoundSync (PIXI, Utils) {
             buttonGraphic.buttonMode = true;
             buttonGraphic.interactive = true;
             buttonGraphic.beginFill(0xFFFF00).drawRoundedRect(0,0,200,50,10).endFill();
-            //button.addChild(buttonGraphic);
             let buttonText = new PIXI.extras.BitmapText("click to start", {font: "24px AntsyPants", align: "left"})
             buttonText.y = -7;
             buttonText.x = 5;
@@ -93,7 +94,6 @@ export default function SoundSync (PIXI, Utils) {
             buttonGraphic.buttonMode = true;
             buttonGraphic.interactive = true;
             buttonGraphic.beginFill(0xFFFF00).drawRoundedRect(0,0,300,50,10).endFill();
-            //button.addChild(buttonGraphic);
             let buttonText2 = new PIXI.extras.BitmapText("click to re-start", {font: "24px AntsyPants", align: "left"})
             buttonText2.y = -7;
             buttonText2.x = 35;
@@ -116,7 +116,7 @@ export default function SoundSync (PIXI, Utils) {
 			 this.soundReadyBoolean = true;
 		},
 		go: function () {
-			  	this.click.play();
+			  	this.loader.resources.click.sound.play();
 			    this.newString += this.textArray[this.textArrayCounter];
 			    this.b = new PIXI.extras.BitmapText(this.newString, {font: "24px AntsyPants", align: "left"})
 			    this.b.y = 50;
@@ -147,9 +147,9 @@ export default function SoundSync (PIXI, Utils) {
 		        this.to = setTimeout(this.newLetter, speed)
 		        if(this.textArray[this.textArrayCounter] !== " "){
 		        	if(str === 'click') {
-						this.click.play();
+						this.loader.resources.click.sound.play();
 		        	} else {
-		        		this.carriageReturn.play()
+		        		this.loader.resources.return.sound.play();
 		        	}
 		        }
 
