@@ -38,9 +38,14 @@ export default class Menu extends Component {
 			    //console.log(error);
 			  });
 	  }
-	  showDropDown(e){
+	  toggleDropDown(e){
 	  	this.setState({
 	  		showDropDown: !this.state.showDropDown
+	  	})
+	  }
+	  hideDropDown(e){
+	  	this.setState({
+	  		showDropDown: false
 	  	})
 	  }
 	  componentDidMount () {
@@ -61,26 +66,25 @@ export default class Menu extends Component {
 	    return (
 			<div>
 				<nav>
-					
 					<div className="not-links">
-						<Link className="homeLink" to={homeLink} onClick={() => this.showDropDown()} >
+						<Link className="homeLink" to={homeLink} onClick={() => this.hideDropDown()} >
 						   <Logo customClass="menuLogo" w={70} alpha={0.5}/>
 							<h1>warped puppy</h1>
 							</Link>
-						<div className="hamburger" onClick={() => this.showDropDown()}>
+						<div className="hamburger" onClick={() => this.toggleDropDown()}>
 							<span></span>
 							<span></span>
 							<span></span>
 						</div>
 					</div>
 					<div className={`links  ${showDropDownClass}`}>
-						<Link to={experimentsLink}  onClick={() => this.showDropDown()} >
+						<Link to={experimentsLink}  onClick={() => this.toggleDropDown()} >
 						<span>js / canvas experiments</span>
 						</Link>
-						<Link to={aboutLink}  onClick={() => this.showDropDown()} >
+						<Link to={aboutLink}  onClick={() => this.toggleDropDown()} >
 						<span>about / cv</span>
 						</Link>
-						<Link to={contactLink}  onClick={() => this.showDropDown()} >
+						<Link to={contactLink}  onClick={() => this.toggleDropDown()} >
 						<span>contact</span>
 						</Link>
 					</div>

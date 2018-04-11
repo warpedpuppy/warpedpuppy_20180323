@@ -48,6 +48,7 @@ export default class ContactForm extends React.Component {
 	render () {
 		return (
 			<div>
+			<h2 class="contactPageTitle">Contact</h2>
 			<form method="POST" onSubmit={(e) => this.onFormSubmit(e)} >
 				<input 
 				type="text"

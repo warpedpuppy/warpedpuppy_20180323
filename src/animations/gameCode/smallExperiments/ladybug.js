@@ -46,6 +46,7 @@ return {
             }
         },
         Main: function () {
+        	this.app.ticker.add(this.animate.bind(this));
         	let t1 = PIXI.loader.resources.l1.texture;
 			let t2 = PIXI.loader.resources.l2.texture;
 			let t3 = PIXI.loader.resources.l3.texture;
@@ -87,7 +88,6 @@ return {
 			this.startOver_btn.y = (this.stageShell.height); 
 			this.stageShell.addChild(this.startOver_btn);
 			this.avatarCreate();
-			this.app.ticker.add(this.animate.bind(this));
 		},
 		animate: function () {
 			if(this.animateBoolean === true){
