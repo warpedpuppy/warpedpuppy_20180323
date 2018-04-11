@@ -6,7 +6,7 @@ export default class ContactForm extends React.Component {
 
 	onFormSubmit (e) {
 		e.preventDefault();
-		axios.post('//formspree.io/wp@tugtug.com', {
+		axios.post('//tryingsomething.com/mail.php', {
 		    firstName: 'Fred',
 		    lastName: 'Flintstone'
 		})
@@ -20,7 +20,7 @@ export default class ContactForm extends React.Component {
 	render () {
 		return (
 			
-			<form method="POST" action="//formspree.io/wp@tugtug.com">
+			<form method="POST" onSubmit={(e) => this.onFormSubmit(e)} >
 				<input type="email" name="email" placeholder="email address " />
 				<input type="text" name="name" placeholder="name" />
 				<textarea name="message"></textarea>

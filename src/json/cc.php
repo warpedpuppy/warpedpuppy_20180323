@@ -4,6 +4,6 @@ header('Content-Type: application/json');
 ?>
 {
 	"cc": {
-		"cc": "ts_6"
+		"cc": "ts_asdfasdfasdf"
 	}
 }
