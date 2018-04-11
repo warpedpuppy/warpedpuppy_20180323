@@ -23,7 +23,19 @@
 	margin:10px 0 ;
 	border-radius: 3px;
 	border:1px solid white;
+	outline: none;
 }
+.contactPage form input:focus {
+	background-color: white;
+}
+.contactPage form input:-webkit-autofill, 
+.contactPage form textarea:-webkit-autofill, 
+.contactPage form select:-webkit-autofill {
+    background-color: white !important;
+    background-image: none !important;
+    color: rgb(0, 0, 0) !important;
+}
+
 textarea {
 	display:block;
 	width: 100%;
@@ -43,10 +55,25 @@ textarea {
 	width:50%;
 	display: inline-block;
 }
+.contactPage form input[type="submit"]:hover {
+	background-color: #FF00FF;
+}
+.contactPage form input[type="submit"]:active {
+	background-color: #000000;
+	color:white;
+}
+.contactPage img {
+	width:90%;
+}
+
 
 
 @media (min-width: 1024px) {
 	.contactPage form {
 		width:800px;
 	}
+	.contactPage img {
+		width:800px;
+	}
+
 }

@@ -1,19 +1,26 @@
 .aboutPage {
-	min-height: 100vw;
 	padding:20px;
+	text-align: center;
 }
 .aboutPage div.text {
 	background-color: rgba(0,0,0,0.75);
 	border:3px solid black;
-	padding:10px;
+	padding:60px;
 	border-radius: 20px;
 	margin: 5px auto;
-	width: 80%;
+	display: inline-block;
 }
-.aboutPage div h1 {
-	color: white;
+.aboutPage div h2 {
+	color: #FF00FF;
+	text-align: center;
+	text-decoration: underline;
 }
-.aboutPage div p {
+.aboutPage div ul {
+	margin-left:20px;
+}
+.aboutPage div ul li {
 	color: white;
-	margin:20px 0;
+	font-size: 14px;
+	margin:20px 0 20px 30px ;
+	text-align: left;
 }

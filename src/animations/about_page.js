@@ -56,6 +56,8 @@ return {
                     {x:startX + 100, y:startY + 250}, 
                     {x:startX + 150, y:startY + 100}, 
                     {x:startX + 700, y:startY + 700}, 
+                    {x:this.canvasWidth - 100, y:100}, 
+                    {x:100, y:this.canvasHeight - 100},
                     {x:startX + 500, y:startY + 400, alpha:0},
                     {x:startX, y:startY}]
                 this.tl.staggerTo(this.bugs, 10, { bezier: {
