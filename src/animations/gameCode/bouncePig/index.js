@@ -55,10 +55,10 @@ export default function(
             }
            
             this.webGL = (this.renderer instanceof PIXI.CanvasRenderer) ? false : true;
-            this.resizeHandler = this.resizeHandler.bind(this);
-            window.onresize = this.resizeHandler;
+            // this.resizeHandler = this.resizeHandler.bind(this);
+            // window.onresize = this.resizeHandler;
 
-            window.addEventListener("orientationchange", function(){console.log('boom'); this.resizeHandler();});
+            // window.addEventListener("orientationchange", function(){console.log('boom'); this.resizeHandler();});
 
 
             this.counter = 0;
