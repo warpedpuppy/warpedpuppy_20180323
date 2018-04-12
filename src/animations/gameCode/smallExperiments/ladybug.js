@@ -245,6 +245,14 @@ return {
 			return returnString;
 		},
 		resize: function () {
+			this.delay = this.delay.bind(this);
+            if(!this.timeout) {
+                this.timeout = setTimeout(this.delay, 1000)
+            }
+        },
+		delay: function () {
+			clearTimeout(this.timeout);
+            this.timeout = null;
 			this.canvasWidth = this.utils.returnCanvasWidth();
 			this.canvasHeight =  400;
 			this.halfWidth = this.canvasWidth/2;

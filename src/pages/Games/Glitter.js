@@ -23,13 +23,7 @@ export default class Glitter extends React.Component {
 	}
 	render () {
 		return (
-			<div>
-			 <div id="tugtugCanvas" className="games">
-		        <div className="uiElementCont">
-		        	<div id='my-stats-container'></div>
-		        </div>
-		    </div>
-		    </div>
+			 <div id="tugtugCanvas" className="games"></div>
 		)
 	}
 }

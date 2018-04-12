@@ -107,12 +107,22 @@ export default function GlitterCode (Utils, PIXI) {
         return dot;
     },
     resize: function() {
+        this.stage.visible = false;
+        this.delay = this.delay.bind(this);
+        if(!this.timeout) {
+            this.timeout = setTimeout(this.delay, 1000)
+        }
+    },
+    delay: function () {
+        clearTimeout(this.timeout);
+        this.timeout = null;
         this.canvasWidth = this.utils.returnCanvasWidth();
         this.canvasHeight = 400;
         this.halfWidth = this.canvasWidth / 2;
         this.renderer.resize(this.canvasWidth, this.canvasHeight);
         this.dots();
         this.lines();
+        this.stage.visible = true;
     },
     animate: function() {
             for (var i = 0; i < this.dotQ; i++) {

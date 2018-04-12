@@ -134,10 +134,9 @@ export default function(
           
         },
         resizeHandler: function () {
-            console.log('change');
             this.delay = this.delay.bind(this);
             if(!this.timeout) {
-                setTimeout(this.delay, 750)
+                this.timeout = setTimeout(this.delay, 1000)
             }
             
         },
