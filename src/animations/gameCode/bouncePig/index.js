@@ -135,7 +135,15 @@ export default function(
         },
         resizeHandler: function () {
             console.log('change');
-        
+            this.delay = this.delay.bind(this);
+            if(!this.timeout) {
+                setTimeout(this.delay, 1000)
+            }
+            
+        },
+        delay: function () {
+            clearTimeout(this.timeout);
+            this.timeout = null;
             this.canvasWidth = this.utils.returnCanvasWidth();
             this.canvasHeight =  400;
             this.halfWidth = this.canvasWidth/2;
