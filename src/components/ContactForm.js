@@ -24,7 +24,7 @@ export default class ContactForm extends React.Component {
 		let url2 = '//localhost:8000/warpedpuppy/contactFormHandler.php';
 		let url3 = '//localhost:8000/mail.php';
 		let url4 = '//tryingsomething.com/mail.php';
-		axios.post(url4, params)
+		axios.post(url3, params)
 		.then(function (response) {
 		    console.log(response);
 		    that.setState({
@@ -45,11 +45,12 @@ export default class ContactForm extends React.Component {
 	clearMessage () {
 		this.setState({message: ''});
 	}
+	//onSubmit={(e) => this.onFormSubmit(e)}
 	render () {
 		return (
 			<div>
-			<h2 class="contactPageTitle">Contact</h2>
-			<form method="POST" onSubmit={(e) => this.onFormSubmit(e)} >
+			<h2 className="contactPageTitle">Contact</h2>
+			<form method="POST"  action="//formspree.io/wp@tugtug.com" >
 				<input 
 				type="text"
 				name="name" 
@@ -78,7 +79,7 @@ export default class ContactForm extends React.Component {
 				<div className="buttonDiv">
 					<input type="submit" value="send" />
 				</div>
-				<div class="emailResponse">{this.state.response}</div>
+				<div className="emailResponse">{this.state.response}</div>
 			</form>
 			<img src={emailAddress} alt='email_address' />
 			</div>

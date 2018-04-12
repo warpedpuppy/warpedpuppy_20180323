@@ -10,9 +10,9 @@ nav {
 	
 }
 nav h1 {
-	font-size: 35px;
+	font-size: 20px;
 	display: inline-block;
-	margin-top: 5px;
+	margin-top: 15px;
 	width: 350px;
 	text-align: center;
 	transition: left 0.5s;
