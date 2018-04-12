@@ -32,7 +32,7 @@ export default function(
             this.ObjectPoolBuilder = ObjectPoolBuilder;
             this.Mines = Mines;
             this.speedLimit = this.storeSpeedLimit = 10;
-            this.canvasWidth = this.utils.returnCanvasWidth();
+            this.canvasWidth = this.utils.returnCanvasWidth()*0.75;
             this.canvasHeight = 400;
             this.vy = 2;
             this.vx = 0;
@@ -130,7 +130,7 @@ export default function(
           
         },
         resizeHandler: function () {
-            this.canvasWidth = this.utils.returnCanvasWidth();
+            this.canvasWidth = this.utils.returnCanvasWidth()*0.75;
             this.canvasHeight =  400;
             this.halfWidth = this.canvasWidth/2;
             this.halfHeight = this.canvasHeight/2;
