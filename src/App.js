@@ -14,9 +14,7 @@ export default function App () {
       return (
         <Router>
           <div className="App">
-            <header>
-              <Menu />
-            </header>
+          
             <main>
               <Route exact path="/" component={Home} />
               <Route exact path="/Experiments" component={Experiments} />

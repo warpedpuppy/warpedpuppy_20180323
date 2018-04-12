@@ -57,9 +57,8 @@ export default function(
             this.webGL = (this.renderer instanceof PIXI.CanvasRenderer) ? false : true;
             this.resizeHandler = this.resizeHandler.bind(this);
             window.onresize = this.resizeHandler;
-            window.onorientationchange = this.resizeHandler;
-            let that = this;
-             window.addEventListener("orientationchange", function(){console.log('boom'); that.resizeHandler();});
+            //let that = this;
+            //window.addEventListener("orientationchange", () => that.resizeHandler() );
 
 
             this.counter = 0;
@@ -135,7 +134,8 @@ export default function(
           
         },
         resizeHandler: function () {
-            console.log('change')
+            console.log('change');
+        
             this.canvasWidth = this.utils.returnCanvasWidth();
             this.canvasHeight =  400;
             this.halfWidth = this.canvasWidth/2;
