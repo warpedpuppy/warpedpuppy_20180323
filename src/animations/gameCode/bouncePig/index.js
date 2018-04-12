@@ -137,7 +137,7 @@ export default function(
             console.log('change');
             this.delay = this.delay.bind(this);
             if(!this.timeout) {
-                setTimeout(this.delay, 10)
+                setTimeout(this.delay, 250)
             }
             
         },
