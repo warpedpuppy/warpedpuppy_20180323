@@ -69,7 +69,7 @@ export default class Menu extends Component {
 					<div className="not-links">
 						<Link className="homeLink" to={homeLink} onClick={() => this.hideDropDown()} >
 						   <Logo customClass="menuLogo" w={70} alpha={0.5}/>
-							<h1>warped 3 puppy</h1>
+							<h1>warped 4 puppy</h1>
 							</Link>
 						<div className="hamburger" onClick={() => this.toggleDropDown()}>
 							<span></span>
