@@ -245,14 +245,6 @@ return {
 			return returnString;
 		},
 		resize: function () {
-			this.delay = this.delay.bind(this);
-            if(!this.timeout) {
-                this.timeout = setTimeout(this.delay, 1000)
-            }
-        },
-		delay: function () {
-			clearTimeout(this.timeout);
-            this.timeout = null;
 			this.canvasWidth = this.utils.returnCanvasWidth();
 			this.canvasHeight =  400;
 			this.halfWidth = this.canvasWidth/2;
@@ -260,7 +252,7 @@ return {
 			this.renderer.resize(this.canvasWidth, this.canvasHeight);
 			this.stageShell.x = (this.canvasWidth - this.stageShell.width)/2; 
 			this.stageShell.y = (this.canvasHeight - this.stageShell.height)/2; 
-		},
+        },
 		determinePath: function (mc, endTile) {
 				var timerPause = this.forwardMotion * 1000;
 				setTimeout(nextTile.bind(this),timerPause)

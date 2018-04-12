@@ -134,16 +134,7 @@ export default function(
           
         },
         resizeHandler: function () {
-            this.delay = this.delay.bind(this);
-            if(!this.timeout) {
-                this.timeout = setTimeout(this.delay, 1000)
-            }
-            
-        },
-        delay: function () {
-            clearTimeout(this.timeout);
-            this.timeout = null;
-            this.canvasWidth = this.utils.returnCanvasWidth();
+             this.canvasWidth = this.utils.returnCanvasWidth();
             this.canvasHeight =  400;
             this.halfWidth = this.canvasWidth/2;
             this.halfHeight = this.canvasHeight/2;
@@ -156,7 +147,7 @@ export default function(
             this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;
             this.heroInstance.y = this.halfHeight;
             this.mines.resize();
- 
+            
         }
     }
 }
