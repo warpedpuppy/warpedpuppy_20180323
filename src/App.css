@@ -1,3 +1,7 @@
+html {
+	border:5px solid gold;
+}
+
 body {
 	border:5px solid orange;
 }
@@ -16,4 +20,7 @@ main {
 }
 main > div {
 	border:5px solid green;
+}
+header {
+	border:5px solid black;
 }
