@@ -1,26 +1,3 @@
-html {
-	border:5px solid gold;
-}
-
-body {
-	border:5px solid orange;
-}
-
-#root {
-	border:5px solid pink;
-}
-
-.App {
-	border:5px solid blue;
-}
-
 main {
-	margin-top: 50px;
-	border:5px solid red;
-}
-main > div {
-	border:5px solid green;
-}
-header {
-	border:5px solid black;
+	margin-top: 55px;
 }
