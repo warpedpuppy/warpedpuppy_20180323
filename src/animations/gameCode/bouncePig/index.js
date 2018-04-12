@@ -32,7 +32,7 @@ export default function(
             this.ObjectPoolBuilder = ObjectPoolBuilder;
             this.Mines = Mines;
             this.speedLimit = this.storeSpeedLimit = 10;
-            this.canvasWidth = this.utils.returnCanvasWidth()*0.75;
+            this.canvasWidth = this.utils.returnCanvasWidth();
             this.canvasHeight = 400;
             this.vy = 2;
             this.vx = 0;
@@ -57,6 +57,10 @@ export default function(
             this.webGL = (this.renderer instanceof PIXI.CanvasRenderer) ? false : true;
             this.resizeHandler = this.resizeHandler.bind(this);
             window.onresize = this.resizeHandler;
+
+            window.addEventListener("orientationchange", function(){console.log('boom'); this.resizeHandler();});
+
+
             this.counter = 0;
         },
         stop: function () {
@@ -130,7 +134,7 @@ export default function(
           
         },
         resizeHandler: function () {
-            this.canvasWidth = this.utils.returnCanvasWidth()*0.75;
+            this.canvasWidth = this.utils.returnCanvasWidth();
             this.canvasHeight =  400;
             this.halfWidth = this.canvasWidth/2;
             this.halfHeight = this.canvasHeight/2;
