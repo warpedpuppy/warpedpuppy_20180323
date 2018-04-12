@@ -1,3 +1,11 @@
+body {
+	border:5px solid orange;
+}
+
+#root {
+	border:5px solid pink;
+}
+
 .App {
 	border:5px solid blue;
 }
