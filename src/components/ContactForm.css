@@ -61,6 +61,7 @@ textarea {
 	cursor:pointer;
 	width:50%;
 	display: inline-block;
+	background-color:white;
 }
 .contactPage form input[type="submit"]:hover {
 	background-color: #FF00FF;

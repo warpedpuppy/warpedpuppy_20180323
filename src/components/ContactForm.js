@@ -81,7 +81,9 @@ export default class ContactForm extends React.Component {
 				</div>
 				<div className="emailResponse">{this.state.response}</div>
 			</form>
+			<a href="mailto:info@warpedpuppy.com">
 			<img src={emailAddress} alt='email_address' />
+			</a>
 			</div>
 			
 		)
