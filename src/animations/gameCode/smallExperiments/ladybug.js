@@ -79,7 +79,7 @@ return {
 			this.stageShell.scale.x = this.stageShell.scale.y = 0.5;
 			this.stage.addChildAt(this.stageShell, 0);
 			this.makeMaze();
-			this.startOver_btn.mousedown =  this.startOver;
+			this.startOver_btn.mousedown =  this.startOver_btn.touchdown =this.startOver;
 
 			this.stageShell.addChild(this.instructions_mc);
 			this.stageShell.x = (this.canvasWidth - this.stageShell.width)/2; 
@@ -92,7 +92,7 @@ return {
 		animate: function () {
 			if(this.animateBoolean === true){
 				if(this.dragBoolean === true){
-					let mousePosition= this.renderer.plugins.interaction.mouse.global;
+					let mousePosition = this.renderer.plugins.interaction.mouse.global;
 					this.avatar.x = mousePosition.x ;
 					this.avatar.y = mousePosition.y;
 				}
@@ -113,7 +113,7 @@ return {
 			avatar.x = 775;
 			avatar.y = 300;
 			avatar.interactive = true;
-			avatar.mousedown = this.drag;
+			avatar.mousedown = avatar.touchdown = this.drag;
 			avatar.buttonMode = true;
 			avatar.xPos = avatar.x;
 			avatar.yPos = avatar.y;
@@ -122,8 +122,8 @@ return {
 		drag: function (e) {
 			var mc = this.avatar;
 			this.stage.addChild(mc)
-			mc.mousedown = null;
-			mc.mouseup = this.xDrag;
+			mc.mousedown = mc.touchdown = null;
+			mc.mouseup = mc.touchup = this.xDrag;
 			this.dragBoolean = true;
 			TweenMax.to(mc.scale, 0.25, {x:1, y:1});
 			TweenMax.to(this.instructions_mc,0.25, {alpha:0});
@@ -132,7 +132,7 @@ return {
 		xDrag: function  (e) {
 			var mc = this.avatar;
 			this.stageShell.addChild(mc)
-			mc.mouseup = null;
+			mc.mouseup = mc.touchup = null;
 			this.dragBoolean = false
 			new TweenMax(mc.scale, 0.25, {x:0.5, y:0.5});
 			var tile1XY = this.boardShell.toGlobal(new PIXI.Point(this.tileArray[1].x,this.tileArray[1].y))
@@ -157,7 +157,7 @@ return {
 				new TweenMax(this.instructions_mc, 1, {alpha:1});
 				mc.x = mc.xPos;
 				mc.y = mc.yPos;
-				this.avatar.mousedown = this.drag;
+				this.avatar.mousedown = this.avatar.touchdown = this.drag;
 			};
 		},
 		Tile: function () {
@@ -229,7 +229,7 @@ return {
 				this.tileArray[i].red_mc.alpha = 0;
 			}
 
-			this.avatar.mousedown = this.drag;
+			this.avatar.mousedown = this.avatar.touchdown =this.drag;
 
 
 		},
