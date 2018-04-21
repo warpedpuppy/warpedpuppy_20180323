@@ -36,6 +36,7 @@ export default class About extends React.Component {
           <li>Worked for The Dodo and coded the front end viewed by 17 million people per month.</li>
           <li>Managed a subscription based ecommerce site built in VueJS.</li>
           <li>Mentor at Thinkful.com.</li>
+          <a href="/ebw_resume.pdf">cv</a>
         </ul>
 	      </div>
         </div>
