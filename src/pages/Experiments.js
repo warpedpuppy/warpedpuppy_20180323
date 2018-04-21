@@ -45,17 +45,17 @@ export default class Experiments extends React.Component {
 		if(this.state.activeGame === '') {
 
 		} else if(this.state.activeGame === '0') {
-			game.push(<BouncePig key={this.state.activeGame} />)
+			game.push(<Fireworks  key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '1') {
-			game.push(<Ladybug key={this.state.activeGame} />)
+			game.push(<PrettyDots  key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '2') {
 			game.push(<Glitter  key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '3') {
 			game.push(<FallingNumbers  key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '4') {
-			game.push(<Fireworks  key={this.state.activeGame} />)
+			game.push(<BouncePig key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '5') {
-			game.push(<PrettyDots  key={this.state.activeGame} />)
+			game.push(<Ladybug key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '6') {
 			game.push(<SoundSync  key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '7') {

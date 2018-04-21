@@ -66,6 +66,12 @@ textarea {
 .contactPage form input[type="submit"]:hover {
 	background-color: #FF00FF;
 }
+::placeholder,
+:-ms-input-placeholder,
+::-ms-input-placeholder  {
+    color: #000;
+}
+
 .contactPage form input[type="submit"]:active {
 	background-color: #000000;
 	color:white;
