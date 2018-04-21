@@ -10,6 +10,21 @@ div.homePage h1 {
 	color: #FF8D27;
 	position: relative;
 }
+.textCont p {
+	margin: 25px 0;
+}
+
+div.homePage .textCont p a, 
+div.homePage .textCont p a:visited {
+	color:#F98602;
+	font-weight: bold;
+
+}
+div.homePage .textCont p a:active,
+div.homePage .textCont p a:hover {
+color:#FFC30B;
+}
+
 .textCont svg {
 	position: absolute;
 	right:0;

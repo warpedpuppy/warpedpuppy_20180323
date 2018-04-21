@@ -16,10 +16,11 @@
 	text-decoration: underline;
 }
 .aboutPage div ul {
+	list-style-type: none;
 	margin-left:20px;
 }
 .aboutPage div ul li {
-	color: white;
+	color: #FF8D27;
 	font-size: 14px;
 	margin:20px 0 20px 30px ;
 	text-align: left;

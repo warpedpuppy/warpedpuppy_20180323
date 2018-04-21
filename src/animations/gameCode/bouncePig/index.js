@@ -134,7 +134,7 @@ export default function(
           
         },
         resizeHandler: function () {
-             this.canvasWidth = this.utils.returnCanvasWidth();
+            this.canvasWidth = this.utils.returnCanvasWidth();
             this.canvasHeight =  400;
             this.halfWidth = this.canvasWidth/2;
             this.halfHeight = this.canvasHeight/2;
