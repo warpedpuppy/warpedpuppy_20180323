@@ -2,15 +2,16 @@ export default function () {
 	return [
 
 		{
-			title: 'Bounce, Pig! Bounce!',
-			description: 'A video game in which you bounce a pig on a swipe-created platform and eat fruit!',
-			link: '/BouncePig'
+			title: 'fireworks',
+			description: 'fireworks',
+			link: '/Fireworks'
 		},
 		{
-			title: 'insect ai',
-			description: 'Drop the insect on either of the maze entrances and it will think its way out',
-			link: '/'
+			title: 'pretty dots',
+			description: 'desc1',
+			link: '/PrettyDots'
 		},
+		
 		{
 			title: 'Glitter -- object pool',
 			description: 'Same code from the home page, just purple.',
@@ -24,14 +25,15 @@ export default function () {
 			link: '/FallingNumbers'
 		},
 		{
-			title: 'fireworks',
-			description: 'fireworks',
-			link: '/Fireworks'
+			title: 'Bounce, Pig! Bounce!',
+			description: 'A video game in which you bounce a pig on a swipe-created platform and eat fruit!',
+			link: '/BouncePig'
 		},
+		
 		{
-			title: 'pretty dots',
-			description: 'desc1',
-			link: '/PrettyDots'
+			title: 'insect ai',
+			description: 'Drop the insect on either of the maze entrances and it will think its way out',
+			link: '/'
 		},
 		{
 			title: 'bitmap font and sound sync',
