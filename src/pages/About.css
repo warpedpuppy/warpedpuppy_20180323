@@ -25,3 +25,14 @@
 	margin:20px 0 20px 30px ;
 	text-align: left;
 }
+.aboutPage a, 
+.aboutPage a:visited {
+	color:#FF00FF;
+	font-size: 40px;
+	font-weight: bold;
+
+}
+.aboutPage a:active,
+.aboutPage a:hover {
+color:#FF00FF;
+}
