@@ -7,3 +7,7 @@
 	left:0;
 	z-index: -1;
 }
+#homeCanvas canvas{
+	width: 100vw;
+	height: 100vh;
+}
