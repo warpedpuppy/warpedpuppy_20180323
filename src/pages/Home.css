@@ -3,7 +3,11 @@ div.homePage {
 div.homePage h1 {
 	margin:0;
 }
-
+.small_italic {
+	font-style: italic;
+	font-size: 12px;
+	text-align: center;
+}
 .textCont {
 	width: 70%;
 	margin:150px auto;
