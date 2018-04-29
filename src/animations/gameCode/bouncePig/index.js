@@ -1,4 +1,4 @@
-export default function(
+export default function (
     PIXI, 
     ObjectPoolBuilder,
     LevelComplete,
@@ -14,20 +14,17 @@ export default function(
     Drums, 
     TweenLite, 
     TimelineLite,
-    Back){
+    Back) {
     return {
-        gv: this,
-        username: "guest",
-        bouncePlatform: "",
         app: new PIXI.Application(),
         loader:  PIXI.loader,
         PIXI: PIXI,
         start: function () {
-            this.totalSoundsAndLoader = 7;
+            //this.totalSoundsAndLoader = 7;
             this.utils = new Utils(this, PIXI);
             this.PIXI = PIXI;
             this.TweenLite = TweenLite;
-            this.TimelineLite = TimelineLite;
+            // this.TimelineLite = TimelineLite;
             this.Back = Back;
             this.ObjectPoolBuilder = ObjectPoolBuilder;
             this.Mines = Mines;
@@ -57,11 +54,7 @@ export default function(
             this.webGL = (this.renderer instanceof PIXI.CanvasRenderer) ? false : true;
             this.resizeHandler = this.resizeHandler.bind(this);
             window.onresize = this.resizeHandler;
-            //let that = this;
-            //window.addEventListener("orientationchange", () => that.resizeHandler() );
-
-
-            this.counter = 0;
+            // this.counter = 0;
         },
         stop: function () {
             this.loader.destroy();
@@ -125,7 +118,7 @@ export default function(
 
             this.stars = new ObjectPoolBuilder(PIXI, "star.png", 80, [3,8],[2,25], undefined, true, true, this, false, 1);
             this.stars.init();
-
+            this.stars.startPool(this.hero.x, this.hero.y, this.stage);
            
             this.stage.addChild(this.swipeText);
             this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;

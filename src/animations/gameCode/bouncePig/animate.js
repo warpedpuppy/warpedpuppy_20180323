@@ -124,7 +124,7 @@ export default function animate (gv) {
                     && gv.utils.rectangleRectangleCollisionDetection(rect1, gv.rect2)) {
                     gv.fruit.eat(fruit);
                     gv.hero.chew();
-
+                    console.log('start start')
                     gv.stars.startPool(gv.hero.x, gv.hero.y, gv.kingCont);
                 }
             }

@@ -7,7 +7,7 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
         pixi: true,
         init: function () {
             this.buildPool()
-            this.startScale = (startScale !== undefined)?startScale:0;
+            this.startScale = (startScale !== undefined)?startScale:10;
             if(rotateRange !== undefined)this.rotateRange = rotateRange; 
         },
         singleObject: function () {
@@ -36,30 +36,37 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
                 instance.speed = instance.storeSpeed = gv.utils.randomNumberBetween(speeds[0], speeds[1]);
                 instance.vx = Math.cos(instance.angle) * instance.speed;
                 instance.vy = Math.sin(instance.angle) * instance.speed;
-                instance.scale.x =  instance.scale.y =this.startScale ;
+                instance.scale.x =  instance.scale.y = 1;//this.startScale ;
                 instance.storeScale = 1;//Math.random()*.75+.05;
+                // instance.x = instance.y = 100;
                 this.op.push(instance);
             }
         },
         startPool: function (xPos, yPos, addTo, index) {
             var instance;
             this.addTo = addTo;
-
-            for(var i =0; i < objQ; i ++){
+             console.log(gv.stage.children.length)
+            for(var i = 0; i < objQ; i ++){
                 instance = this.op[i];
+                instance.x = instance.y = 100;
+                // console.log(instance)
+                instance.scale.x = instance.scale.y = 100;
                 this.restore(instance);
-                instance.vx = Math.cos(instance.angle);// * instance.speed;
-                instance.vy = Math.sin(instance.angle);// * instance.speed;
-                instance.startX = instance.x = xPos;
-                instance.startY = instance.y = yPos;
-                instance.age = 0;
-                instance.lifeSpan = gv.utils.randomIntBetween(lifeSpan[0], lifeSpan[1]);
-                if(index === undefined)
-                    addTo.addChild(instance);
-                else
-                    addTo.addChildAt(instance, index);
+                // instance.vx = Math.cos(instance.angle);// * instance.speed;
+                // instance.vy = Math.sin(instance.angle);// * instance.speed;
+                // instance.startX = instance.x = xPos;
+                // instance.startY = instance.y = yPos;
+                // instance.age = 0;
+                // instance.lifeSpan = gv.utils.randomIntBetween(lifeSpan[0], lifeSpan[1]);
+                // if(index === undefined)
+                //     addTo.addChild(instance);
+                // else
+                //     addTo.addChildAt(instance, index);
+
+                gv.stage.addChild(instance)
 
             }
+            console.log(gv.stage.children.length)
             this.go = true;
         },
         addSpeed: function ($target) {
@@ -76,29 +83,29 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
             $target.alpha =1;
         },
         tickIt: function () {
-            if(this.go === true){
-            var instance;
-            for (var i =0; i < objQ; i ++) {
-                instance = this.op[i];
-                if(instance.parent !== undefined){
-                    instance.x += instance.vx;
-                    instance.y += instance.vy;
-                    if(instance.rotateRange !== undefined)instance.rotation += instance.rotateRange;
-                    if(instance.scale.x < 1){
-                        instance.scale.x += 0.01;
-                        instance.scale.y += 0.01;
-                        instance.age ++;
-                        instance.alpha -= 0.005;
-                    }
-                    this.addSpeed(instance);
-                    if (instance.age >= instance.lifeSpan) {
-                        this.restore(instance);
-                        instance.parent.removeChild(instance);
-                        instance.age = 0;
-                    }
-                }
-            }
-        }
-    }
+            // if(this.go === true){
+            // let instance;
+            // for (let i =0; i < objQ; i ++) {
+            //     instance = this.op[i];
+            //     if(instance.parent !== undefined){
+            //         instance.x += instance.vx;
+            //         instance.y += instance.vy;
+            //         if(instance.rotateRange !== undefined)instance.rotation += instance.rotateRange;
+            //         if(instance.scale.x < 1){
+            //             instance.scale.x += 0.01;
+            //             instance.scale.y += 0.01;
+            //             instance.age ++;
+            //             instance.alpha -= 0.005;
+            //         }
+            //         this.addSpeed(instance);
+            //         if (instance.age >= instance.lifeSpan) {
+            //             this.restore(instance);
+            //             instance.parent.removeChild(instance);
+            //             instance.age = 0;
+            //         }
+            //     }
+            //   }
+            // }
+      }
     }
 }
