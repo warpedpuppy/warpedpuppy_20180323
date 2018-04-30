@@ -38,7 +38,7 @@ export default function Drums (gv) {
             this.addToStage();
         },
         show: function () {
-            if(this.rightDrum.visible !== true ){
+            if (this.rightDrum.visible !== true ) {
                 this.rightDrum.y = gv.halfHeight;
                 this.rightDrum.x = gv.canvasWidth*0.75;
 
@@ -54,11 +54,10 @@ export default function Drums (gv) {
         drumRoll: function (drum) {
             gv.animate = false;
             this.drum = drum;
-            if(drum.side === "left"){
+            if (drum.side === "left") {
                 drum.x = gv.halfWidth;
                 drum.y = gv.halfHeight;
-            }
-            else{
+            } else {
                 drum.x = gv.halfWidth;
                 drum.y = gv.halfHeight+85;
             }
@@ -72,7 +71,6 @@ export default function Drums (gv) {
             let rot = (this.drum === this.rightDrum)?-gv.utils.deg2rad(3*360):gv.utils.deg2rad(3*360);
             gv.TweenLite.to(gv.hero,4, {rotation: rot, onComplete:this.heroZero});
             this.miniExplosion.startPool(gv.hero.x, gv.hero.y+10, gv.kingCont);
-
         },
         heroZero: function () {
             gv.hero.rotation = gv.utils.deg2rad(0);
@@ -88,14 +86,13 @@ export default function Drums (gv) {
             drum.h = cont.h = drum.height;
             cont.addChild(drum);
             let line;
-            if(side === "right"){
+            if (side === "right") {
                 line = new gv.PIXI.Graphics();
                 line.lineStyle(2, 0x000000, 1).moveTo(10,10).lineTo(cont.w-12,-cont.h-12);
                 cont.line = line;
                 cont.point1 = new gv.PIXI.Point(10,10);
                 cont.point2 = new gv.PIXI.Point(drum.w-12,-drum.h-12);
-            }
-            else{
+            } else {
                 line = new gv.PIXI.Graphics();
                 line.lineStyle(2, 0x000000, 1).moveTo(-5,10).lineTo(cont.w-25,cont.h+33);
                 cont.line = line;
