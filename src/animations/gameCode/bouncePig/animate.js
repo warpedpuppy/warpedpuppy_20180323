@@ -1,21 +1,20 @@
 export default function animate (gv) {
+    const clouds = gv.clouds.clouds,
+          drums = gv.drums.drums,
+          fruits = gv.fruit.fruits,
+          dot1 = gv.bouncePlatform.dot1,
+          dot2 = gv.bouncePlatform.dot2,
+          line =  gv.bouncePlatform.line,
+          mines = gv.mines.mines,
+          C = new gv.PIXI.Point(gv.halfWidth, gv.halfHeight),
+          bounce = -0.7,
+          testing = false;
+    let A, B, i, mine, mineRect, cloud, boxPoint, cloudRect, drum, fruit, rect1;
 
-    
     return function () {
-        let A,B;
-
         if( gv.animateAllow === true 
             && gv.introScreenOnStage === false ) {
-                var clouds = gv.clouds.clouds;
-                var drums = gv.drums.drums;
-                var fruits = gv.fruit.fruits;
-                var dot1 = gv.bouncePlatform.dot1;
-                var dot2 = gv.bouncePlatform.dot2;
-                var line =  gv.bouncePlatform.line;
-                var mines = gv.mines.mines;
-                var C = new gv.PIXI.Point(gv.heroInstance.x, gv.heroInstance.y);
-                var bounce = -0.7;
-                var testing = false;
+                
                 gv.background.tickIt();
                 gv.bouncePlatform.tickIt();
                 gv.stars.tickIt();
@@ -34,9 +33,9 @@ export default function animate (gv) {
                     }
                 }
 
-            for (var i = 0; i < gv.loopingQ; i++) {
+            for ( i = 0; i < gv.loopingQ; i++) {
                 if (mines[i] && gv.mines.onStage === true) {
-                    var mine = mines[i];
+                    mine = mines[i];
                     mine.rotation +=mine.rot;
                     mine.y -= gv.vy;
                     mine.x -= gv.vx;
@@ -46,7 +45,7 @@ export default function animate (gv) {
 
                     if (mine.x > gv.canvasWidth + mine.w) mine.x = -mine.w;
                     if (mine.x < -mine.w) mine.x = gv.canvasWidth + mine.w;
-                    var mineRect = new gv.PIXI.Rectangle(mine.x + mine.rect.x, mine.y + mine.rect.y, mine.rect.width, mine.rect.height);
+                     mineRect = new gv.PIXI.Rectangle(mine.x + mine.rect.x, mine.y + mine.rect.y, mine.rect.width, mine.rect.height);
                     if (gv.vy > 0 && gv.utils.rectangleRectangleCollisionDetection(mineRect, gv.rect2) ) {
                             gv.fruit.reset();
                             gv.fruit.addToStage();
@@ -58,7 +57,7 @@ export default function animate (gv) {
                 }
                 if (clouds[i] && gv.clouds.onStage === true) {
                    
-                    var cloud = clouds[i];
+                     cloud = clouds[i];
 
                     cloud.y -= gv.vy;
                     cloud.x -= gv.vx;
@@ -70,8 +69,8 @@ export default function animate (gv) {
 
 
                     //CLOUD COLLISION DETECTION
-                    var boxPoint = cloud.toGlobal(new gv.PIXI.Point(cloud.box.x, cloud.box.y));
-                    var cloudRect = new gv.PIXI.Rectangle(boxPoint.x, boxPoint.y, cloud.w, 20);
+                     boxPoint = cloud.toGlobal(new gv.PIXI.Point(cloud.box.x, cloud.box.y));
+                     cloudRect = new gv.PIXI.Rectangle(boxPoint.x, boxPoint.y, cloud.w, 20);
                     if (testing === false && gv.vy >0  && gv.utils.rectangleRectangleCollisionDetection(cloudRect, gv.rect3 ) ) {
                         gv.vy *= bounce;
                         cloud.y += gv.rect3.height;
@@ -82,7 +81,7 @@ export default function animate (gv) {
                 }
 
             if (drums[i] && drums[i].visible === true &&  drums[i].alpha === 1 && gv.drums.onStage === true) {
-                var drum = drums[i];
+                 drum = drums[i];
                 drum.y -= gv.vy;
                 drum.x -= gv.vx;
                 if (drum.y < -drum.h) drum.y = gv.canvasHeight;
@@ -107,7 +106,7 @@ export default function animate (gv) {
                 }
             }
             if (fruits[i]) {
-                var fruit = fruits[i];
+                 fruit = fruits[i];
                 fruit.rotation = gv.utils.cosWave(0, gv.utils.deg2rad(45), fruit.rotQ);
                 fruit.y -= gv.vy;
                 fruit.x -= gv.vx;
@@ -117,14 +116,13 @@ export default function animate (gv) {
                 if (fruit.x > gv.canvasWidth + fruit.width) fruit.x = -fruit.width;
                 if (fruit.x < -fruit.width) fruit.x = gv.canvasWidth + fruit.width;
 
-                var rect1 = new gv.PIXI.Rectangle(fruit.x - (fruit.width / 2), fruit.y, fruit.width, fruit.height);
+                 rect1 = new gv.PIXI.Rectangle(fruit.x - (fruit.width / 2), fruit.y, fruit.width, fruit.height);
 
                 if (testing === false 
                     && gv.speedLimit === gv.storeSpeedLimit 
                     && gv.utils.rectangleRectangleCollisionDetection(rect1, gv.rect2)) {
                     gv.fruit.eat(fruit);
                     gv.hero.chew();
-
                     gv.stars.startPool(gv.hero.x, gv.hero.y, gv.kingCont);
                 }
             }
@@ -197,7 +195,6 @@ export default function animate (gv) {
         gv.mines.redLittles.tickIt();
         gv.renderer.render(gv.stage);
     }
-    // requestAnimFrame(animate);
     gv.renderer.render(gv.stage);
 }
 

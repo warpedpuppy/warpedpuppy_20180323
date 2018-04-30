@@ -1,7 +1,7 @@
 export default function Drums (gv) {
     return {
         cont: new gv.PIXI.Container(),
-        miniExplosion: new gv.ObjectPoolBuilder("miniCloud.png", 2000, [10,30],[2,25], undefined, true, true, gv),
+        miniExplosion: new gv.ObjectPoolBuilder(gv.PIXI, "miniCloud.png", 200, [10,30],[2,25], undefined, true, true, gv),
         onStage: false,
         init: function () {
             this.rightDrum = this.drum("right");
@@ -9,6 +9,7 @@ export default function Drums (gv) {
             this.rightDrum.y = gv.halfHeight;
             this.leftDrum.y = gv.halfHeight;
             this.drums =[this.leftDrum, this.rightDrum];
+            this.miniExplosion.init();
             gv.stage.addChild(this.cont);
         },
         addToStage: function () {
@@ -61,7 +62,8 @@ export default function Drums (gv) {
                 drum.x = gv.halfWidth;
                 drum.y = gv.halfHeight+85;
             }
-            gv.TweenLite.delayedCall(0.5, gv.utils.proxy(this.blastOff, this));
+            this.blastOff();
+            //gv.TweenLite.delayedCall(0.5, gv.utils.proxy(this.blastOff, this));
         },
         blastOff: function () {
             this.hide();

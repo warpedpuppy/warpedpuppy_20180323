@@ -1,11 +1,10 @@
-export default function(
+export default function (
     PIXI, 
     ObjectPoolBuilder,
     LevelComplete,
     Background,
     Hero,
     BouncePlatform,
-    Level,
     Fruit,
     animate, 
     Utils, 
@@ -14,20 +13,22 @@ export default function(
     Drums, 
     TweenLite, 
     TimelineLite,
-    Back){
+    Back) {
     return {
-        gv: this,
-        username: "guest",
-        bouncePlatform: "",
         app: new PIXI.Application(),
         loader:  PIXI.loader,
         PIXI: PIXI,
+        mineQ: 3,
+        fruitQ: 10,
+        cloudQ: 3,
+        maxFruit: 100,
+        maxMines: 10,
         start: function () {
-            this.totalSoundsAndLoader = 7;
+            //this.totalSoundsAndLoader = 7;
             this.utils = new Utils(this, PIXI);
             this.PIXI = PIXI;
             this.TweenLite = TweenLite;
-            this.TimelineLite = TimelineLite;
+            // this.TimelineLite = TimelineLite;
             this.Back = Back;
             this.ObjectPoolBuilder = ObjectPoolBuilder;
             this.Mines = Mines;
@@ -41,7 +42,7 @@ export default function(
             this.renderer = PIXI.autoDetectRenderer(this.canvasWidth, this.canvasHeight);
             this.renderer.backgroundColor = 0x1a69ff;
             this.animate = animate.bind(this);
-            this.app.ticker.add(animate(this));
+           
             document.getElementById("tugtugCanvas").appendChild(this.renderer.view);
             if(!this.loader.resources.gamesheet){
                  this.loader
@@ -57,11 +58,7 @@ export default function(
             this.webGL = (this.renderer instanceof PIXI.CanvasRenderer) ? false : true;
             this.resizeHandler = this.resizeHandler.bind(this);
             window.onresize = this.resizeHandler;
-            //let that = this;
-            //window.addEventListener("orientationchange", () => that.resizeHandler() );
-
-
-            this.counter = 0;
+            // this.counter = 0;
         },
         stop: function () {
             this.loader.destroy();
@@ -71,9 +68,7 @@ export default function(
         Main: function () {
             this.halfHeight = this.canvasHeight / 2;
             this.halfWidth = this.canvasWidth / 2;
-            this.level = Level(this);
-            this.level.init();
-            
+
             this.kingCont = new PIXI.particles.ParticleContainer();
             this.stage.addChild(this.kingCont);
 
@@ -82,16 +77,16 @@ export default function(
             this.clouds.addToStage();
             this.cloudsOnStage = true;
 
-             this.drums = Drums(this);
-             this.drums.init();
-             this.drums.addToStage();
+            this.drums = Drums(this);
+            this.drums.init();
+            this.drums.addToStage();
 
-             this.mines = Mines(this);
-             this.mines.init();
-             this.mines.addToStage();
+            this.mines = Mines(this);
+            this.mines.init();
+            this.mines.addToStage();
 
-             this.fruit = Fruit(this);
-             this.fruit.init();
+            this.fruit = Fruit(this);
+            this.fruit.init();
 
             this.hero = new Hero(this);
             this.hero.init();
@@ -111,10 +106,10 @@ export default function(
             this.introScreenOnStage = false;
 
             this.loopingQ = 10;
-            var hitAreaWidth = this.heroInstance.width*0.5;
-            var hitAreaHeight = this.heroInstance.height*0.5;
-            var hitAreaX =this.heroInstance.x - (hitAreaWidth / 2);
-            var hitAreaY =  this.heroInstance.y - (hitAreaHeight / 2);
+            let hitAreaWidth = this.heroInstance.width * 0.5;
+            let hitAreaHeight = this.heroInstance.height * 0.5;
+            let hitAreaX =this.heroInstance.x - (hitAreaWidth / 2);
+            let hitAreaY =  this.heroInstance.y - (hitAreaHeight / 2);
 
             this.rect2 = new PIXI.Rectangle(hitAreaX,hitAreaY,hitAreaWidth, hitAreaHeight);
             this.rect3 = new PIXI.Rectangle(
@@ -125,12 +120,12 @@ export default function(
 
             this.stars = new ObjectPoolBuilder(PIXI, "star.png", 80, [3,8],[2,25], undefined, true, true, this, false, 1);
             this.stars.init();
-
            
             this.stage.addChild(this.swipeText);
             this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;
             this.swipeText.y = (this.canvasHeight - this.swipeText.height)-10;
             
+            this.app.ticker.add(animate(this));
           
         },
         resizeHandler: function () {

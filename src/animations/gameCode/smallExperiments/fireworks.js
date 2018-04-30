@@ -22,7 +22,7 @@ export default function Firework (PIXI, Utils, TimelineLite){
 
         },
         build: function () {
-            for(let i = 0; i < this.fq; i ++){
+            for (let i = 0; i < this.fq; i ++) {
                 let firework = this.FireworkInstance();
                 firework.start = firework.start.bind(firework);
                 firework.restart = firework.restart.bind(firework);
@@ -33,7 +33,7 @@ export default function Firework (PIXI, Utils, TimelineLite){
                 let delay = this.utils.randomIntBetween(0, 1);
                 setTimeout(firework.start, delay);
             }
-            for(let i = 0; i < 500; i ++){
+            for (let i = 0; i < 500; i ++) {
                 let star = new PIXI.Graphics();
                 star.beginFill(0xFFFF00).drawCircle(0,0,0.25).endFill();
                 star.x = this.utils.randomNumberBetween(0,this.canvasWidth);
@@ -41,7 +41,7 @@ export default function Firework (PIXI, Utils, TimelineLite){
                 this.stage.addChild(star);
             }
             let widthCheck = 0;
-            while(widthCheck < this.canvasWidth){
+            while (widthCheck < this.canvasWidth) {
                 let shape = new PIXI.Graphics();
                 let width = this.utils.randomNumberBetween(10, 30);
                 let height =  this.utils.randomNumberBetween(10, 50);
@@ -150,7 +150,6 @@ export default function Firework (PIXI, Utils, TimelineLite){
                     f.restart();
                 }
             }
-
             this.renderer.render(this.stage);
         }
     }

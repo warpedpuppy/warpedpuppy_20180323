@@ -1,6 +1,6 @@
 export default function Mines (gv) {
     return {
-        mineQ: gv.level.mineQ,
+        mineQ: gv.mineQ,
         mines: [],
         redBackground: new gv.PIXI.Graphics(),
         onStage: false,
@@ -19,11 +19,13 @@ export default function Mines (gv) {
                 var mine = this.mine();
                 this.mines.push(mine);
             }
-            this.redLittles = new gv.ObjectPoolBuilder("redLittle.png", 200, [10,30], [10,50], [0.05, 2], true, true, gv);
+            this.redLittles = new gv.ObjectPoolBuilder(gv.PIXI,"redLittle.png", 200, [10,30], [10,50], [0.05, 2], true, true, gv);
+            this.redLittles.init();
             this.redBigs = new gv.ObjectPoolBuilder("redBig.png", 100, [3,8], [50,100], [0.05, 2], true, true, gv);
+            this.redBigs.init();
         },
         addMoreMines: function () {
-            var additionalMines = gv.level.mineQ - this.mineQ;
+            var additionalMines = gv.mineQ - this.mineQ;
             var mine;
             for (var i = 0; i < additionalMines; i++) {
                 mine = this.mine();
