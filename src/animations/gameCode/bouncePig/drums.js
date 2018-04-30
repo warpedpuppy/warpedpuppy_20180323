@@ -69,7 +69,7 @@ export default function Drums (gv) {
             this.hide();
             gv.animate = true;
             gv.utils.playSound("explosion");
-            var rot = (this.drum === this.rightDrum)?-gv.utils.deg2rad(3*360):gv.utils.deg2rad(3*360);
+            let rot = (this.drum === this.rightDrum)?-gv.utils.deg2rad(3*360):gv.utils.deg2rad(3*360);
             gv.TweenLite.to(gv.hero,4, {rotation: rot, onComplete:this.heroZero});
             this.miniExplosion.startPool(gv.hero.x, gv.hero.y+10, gv.kingCont);
 
@@ -78,16 +78,16 @@ export default function Drums (gv) {
             gv.hero.rotation = gv.utils.deg2rad(0);
         },
         drum: function (side) {
-            var cont = new gv.PIXI.Container();
+            let cont = new gv.PIXI.Container();
             cont.side = side;
-            var drum = new gv.PIXI.Sprite.fromFrame("drum.png");
+            let drum = new gv.PIXI.Sprite.fromFrame("drum.png");
             drum.side= side;
             drum.rotation = (side === "right")?gv.utils.deg2rad(-30):gv.utils.deg2rad(30);
             drum.cacheAsBitmap = true;
             drum.w = cont.w = drum.width;
             drum.h = cont.h = drum.height;
             cont.addChild(drum);
-            var line;
+            let line;
             if(side === "right"){
                 line = new gv.PIXI.Graphics();
                 line.lineStyle(2, 0x000000, 1).moveTo(10,10).lineTo(cont.w-12,-cont.h-12);

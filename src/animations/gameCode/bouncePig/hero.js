@@ -38,7 +38,6 @@ export default function Hero (gv) {
                 this.glideHero.play();
                 this.activeMC = this.glideHero;
             }
-
         },
         getHero: function () {
             return this.cont;
@@ -51,40 +50,32 @@ export default function Hero (gv) {
             this.cont.removeChild(this.activeMC);
             this.cont.addChild(this.chewingHero);
             this.chewingHero.play();
-
             this.activeMC = this.chewingHero;
         },
         fly: function () {
-
-                this.activeMC.stop();
-                this.cont.removeChild(this.activeMC);
-                this.cont.addChild(this.flyingHero);
-                this.flyingHero.play();
-
-                this.activeMC = this.flyingHero;
+            this.activeMC.stop();
+            this.cont.removeChild(this.activeMC);
+            this.cont.addChild(this.flyingHero);
+            this.flyingHero.play();
+            this.activeMC = this.flyingHero;
         },
         stand: function () {
-
-                this.activeMC.stop();
-                this.cont.removeChild(this.activeMC);
-                this.cont.addChild(this.standingHero);
-                this.standingHero.play();
-
-                this.activeMC = this.standingHero;
+            this.activeMC.stop();
+            this.cont.removeChild(this.activeMC);
+            this.cont.addChild(this.standingHero);
+            this.standingHero.play();
+            this.activeMC = this.standingHero;
         },
         hero: function () {
-
             this.cont.chewCounter ++;
-
-            if(this.cont.chewCounter >5){
+            if (this.cont.chewCounter >5) {
                 this.cont.chewCounter = 0;
                 this.activeMC.stop();
                 this.cont.removeChild(this.activeMC);
                 this.cont.addChild(this.hero);
                 this.hero.play();
                 this.activeMC = this.hero;
-            }
-            else{
+            } else{ 
                 this.cont.chew();
             }
 

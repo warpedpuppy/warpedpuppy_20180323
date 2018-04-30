@@ -4,7 +4,7 @@ export default function Clouds (gv) {
         cont: new gv.PIXI.Container(),
         onStage:false,
         init: function (){
-            for(var i = 0; i < gv.cloudQ; i ++){
+            for(let i = 0; i < gv.cloudQ; i ++){
                 this.clouds.push(this.cloud("right"));
                 this.clouds.push(this.cloud("left"));
             }
@@ -13,7 +13,7 @@ export default function Clouds (gv) {
         addToStage: function () {
             this.onStage = true;
             let cloud;
-            for(var i = 0; i < this.clouds.length; i ++){
+            for(let i = 0; i < this.clouds.length; i ++){
                 cloud =  this.clouds[i];
                 cloud.alpha = 1;
                 cloud.y = Math.ceil(Math.random()*gv.canvasHeight);
@@ -31,12 +31,12 @@ export default function Clouds (gv) {
             this.addToStage();
         },
         cloud: function (side) {
-            var cloud = (side === "right")?new gv.PIXI.Sprite.fromFrame("cloudRight.png"):new gv.PIXI.Sprite.fromFrame("cloudLeft.png");
+            let cloud = (side === "right")?new gv.PIXI.Sprite.fromFrame("cloudRight.png"):new gv.PIXI.Sprite.fromFrame("cloudLeft.png");
             cloud.side= side;
             cloud.cacheAsBitmap = true;
             cloud.w = cloud.width;
             cloud.h = cloud.height;
-            var box = new gv.PIXI.Rectangle(0,60,cloud.w, 10);
+            let box = new gv.PIXI.Rectangle(0,60,cloud.w, 10);
             cloud.box = box;
             return cloud;
         }

@@ -15,8 +15,8 @@ export default function Mines (gv) {
             this.redBackground.beginFill(0xFF0000).drawRect(0,0,gv.canvasWidth,gv.canvasHeight).endFill();
         },
         build: function () {
-            for(var i = 0; i < this.mineQ; i++){
-                var mine = this.mine();
+            for (let i = 0; i < this.mineQ; i++) {
+                let mine = this.mine();
                 this.mines.push(mine);
             }
             this.redLittles = new gv.ObjectPoolBuilder(gv.PIXI,"redLittle.png", 200, [10,30], [10,50], [0.05, 2], true, true, gv);
@@ -25,9 +25,9 @@ export default function Mines (gv) {
             this.redBigs.init();
         },
         addMoreMines: function () {
-            var additionalMines = gv.mineQ - this.mineQ;
-            var mine;
-            for (var i = 0; i < additionalMines; i++) {
+            let additionalMines = gv.mineQ - this.mineQ;
+            let mine;
+            for (let i = 0; i < additionalMines; i++) {
                 mine = this.mine();
                 this.mines.push(mine);
             }
@@ -35,15 +35,15 @@ export default function Mines (gv) {
         },
         removeFromStage: function () {
             this.onStage = false;
-            for(var i = 0; i < this.mineQ; i++){
-                var mine = this.mines[i];
+            for(let i = 0; i < this.mineQ; i++){
+                let mine = this.mines[i];
                 gv.kingCont.removeChild(mine);
             }
         },
         addToStage: function () {
             this.onStage = true;
-            for(var i = 0; i < this.mineQ; i++){
-                var mine = this.mines[i];
+            for(let i = 0; i < this.mineQ; i++){
+                let mine = this.mines[i];
                 mine.alpha = 1;
                 mine.x = gv.utils.randomNumberBetween(0,gv.canvasWidth);
                 mine.y = gv.utils.randomNumberBetween(0,gv.canvasHeight);
@@ -65,7 +65,7 @@ export default function Mines (gv) {
             gv.TweenLite.to(this.redBackground,0.5, {alpha:0});
         },
         mine: function () {
-            var mine = new gv.PIXI.Sprite.fromFrame("mine.png");
+            let mine = new gv.PIXI.Sprite.fromFrame("mine.png");
             mine.rect = new gv.PIXI.Rectangle(-30,-30,60,60);
             mine.w = mine.h =Math.max(mine.height,mine.width);
             mine.anchor.x = mine.anchor.y = 0.5;

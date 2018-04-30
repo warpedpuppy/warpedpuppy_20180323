@@ -12,31 +12,29 @@ export default function Fruit(gv) {
             this.addToStage();
         },
         build: function () {
-            var fruit;
-            for (var i = 0; i < this.fruitQ; i++) {
+            let fruit;
+            for (let i = 0; i < this.fruitQ; i++) {
                 fruit = new gv.PIXI.Sprite.fromFrame(this.fruitArray[gv.utils.randomIntBetween(0,this.fruitArray.length-1)]);
                 fruit.scale.x = fruit.scale.y = 0.5;
                 fruit.anchor.x = 0.5;
-
                 this.fruits.push(fruit);
                 this.storeFruit.push(fruit);
             }
         },
         addMoreFruit: function () {
-            var additionalFruit = gv.fruitQ - this.fruitQ;
-            var fruit;
-            for (var i = 0; i < additionalFruit; i++) {
+            let additionalFruit = gv.fruitQ - this.fruitQ;
+            let fruit;
+            for (let i = 0; i < additionalFruit; i++) {
                 fruit = new gv.PIXI.Sprite.fromFrame(this.fruitArray[gv.utils.randomIntBetween(0,this.fruitArray.length-1)]);
                 fruit.scale.x = fruit.scale.y = 0.5;
                 fruit.anchor.x = 0.5;
-
                 this.storeFruit.push(fruit);
             }
             this.fruitQ = gv.fruitQ;
         },
         reset: function () {
             this.fruitCont.removeChildren();
-            var fruit;
+            let fruit;
             this.fruits.length = 0;
             for (var i = 0; i < this.fruitQ; i++) {
                 fruit = this.storeFruit[i];
@@ -57,9 +55,8 @@ export default function Fruit(gv) {
             gv.utils.playSound("crunch");
         },
         addToStage: function () {
-            var fruit;
-            for (var i = 0; i < this.fruitQ; i++) {
-
+            let fruit;
+            for (let i = 0; i < this.fruitQ; i++) {
                 fruit = this.fruits[i];
                 fruit.pivot.x = 0.5;
                 fruit.pivot.y = 0;
@@ -68,8 +65,7 @@ export default function Fruit(gv) {
                 fruit.scale.x = fruit.scale.y = 0.5;
                 fruit.rotQ = gv.utils.randomNumberBetween(0.001, 0.005);
                 fruit.y = gv.utils.randomNumberBetween(0, gv.canvasHeight);
-                fruit.x = gv.utils.randomNumberBetween(0, gv.canvasWidth);//gv.canvasWidth/2;//
-
+                fruit.x = gv.utils.randomNumberBetween(0, gv.canvasWidth);
                 this.fruitCont.addChild(fruit);
 
             }

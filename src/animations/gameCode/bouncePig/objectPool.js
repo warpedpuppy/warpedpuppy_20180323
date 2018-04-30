@@ -36,9 +36,8 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
                 instance.speed = instance.storeSpeed = gv.utils.randomNumberBetween(speeds[0], speeds[1]);
                 instance.vx = Math.cos(instance.angle) * instance.speed;
                 instance.vy = Math.sin(instance.angle) * instance.speed;
-                instance.scale.x =  instance.scale.y = 1;//this.startScale ;
-                instance.storeScale = 1;//Math.random()*.75+.05;
-                // instance.x = instance.y = 100;
+                instance.scale.x =  instance.scale.y = 1;
+                instance.storeScale = 1;
                 this.op.push(instance);
             }
         },
@@ -50,33 +49,25 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
                 instance.startX = instance.x = gv.halfWidth;
                 instance.startY = instance.y = 200;
                 this.restore(instance);
-                instance.vx = Math.cos(instance.angle);// * instance.speed;
-                instance.vy = Math.sin(instance.angle);// * instance.speed;
-                // instance.x = xPos;
-                // instance.y = yPos;
+                instance.vx = Math.cos(instance.angle);
+                instance.vy = Math.sin(instance.angle);
                 instance.age = 0;
                 instance.lifeSpan = gv.utils.randomIntBetween(lifeSpan[0], lifeSpan[1]);
-                // if(index === undefined)
-                //     addTo.addChild(instance);
-                // else
-                //     addTo.addChildAt(instance, index);
-
                 gv.kingCont.addChild(instance)
-
             }
             
             this.go = true;
         },
-        addSpeed: function ($target) {
-            $target.speed += 0.025;
-            $target.vx = Math.cos($target.angle) * ($target.speed);
-            $target.vy = Math.sin($target.angle) * ($target.speed);
+        addSpeed: function (target) {
+            target.speed += 0.025;
+            target.vx = Math.cos(target.angle) * (target.speed);
+            target.vy = Math.sin(target.angle) * (target.speed);
         },
-        restore: function ($target) {
-            $target.visible = true;
-            $target.speed =  $target.storeSpeed;
-            $target.scale.x = $target.scale.y = 1;//this.startScale;
-            $target.alpha =1;
+        restore: function (target) {
+            target.visible = true;
+            target.speed =  target.storeSpeed;
+            target.scale.x = target.scale.y = 1;//this.startScale;
+            target.alpha =1;
 
         },
         tickIt: function () {

@@ -23,23 +23,22 @@ export default function BouncePlatform (gv) {
             this.onMouseMove = this.onMouseMove.bind(this)
             this.releaseMouse = this.releaseMouse.bind(this)
 
-            if(trueFalse === true){
+            if (trueFalse === true) {
                 gv.stage.interactive = true;
                 gv.stage.buttonMode = true;
                 gv.stage.mousedown = gv.stage.touchstart =  this.placeFirstDot;
                 gv.stage.mousemove = gv.stage.touchmove = this.onMouseMove;
                 gv.stage.mouseup =  gv.stage.touchend = this.releaseMouse;
             } else {
-                //gv.stage.interactive = false;
                 gv.stage.mousedown = gv.stage.touchstart =  null;
                 gv.stage.mousemove = gv.stage.touchmove = null;
                 gv.stage.mouseup =  gv.stage.touchend = null;
             }
         },
         placeFirstDot: function(touchData) {
-            var mouse = touchData.data.global;
-            var mouseX = mouse.x;
-            var mouseY = mouse.y;
+            let mouse = touchData.data.global,
+                mouseX = mouse.x,
+                mouseY = mouse.y;
             this.line.width = 0;
             this.line.x = mouseX;
             this.line.y = mouseY;
@@ -54,13 +53,13 @@ export default function BouncePlatform (gv) {
             gv.stage.removeChild(gv.swipeText);
         },
         onMouseMove: function(touchData){
-            if(gv.mouseDown === true){
-                var mouse = touchData.data.global;
-                var mouseX = mouse.x;
-                var mouseY = mouse.y;
+            if (gv.mouseDown === true) {
+                let mouse = touchData.data.global,
+                    mouseX = mouse.x,
+                    mouseY = mouse.y;
                 this.dot2.x = mouseX;
                 this.dot2.y = mouseY;
-                var disAngle = gv.utils.distanceAndAngle(new gv.PIXI.Point(this.dot1.x, this.dot1.y), new gv.PIXI.Point(this.dot2.x, this.dot2.y));
+                let disAngle = gv.utils.distanceAndAngle(new gv.PIXI.Point(this.dot1.x, this.dot1.y), new gv.PIXI.Point(this.dot2.x, this.dot2.y));
                 this.line.rotation = disAngle[1];
                 this.line.width = disAngle[0];
             }
@@ -69,7 +68,7 @@ export default function BouncePlatform (gv) {
             gv.mouseDown = false;
         },
         tickIt: function() {
-            if(this.dot2.visible === true){
+            if (this.dot2.visible === true) {
                 this.dot1.rotation += 0.25;
                 this.dot2.rotation += 0.25;
             }

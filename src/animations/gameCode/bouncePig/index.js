@@ -1,7 +1,6 @@
 export default function (
     PIXI, 
     ObjectPoolBuilder,
-    LevelComplete,
     Background,
     Hero,
     BouncePlatform,
