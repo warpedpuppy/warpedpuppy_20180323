@@ -12,26 +12,26 @@ export default function animate (gv) {
     let A, B, i, mine, mineRect, cloud, boxPoint, cloudRect, drum, fruit, rect1;
 
     return function () {
-        if( gv.animateAllow === true 
-            && gv.introScreenOnStage === false ) {
+        if (gv.animateAllow === true) {
                 
-                gv.background.tickIt();
-                gv.bouncePlatform.tickIt();
-                gv.stars.tickIt();
-                gv.drums.miniExplosion.tickIt();
-                gv.mines.redBigs.tickIt();
-                gv.mines.redLittles.tickIt();
-                if (gv.mouseDown !== true) {
-                    dot1.y -= gv.vy;
-                    dot2.y -= gv.vy;
-                    line.y -= gv.vy;
-                    dot1.x -= gv.vx;
-                    dot2.x -= gv.vx;
-                    line.x -= gv.vx;
-                    if ((dot1.y < 0 && dot2.y < 0) || (dot1.y > gv.canvasHeight && dot2.y > gv.canvasHeight)) {
-                        gv.swipeText.visible = true;
-                    }
+            gv.background.tickIt();
+            gv.bouncePlatform.tickIt();
+            gv.stars.tickIt();
+            gv.drums.miniExplosion.tickIt();
+            gv.mines.redBigs.tickIt();
+            gv.mines.redLittles.tickIt();
+
+            if (gv.mouseDown !== true) {
+                dot1.y -= gv.vy;
+                dot2.y -= gv.vy;
+                line.y -= gv.vy;
+                dot1.x -= gv.vx;
+                dot2.x -= gv.vx;
+                line.x -= gv.vx;
+                if ((dot1.y < 0 && dot2.y < 0) || (dot1.y > gv.canvasHeight && dot2.y > gv.canvasHeight)) {
+                    gv.swipeText.visible = true;
                 }
+            }
 
             for ( i = 0; i < gv.loopingQ; i++) {
                 if (mines[i] && gv.mines.onStage === true) {
@@ -57,7 +57,7 @@ export default function animate (gv) {
                 }
                 if (clouds[i] && gv.clouds.onStage === true) {
                    
-                     cloud = clouds[i];
+                    cloud = clouds[i];
 
                     cloud.y -= gv.vy;
                     cloud.x -= gv.vx;
@@ -128,7 +128,10 @@ export default function animate (gv) {
             }
         }
 
-        if (gv.vy < gv.speedLimit)gv.vy += 0.25;
+        if (gv.vy < gv.speedLimit) {
+            gv.vy += 0.25;
+        }
+
         if (gv.speedLimit !== gv.storeSpeedLimit) {
             gv.swipeText.visible = false;
             if (gv.vy > 0) {
@@ -139,16 +142,16 @@ export default function animate (gv) {
                 }
             }
         } else if (gv.speedLimit === gv.storeSpeedLimit && gv.vy >0) {
-            if(gv.vy > gv.speedLimit){
+            if (gv.vy > gv.speedLimit) {
                 gv.vy -= 0.5;
             }
-            if(gv.vx > gv.speedLimit){
+            if (gv.vx > gv.speedLimit) {
                 gv.vx -= 0.5;
             }
-            else if(gv.vx < -gv.speedLimit){
+            else if (gv.vx < -gv.speedLimit) {
                 gv.vx += 0.5;
             }
-            if(gv.vx <= gv.speedLimit && gv.vy <= gv.speedLimit){
+            if (gv.vx <= gv.speedLimit && gv.vy <= gv.speedLimit) {
                 gv.drums.show();
             }
         }
@@ -170,31 +173,7 @@ export default function animate (gv) {
             gv.swipeText.visible = false;
             gv.speedLimit = gv.storeSpeedLimit;
         }
-        gv.renderer.render(gv.stage);
-    } else if( gv.animateAllow === true && gv.introScreenOnStage === true ) {
-        //THIS IF FOR THE NEXT LEVEL SCREENS
-        if(gv.bouncePlatform.line.alpha === 1){
-            gv.stars.tickIt();
-            gv.background.tickIt();
-            gv.bouncePlatform.tickIt();
-            gv.nextLevelScreen.tickIt();
-            gv.hero.y += gv.hero.introVY;
-            gv.hero.introVY += 0.15;
-            if(gv.hero.y > gv.halfHeight-130){
-                gv.hero.y  = gv.halfHeight-140;
-                // gv.utils.playSound("boing");
-
-                gv.hero.introVY *= -0.85;
-                gv.hero.bounce();
-            }
-        }
-        gv.renderer.render(gv.stage);
-    } else if( gv.animateAllow === true && gv.introScreenOnStage === false ) {
-        gv.stars.tickIt();
-        gv.mines.redBigs.tickIt();
-        gv.mines.redLittles.tickIt();
-        gv.renderer.render(gv.stage);
-    }
+    } 
     gv.renderer.render(gv.stage);
 }
 
