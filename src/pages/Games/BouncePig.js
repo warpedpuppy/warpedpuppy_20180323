@@ -1,5 +1,6 @@
 import React from 'react';
 import './Games.css';
+import './BouncePig.css';
 import * as PIXI from 'pixi.js';
 import Utils from '../../animations/gameCode/bouncePig/utils.js';
 import { TweenLite, TimelineLite, Back } from 'gsap';
@@ -41,7 +42,7 @@ export default class BouncePig extends React.Component {
 	}
 	render () {
 		return (
-			<div id="tugtugCanvas" className="games"></div>
+			<div id="tugtugCanvas" className="games"><h1 id="pig_loading">LOADING. . . </h1></div>
 	    );
 	}
     

@@ -43,12 +43,15 @@ export default function (
             this.animate = animate.bind(this);
            
             document.getElementById("tugtugCanvas").appendChild(this.renderer.view);
-            if(!this.loader.resources.gamesheet){
+            if (!this.loader.resources.gamesheet) {
                  this.loader
                     .add('gamesheet', "/images/bouncePig/bpb.json")
                     .add('levelText', "/fonts/games/bouncePig/levelText.xml")
                     .add('text', "/fonts/games/bouncePig/text.xml")
                     .load(this.Main.bind(this));
+                this.loader.onComplete.add(() => {
+                    document.getElementById('pig_loading').innerHTML = '';
+                });
             } else {
                 this.Main.bind(this)
                 this.Main();

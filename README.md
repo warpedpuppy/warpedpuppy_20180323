@@ -1,3 +1,3 @@
-<h1>redoing my portfolio in react</h1>
+<h1>Redoing my personal site in React</h1>
 
-<p>progress can be viewed here:  https://xenodochial-ramanujan-624727.netlify.com/</p>
+<p>This site is up and visible at <a href="//warpedpuppy.com>www.warpedpuppy.com</a> but I'm still cleaning the code.  A lot of it started out in AS3, so bear with me.</p>
