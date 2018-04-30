@@ -42,7 +42,7 @@ export default class BouncePig extends React.Component {
 	}
 	render () {
 		return (
-			<div id="tugtugCanvas" className="games"><h1 id="pig_loading">LOADING. . . </h1></div>
+			<div id="tugtugCanvas" className="games"><div id="pig_loading"><img class='spinLogo' src='/images/logo.png' /><h3>¡loading!</h3></div></div>
 	    );
 	}
     
