@@ -1,4 +1,4 @@
-export default function(Utils, PIXI, canvas) {
+export default function(Utils, PIXI, canvas, TweenLite) {
   return {
     gv: {},
     left_adjustment: .15,
@@ -22,20 +22,28 @@ export default function(Utils, PIXI, canvas) {
         this.gv.stage.addChild(this.gv.dotCont);
         this.gv.lineCont = new PIXI.Container();
         this.gv.stage.addChild(this.gv.lineCont);
+        this.gv.stage.alpha = 0;
         this.gv.webGL = (this.gv.renderer instanceof PIXI.CanvasRenderer) ? false : true;
         this.gv.dotQ = (this.gv.webGL === true) ? 1000 : 100;
         this.gv.lineQ = (this.gv.webGL === true) ? 360 : 36;
         if(!this.loader.resources.spritesheet){
             this.loader.add('spritesheet', '/bmps/shimmer.json').load(this.Main.bind(this));
+             this.loader.onComplete.add(() => {
+                    this.stageFadeIn();
+                });
         } else {
             this.Main.bind(this)
             this.Main();
+            this.stageFadeIn();
         }
     },
     Main: function() {
         this.app.ticker.add(this.animate.bind(this));
         this.dots();
         this.lines();
+    },
+    stageFadeIn: function () {
+        TweenLite.to(this.gv.stage, 1, {alpha:1})
     },
     Stop: function () {
          window.onresize = null;

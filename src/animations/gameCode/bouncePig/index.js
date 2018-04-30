@@ -55,6 +55,7 @@ export default function (
             } else {
                 this.Main.bind(this)
                 this.Main();
+                document.getElementById('pig_loading').innerHTML = '';
             }
            
             this.webGL = (this.renderer instanceof PIXI.CanvasRenderer) ? false : true;
