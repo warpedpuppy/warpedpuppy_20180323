@@ -43,30 +43,28 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
             }
         },
         startPool: function (xPos, yPos, addTo, index) {
-            var instance;
+            let instance;
             this.addTo = addTo;
-             console.log(gv.stage.children.length)
-            for(var i = 0; i < objQ; i ++){
+            for(let i = 0; i < objQ; i ++){
                 instance = this.op[i];
-                instance.x = instance.y = 100;
-                // console.log(instance)
-                instance.scale.x = instance.scale.y = 100;
+                instance.x = gv.halfWidth;
+                instance.y = 200;
                 this.restore(instance);
-                // instance.vx = Math.cos(instance.angle);// * instance.speed;
-                // instance.vy = Math.sin(instance.angle);// * instance.speed;
+                instance.vx = Math.cos(instance.angle);// * instance.speed;
+                instance.vy = Math.sin(instance.angle);// * instance.speed;
                 // instance.startX = instance.x = xPos;
                 // instance.startY = instance.y = yPos;
-                // instance.age = 0;
-                // instance.lifeSpan = gv.utils.randomIntBetween(lifeSpan[0], lifeSpan[1]);
+                instance.age = 0;
+                instance.lifeSpan = gv.utils.randomIntBetween(lifeSpan[0], lifeSpan[1]);
                 // if(index === undefined)
                 //     addTo.addChild(instance);
                 // else
                 //     addTo.addChildAt(instance, index);
 
-                gv.stage.addChild(instance)
+                gv.kingCont.addChild(instance)
 
             }
-            console.log(gv.stage.children.length)
+            
             this.go = true;
         },
         addSpeed: function ($target) {
@@ -75,37 +73,35 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
             $target.vy = Math.sin($target.angle) * ($target.speed);
         },
         restore: function ($target) {
-            $target.y = $target.startY;
-            $target.x = $target.startX;
             $target.visible = true;
             $target.speed =  $target.storeSpeed;
-            $target.scale.x = $target.scale.y = this.startScale;
+            $target.scale.x = $target.scale.y = 1;//this.startScale;
             $target.alpha =1;
         },
         tickIt: function () {
-            // if(this.go === true){
-            // let instance;
-            // for (let i =0; i < objQ; i ++) {
-            //     instance = this.op[i];
-            //     if(instance.parent !== undefined){
-            //         instance.x += instance.vx;
-            //         instance.y += instance.vy;
-            //         if(instance.rotateRange !== undefined)instance.rotation += instance.rotateRange;
-            //         if(instance.scale.x < 1){
-            //             instance.scale.x += 0.01;
-            //             instance.scale.y += 0.01;
-            //             instance.age ++;
-            //             instance.alpha -= 0.005;
-            //         }
-            //         this.addSpeed(instance);
-            //         if (instance.age >= instance.lifeSpan) {
-            //             this.restore(instance);
-            //             instance.parent.removeChild(instance);
-            //             instance.age = 0;
-            //         }
-            //     }
-            //   }
-            // }
+            if(this.go === true){
+            let instance;
+            for (let i =0; i < objQ; i ++) {
+                instance = this.op[i];
+                if(instance.parent !== undefined){
+                    instance.x += instance.vx;
+                    instance.y += instance.vy;
+                    if(instance.rotateRange !== undefined)instance.rotation += instance.rotateRange;
+                    if(instance.scale.x < 1){
+                        instance.scale.x += 0.01;
+                        instance.scale.y += 0.01;
+                        instance.age ++;
+                        instance.alpha -= 0.005;
+                    }
+                    this.addSpeed(instance);
+                    if (instance.age >= instance.lifeSpan) {
+                        this.restore(instance);
+                        instance.parent.removeChild(instance);
+                        instance.age = 0;
+                    }
+                }
+              }
+            }
       }
     }
 }

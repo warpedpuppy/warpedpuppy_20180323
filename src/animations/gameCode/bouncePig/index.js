@@ -118,12 +118,12 @@ export default function (
 
             this.stars = new ObjectPoolBuilder(PIXI, "star.png", 80, [3,8],[2,25], undefined, true, true, this, false, 1);
             this.stars.init();
-            this.stars.startPool(this.hero.x, this.hero.y, this.stage);
            
             this.stage.addChild(this.swipeText);
             this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;
             this.swipeText.y = (this.canvasHeight - this.swipeText.height)-10;
             
+        
           
         },
         resizeHandler: function () {
