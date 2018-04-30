@@ -4,7 +4,7 @@ export default function Clouds (gv) {
         cont: new gv.PIXI.Container(),
         onStage:false,
         init: function (){
-            for(var i = 0; i < gv.level.cloudQ; i ++){
+            for(var i = 0; i < gv.cloudQ; i ++){
                 this.clouds.push(this.cloud("right"));
                 this.clouds.push(this.cloud("left"));
             }

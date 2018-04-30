@@ -47,13 +47,13 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
             this.addTo = addTo;
             for(let i = 0; i < objQ; i ++){
                 instance = this.op[i];
-                instance.x = gv.halfWidth;
-                instance.y = 200;
+                instance.startX = instance.x = gv.halfWidth;
+                instance.startY = instance.y = 200;
                 this.restore(instance);
                 instance.vx = Math.cos(instance.angle);// * instance.speed;
                 instance.vy = Math.sin(instance.angle);// * instance.speed;
-                // instance.startX = instance.x = xPos;
-                // instance.startY = instance.y = yPos;
+                // instance.x = xPos;
+                // instance.y = yPos;
                 instance.age = 0;
                 instance.lifeSpan = gv.utils.randomIntBetween(lifeSpan[0], lifeSpan[1]);
                 // if(index === undefined)
@@ -77,31 +77,33 @@ export default function ObjectPoolBuilder(PIXI, bitmapString, objQ, speeds, life
             $target.speed =  $target.storeSpeed;
             $target.scale.x = $target.scale.y = 1;//this.startScale;
             $target.alpha =1;
+
         },
         tickIt: function () {
-            if(this.go === true){
-            let instance;
-            for (let i =0; i < objQ; i ++) {
-                instance = this.op[i];
-                if(instance.parent !== undefined){
-                    instance.x += instance.vx;
-                    instance.y += instance.vy;
-                    if(instance.rotateRange !== undefined)instance.rotation += instance.rotateRange;
-                    if(instance.scale.x < 1){
-                        instance.scale.x += 0.01;
-                        instance.scale.y += 0.01;
-                        instance.age ++;
-                        instance.alpha -= 0.005;
+            if (this.go === true) {
+                let instance;
+                for (let i =0; i < objQ; i ++) {
+
+                    instance = this.op[i];
+                    if(instance.parent !== undefined){
+                        instance.x += instance.vx;
+                        instance.y += instance.vy;
+                        if(instance.rotateRange !== undefined)instance.rotation += instance.rotateRange;
+                        if(instance.scale.x < 1){
+                            instance.scale.x += 0.01;
+                            instance.scale.y += 0.01;
+                            instance.age ++;
+                            instance.alpha -= 0.005;
+                        }
+                        this.addSpeed(instance);
+                        if (instance.age >= instance.lifeSpan) {
+                            this.restore(instance);
+                            instance.parent.removeChild(instance);
+                            instance.age = 0;
+                        }
                     }
-                    this.addSpeed(instance);
-                    if (instance.age >= instance.lifeSpan) {
-                        this.restore(instance);
-                        instance.parent.removeChild(instance);
-                        instance.age = 0;
-                    }
+                  }
                 }
-              }
             }
-      }
     }
 }

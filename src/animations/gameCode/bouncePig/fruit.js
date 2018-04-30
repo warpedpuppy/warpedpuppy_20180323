@@ -2,8 +2,8 @@ export default function Fruit(gv) {
     return {
         fruitArray: ["banana1.png", "banana2.png", "banana3.png", "banana4.png", "apple1.png", "apple2.png", "apple3.png", "apple4.png", "grapes1.png", "grapes2.png", "grapes3.png", "grapes4.png", "strawberry1.png", "strawberry2.png", "strawberry3.png", "strawberry4.png"],
         fruitCont: new gv.PIXI.particles.ParticleContainer(),
-        fruitQ: gv.level.fruitQ,
-        nextLevelFruitQ: gv.level.fruitQ,
+        fruitQ: gv.fruitQ,
+        nextLevelFruitQ: gv.fruitQ,
         storeFruit: [],
         fruits: [],
         init: function () {
@@ -23,7 +23,7 @@ export default function Fruit(gv) {
             }
         },
         addMoreFruit: function () {
-            var additionalFruit = gv.level.fruitQ - this.fruitQ;
+            var additionalFruit = gv.fruitQ - this.fruitQ;
             var fruit;
             for (var i = 0; i < additionalFruit; i++) {
                 fruit = new gv.PIXI.Sprite.fromFrame(this.fruitArray[gv.utils.randomIntBetween(0,this.fruitArray.length-1)]);
@@ -32,7 +32,7 @@ export default function Fruit(gv) {
 
                 this.storeFruit.push(fruit);
             }
-            this.fruitQ = gv.level.fruitQ;
+            this.fruitQ = gv.fruitQ;
         },
         reset: function () {
             this.fruitCont.removeChildren();
