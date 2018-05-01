@@ -50,12 +50,16 @@ export default function (
                     .add('text', "/fonts/games/bouncePig/text.xml")
                     .load(this.Main.bind(this));
                 this.loader.onComplete.add(() => {
-                document.getElementById('pig_loading').innerHTML = '';
+                if ( document.getElementById('pig_loading')) {
+                    document.getElementById('pig_loading').innerHTML = '';
+                }    
                 });
             } else {
                 this.Main.bind(this)
                 this.Main();
-                document.getElementById('pig_loading').innerHTML = '';
+                if ( document.getElementById('pig_loading')) {
+                    document.getElementById('pig_loading').innerHTML = '';
+                }    
             }
            
             this.webGL = (this.renderer instanceof PIXI.CanvasRenderer) ? false : true;
