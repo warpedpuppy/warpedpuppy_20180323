@@ -50,7 +50,7 @@ export default function (
                     .add('text', "/fonts/games/bouncePig/text.xml")
                     .load(this.Main.bind(this));
                 this.loader.onComplete.add(() => {
-                    document.getElementById('pig_loading').innerHTML = '';
+                document.getElementById('pig_loading').innerHTML = '';
                 });
             } else {
                 this.Main.bind(this)
@@ -141,7 +141,6 @@ export default function (
             this.heroInstance.x = this.halfWidth;
             this.drums.resize();
             this.clouds.resize();
-            this.level.resize();
             this.swipeText.x = (this.canvasWidth - this.swipeText.width) / 2;
             this.heroInstance.y = this.halfHeight;
             this.mines.resize();

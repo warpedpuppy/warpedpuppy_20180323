@@ -4,7 +4,7 @@ import './BouncePig.css';
 import * as PIXI from 'pixi.js';
 import Utils from '../../animations/gameCode/bouncePig/utils.js';
 import { TweenLite, TimelineLite, Back } from 'gsap';
-
+import LogoWithBorder from '../../svgs/LogoWithBorder';
 import bp from '../../animations/gameCode/bouncePig/index.js';
 import ObjectPoolBuilder from '../../animations/gameCode/bouncePig/objectPool.js';
 import Background from '../../animations/gameCode/bouncePig/background.js';
@@ -42,7 +42,13 @@ export default class BouncePig extends React.Component {
 	}
 	render () {
 		return (
-			<div id="tugtugCanvas" className="games"><div id="pig_loading"><img class='spinLogo' src='/images/logo.png' /><h3>¡loading!</h3></div></div>
+			<div id="tugtugCanvas" className="games">
+			<div id="pig_loading">
+			<LogoWithBorder w="250" className='spinLogo' color={true} />
+			
+			<h3>¡loading!</h3>
+			</div>
+			</div>
 	    );
 	}
     
