@@ -4,6 +4,7 @@ import Utils from '../../animations/utils.js';
 import Stats from '../../animations/Stats.js';
 import './WhirlyGigs.css';
 import './Games.css';
+import Loader from '../../components/Loader';
 
 import fallingGreenNumbers from '../../animations/gameCode/smallExperiments/fallingNumbers.js';
 
@@ -27,12 +28,11 @@ export default class FallingNumbers extends React.Component {
 	}
 	render () {
 		return (
-			<div>
-				<div id="tugtugCanvas" className="games">
-		        <div className="uiElementCont">
-		        	<div id='my-stats-container'></div>
-		        </div>
-			    </div>
+			<div id="tugtugCanvas" className="games">
+			<Loader />
+	        <div className="uiElementCont">
+	        	<div id='my-stats-container'></div>
+	        </div>
 		    </div>
 		)
 	}

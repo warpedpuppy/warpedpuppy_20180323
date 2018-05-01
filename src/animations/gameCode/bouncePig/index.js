@@ -50,15 +50,15 @@ export default function (
                     .add('text', "/fonts/games/bouncePig/text.xml")
                     .load(this.Main.bind(this));
                 this.loader.onComplete.add(() => {
-                if ( document.getElementById('pig_loading')) {
-                    document.getElementById('pig_loading').innerHTML = '';
-                }    
+                    if ( document.getElementById('loading')) {
+                        document.getElementById('loading').innerHTML = '';
+                    }    
                 });
             } else {
                 this.Main.bind(this)
                 this.Main();
-                if ( document.getElementById('pig_loading')) {
-                    document.getElementById('pig_loading').innerHTML = '';
+                if ( document.getElementById('loading')) {
+                    document.getElementById('loading').innerHTML = '';
                 }    
             }
            

@@ -21,9 +21,15 @@ export default function Numbers (PIXI, Utils, Stats) {
             window.onresize = this.resize;
             if (!this.loader.resources.Typewriter) {
               this.loader.add('Typewriter', "/fonts/games/fallingNumbers/greenNumbers.xml").load(this.Main.bind(this));
+              if ( document.getElementById('loading')) {
+                 document.getElementById('loading').innerHTML = '';
+                }  
             } else {
               this.Main.bind(this)
               this.Main();
+               if ( document.getElementById('loading')) {
+                 document.getElementById('loading').innerHTML = '';
+                }   
             }
             
         },
