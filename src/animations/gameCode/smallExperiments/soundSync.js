@@ -39,9 +39,15 @@ export default function SoundSync (PIXI, Utils) {
                     .add('click', "/sounds/click.mp3")
                     .add('return', "/sounds/carriageReturn.mp3")
                     .load(this.Main.bind(this));
+                 if ( document.getElementById('loading')) {
+                        document.getElementById('loading').innerHTML = '';
+                    }   
             } else {
                 this.Main.bind(this)
                 this.Main();
+                 if ( document.getElementById('loading')) {
+                        document.getElementById('loading').innerHTML = '';
+                    }   
             }
         },
         stop: function () {

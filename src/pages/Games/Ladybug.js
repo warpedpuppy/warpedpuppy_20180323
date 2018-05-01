@@ -4,10 +4,11 @@ import Utils from '../../animations/utils.js';
 import './Games.css';
 import { TweenMax } from 'gsap';
 import LadybugCode from '../../animations/gameCode/smallExperiments/ladybug.js';
+import Loader from '../../components/Loader';
+
 export default class Ladybug extends React.Component {
 
-	componentDidMount () {
-		 
+	componentDidMount () {	 
 		this.code = new LadybugCode(PIXI, Utils, TweenMax);
 		this.code.init();
 	}
@@ -24,8 +25,7 @@ export default class Ladybug extends React.Component {
 	}
 	render () {
 		return (
-			<div id="tugtugCanvas" className="games"></div>
-
+			<div id="tugtugCanvas" className="games"><Loader /></div>
 		)
 	}
 }

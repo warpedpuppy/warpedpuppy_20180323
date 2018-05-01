@@ -40,9 +40,15 @@ return {
 				 .add('instructions', '/bmps/lady_bug/instructions_mc.png')
 				 .add('brickWall', '/bmps/lady_bug/brickWall.png')
 				 .load(this.Main.bind(this));
+				if ( document.getElementById('loading')) {
+                        document.getElementById('loading').innerHTML = '';
+                    } 
             } else {
                 this.Main.bind(this)
                 this.Main();
+                if ( document.getElementById('loading')) {
+                        document.getElementById('loading').innerHTML = '';
+                    } 
             }
         },
         Main: function () {

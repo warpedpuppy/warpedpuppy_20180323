@@ -3,6 +3,7 @@ import * as PIXI from 'pixi.js';
 import Utils from '../../animations/utils.js';
 import './Games.css';
 import GlitterCode from '../../animations/gameCode/smallExperiments/glitter.js';
+import Loader from '../../components/Loader';
 
 export default class Glitter extends React.Component {
 
@@ -23,7 +24,7 @@ export default class Glitter extends React.Component {
 	}
 	render () {
 		return (
-			 <div id="tugtugCanvas" className="games"></div>
+			 <div id="tugtugCanvas" className="games"><Loader /></div>
 		)
 	}
 }
