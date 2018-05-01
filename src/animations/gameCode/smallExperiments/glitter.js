@@ -27,16 +27,23 @@ export default function GlitterCode (Utils, PIXI) {
         this.lineQ = (this.webGL === true) ? 360 : 36;
         if(!this.loader.resources.spritesheet){
             this.loader.add('spritesheet', '/bmps/shimmer.json').load(this.Main.bind(this));
-            if ( document.getElementById('loading')) {
-                        document.getElementById('loading').innerHTML = '';
-                    } 
+            this.loader.onComplete.add(() => {this.clearLoader();})
+            
         } else {
             this.Main.bind(this)
             this.Main();
-            if ( document.getElementById('loading')) {
-                        document.getElementById('loading').innerHTML = '';
-                    } 
+            this.clearLoader();
         }
+    },
+    clearLoader: function () {
+        if ( document.getElementById('loading')) {
+            //console.log('clear2', document.getElementsByClassName('loading_container').length)
+            console.log('clear3', document.getElementById('loading') )
+            //document.getElementsByClassName('loading_container')[0].innerHTML = '';
+           document.getElementById('loading').innerHTML = '';
+            console.log('clear4', document.getElementById('loading') );
+            document.getElementById('loading').className = 'hideLoader';
+        } 
     },
     Main: function() {
         this.app.ticker.add(this.animate.bind(this));
