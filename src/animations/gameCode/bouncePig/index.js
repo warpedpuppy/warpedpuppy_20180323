@@ -51,12 +51,12 @@ export default function (
                     .add('text', "/fonts/games/bouncePig/text.xml")
                     .load(this.Main.bind(this));
                 this.loader.onComplete.add(() => {
-                    // loader_data('off');
+                    loader_data('off');
                 });
             } else {
                 this.Main.bind(this)
                 this.Main();
-                // loader_data('off');     
+                loader_data('off');     
             }
            
             this.webGL = (this.renderer instanceof PIXI.CanvasRenderer) ? false : true;
