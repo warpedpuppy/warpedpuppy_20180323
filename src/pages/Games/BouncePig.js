@@ -17,7 +17,9 @@ import Drums from '../../animations/gameCode/bouncePig/drums.js';
 
 
 export default class BouncePig extends React.Component {
-	
+	constructor(props) {
+		super(props)
+	}
 	componentDidMount(){
 		this.game = new bp( 
 			PIXI,
@@ -33,7 +35,8 @@ export default class BouncePig extends React.Component {
 			Drums,
 			TweenLite,
 			TimelineLite, 
-			Back);
+			Back,
+			this.props.loader_data);
 		this.game.start();
 	}
 	componentWillUnmount () {

@@ -10,7 +10,7 @@ export default class SoundSync extends React.Component {
 
 	componentDidMount () {
 		 
-		this.code = new soundSync(PIXI, Utils, pixisound);
+		this.code = new soundSync(PIXI, Utils, this.props.loader_data);
 		this.code.init();
 	}
 	addMore (e) {

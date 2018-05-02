@@ -1,0 +1,6 @@
+.loader_hide {
+	display: none;
+}
+.loader_visible {
+	display: block;
+}

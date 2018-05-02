@@ -1,4 +1,4 @@
-export default function GlitterCode (Utils, PIXI) {
+export default function GlitterCode (Utils, PIXI, loader_data) {
   return {
     left_adjustment: .15,
     utils: new Utils(),
@@ -27,15 +27,14 @@ export default function GlitterCode (Utils, PIXI) {
         this.lineQ = (this.webGL === true) ? 360 : 36;
         if(!this.loader.resources.spritesheet){
             this.loader.add('spritesheet', '/bmps/shimmer.json').load(this.Main.bind(this));
-            if ( document.getElementById('loading')) {
-                        document.getElementById('loading').innerHTML = '';
-                    } 
+            this.loader.onComplete.add(() => {
+                loader_data('off');
+                });
+            
         } else {
             this.Main.bind(this)
             this.Main();
-            if ( document.getElementById('loading')) {
-                        document.getElementById('loading').innerHTML = '';
-                    } 
+            loader_data('off');
         }
     },
     Main: function() {

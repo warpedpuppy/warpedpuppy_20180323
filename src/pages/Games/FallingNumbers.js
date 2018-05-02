@@ -9,10 +9,11 @@ import Loader from '../../components/Loader';
 import fallingGreenNumbers from '../../animations/gameCode/smallExperiments/fallingNumbers.js';
 
 export default class FallingNumbers extends React.Component {
-
+	constructor (props) {
+		super(props);
+	}
 	componentDidMount () {
-		 
-		this.code = new fallingGreenNumbers(PIXI, Utils, Stats);
+		this.code = new fallingGreenNumbers(PIXI, Utils, Stats, this.props.loader_data);
 		this.code.init();
 	}
 	addMore (e) {
@@ -29,7 +30,7 @@ export default class FallingNumbers extends React.Component {
 	render () {
 		return (
 			<div id="tugtugCanvas" className="games">
-			<Loader />
+			<Loader visible={this.props.loader_data('return')} />
 	        <div className="uiElementCont">
 	        	<div id='my-stats-container'></div>
 	        </div>

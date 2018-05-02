@@ -12,7 +12,8 @@ export default function (
     Drums, 
     TweenLite, 
     TimelineLite,
-    Back) {
+    Back, 
+    loader_data) {
     return {
         app: new PIXI.Application(),
         loader:  PIXI.loader,
@@ -50,16 +51,12 @@ export default function (
                     .add('text', "/fonts/games/bouncePig/text.xml")
                     .load(this.Main.bind(this));
                 this.loader.onComplete.add(() => {
-                    if ( document.getElementById('loading')) {
-                        document.getElementById('loading').innerHTML = '';
-                    }    
+                loader_data('off');
                 });
             } else {
                 this.Main.bind(this)
                 this.Main();
-                if ( document.getElementById('loading')) {
-                    document.getElementById('loading').innerHTML = '';
-                }    
+                loader_data('off');     
             }
            
             this.webGL = (this.renderer instanceof PIXI.CanvasRenderer) ? false : true;

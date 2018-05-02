@@ -22,9 +22,20 @@ export default class Experiments extends React.Component {
 		this.changePage = this.changePage.bind(this)
 		this.state = {
 			activeGame: '',
-			getVar: ''
+			getVar: '',
+			loaded: true
 		}
+		this.loader_data = this.loader_data.bind(this);
 
+	}
+	loader_data (string) {
+		if (string === 'on') {
+			this.setState({loaded: true});
+		} else if (string === 'off') {
+			this.setState({loaded: false});
+		} else if (string === 'return') {
+			return this.state.loaded.toString();
+		}
 	}
 	componentDidMount(){
 		this.utils = Utils();
@@ -45,31 +56,31 @@ export default class Experiments extends React.Component {
 		if(this.state.activeGame === '') {
 
 		} else if(this.state.activeGame === '0') {
-			game.push(<Fireworks  key={this.state.activeGame} />)
+			game.push(<Fireworks loader_data="loader_data" key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '1') {
-			game.push(<PrettyDots  key={this.state.activeGame} />)
+			game.push(<PrettyDots loader_data={this.loader_data} key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '2') {
-			game.push(<Glitter  key={this.state.activeGame} />)
+			game.push(<Glitter  loader_data={this.loader_data}  key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '3') {
-			game.push(<FallingNumbers  key={this.state.activeGame} />)
+			game.push(<FallingNumbers loader_data={this.loader_data}  key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '4') {
-			game.push(<BouncePig key={this.state.activeGame} />)
+			game.push(<BouncePig  loader_data={this.loader_data} key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '5') {
-			game.push(<Ladybug key={this.state.activeGame} />)
+			game.push(<Ladybug  loader_data={this.loader_data} key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '6') {
-			game.push(<SoundSync  key={this.state.activeGame} />)
+			game.push(<SoundSync  loader_data={this.loader_data}  key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '7') {
-			game.push(<NodeGarden  key={this.state.activeGame} />)
+			game.push(<NodeGarden  loader_data={this.loader_data}  key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '8') {
-			game.push(<LongChain key={this.state.activeGame} />)
+			game.push(<LongChain  loader_data={this.loader_data} key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '9') {
-			game.push(<ElasticThree key={this.state.activeGame} />)
+			game.push(<ElasticThree  loader_data={this.loader_data} key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '10') {
-			game.push(<WhirlyGigs key={this.state.activeGame} />)
+			game.push(<WhirlyGigs  loader_data={this.loader_data} key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '11') {
-			game.push(<ElasticTwo key={this.state.activeGame} />)
+			game.push(<ElasticTwo  loader_data={this.loader_data} key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '12') {
-			game.push(<BrickBreak key={this.state.activeGame} />)
+			game.push(<BrickBreak  loader_data={this.loader_data} key={this.state.activeGame} />)
 			
 		} 
 		
