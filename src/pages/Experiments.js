@@ -49,6 +49,7 @@ export default class Experiments extends React.Component {
 	}
 	changePage (index) {
 		let minusOne = Number(index) - 1;
+		this.loader_data('on');
 		this.setState({activeGame: minusOne.toString()})
 	}
 	render () {
