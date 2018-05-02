@@ -27,7 +27,9 @@ export default class Ladybug extends React.Component {
 	}
 	render () {
 		return (
-			<div id="tugtugCanvas" className="games"><Loader /></div>
+			<div id="tugtugCanvas" className="games">
+			<Loader visible={this.props.loader_data('return')} />
+			</div>
 		)
 	}
 }

@@ -45,7 +45,7 @@ export default class BouncePig extends React.Component {
 	render () {
 		return (
 			<div id="tugtugCanvas" className="games">
-				<Loader />
+				<Loader visible={this.props.loader_data('return')} />
 			</div>
 	    );
 	}

@@ -7,7 +7,9 @@ import soundSync from '../../animations/gameCode/smallExperiments/soundSync.js';
 import Loader from '../../components/Loader';
 
 export default class SoundSync extends React.Component {
-
+	constructor(props){
+		super(props)
+	}
 	componentDidMount () {
 		this.code = new soundSync(PIXI, Utils, this.props.loader_data);
 		this.code.init();
@@ -25,7 +27,9 @@ export default class SoundSync extends React.Component {
 	}
 	render () {
 		return (
-			 <div id="tugtugCanvas" className="games"><Loader /></div>
+			 <div id="tugtugCanvas" className="games">
+			 <Loader visible={this.props.loader_data('return')} />
+			 </div>
 		)
 	}
 }
