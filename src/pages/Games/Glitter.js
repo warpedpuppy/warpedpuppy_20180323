@@ -6,9 +6,11 @@ import GlitterCode from '../../animations/gameCode/smallExperiments/glitter.js';
 import Loader from '../../components/Loader';
 
 export default class Glitter extends React.Component {
-
+	constructor(props){
+		super(props)
+	}
 	componentDidMount () {
-		this.code = new GlitterCode(Utils, PIXI);
+		this.code = new GlitterCode(Utils, PIXI, this.props.loader_data);
 		this.code.Init();
 	}
 	addMore (e) {

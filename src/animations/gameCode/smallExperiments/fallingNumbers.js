@@ -1,4 +1,4 @@
-export default function Numbers (PIXI, Utils, Stats) {
+export default function Numbers (PIXI, Utils, Stats, loader_data) {
     return {
         utils: new Utils(),
         stage: new PIXI.Container(),
@@ -21,15 +21,13 @@ export default function Numbers (PIXI, Utils, Stats) {
             window.onresize = this.resize;
             if (!this.loader.resources.Typewriter) {
               this.loader.add('Typewriter', "/fonts/games/fallingNumbers/greenNumbers.xml").load(this.Main.bind(this));
-              if ( document.getElementById('loading')) {
-                 document.getElementById('loading').innerHTML = '';
-                }  
+               this.loader.onComplete.add(() => {
+                loader_data('off');
+                });
             } else {
               this.Main.bind(this)
               this.Main();
-               if ( document.getElementById('loading')) {
-                 document.getElementById('loading').innerHTML = '';
-                }   
+              loader_data('off')
             }
             
         },

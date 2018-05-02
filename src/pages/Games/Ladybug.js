@@ -7,9 +7,11 @@ import LadybugCode from '../../animations/gameCode/smallExperiments/ladybug.js';
 import Loader from '../../components/Loader';
 
 export default class Ladybug extends React.Component {
-
+	constructor(props){
+		super(props)
+	}
 	componentDidMount () {	 
-		this.code = new LadybugCode(PIXI, Utils, TweenMax);
+		this.code = new LadybugCode(PIXI, Utils, TweenMax, this.props.loader_data);
 		this.code.init();
 	}
 	addMore (e) {
