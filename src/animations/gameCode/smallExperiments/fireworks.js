@@ -4,6 +4,7 @@ export default function Firework (PIXI, Utils, TimelineLite){
         canvasHeight: 400,
         fs: [],
         fq: 20,
+        starQ: 500,
         range: 100,
         stage: new PIXI.Container(),
         app: new PIXI.Application(),
@@ -19,32 +20,31 @@ export default function Firework (PIXI, Utils, TimelineLite){
             document.getElementById("tugtugCanvas").appendChild(this.renderer.view);
             this.build();
             this.app.ticker.add(this.animate.bind(this));
-
         },
-        build: function () {
+        build: function () {;
+            let firework, star, delay, shape, width, height, widthCheck = 0;;
             for (let i = 0; i < this.fq; i ++) {
-                let firework = this.FireworkInstance();
+                firework = this.FireworkInstance();
                 firework.start = firework.start.bind(firework);
                 firework.restart = firework.restart.bind(firework);
                 firework.x = this.utils.randomNumberBetween(this.halfWidth-this.range,this.halfWidth+this.range);
                 firework.y = this.utils.randomNumberBetween(this.halfHeight+50,this.halfHeight-this.range);;
                 this.stage.addChild(firework);
                 this.fs.push(firework);
-                let delay = this.utils.randomIntBetween(0, 1);
+                delay = this.utils.randomIntBetween(0, 1);
                 setTimeout(firework.start, delay);
             }
-            for (let i = 0; i < 500; i ++) {
-                let star = new PIXI.Graphics();
+            for (let i = 0; i < this.starQ; i ++) {
+                star = new PIXI.Graphics();
                 star.beginFill(0xFFFF00).drawCircle(0,0,0.25).endFill();
                 star.x = this.utils.randomNumberBetween(0,this.canvasWidth);
                 star.y = this.utils.randomNumberBetween(0,this.canvasHeight);
                 this.stage.addChild(star);
             }
-            let widthCheck = 0;
             while (widthCheck < this.canvasWidth) {
-                let shape = new PIXI.Graphics();
-                let width = this.utils.randomNumberBetween(10, 30);
-                let height =  this.utils.randomNumberBetween(10, 50);
+                shape = new PIXI.Graphics();
+                width = this.utils.randomNumberBetween(10, 30);
+                height =  this.utils.randomNumberBetween(10, 50);
                 shape.beginFill(0x333333).drawRect(0,0,width, height).endFill();
                 shape.x = widthCheck;
                 shape.y = this.canvasHeight-height;
@@ -67,20 +67,23 @@ export default function Firework (PIXI, Utils, TimelineLite){
             this.build();
         },
         FireworkInstance: function () {
-            let cont = new PIXI.Container();
-            let i = 0;
-            let cf = 0;
-            let numberOfBeams = 20;
+            let cont = new PIXI.Container(),
+                i = 0,
+                cf = 0,
+                numberOfBeams = 20,
+                myBeam1,
+                colorArray =[ 0xFFFF00 , 0xFF00FF , 0x00FF00 , 0x00FFFF , 0xCCFF00],
+                color = colorArray[this.utils.randomIntBetween(0, colorArray.length-1)],
+                that = this,
+                fps = 60,
+                fps2 = fps * 2,
+                frames = that.utils.randomIntBetween(fps, fps2);
             cont.beams = [];
-            let myBeam1;
-            let colorArray =[ 0xFFFF00 , 0xFF00FF , 0x00FF00 , 0x00FFFF , 0xCCFF00];
-            let color = colorArray[this.utils.randomIntBetween(0, colorArray.length-1)];
             for ( i = 0; i < numberOfBeams; i++) {
                 myBeam1 = this.Beam(color);
-                //myBeam1.shape.alpha = 0;
-               myBeam1.rotation = this.utils.deg2rad(Math.random()*360);
-               myBeam1.scaleX = this.utils.randomNumberBetween(.2,1)
-               myBeam1.scaleY = this.utils.randomNumberBetween(.2,1)
+                myBeam1.rotation = this.utils.deg2rad(Math.random()*360);
+                myBeam1.scaleX = this.utils.randomNumberBetween(.2,1)
+                myBeam1.scaleY = this.utils.randomNumberBetween(.2,1)
                 cont.addChild(myBeam1);
                 cont.beams.push(myBeam1);
             }
@@ -88,18 +91,18 @@ export default function Firework (PIXI, Utils, TimelineLite){
             cont.numberOfBeams = numberOfBeams;
             cont.tl = new TimelineLite();
             cont.tls = [];
-            let that = this;
-            let fps = 60;
-            let fps2 = fps * 2
-            let frames = that.utils.randomIntBetween(fps, fps2);
             cont.twinkleStart = Math.floor(frames * .33);
             cont.fadeOutStart = Math.floor(frames * .66);
             cont.end = frames;
             cont.start = function () {
-                for( i = 0; i < numberOfBeams; i++){
+                for (i = 0; i < numberOfBeams; i++) {
                     let beam = this.beams[i];
                     beam.shape.rotation = that.utils.deg2rad(Math.random() * 360);
-                    this.tl = new TimelineLite({ useFrames:true, onStart:this.alphaOne, onStartParams:[beam.shape]});
+                    this.tl = new TimelineLite({ 
+                        useFrames:true, 
+                        onStart:this.alphaOne, 
+                        onStartParams:[beam.shape]
+                    });
                     this.distance = that.utils.randomNumberBetween(50,150);
                     this.tl.to(beam.shape, frames, {x:this.distance});
                     this.tls.push( this.tl);
@@ -109,7 +112,7 @@ export default function Firework (PIXI, Utils, TimelineLite){
                 this.cf = 0;
                 this.x = that.utils.randomNumberBetween(that.halfWidth-that.range,that.halfWidth+that.range);
                 this.y = that.utils.randomNumberBetween(that.halfHeight+50,that.halfHeight-that.range);
-                for( i = 0; i < numberOfBeams; i++){
+                for ( i = 0; i < numberOfBeams; i++) {
                     this.beams[i].shape.x = this.beams[i].shape.y = 0;
                     this.beams[i].alpha = 1;
                     if(this.tls[i])cont.tls[i].restart();
@@ -129,14 +132,15 @@ export default function Firework (PIXI, Utils, TimelineLite){
             return cont;
         },
         animate: function () {
-            for(let j = 0; j < this.fq; j++) {
-                let f =  this.fs[j]
+            let i, j, f, twinkleStart, fadeOutStart, end;
+            for (j = 0; j < this.fq; j++) {
+                f =  this.fs[j]
                 f.cf ++;
-                let twinkleStart = f.twinkleStart;
-                let fadeOutStart = f.fadeOutStart;
-                let end = f.end;
+                twinkleStart = f.twinkleStart;
+                fadeOutStart = f.fadeOutStart;
+                end = f.end;
                 if (f.cf >= twinkleStart && f.cf < fadeOutStart) {
-                    for (var i = 0; i < f.numberOfBeams; i++) {
+                    for (i = 0; i < f.numberOfBeams; i++) {
                         f.beams[i].alpha = Math.random() * 1;
                         f.alpha = 1;
                     }
