@@ -7,8 +7,8 @@ export default function PrettyDots (PIXI, Utils, Stats) {
         loader:  PIXI.loader,
         stats: new Stats(),
         init: function () {
+
             this.resize = this.resize.bind(this);
-            window.onresize = this.resize;
             this.canvasWidth = this.utils.returnCanvasWidth();
             this.canvasHeight = 400;
             this.halfHeight = this.canvasHeight / 2;
@@ -16,13 +16,11 @@ export default function PrettyDots (PIXI, Utils, Stats) {
             this.renderer = PIXI.autoDetectRenderer(this.canvasWidth, this.canvasHeight);
             this.renderer.backgroundColor = 0xFFFFFF;
             document.getElementById("tugtugCanvas").appendChild(this.renderer.view);
-
             this.resize = this.resize.bind(this);
             window.onresize = this.resize;
+            this.stats.setMode(0);
 
-             this.stats.setMode(0);
-
-            if(!this.loader.resources.spritesheet){
+            if (!this.loader.resources.spritesheet) {
                 this.loader.add('spritesheet', '/bmps/shimmer.json').load(this.Main.bind(this));
             } else {
                 this.Main.bind(this)
@@ -85,11 +83,12 @@ export default function PrettyDots (PIXI, Utils, Stats) {
             dot.width = dot.height =size
             dot.tint = "0x" + this.utils.randomColor().substr(1);
             dot.var = (Math.random()*150) + 20;
+            dot.timing = this.utils.randomNumberBetween(.0005, .001)
             cont.addChild(dot);
             let that = this;
             cont.project = function () {
                 cont.rotation += that.utils.deg2rad(1);
-                dot.x = that.utils.cosWave(zero, dot.var,.001);
+                dot.x = that.utils.cosWave(zero, dot.var,dot.timing);
             }
             return cont;
         },
