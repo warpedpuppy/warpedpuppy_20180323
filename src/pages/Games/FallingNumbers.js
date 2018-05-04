@@ -9,9 +9,6 @@ import Loader from '../../components/Loader';
 import fallingGreenNumbers from '../../animations/gameCode/smallExperiments/fallingNumbers.js';
 
 export default class FallingNumbers extends React.Component {
-	constructor (props) {
-		super(props);
-	}
 	componentDidMount () {
 		this.code = new fallingGreenNumbers(PIXI, Utils, Stats, this.props.loader_data);
 		this.code.init();

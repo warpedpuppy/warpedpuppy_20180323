@@ -20,10 +20,10 @@ export default class ContactForm extends React.Component {
 		params.append('name', this.state.name);
 		params.append('email', this.state.email);
 		params.append('message', this.state.message);
-		let url1 = '//tryingsomething.com/warpedpuppy/contactFormHandler.php';
-		let url2 = '//localhost:8000/warpedpuppy/contactFormHandler.php';
+		// let url1 = '//tryingsomething.com/warpedpuppy/contactFormHandler.php';
+		// let url2 = '//localhost:8000/warpedpuppy/contactFormHandler.php';
 		let url3 = '//localhost:8000/mail.php';
-		let url4 = '//tryingsomething.com/mail.php';
+		// let url4 = '//tryingsomething.com/mail.php';
 		axios.post(url3, params)
 		.then(function (response) {
 		    console.log(response);

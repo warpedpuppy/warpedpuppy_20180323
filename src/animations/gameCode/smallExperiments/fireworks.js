@@ -22,19 +22,19 @@ export default function Firework (PIXI, Utils, TimelineLite){
             this.app.ticker.add(this.animate.bind(this));
         },
         build: function () {;
-            let firework, star, delay, shape, width, height, widthCheck = 0;;
-            for (let i = 0; i < this.fq; i ++) {
+            let i, firework, star, delay, shape, width, height, widthCheck = 0;
+            for (i = 0; i < this.fq; i ++) {
                 firework = this.FireworkInstance();
                 firework.start = firework.start.bind(firework);
                 firework.restart = firework.restart.bind(firework);
                 firework.x = this.utils.randomNumberBetween(this.halfWidth-this.range,this.halfWidth+this.range);
-                firework.y = this.utils.randomNumberBetween(this.halfHeight+50,this.halfHeight-this.range);;
+                firework.y = this.utils.randomNumberBetween(this.halfHeight+50,this.halfHeight-this.range);
                 this.stage.addChild(firework);
                 this.fs.push(firework);
                 delay = this.utils.randomIntBetween(0, 1);
                 setTimeout(firework.start, delay);
             }
-            for (let i = 0; i < this.starQ; i ++) {
+            for (i = 0; i < this.starQ; i ++) {
                 star = new PIXI.Graphics();
                 star.beginFill(0xFFFF00).drawCircle(0,0,0.25).endFill();
                 star.x = this.utils.randomNumberBetween(0,this.canvasWidth);
@@ -95,8 +95,9 @@ export default function Firework (PIXI, Utils, TimelineLite){
             cont.fadeOutStart = Math.floor(frames * .66);
             cont.end = frames;
             cont.start = function () {
+                let beam;
                 for (i = 0; i < numberOfBeams; i++) {
-                    let beam = this.beams[i];
+                    beam = this.beams[i];
                     beam.shape.rotation = that.utils.deg2rad(Math.random() * 360);
                     this.tl = new TimelineLite({ 
                         useFrames:true, 
@@ -133,6 +134,7 @@ export default function Firework (PIXI, Utils, TimelineLite){
         },
         animate: function () {
             let i, j, f, twinkleStart, fadeOutStart, end;
+
             for (j = 0; j < this.fq; j++) {
                 f =  this.fs[j]
                 f.cf ++;
