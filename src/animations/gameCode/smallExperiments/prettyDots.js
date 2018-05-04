@@ -80,8 +80,9 @@ export default function PrettyDots (PIXI, Utils, Stats) {
         Spinner: function (zero, size) {
             let cont = new PIXI.Container();
             let dot = new PIXI.Sprite.fromFrame("dot.png");
-            dot.width = dot.height =size
-            dot.tint = "0x" + this.utils.randomColor().substr(1);
+            dot.alpha = this.utils.randomNumberBetween(.05, 1)
+            dot.width = dot.height = size
+            dot.tint = "0x551A8B";// + this.utils.randomColor().substr(1);
             dot.var = (Math.random()*150) + 20;
             dot.timing = this.utils.randomNumberBetween(.0005, .001)
             cont.addChild(dot);
