@@ -3,15 +3,8 @@ import './Home.css';
 import HomeCanvas from '../components/HomeCanvas';
 import LogoWithBorder from '../svgs/LogoWithBorder';
 import {connect} from 'react-redux';
-//import { addItem } from '../actions/index.js';
 
 class Home extends React.Component {
-	// constructor(props){
-	// 	super(props);
-	// }
-	// addItemHandler(){
-	// 	this.props.dispatch(addItem(5))
-	// }
 	render () {
 		return (
 			<div className='homePage'>
@@ -25,7 +18,7 @@ class Home extends React.Component {
             <p><a href="https://github.com/warpedpuppy" rel="noopener noreferrer" target="_blank">github</a> </p>
              <p><a href="https://www.linkedin.com/in/ted-walther-98926a8/" rel="noopener noreferrer" target="_blank">linkedin</a> </p>
              <p className="small_italic">(In case you&apos;re interested, I just started building a fun site over <a href="//tugtug.com" rel="noopener noreferrer" target="_blank">here</a>)</p>
-             	<p>~~</p>
+             	<p></p>
 		      <LogoWithBorder w="250" rotate="rotate(15)" color={true} />
 		     </div>
 	      </div>
