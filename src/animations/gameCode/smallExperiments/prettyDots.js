@@ -46,7 +46,7 @@ export default function PrettyDots (PIXI, Utils, Stats) {
         },
         SpinningShell: function () {
             let cont = new PIXI.Container();
-            let q = this.utils.randomIntBetween(50, 100);
+            let q = this.utils.randomIntBetween(100, 300);
             let dots = [];
             let dot;
             for (let i = 0; i < q; i ++) {
