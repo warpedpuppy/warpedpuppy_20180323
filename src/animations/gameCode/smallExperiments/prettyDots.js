@@ -6,6 +6,7 @@ export default function PrettyDots (PIXI, Utils, Stats) {
         app: new PIXI.Application(),
         loader:  PIXI.loader,
         stats: new Stats(),
+        shells: [],
         init: function () {
 
             this.resize = this.resize.bind(this);
@@ -33,68 +34,56 @@ export default function PrettyDots (PIXI, Utils, Stats) {
             this.renderer.destroy();
         },
         Main: function () {
-            this.flower = this.Flower(0);
-            this.flower.x = this.halfWidth;
-            this.flower.y = this.halfHeight;
-            this.stage.addChild(this.flower);
-            this.flowers = [];
-            this.flowers.push(this.flower);
+            let kingCont = this.kingCont = new PIXI.Container();
+            kingCont.x = this.halfWidth;
+            kingCont.y = this.halfHeight;
+            this.stage.addChild(kingCont);
+            let shell = this.SpinningShell();
+            kingCont.addChild(shell);
             this.app.ticker.add(this.animate.bind(this));
             let customContainer = document.getElementById('my-stats-container');
             customContainer.appendChild(this.stats.domElement);
         },
-        Flower: function (zero) {
+        SpinningShell: function () {
             let cont = new PIXI.Container();
-            let spinners = this.Spinners(zero);
-            cont.spinners = cont;
-            cont.addChild(spinners);
-            let that = this;
-            cont.project = function () {
-                for (let j = 0; j < spinners.spinners.length; j ++) {
-                    spinners.spinners[j].project();
-                }
-            }
-            cont.add = function () {
-                for (let j = 0; j < spinners.spinners.length; j ++) {
-                    let f = that.Flower(spinners.spinners[j].x + Math.random()*100);
-                    that.flowers.push(f)
-                    spinners.spinners[j].addChild(f);
-                }
-            }
-            return cont;
-        },
-        Spinners: function (zero) {
-            let cont = new PIXI.Container();
-            let q = this.utils.randomIntBetween(10, 30);
-            let spinners = [];
-            let s;
+            let q = this.utils.randomIntBetween(50, 100);
+            let dots = [];
+            let dot;
             for (let i = 0; i < q; i ++) {
-                s = this.Spinner(zero,this.utils.randomIntBetween(3, 10));
-                s.rotation = this.utils.deg2rad(360/q)*i;
-                spinners.push(s);
-                cont.addChild(s)
+                dot = this.Dot(this.utils.randomIntBetween(3, 10));
+                dot.rotation = this.utils.deg2rad(360/q)*i;
+                dots.push(dot);
+                cont.addChild(dot)
             }
-            cont.spinners = spinners;
+            this.shells.push(cont);
+            cont.dots = dots;
+            let that = this;
+            cont.rotation = that.utils.randomNumberBetween(.00005, .0001)
+            cont.cosineWave = function () {
+                for (let i = 0; i < q; i ++) {
+                    let dot = dots[i];
+                    dot.child.x = that.utils.cosWave(0, dot.var,dot.timing);
+                    dot.rotation += that.utils.deg2rad(1);
+                }
+            }
             return cont;
         },
-        Spinner: function (zero, size) {
+        Dot: function (size) {
             let cont = new PIXI.Container();
             let dot = new PIXI.Sprite.fromFrame("dot.png");
             dot.alpha = this.utils.randomNumberBetween(.05, 1)
+            dot.x = 100;
             dot.width = dot.height = size
             dot.tint = "0x551A8B";// + this.utils.randomColor().substr(1);
-            dot.var = (Math.random()*150) + 20;
-            dot.timing = this.utils.randomNumberBetween(.0005, .001)
+            cont.var = (Math.random()*150) + 20;
+            cont.timing = this.utils.randomNumberBetween(.0005, .001);
             cont.addChild(dot);
-            let that = this;
-            cont.project = function () {
-                cont.rotation += that.utils.deg2rad(1);
-                dot.x = that.utils.cosWave(zero, dot.var,dot.timing);
-            }
+            cont.child = dot;
             return cont;
         },
         addMore: function () {
-            this.flower.add();
+            let shell = this.SpinningShell();
+            this.kingCont.addChild(shell);
         },
         resize: function () {
             this.canvasWidth = this.utils.returnCanvasWidth();
@@ -106,17 +95,16 @@ export default function PrettyDots (PIXI, Utils, Stats) {
 
         },
         reset: function () {
-            this.stage.removeChildren();
-            this.flower = this.Flower(0);
-            this.flower.x = this.halfWidth;
-            this.flower.y = this.halfHeight;
-            this.stage.addChild(this.flower);
-            this.flowers = [];
-            this.flowers.push(this.flower);
+            this.kingCont.removeChildren();
+            this.kingCont.x = this.halfWidth;
+            this.kingCont.y = this.halfHeight;
+            this.stage.addChild(this.kingCont);
+            let shell = this.SpinningShell();
+            this.kingCont.addChild(shell);
         },
         animate: function () {
-            for (let i = 0; i < this.flowers.length; i ++) {
-                this.flowers[i].project();
+            for (let i = 0; i < this.shells.length; i ++) {
+                this.shells[i].cosineWave();
             }
             this.stats.update();
             this.renderer.render(this.stage);
