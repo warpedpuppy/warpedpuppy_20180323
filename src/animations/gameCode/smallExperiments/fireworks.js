@@ -53,6 +53,7 @@ export default function Firework (PIXI, Utils, TimelineLite){
             }
         },
         stop: function () {
+            window.onresize = null;
             this.app.ticker.destroy();
             this.renderer.destroy();
         },

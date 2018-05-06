@@ -28,6 +28,7 @@ export default function PrettyDots (PIXI, Utils, Stats) {
             }
         },
         stop: function () {
+            window.onresize = null;
             this.loader.destroy();
             this.app.ticker.destroy();
             this.renderer.destroy();

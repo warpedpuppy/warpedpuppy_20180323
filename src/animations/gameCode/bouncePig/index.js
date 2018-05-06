@@ -65,6 +65,7 @@ export default function (
             // this.counter = 0;
         },
         stop: function () {
+            window.onresize = null;
             this.loader.destroy();
             this.app.ticker.destroy();
             this.renderer.destroy();
