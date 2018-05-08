@@ -44,7 +44,7 @@ export default function TwoBalls (PIXI, Utils){
             this.b0.y = Math.random() * this.canvasHeight;
             this.b0.interactive = true;
             this.b0.buttonMode = true;
-            this.b0.mousedown = this.p;
+            this.b0.mousedown = this.b0.touchstart = this.p;
             this.b0.name = 'b0';
             this.stage.addChild(this.ball0)
 
@@ -55,7 +55,7 @@ export default function TwoBalls (PIXI, Utils){
             this.b1.interactive = true;
             this.b1.buttonMode = true;
             this.b1.name = 'b1';
-            this.b1.mousedown = this.p;
+            this.b1.mousedown = this.b1.touchstart = this.p;
             this.stage.addChild(this.ball1)
 
             this.ball2 = this.Ball(10,0xFF0000);
@@ -65,7 +65,7 @@ export default function TwoBalls (PIXI, Utils){
             this.b2.interactive = true;
             this.b2.buttonMode = true;
             this.b2.name = 'b2';
-            this.b2.mousedown = this.p;
+            this.b2.mousedown = this.b2.touchstart = this.p;
             this.stage.addChild(this.ball2)
 
 
@@ -115,20 +115,20 @@ export default function TwoBalls (PIXI, Utils){
         p: function (e) {
             if (e.currentTarget.name === 'b0') {
                 this.ball0Dragging = true;
-                this.stage.mousemove = this.mouseMoveHandler;
+                this.stage.mousemove = this.stage.touchmove = this.mouseMoveHandler;
             } else if (e.currentTarget.name === 'b1') {
                 this.ball1Dragging = true;
-                this.stage.mousemove = this.mouseMoveHandler;
+                this.stage.mousemove = this.stage.touchmove = this.mouseMoveHandler;
             } else if (e.currentTarget.name === 'b2') {
                 this.ball2Dragging = true;
-                this.stage.mousemove = this.mouseMoveHandler;
+                this.stage.mousemove = this.stage.touchmove = this.mouseMoveHandler;
             }
         },
         r: function (event) {
             this.ball0Dragging = false;
             this.ball1Dragging = false;
             this.ball2Dragging = false;
-            this.stage.mousemove = null;
+            this.stage.mousemove = this.stage.touchmove = null;
         },
         mouseMoveHandler: function (touchData) {
             this.mousePosition = touchData.data.global;

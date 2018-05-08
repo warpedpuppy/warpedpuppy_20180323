@@ -5,9 +5,11 @@ export default function LongChain (PIXI, Utils){
         stage: new PIXI.Container(),
         app: new PIXI.Application(),
         init: function () {
+
             this.mousePosition = new PIXI.Point(10,10);
             this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
-            this.stage.mousemove = this.mouseMoveHandler;
+            
+            this.stage.mousemove = this.stage.touchmove = this.mouseMoveHandler;
             this.stage.interactive = true;
             this.stage.buttonMode = true;
             this.resize = this.resize.bind(this);
