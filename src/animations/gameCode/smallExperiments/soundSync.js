@@ -151,6 +151,7 @@ export default function SoundSync (PIXI, Utils, loader_data) {
 		        this.to = setTimeout(this.newLetter, speed)
 		        if(this.textArray[this.textArrayCounter] !== " "){
 		        	if(str === 'click') {
+
 						this.loader.resources.click.sound.play();
 		        	} else {
 		        		this.loader.resources.return.sound.play();

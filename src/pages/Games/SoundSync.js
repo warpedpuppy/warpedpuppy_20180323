@@ -4,10 +4,11 @@ import Utils from '../../animations/utils.js';
 import './Games.css';
 import soundSync from '../../animations/gameCode/smallExperiments/soundSync.js';
 import Loader from '../../components/Loader';
+import * as PixiSound from 'pixi-sound';
 
 export default class SoundSync extends React.Component {
 	componentDidMount () {
-		this.code = new soundSync(PIXI, Utils, this.props.loader_data);
+		this.code = new soundSync(PIXI, Utils, this.props.loader_data, PixiSound);
 		this.code.init();
 	}
 	addMore (e) {
