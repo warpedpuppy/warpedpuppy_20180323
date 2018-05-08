@@ -62,7 +62,7 @@ export default function SoundSync (PIXI, Utils, loader_data) {
             this.button.y = Math.floor(170);
             this.button.buttonMode = true;
             this.button.interactive = true;
-            this.button.mousedown = this.onButtonDown;
+            this.button.mousedown = this.button.touchstart = this.onButtonDown;
 
 
             this.button2 = this.ReStartButton();
@@ -70,7 +70,7 @@ export default function SoundSync (PIXI, Utils, loader_data) {
             this.button2.y = Math.floor(this.canvasHeight-70);
             this.button2.buttonMode = true;
             this.button2.interactive = true;
-            this.button2.mousedown = this.onButtonDown;
+            this.button2.mousedown = this.button2.touchstart = this.onButtonDown;
             this.button2.visible = false;
 
             this.stage.addChild(this.button2);
