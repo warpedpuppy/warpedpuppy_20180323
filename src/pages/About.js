@@ -21,7 +21,7 @@ export default class About extends React.Component {
     	<div className="aboutPage">
       <AboutCanvas />
       <div className="text">
-	      <h2>more than you ever wanted to know about me</h2>
+	      <h2>more than you ever wanted to know about me:</h2>
         <ul>
           <li>Graduated from U.C. Berkeley with Honors.</li>
           <li>Graduated from U.C. Hastings, College of the Law.  
@@ -36,7 +36,7 @@ export default class About extends React.Component {
           <li>Worked for The Dodo and coded the front end viewed by 17 million people per month.</li>
           <li>Managed a subscription based ecommerce site built in VueJS.</li>
           <li>Mentor at Thinkful.com.</li>
-          <a href="/ebw_resume.pdf">cv</a>
+          <li>Click <a href="/ebw_resume.pdf" rel="noopener noreferrer" target="_blank">here</a> to view my C.V.</li>
         </ul>
 	      </div>
         </div>

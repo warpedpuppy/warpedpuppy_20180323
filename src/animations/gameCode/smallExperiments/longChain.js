@@ -8,12 +8,14 @@ export default function LongChain (PIXI, Utils){
 
             this.mousePosition = new PIXI.Point(10,10);
             this.mouseMoveHandler = this.mouseMoveHandler.bind(this);
-            
+
             this.stage.mousemove = this.stage.touchmove = this.mouseMoveHandler;
             this.stage.interactive = true;
             this.stage.buttonMode = true;
+
             this.resize = this.resize.bind(this);
             window.onresize = this.resize;
+
             this.canvasWidth = this.utils.returnCanvasWidth();
             this.canvasHeight = 400;
             this.halfHeight = this.canvasHeight / 2;
@@ -21,11 +23,14 @@ export default function LongChain (PIXI, Utils){
             this.renderer = PIXI.autoDetectRenderer(this.canvasWidth, this.canvasHeight);
             this.renderer.backgroundColor = 0x333333;
             document.getElementById("tugtugCanvas").appendChild(this.renderer.view);
+
             this.build();
+
             this.app.ticker.add(this.animate.bind(this));
 
         },
         stop: function () {
+            window.onresize = undefined;
             this.app.ticker.destroy();
             this.renderer.destroy();
         },
@@ -37,27 +42,22 @@ export default function LongChain (PIXI, Utils){
             this.numBalls = 10;
             this.line = new PIXI.Graphics();
             this.stage.addChild(this.line);
-            for (var i = 0; i < this.numBalls; i++){
-                let ball = this.Ball(5, 0xFF0000);
+            let i, ball;
+            for (i = 0; i < this.numBalls; i++){
+                ball = this.Ball(5, 0xFF0000);
                 this.balls.push(ball);
                 this.stage.addChild(ball);
             }
         },
         Ball: function (radius, color) {
             let cont = new PIXI.Container();
-            cont.radius = typeof radius !== 'undefined' ? radius : 10;
-            cont.color = typeof color !== 'undefined' ? color : 0xFF00FF;
-            cont.height = cont.radius*4;
+            cont.radius = radius;
+            cont.height = cont.radius * 4;
             cont.vx = 0;
             cont.vy = 0;
-            cont.vz = 0;
-
             cont.xpos = 0;
             cont.ypos = 0;
-            cont.zpos = 0;
-            cont.mass = 1;
-            //private properties
-            var b = new PIXI.Graphics();
+            let b = new PIXI.Graphics();
             b.beginFill(color).drawCircle(0,0,cont.radius*2);
             cont.addChild(b);
             cont.body = b;
@@ -72,10 +72,10 @@ export default function LongChain (PIXI, Utils){
             this.line.moveTo(this.mousePosition.x, this.mousePosition.y);
             this.moveBall(this.balls[0], this.mousePosition.x, this.mousePosition.y);
             this.line.lineTo(this.balls[0].x, this.balls[0].y);
-
-            for (let i = 1; i < this.numBalls; i++) {
-                var ballA = this.balls[i-1];
-                var ballB = this.balls[i];
+            let i, ballA, ballB;
+            for (i = 1; i < this.numBalls; i++) {
+                ballA = this.balls[i-1];
+                ballB = this.balls[i];
                 this.moveBall(ballB, ballA.x, ballA.y);
                 this.line.lineTo(ballB.x, ballB.y);
             };

@@ -5,34 +5,39 @@
 .aboutPage div.text {
 	background-color: rgba(0,0,0,0.75);
 	border:3px solid black;
-	padding:60px;
+	padding:100px 20px;
 	border-radius: 20px;
 	margin: 5px auto;
 	display: inline-block;
 }
 .aboutPage div h2 {
 	color: #FF00FF;
+	color: #CCC;
 	text-align: center;
-	text-decoration: underline;
 }
 .aboutPage div ul {
 	list-style-type: none;
 	margin-left:20px;
 }
 .aboutPage div ul li {
-	color: #FF8D27;
-	font-size: 14px;
+	color: white;
+	font-size: 12px;
 	margin:20px 0 20px 30px ;
 	text-align: left;
 }
+.aboutPage div ul li:last-child {
+	text-align: center;
+}
 .aboutPage a, 
 .aboutPage a:visited {
-	color:#FF00FF;
-	font-size: 40px;
+	/*color:#FF00FF;
+	font-size: 40px;*/
+	color: white;
+	font-size: 12px;
 	font-weight: bold;
 
 }
 .aboutPage a:active,
 .aboutPage a:hover {
-color:#FF00FF;
+/*color:#FF00FF;*/
 }
