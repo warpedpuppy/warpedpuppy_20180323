@@ -92,23 +92,12 @@ export default function Ladybug (PIXI, Utils, TweenMax, loader_data) {
 				this.startOver_btn.x = (this.stageShell.width); 
 				this.startOver_btn.y = (this.stageShell.height); 
 				this.stageShell.addChild(this.startOver_btn);
-
+				this.mouseMoveHandler = this.mouseMoveHandler.bind(this)
 				this.stage.interactive = true;
-				//
-
 				this.avatarCreate();
 
 			},
 			animate: function () {
-				if (this.animateBoolean === true) {
-					// if (this.dragBoolean === true) {
-					// 	console.log(this.renderer.plugins.interaction)
-					// 	let mousePosition = this.renderer.plugins.interaction.mouse.global;
-					// 	this.avatar.x = mousePosition.x ;
-					// 	this.avatar.y = mousePosition.y;
-					// }
-					
-				}
 				this.renderer.render(this.stage);
 			},
 			LadyBug: function () {
@@ -122,8 +111,9 @@ export default function Ladybug (PIXI, Utils, TweenMax, loader_data) {
 			},
 			avatarCreate: function () {
 				let avatar = this.avatar = this.LadyBug();
-				avatar.x = 775;
-				avatar.y = 300;
+				avatar.x = 795;
+				avatar.y = 315;
+				avatar.scale.x = avatar.scale.y = 2;
 				avatar.interactive = true;
 				avatar.mousedown = avatar.touchstart = this.drag;
 				avatar.buttonMode = true;
@@ -132,15 +122,13 @@ export default function Ladybug (PIXI, Utils, TweenMax, loader_data) {
 				this.stageShell.addChild(avatar);
 			},
 			drag: function (e) {
-
 				var mc = this.avatar;
 				this.stage.addChild(mc)
-				mc.mousedown = mc.touchstart = null;
+				//mc.mousedown = mc.touchstart = undefined;
 				mc.mouseup = mc.touchend = this.xDrag;
-				this.mouseMoveHandler = this.mouseMoveHandler.bind(this)
 				this.stage.mousemove = this.stage.touchmove = this.mouseMoveHandler;
 				this.dragBoolean = true;
-				TweenMax.to(mc.scale, 0.25, {x:1, y:1});
+				TweenMax.to(mc.scale, 0.25, {x:3, y:3});
 				TweenMax.to(this.instructions_mc,0.25, {alpha:0});
 				//createjs.Sound.play("click");
 			},
@@ -153,6 +141,7 @@ export default function Ladybug (PIXI, Utils, TweenMax, loader_data) {
 			},
 			xDrag: function  (e) {
 				let mc = this.avatar;
+				this.stage.removeChild(mc)
 				this.stageShell.addChild(mc)
 				mc.mouseup = mc.touchup = null;
 				this.stage.mousemove = this.stage.touchmove = null;
@@ -164,23 +153,25 @@ export default function Ladybug (PIXI, Utils, TweenMax, loader_data) {
 				    rect2 = new PIXI.Rectangle(tile341XY.x-50,tile341XY.y-50,this.tileWidthHeight+100, this.tileWidthHeight+100);
 
 				if (this.utils.pixiPointRectangleCollisionDetection(new PIXI.Point(mc.x, mc.y), rect1)) {
-					new TweenMax(mc, .2, {scaleX:1, scaleY:1});
+					new TweenMax(mc.scale, 0.25, {x:0.5, y:0.5});
 					this.stage.removeChild(this.avatar);
 					this.boardShell.addChild(this.avatar);
 					mc.x = this.tileArray[1].x; mc.y = this.tileArray[1].y;
 					this.determinePath(1,341)
 				} else if (this.utils.pixiPointRectangleCollisionDetection(new PIXI.Point(mc.x, mc.y),rect2)) {
-					new TweenMax(mc, .2, {scaleX:1, scaleY:1});
+					new TweenMax(mc.scale, 0.25, {x:0.5, y:0.5});
 					this.stage.removeChild(this.avatar);
 					this.boardShell.addChild(this.avatar);
 					mc.x = this.tileArray[341].x; mc.y = this.tileArray[341].y;
 					this.determinePath(341,1)
 				} else {
-					new TweenMax(this.avatar, .2, {scaleX:2, scaleY:2});
+					mc.interactive = true;
+					new TweenMax(mc.scale, .2, {x:2, y:2});
 					new TweenMax(this.instructions_mc, 1, {alpha:1});
 					mc.x = mc.xPos;
 					mc.y = mc.yPos;
-					this.avatar.mousedown = this.avatar.touchdown = this.drag;
+					//mc.mousedown = mc.touchdown = this.drag;
+					//console.log("here", mc.mousedown)
 				};
 			},
 			Tile: function () {
