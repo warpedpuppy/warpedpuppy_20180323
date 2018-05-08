@@ -84,7 +84,7 @@ export default function Ladybug (PIXI, Utils, TweenMax, loader_data) {
 				this.stageShell.scale.x = this.stageShell.scale.y = 0.5;
 				this.stage.addChildAt(this.stageShell, 0);
 				this.makeMaze();
-				this.startOver_btn.mousedown =  this.startOver_btn.touchdown =this.startOver;
+				this.startOver_btn.mousedown =  this.startOver_btn.touchstart = this.startOver;
 
 				this.stageShell.addChild(this.instructions_mc);
 				this.stageShell.x = (this.canvasWidth - this.stageShell.width)/2; 
@@ -92,17 +92,24 @@ export default function Ladybug (PIXI, Utils, TweenMax, loader_data) {
 				this.startOver_btn.x = (this.stageShell.width); 
 				this.startOver_btn.y = (this.stageShell.height); 
 				this.stageShell.addChild(this.startOver_btn);
+
+				this.stage.interactive = true;
+				//
+
 				this.avatarCreate();
+
 			},
 			animate: function () {
 				if (this.animateBoolean === true) {
-					if (this.dragBoolean === true) {
-						let mousePosition = this.renderer.plugins.interaction.mouse.global;
-						this.avatar.x = mousePosition.x ;
-						this.avatar.y = mousePosition.y;
-					}
-					this.renderer.render(this.stage);
+					// if (this.dragBoolean === true) {
+					// 	console.log(this.renderer.plugins.interaction)
+					// 	let mousePosition = this.renderer.plugins.interaction.mouse.global;
+					// 	this.avatar.x = mousePosition.x ;
+					// 	this.avatar.y = mousePosition.y;
+					// }
+					
 				}
+				this.renderer.render(this.stage);
 			},
 			LadyBug: function () {
 				let body = this.body;
@@ -118,26 +125,37 @@ export default function Ladybug (PIXI, Utils, TweenMax, loader_data) {
 				avatar.x = 775;
 				avatar.y = 300;
 				avatar.interactive = true;
-				avatar.mousedown = avatar.touchdown = this.drag;
+				avatar.mousedown = avatar.touchstart = this.drag;
 				avatar.buttonMode = true;
 				avatar.xPos = avatar.x;
 				avatar.yPos = avatar.y;
 				this.stageShell.addChild(avatar);
 			},
 			drag: function (e) {
+
 				var mc = this.avatar;
 				this.stage.addChild(mc)
-				mc.mousedown = mc.touchdown = null;
-				mc.mouseup = mc.touchup = this.xDrag;
+				mc.mousedown = mc.touchstart = null;
+				mc.mouseup = mc.touchend = this.xDrag;
+				this.mouseMoveHandler = this.mouseMoveHandler.bind(this)
+				this.stage.mousemove = this.stage.touchmove = this.mouseMoveHandler;
 				this.dragBoolean = true;
 				TweenMax.to(mc.scale, 0.25, {x:1, y:1});
 				TweenMax.to(this.instructions_mc,0.25, {alpha:0});
 				//createjs.Sound.play("click");
 			},
+			mouseMoveHandler: function (touchData) {
+				let mouse = touchData.data.global,
+                    mouseX = mouse.x,
+                    mouseY = mouse.y;
+                this.avatar.x = mouseX;
+                this.avatar.y = mouseY;
+			},
 			xDrag: function  (e) {
 				let mc = this.avatar;
 				this.stageShell.addChild(mc)
 				mc.mouseup = mc.touchup = null;
+				this.stage.mousemove = this.stage.touchmove = null;
 				this.dragBoolean = false
 				new TweenMax(mc.scale, 0.25, {x:0.5, y:0.5});
 				let tile1XY = this.boardShell.toGlobal(new PIXI.Point(this.tileArray[1].x,this.tileArray[1].y)),
