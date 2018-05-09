@@ -23,8 +23,8 @@ export default class ContactForm extends React.Component {
 		// let url1 = '//tryingsomething.com/warpedpuppy/contactFormHandler.php';
 		// let url2 = '//localhost:8000/warpedpuppy/contactFormHandler.php';
 		let url3 = '//localhost:8000/mail.php';
-		// let url4 = '//tryingsomething.com/mail.php';
-		axios.post(url3, params)
+		let url4 = '//tryingsomething.com/mail.php';
+		axios.post(url4, params)
 		.then(function (response) {
 		    console.log(response);
 		    that.setState({
@@ -45,12 +45,13 @@ export default class ContactForm extends React.Component {
 	clearMessage () {
 		this.setState({message: ''});
 	}
-	//onSubmit={(e) => this.onFormSubmit(e)}
+	//
+	//action="//formspree.io/wp@tugtug.com"
 	render () {
 		return (
 			<div>
 			<h2 className="contactPageTitle">Contact</h2>
-			<form method="POST"  action="//formspree.io/wp@tugtug.com" >
+			<form method="POST" onSubmit={(e) => this.onFormSubmit(e)} >
 				<input 
 				type="text"
 				name="name" 
