@@ -9,7 +9,8 @@ export default class ContactForm extends React.Component {
 		this.state= {
 			name: '',
 			email: '',
-			message: 'thrill me, baby!'
+			message: 'thrill me, baby!',
+			response: ''
 		}
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
@@ -30,11 +31,17 @@ export default class ContactForm extends React.Component {
 		    that.setState({
 		    	name: '',
 		    	email: '',
-		    	message: 'thrill me again, baby!'
+		    	message: 'thrill me again, baby!',
+		    	response: 'Message sent!'
 		    })
 		})
 		.catch(function (error) {
-		    console.error('error = ', error);
+		    that.setState({
+		    	name: '',
+		    	email: '',
+		    	message: 'thrill me again, baby!',
+		    	response: 'There was an error sending -- please use link below!'
+		    })
 		});
 	}
 	onChangeInputValue(e){

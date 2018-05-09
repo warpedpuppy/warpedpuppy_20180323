@@ -55,7 +55,9 @@ h2.contactPageTitle {
 .contactPage form input:-moz-placeholder { /* Firefox 18- */
   color:#333;
 }
-
+.emailResponse {
+	color:white;
+}
 
 textarea {
 	display:block;
