@@ -94,12 +94,13 @@ export default function LongChain (PIXI, Utils){
             tempBallBody.y += ball.vy;
         },
         resize: function () {
-            // this.stage.removeAllChildren();
-
-            // this.canvasWidth = $(window).width();
-            // $("#"+this.canvasID).attr("width", this.canvasWidth);
-            // this.ctx.clearRect(0,0, this.canvasWidth, this.canvasHeight);
-            // custom();
+            this.stage.removeChildren();
+            this.canvasWidth = this.utils.returnCanvasWidth();
+            this.canvasHeight = 400;
+            this.halfHeight = this.canvasHeight / 2;
+            this.halfWidth = this.canvasWidth / 2;
+            this.renderer.resize(this.canvasWidth, this.canvasHeight);
+            this.build();
         }
     }
 }
