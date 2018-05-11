@@ -52,6 +52,7 @@ export default class Experiments extends React.Component {
 		this.loader_data('on');
 		let minusOne = Number(index) - 1;
 		this.setState({activeGame: minusOne.toString()})
+		//game.push(<BouncePig  loader_data={this.loader_data} key={this.state.activeGame} />)
 	}
 	render () {
 		let game = [];
@@ -60,28 +61,26 @@ export default class Experiments extends React.Component {
 		} else if(this.state.activeGame === '0') {
 			game.push(<Fireworks loader_data="loader_data" key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '1') {
-			game.push(<Spiral loader_data="loader_data" key={this.state.activeGame} />)
-		} else if (this.state.activeGame === '2') {
 			game.push(<BouncePig  loader_data={this.loader_data} key={this.state.activeGame} />)
-		} else if (this.state.activeGame === '3') {
+		} else if (this.state.activeGame === '2') {
 			game.push(<Glitter  loader_data={this.loader_data}  key={this.state.activeGame} />)
-		} else if (this.state.activeGame === '4') {
+		} else if (this.state.activeGame === '3') {
 			game.push(<FallingNumbers loader_data={this.loader_data}  key={this.state.activeGame} />)
-		} else if (this.state.activeGame === '5') {
+		} else if (this.state.activeGame === '4') {
 			game.push(<Ladybug  loader_data={this.loader_data} key={this.state.activeGame} />)
-		} else if (this.state.activeGame === '6') {
+		} else if (this.state.activeGame === '5') {
 			game.push(<SoundSync  loader_data={this.loader_data}  key={this.state.activeGame} />)
-		} else if (this.state.activeGame === '7') {
+		} else if (this.state.activeGame === '6') {
 			game.push(<NodeGarden  loader_data={this.loader_data}  key={this.state.activeGame} />)
-		} else if (this.state.activeGame === '8') {
+		} else if (this.state.activeGame === '7') {
 			game.push(<LongChain  loader_data={this.loader_data} key={this.state.activeGame} />)
-		} else if (this.state.activeGame === '9') {
+		} else if (this.state.activeGame === '8') {
 			game.push(<ElasticThree  loader_data={this.loader_data} key={this.state.activeGame} />)
-		} else if (this.state.activeGame === '10') {
+		} else if (this.state.activeGame === '9') {
 			game.push(<WhirlyGigs  loader_data={this.loader_data} key={this.state.activeGame} />)
-		} else if (this.state.activeGame === '11') {
+		} else if (this.state.activeGame === '10') {
 			game.push(<PrettyDots loader_data={this.loader_data} key={this.state.activeGame} />)
-		} else if (this.state.activeGame === '12') {
+		} else if (this.state.activeGame === '11') {
 			game.push(<BrickBreak  loader_data={this.loader_data} key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '12') {
 			game.push(<ElasticTwo  loader_data={this.loader_data} key={this.state.activeGame} />)

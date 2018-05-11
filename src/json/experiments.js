@@ -6,11 +6,11 @@ export default function () {
 			description: 'fireworks',
 			link: '/Fireworks'
 		},
-		{
-			title: 'spiral',
-			description: 'three d spiral',
-			link: '/Fireworks'
-		},
+		// {
+		// 	title: 'spiral',
+		// 	description: 'three d spiral',
+		// 	link: '/Fireworks'
+		// },
 		{
 			title: 'Bounce, Pig! Bounce!',
 			description: 'A game in which you bounce a pig on a swipe-created platform and eat fruit!',
