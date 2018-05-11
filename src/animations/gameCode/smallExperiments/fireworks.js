@@ -21,7 +21,7 @@ export default function Firework (PIXI, Utils, TimelineLite){
             this.build();
             this.app.ticker.add(this.animate.bind(this));
         },
-        build: function () {;
+        build: function () {
             let i, firework, star, delay, shape, width, height, widthCheck = 0;
             for (i = 0; i < this.fq; i ++) {
                 firework = this.FireworkInstance();
@@ -83,8 +83,8 @@ export default function Firework (PIXI, Utils, TimelineLite){
             for ( i = 0; i < numberOfBeams; i++) {
                 myBeam1 = this.Beam(color);
                 myBeam1.rotation = this.utils.deg2rad(Math.random()*360);
-                myBeam1.scaleX = this.utils.randomNumberBetween(.2,1)
-                myBeam1.scaleY = this.utils.randomNumberBetween(.2,1)
+                myBeam1.scaleX = this.utils.randomNumberBetween(0.2,1)
+                myBeam1.scaleY = this.utils.randomNumberBetween(0.2,1)
                 cont.addChild(myBeam1);
                 cont.beams.push(myBeam1);
             }
@@ -92,8 +92,8 @@ export default function Firework (PIXI, Utils, TimelineLite){
             cont.numberOfBeams = numberOfBeams;
             cont.tl = new TimelineLite();
             cont.tls = [];
-            cont.twinkleStart = Math.floor(frames * .33);
-            cont.fadeOutStart = Math.floor(frames * .66);
+            cont.twinkleStart = Math.floor(frames * 0.33);
+            cont.fadeOutStart = Math.floor(frames * 0.66);
             cont.end = frames;
             cont.start = function () {
                 let beam;
@@ -150,7 +150,7 @@ export default function Firework (PIXI, Utils, TimelineLite){
                 }
                 if (f.cf >= fadeOutStart) {
                     for (i = 0; i < f.numberOfBeams; i++) {
-                        f.beams[i].alpha *= .75;
+                        f.beams[i].alpha *= 0.75;
                     }
                 }
                 if (f.cf >= end) {
