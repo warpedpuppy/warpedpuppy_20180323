@@ -5,11 +5,13 @@ export default function Spiral (THREE) {
 		renderer: '',
 		geometry: '',
 		material: '', 
-		mesh: '',
+		spinningWheelMesh: '',
 		collidableMeshList: [],
 		balls: [],
-		ballQ: 20,
+		ballQ: 5,
 		windowHeight: 400,
+		animateBoolean: true,
+		gravity: 0.03,
 		init: function () {
 
 			this.setup();
@@ -24,7 +26,11 @@ export default function Spiral (THREE) {
 		    window.onresize = this.resize;
 		},
 		stop: function () {
-
+			this.camera = undefined;
+			this.animateBoolean = false;
+			this.animate = undefined;
+			this.renderer = undefined;
+			window.onresize = undefined;
 		},
 		setup: function () {
 			this.camera = null;
@@ -52,8 +58,8 @@ export default function Spiral (THREE) {
 			// platform
 			this.geometry = new THREE.CylinderGeometry( 50, 50, 2, 20, 20  );
 			this.material = new THREE.MeshBasicMaterial(  { color: 0xFF0000, wireframe: true} );
-			this.mesh = new THREE.Mesh( this.geometry, this.material );
-			this.scene.add( this.mesh );
+			this.spinningWheelMesh = new THREE.Mesh( this.geometry, this.material );
+			this.scene.add( this.spinningWheelMesh );
 			
 
 			//ball
@@ -61,7 +67,7 @@ export default function Spiral (THREE) {
 				this.ball_geom = new THREE.SphereBufferGeometry( 4, 12, 12 );
 				this.ball_material = new THREE.MeshBasicMaterial(  { color: 0xFFFF00} );
 				this.ball_mesh = new THREE.Mesh( this.ball_geom, this.ball_material );
-				this.ball_mesh.position.x = Math.random()*20;
+				this.ball_mesh.position.x = this.getXStart();
 				this.ball_mesh.position.y = (Math.random())*100+100;
 				this.ball_mesh.vy =  Math.random()*0.2;
 				this.ball_mesh.vx = 0;
@@ -71,7 +77,7 @@ export default function Spiral (THREE) {
 				this.balls.push(this.ball_mesh)
 			}
 			
-		 
+		 	this.originPoint = this.spinningWheelMesh.position.clone();
 		   
 		},
 		resize: function () {
@@ -79,55 +85,57 @@ export default function Spiral (THREE) {
 			this.camera.updateProjectionMatrix();
 			this.renderer.setSize( window.innerWidth, this.windowHeight );
 		},
+		getXStart: function () {
+			return Math.random()*30 + 10;
+		},	
 		animate: function () {
 
-		    requestAnimationFrame( this.animate );
+
 		    this.pole_mesh.rotation.y -= 0.02;
-		    this.mesh.rotation.y += 0.02;
-		    let gravity = 0.03;
+		    this.spinningWheelMesh.rotation.y += 0.02;
+	
 		   
 		    for(let i = 0; i < this.ballQ; i++){
 		    	this.balls[i].position.y -= this.balls[i].vy;
 			    this.balls[i].position.x -= this.balls[i].vx;
-				this.balls[i].vy += gravity;
+				this.balls[i].vy += this.gravity;
 
 			    if (this.balls[i].position.y < -100) {
 			    	this.balls[i].position.y = (Math.random())*100+100;
-			    	this.balls[i].position.x = Math.random()*20;
+			    	this.balls[i].position.x = this.getXStart();
 			    	this.balls[i].vx = 0;
 			    	this.balls[i].vy =  Math.random()*0.2;
 			    	this.balls[i].hit = false;
+			    	if (this.collidableMeshList.indexOf(this.balls[i]) === -1) {
+			    		this.collidableMeshList.push(this.balls[i])
+			    	}
 			    }
 		    }
 		   
 
 		   // COLLISION DETECTION
-		   var originPoint = this.mesh.position.clone();
-		   for (var vertexIndex = 0; vertexIndex < this.mesh.geometry.vertices.length; vertexIndex++) {		
-				var localVertex = this.mesh.geometry.vertices[vertexIndex].clone();
-				var globalVertex = localVertex.applyMatrix4( this.mesh.matrix );
-				var directionVector = globalVertex.sub( this.mesh.position );
-				
-				var ray = new THREE.Raycaster( originPoint, directionVector.clone().normalize() );
-				
-				var collisionResults = ray.intersectObjects( this.collidableMeshList );
-				if ( collisionResults.length > 0 && collisionResults[0].distance < directionVector.length() ) {
+		   
+		   for (let vertexIndex = 0; vertexIndex < this.spinningWheelMesh.geometry.vertices.length; vertexIndex++) {		
+				let localVertex = this.spinningWheelMesh.geometry.vertices[vertexIndex].clone(),
+				    globalVertex = localVertex.applyMatrix4( this.spinningWheelMesh.matrix ),
+				    directionVector = globalVertex.sub( this.spinningWheelMesh.position ),
+					ray = new THREE.Raycaster( this.originPoint, directionVector.clone().normalize()),
+				    collisionResults = ray.intersectObjects( this.collidableMeshList );
+
+				if (collisionResults.length > 0 && collisionResults[0].distance < directionVector.length()) {
 					for(let j = 0; j < collisionResults.length; j++) {
 						//console.log("Hit");
-						//console.log(collisionResults[j])
-						if(!collisionResults[j].object.hit){
-							collisionResults[j].object.hit = true;
-							collisionResults[j].object.vx = -2;
-						 	collisionResults[j].object.vy = -1.5;
-						}
-						 
+						this.collidableMeshList.splice(j, 1);
+						collisionResults[j].object.vx = -2;
+						collisionResults[j].object.vy = -1.5;
 					}
-					
 				}
-			}	
+			}
 
-		    this.renderer.render( this.scene, this.camera );
-		 
+			if(this.animateBoolean){
+		    	requestAnimationFrame( this.animate );
+		    	this.renderer.render( this.scene, this.camera );
+		    }
 		}
 	}
 }
