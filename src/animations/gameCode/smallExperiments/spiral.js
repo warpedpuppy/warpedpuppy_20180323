@@ -12,6 +12,9 @@ export default function Spiral (THREE) {
 		windowHeight: 400,
 		animateBoolean: true,
 		gravity: 0.03,
+		angle: 0,
+		mouseDown: false,
+		startX: 0,
 		init: function () {
 
 			this.setup();
@@ -24,6 +27,11 @@ export default function Spiral (THREE) {
 		    this.animate();
 		    this.resize = this.resize.bind(this);
 		    window.onresize = this.resize;
+		    this.onMouseDown = this.onMouseDown.bind(this);
+		    this.onMouseMove = this.onMouseMove.bind(this);
+		    this.onMouseUp = this.onMouseUp.bind(this);
+		    this.renderer.domElement.addEventListener('mousedown', this.onMouseDown);
+		    
 		},
 		stop: function () {
 			this.camera = undefined;
@@ -31,6 +39,27 @@ export default function Spiral (THREE) {
 			this.animate = undefined;
 			this.renderer = undefined;
 			window.onresize = undefined;
+		},
+		onMouseDown( event ) {
+			//console.log(event)
+			this.startX = event.clientX
+			this.mouseDown = true;
+			this.renderer.domElement.addEventListener('mousemove', this.onMouseMove);
+			this.renderer.domElement.addEventListener('mouseup', this.onMouseUp);
+		},
+		onMouseMove( event ) {
+			if(this.mouseDown){
+				//console.log(event);
+				//this.camera.position.y -= event.movementY * 0.2;
+    			this.camera.position.x += event.movementX * 0.2;
+                // this.camera.quaternion.y -= event.movementX * 0.2/10;
+                // this.camera.quaternion.x -= event.movementY * 0.2/10;
+			}
+		},
+		onMouseUp( event ) {
+			this.mouseDown = false;
+			this.renderer.domElement.removeEventListener('mousemove', this.onMouseMove);
+			this.renderer.domElement.removeEventListener('mouseup', this.onMouseUp);
 		},
 		setup: function () {
 			this.camera = null;
@@ -43,9 +72,9 @@ export default function Spiral (THREE) {
 			this.geometry = null;
 			this.material = null;
 
-			this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / this.windowHeight, 1, 1000);
-		    this.camera.position.z = 100;
-		    this.camera.position.y = 10;
+			this.camera = new THREE.PerspectiveCamera( 40, window.innerWidth / this.windowHeight, 1, 1000);
+		    this.camera.position.z = 110;
+		    this.camera.position.y = 20;
 		 
 		    this.scene = new THREE.Scene();
 		 
@@ -60,7 +89,7 @@ export default function Spiral (THREE) {
 			this.material = new THREE.MeshBasicMaterial(  { color: 0xFF0000, wireframe: true} );
 			this.spinningWheelMesh = new THREE.Mesh( this.geometry, this.material );
 			this.scene.add( this.spinningWheelMesh );
-			
+
 
 			//ball
 			for(let i = 0; i < this.ballQ; i++) {
@@ -69,6 +98,7 @@ export default function Spiral (THREE) {
 				this.ball_mesh = new THREE.Mesh( this.ball_geom, this.ball_material );
 				this.ball_mesh.position.x = this.getXStart();
 				this.ball_mesh.position.y = (Math.random())*100+100;
+
 				this.ball_mesh.vy =  Math.random()*0.2;
 				this.ball_mesh.vx = 0;
 				this.ball_mesh.hit = false;
@@ -87,13 +117,13 @@ export default function Spiral (THREE) {
 		},
 		getXStart: function () {
 			return Math.random()*30 + 10;
-		},	
+		},
 		animate: function () {
 
 
 		    this.pole_mesh.rotation.y -= 0.02;
 		    this.spinningWheelMesh.rotation.y += 0.02;
-	
+			//this.updateCamPosition();
 		   
 		    for(let i = 0; i < this.ballQ; i++){
 		    	this.balls[i].position.y -= this.balls[i].vy;

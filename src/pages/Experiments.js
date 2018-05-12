@@ -16,6 +16,7 @@ import ElasticThree from './Games/ElasticThree.js';
 import LongChain from './Games/LongChain.js';
 import BrickBreak from './Games/BrickBreak.js';
 import Spiral from './Games/Spiral.js';
+import Solitaire from './Games/Solitaire.js';
 export default class Experiments extends React.Component {
 	
 	constructor (props) {
@@ -58,7 +59,8 @@ export default class Experiments extends React.Component {
 		if(this.state.activeGame === '') {
 
 		} else if(this.state.activeGame === '0') {
-			game.push(<Fireworks loader_data="loader_data" key={this.state.activeGame} />)
+			game.push(<Solitaire loader_data="loader_data" key={this.state.activeGame} />)
+			//game.push(<Fireworks loader_data="loader_data" key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '1') {
 			game.push(<BouncePig  loader_data={this.loader_data} key={this.state.activeGame} />)
 		} else if (this.state.activeGame === '2') {
