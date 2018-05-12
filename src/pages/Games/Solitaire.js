@@ -3,11 +3,12 @@ import * as PIXI from 'pixi.js';
 import Utils from '../../animations/utils.js';
 import './Games.css';
 import SolitaireCode from '../../animations/gameCode/solitaireWithAI/index.js';
+import Loader from '../../components/Loader';
+
 export default class Solitaire extends React.Component {
 
 	componentDidMount () {
-		 
-		this.code = new SolitaireCode(PIXI, Utils);
+		this.code = new SolitaireCode(PIXI, Utils, this.props.loader_data);
 		this.code.init();
 	}
 	addMore (e) {
@@ -23,7 +24,9 @@ export default class Solitaire extends React.Component {
 	}
 	render () {
 		return (
-			<div id="tugtugCanvas" className="games"></div>
+			<div id="tugtugCanvas" className="games">
+			<Loader visible={this.props.loader_data('return')} />
+			</div>
 		)
 	}
 }
