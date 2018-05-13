@@ -4,6 +4,7 @@ export default function SolitaireCode (PIXI, Utils, loader_data) {
 		utils: new Utils(),
 		stage: new PIXI.Container(),
     	canvasHeight: 400,
+    	loader:  PIXI.loader,
 		init: function () {
 			this.resize = this.resize.bind(this)
 	        window.onresize = this.resize;
@@ -17,14 +18,11 @@ export default function SolitaireCode (PIXI, Utils, loader_data) {
 	        this.Main = this.Main.bind(this);
             if(!this.loader.resources.instructions){
                 this.loader
-                 .add('l1', '/bmps/lady_bug/l1.png')
-				 .add('l2', '/bmps/lady_bug/l2.png')
-				 .add('l3', '/bmps/lady_bug/l3.png')
-				 .add('l4', '/bmps/lady_bug/l4.png')
-				 .add('l5', '/bmps/lady_bug/l5.png')
-				 .add('startOver', '/bmps/lady_bug/startOver_btn.png')
-				 .add('instructions', '/bmps/lady_bug/instructions_mc.png')
-				 .add('brickWall', '/bmps/lady_bug/brickWall.png')
+                 .add('cardBack', '/bmps/card/cardBack.png')
+				 .add('club', '/bmps/card/club.png')
+				 .add('diamond', '/bmps/card/diamond.png')
+				 .add('heart', '/bmps/card/heart.png')
+				 .add('spade', '/bmps/card/spade.png')
 				 .load(this.Main)
 				 .onComplete.add(() => {
                      loader_data('off');
@@ -35,7 +33,21 @@ export default function SolitaireCode (PIXI, Utils, loader_data) {
             }
 		},
 		Main: function () {
-
+			let value = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"];
+		    let suits = ["hearts", "spades", "diamonds", "clubs"];
+		    let storeCards = [];
+		    let storeSlots = [];
+		    let i, j, card;
+		    for(i = 0; i < 4; i++){
+		       // storeSlots.push(new Slot(width, height))
+		        for(j = 0; j < 13; j++){
+		            card = this.Card(value[j], suits[i], j, 75, 100);
+		            card.x = j * 100 ;
+		            card.y = i * 75;
+		            storeCards.push(card);
+		            this.stage.addChild(card);
+		        }
+		    }
 		},
 		stop: function () {
 
@@ -50,7 +62,7 @@ export default function SolitaireCode (PIXI, Utils, loader_data) {
 		},
 		Card: function (str1, suit, value, width, height) {
 
-		    var cont = new PIXI.Container();
+		    const cont = new PIXI.Container();
 		    cont.width = width;
 		    cont.height = height;
 		    cont.storeX;
@@ -60,34 +72,37 @@ export default function SolitaireCode (PIXI, Utils, loader_data) {
 		    cont.color = (suit == "spades" || suit == "clubs")?"black":"red";
 		    cont.pile;
 
-		    var arr = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"];
+		    const arr = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"];
 
 		    cont.name = arr[cont.value];
 
-		    var background = new PIXI.Graphics;
-		    background.setStrokeStyle(1).beginStroke("#000000").beginFill("#FFFFFF").drawRoundRect(0,0,width,height, 5).endStroke().endFill();;
+		    const background = new PIXI.Graphics();
+		    background.beginFill(0xFFFFFF).drawRoundedRect(0,0,width,height, 5).endFill();
 		    cont.addChild(background);
 		    cont.background = background;
 
-		    var suitString = suit.substr(0, suit.length-1)
-		    var icon = new PIXI.Sprite(PIXI.loader.resources.suitString);
+		    const suitString = suit.substr(0, suit.length-1)
+		    console.log(suitString)
+		    console.log(PIXI.loader.resources)
+		    var icon = new PIXI.Sprite(PIXI.loader.resources[suitString].texture);
 		    icon.x = width - icon.getBounds().width-5;
 		    icon.y = 5;
 		    cont.addChild(icon);
 
-		    var text1 = new PIXI.Text(str1, "bold 10px Verdana", "#000000");
+		    let text1 = new PIXI.Text(str1,{fontFamily : 'Arial', fontSize: 10, fill : 0xff1010, align : 'center'});
+		    //const text1 = new PIXI.Text(str1, "bold 10px Verdana", "#000000");
 		    text1.x = text1.y = 5;
 		    cont.addChild(text1);
 		    cont.text1 = text1;
 
-
-		    var text2 = new PIXI.Text(suit, "bold 10px Verdana", "#000000");
+		    let text2 = new PIXI.Text(suit,{fontFamily : 'Arial', fontSize: 10, fill : 0xff1010, align : 'center'});
+		    //const text2 = new PIXI.Text(suit, "bold 10px Verdana", "#000000");
 		    text2.x = 5
-		    text2.y = text1.getMeasuredHeight()+5;
+		    text2.y = text1.height +5;
 		    cont.addChild(text2);
 		    cont.text2 = text2;
-
-		    var cardBack = new PIXI.Sprite(PIXI.loader.resources.suitString.cardBack);
+		    console.log(PIXI.loader.resources)
+		    let cardBack = new PIXI.Sprite(PIXI.loader.resources.cardBack.texture);
 		    cont.addChild(cardBack);
 		    cont.cardBack = cardBack;
 
