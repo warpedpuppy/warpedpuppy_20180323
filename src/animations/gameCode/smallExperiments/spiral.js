@@ -34,14 +34,16 @@ export default function Spiral (THREE) {
 		    
 		},
 		stop: function () {
+			
+			this.renderer.domElement.removeEventListener('mousedown', this.onMouseDown);
+			this.renderer.domElement.removeEventListener('mousemove', this.onMouseMove);
+			this.renderer.domElement.removeEventListener('mouseup', this.onMouseUp);
+
 			this.camera = undefined;
 			this.animateBoolean = false;
 			this.animate = undefined;
 			this.renderer = undefined;
 			window.onresize = undefined;
-			this.renderer.domElement.removeEventListener('mousedown', this.onMouseDown);
-			this.renderer.domElement.removeEventListener('mousemove', this.onMouseMove);
-			this.renderer.domElement.removeEventListener('mouseup', this.onMouseUp);
 		},
 		onMouseDown( event ) {
 			//console.log(event)
