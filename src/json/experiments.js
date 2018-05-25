@@ -2,6 +2,11 @@ export default function () {
 	return [
 
 		{
+			title: 'pink drawers',
+			description: 'fireworks',
+			link: '/pinkDrawers'
+		},
+		{
 			title: 'fireworks',
 			description: 'fireworks',
 			link: '/Fireworks'
