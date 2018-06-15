@@ -2,6 +2,11 @@ export default function () {
 	return [
 
 		{
+			title: 'infinite background',
+			description: 'infinite background',
+			link: '/infiniteBackground'
+		},
+		{
 			title: 'pink drawers',
 			description: 'fireworks',
 			link: '/pinkDrawers'
