@@ -130,11 +130,19 @@ export default function Game (PIXI, Utils, loader_data){
                     pegPanel.addChild(peg);
                 }
             }
+            let frame = new PIXI.Graphics();
+            frame.lineStyle(2, 0xFF00FF)
+            .moveTo(0,0)
+            .lineTo(this.horizSpacer, 0)
+            .lineTo(this.horizSpacer,this.vertSpacer)
+            .lineTo(0,this.vertSpacer)
+            .lineTo(0,0)
+            pegPanel.addChild(frame);
             return pegPanel;
         },
         Peg: function () {
             let dot = new PIXI.Graphics();
-            dot.beginFill(0x333333).drawCircle(0,0,2).endFill();
+            dot.beginFill(0x333333).drawCircle(0,0,6).endFill();
             return dot;
         },
         Stop: function () {
