@@ -6,6 +6,8 @@
     "axios": "^0.18.0",
     "createjs": "^1.0.1",
     "gsap": "^1.20.4",
+    "lodash": "^4.17.15",
+    "macaddress": "^0.2.9",
     "normalize.css": "^8.0.0",
     "pixi-sound": "^2.0.1",
     "pixi.js": "^4.7.1",
