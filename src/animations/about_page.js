@@ -1,4 +1,4 @@
-export default function Ladybug (PIXI, Utils, TimelineMax, BezierPlugIn, Power1) {
+export default function Ladybug (PIXI, Utils, TimelineMax, Power1) {
 return {
         utils: new Utils(),
         canvasHeight: 400,

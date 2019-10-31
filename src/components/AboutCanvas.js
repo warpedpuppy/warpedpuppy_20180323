@@ -3,7 +3,8 @@ import './AboutCanvas.css';
 import * as PIXI from 'pixi.js'
 import Utils from '../animations/utils'
 import about_page from '../animations/about_page';
-import { TimelineMax, BezierPlugIn, Power1 } from 'gsap';
+import { TimelineMax, Power1 } from 'gsap/all';
+
 export default class AboutCanvas extends React.Component {
 
 	constructor(props){
@@ -11,7 +12,7 @@ export default class AboutCanvas extends React.Component {
 		this.about_page = {};
 	}
 	componentDidMount(){
-		this.about_page = about_page(PIXI, Utils, TimelineMax, BezierPlugIn, Power1);
+		this.about_page = about_page(PIXI, Utils, TimelineMax, Power1);
 		this.about_page.init();
 	}
 	componentWillUnmount(){
