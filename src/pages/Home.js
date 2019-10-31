@@ -16,7 +16,7 @@ class Home extends React.Component {
             <p>I&apos;m lonely, contact me: <a href="mailto:ted@warpedpuppy.com">ted@warpedpuppy.com</a>
             </p>
             <p><a href="https://github.com/warpedpuppy" rel="noopener noreferrer" target="_blank">github</a> </p>
-             <p><a href="https://www.linkedin.com/in/e-w-98926a8/ " rel="noopener noreferrer" target="_blank">linkedin</a> </p>
+             <p><a href="https://www.linkedin.com/in/e-w-98926a8/" rel="noopener noreferrer" target="_blank">linkedin</a> </p>
          
              	<p></p>
 		      <LogoWithBorder w="250" rotate="rotate(15)" color={true} />
