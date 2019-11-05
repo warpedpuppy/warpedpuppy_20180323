@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.css';
 import Menu from './components/Menu.js';
 import Home from './pages/Home.js';
@@ -12,7 +12,7 @@ require('../node_modules/normalize.css/normalize.css');
 
 export default function App () {
       return (
-        <Router>
+        <BrowserRouter>
           <div className="App">
             <header>
               <Menu />
@@ -26,6 +26,6 @@ export default function App () {
             </main>
             <Footer />
           </div>
-        </Router>
+        </BrowserRouter>
       )
 }
