@@ -27,7 +27,6 @@ export default class ContactForm extends React.Component {
 		let url4 = '//tryingsomething.com/mail.php';
 		axios.post(url4, params)
 		.then(function (response) {
-		    console.log(response);
 		    that.setState({
 		    	name: '',
 		    	email: '',
@@ -51,6 +50,9 @@ export default class ContactForm extends React.Component {
 	}
 	clearMessage () {
 		this.setState({message: ''});
+	}
+	buttonFocus = () => {
+
 	}
 	//
 	//action="//formspree.io/wp@tugtug.com"
@@ -85,7 +87,7 @@ export default class ContactForm extends React.Component {
 				<input type="text" name="_gotcha" style={{"display":"none"}} />
 				<input type="hidden" name="_next" value="/contact" />
 				<div className="buttonDiv">
-					<input type="submit" value="send" />
+					<input type="submit" value="send" onFocus={() => this.buttonFocus() } />
 				</div>
 				<div className="emailResponse">{this.state.response}</div>
 			</form>
