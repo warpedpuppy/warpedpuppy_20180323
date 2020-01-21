@@ -22,7 +22,6 @@ export default function App () {
               <Route exact path="/Experiments" component={Experiments} />
               <Route exact path="/About" component={About} />
               <Route exact path="/Contact" component={Contact} />
-      
             </main>
             <Footer />
           </div>
