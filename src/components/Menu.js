@@ -50,8 +50,8 @@ export default class Menu extends Component {
 	  }
 	  componentDidMount () {
 	  	let params = new Utils().createParamObject();
-	  	this.setState({cc: `?cc=${params.cc}`})
-	  	this.checkRemoteCCValue();
+	  	this.setState({cc: ``})
+	  	//this.checkRemoteCCValue();
 	  }
 	  componentDidUpdate () {
 	  	// console.log('update', this.state)
@@ -82,7 +82,7 @@ export default class Menu extends Component {
 						<span>js / canvas experiments</span>
 						</Link>
 						<Link to={aboutLink}  onClick={() => this.toggleDropDown()} >
-						<span>about / cv</span>
+						<span>about</span>
 						</Link>
 						<Link to={contactLink}  onClick={() => this.toggleDropDown()} >
 						<span>contact</span>
