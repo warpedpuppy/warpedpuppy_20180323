@@ -49,7 +49,7 @@ export default class Menu extends Component {
 	  	})
 	  }
 	  componentDidMount () {
-	  	let params = new Utils().createParamObject();
+	  	// let params = new Utils().createParamObject();
 	  	this.setState({cc: ``})
 	  	//this.checkRemoteCCValue();
 	  }
