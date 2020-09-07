@@ -12,7 +12,7 @@ class Home extends React.Component {
 			<div className="textCont">
 			<p>Hello!</p>
             <p>My name is Ted and I&apos;m a full stack web developer. I focus in a React front end (although I have experience with Vue) and a Node backend.</p>
-            <p>I have 10+ experience in a variety of languages.</p>
+            <p>I have 15+ experience in a variety of languages.</p>
             <p>I&apos;m lonely, contact me: <a href="mailto:ted@warpedpuppy.com">ted@warpedpuppy.com</a>
             </p>
             <p><a href="https://github.com/warpedpuppy" rel="noopener noreferrer" target="_blank">github</a> </p>
