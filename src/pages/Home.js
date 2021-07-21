@@ -5,15 +5,21 @@ import LogoWithBorder from '../svgs/LogoWithBorder';
 import { connect } from 'react-redux';
 
 class Home extends React.Component {
+
+	
 	render () {
+	let d = new Date()
+	let y = d.getFullYear();
+	console.log(y)
+	let diff = y - 2004;
 		return (
 			<div className='homePage'>
 			<HomeCanvas />
 			<div className="textCont">
 			<p>Hello!</p>
-            <p>My name is Ted and I&apos;m a full stack web developer. I focus in a React front end (although I have experience with Vue) and a Node backend.</p>
-            <p>I have 15+ experience in a variety of languages.</p>
-            <p>I&apos;m lonely, contact me: <a href="mailto:ted@warpedpuppy.com">ted@warpedpuppy.com</a>
+            <p>My name is Ted and I&apos;m a full stack web developer. You are looking at a very old site and I have been working on its replacement for months. But nothing is moving quickly so please just bear with me.</p>
+            <p>I have {diff} experience in a variety of languages.</p>
+            <p>I do love it when strangers contact me: <a href="mailto:ted@warpedpuppy.com">ted@warpedpuppy.com</a>
             </p>
             <p><a href="https://github.com/warpedpuppy" rel="noopener noreferrer" target="_blank">github</a> </p>
              <p><a href="https://www.linkedin.com/in/edward-ted-walther-98926a8/" rel="noopener noreferrer" target="_blank">linkedin</a> </p>
