@@ -17,7 +17,7 @@ class Home extends React.Component {
 			<HomeCanvas />
 			<div className="textCont">
 			<p>Hello!</p>
-            <p>My name is Ted and I&apos;m a full stack web developer. You are looking at a very old site and I have been working on its replacement for months. But nothing is moving quickly so please just bear with me.</p>
+            <p>My name is Ted and I&apos;m a full stack web developer. You are looking at my old web site.  My new one can be found at <a href="//tryingsomething.com">trying something</a>.</p>
             <p>I have {diff} experience in a variety of languages.</p>
             <p>I do love it when strangers contact me: <a href="mailto:ted@warpedpuppy.com">ted@warpedpuppy.com</a>
             </p>
